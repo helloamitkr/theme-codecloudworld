@@ -4,18 +4,115 @@
 <head>
   <meta charset='UTF-8'/>
   <meta content='width=device-width, initial-scale=1' name='viewport'/>
-  <title><data:blog.pageTitle/></title>
-  <b:include data='blog' name='all-head-content'/>
-  
-  <!-- Fonts -->
-  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700' rel='stylesheet'/>
-  <link href='https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500' rel='stylesheet'/>
-  
-  <!-- Prism JS CSS -->
-  <link href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css' rel='stylesheet'/>
+  <meta content='IE=edge' http-equiv='X-UA-Compatible'/>
 
-  <!-- External CSS hosted on GitHub via jsDelivr CDN for faster loading -->
+  <!-- SEO: Title -->
+  <b:if cond='data:view.isSingleItem'>
+    <title><data:blog.pageName/> | <data:blog.title/></title>
+  <b:else/>
+    <title><data:blog.pageTitle/></title>
+  </b:if>
+
+  <!-- SEO: Meta Description -->
+  <b:if cond='data:view.isSingleItem'>
+    <b:if cond='data:blog.metaDescription'>
+      <meta expr:content='data:blog.metaDescription' name='description'/>
+    <b:else/>
+      <meta expr:content='data:blog.pageName + &quot; - Read this tutorial on &quot; + data:blog.title' name='description'/>
+    </b:if>
+  <b:else/>
+    <meta content='DevOps, Cloud Computing, MLOps tutorials and guides. Learn Kubernetes, Docker, CI/CD, and more at codecloudworld.' name='description'/>
+  </b:if>
+
+  <!-- SEO: Canonical URL -->
+  <link expr:href='data:blog.canonicalUrl' rel='canonical'/>
+
+  <!-- SEO: Robots - noindex archive/search/label pages -->
+  <b:if cond='data:view.isLabelSearch or data:view.isSearch or data:view.isArchive'>
+    <meta content='noindex, follow' name='robots'/>
+  <b:else/>
+    <meta content='index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' name='robots'/>
+  </b:if>
+
+  <!-- Open Graph -->
+  <meta content='website' property='og:type'/>
+  <meta expr:content='data:blog.pageTitle' property='og:title'/>
+  <meta expr:content='data:blog.canonicalUrl' property='og:url'/>
+  <meta expr:content='data:blog.title' property='og:site_name'/>
+  <b:if cond='data:blog.postImageThumbnailUrl'>
+    <meta expr:content='data:blog.postImageThumbnailUrl' property='og:image'/>
+  </b:if>
+  <b:if cond='data:blog.metaDescription'>
+    <meta expr:content='data:blog.metaDescription' property='og:description'/>
+  </b:if>
+
+  <!-- Twitter Card -->
+  <meta content='summary_large_image' name='twitter:card'/>
+  <meta expr:content='data:blog.pageTitle' name='twitter:title'/>
+  <b:if cond='data:blog.metaDescription'>
+    <meta expr:content='data:blog.metaDescription' name='twitter:description'/>
+  </b:if>
+  <b:if cond='data:blog.postImageThumbnailUrl'>
+    <meta expr:content='data:blog.postImageThumbnailUrl' name='twitter:image'/>
+  </b:if>
+
+  <!-- JSON-LD Structured Data -->
+  <b:if cond='data:view.isHomepage'>
+    <script type='application/ld+json'>
+      {
+        &quot;@context&quot;: &quot;https://schema.org&quot;,
+        &quot;@type&quot;: &quot;WebSite&quot;,
+        &quot;name&quot;: &quot;<data:blog.title/>&quot;,
+        &quot;url&quot;: &quot;<data:blog.canonicalHomepageUrl/>&quot;,
+        &quot;potentialAction&quot;: {
+          &quot;@type&quot;: &quot;SearchAction&quot;,
+          &quot;target&quot;: &quot;<data:blog.canonicalHomepageUrl/>search?q={search_term_string}&quot;,
+          &quot;query-input&quot;: &quot;required name=search_term_string&quot;
+        }
+      }
+    </script>
+  </b:if>
+
+  <b:if cond='data:view.isSingleItem'>
+    <script type='application/ld+json'>
+      {
+        &quot;@context&quot;: &quot;https://schema.org&quot;,
+        &quot;@type&quot;: &quot;BlogPosting&quot;,
+        &quot;headline&quot;: &quot;<data:blog.pageName/>&quot;,
+        &quot;url&quot;: &quot;<data:blog.canonicalUrl/>&quot;,
+        &quot;publisher&quot;: {
+          &quot;@type&quot;: &quot;Organization&quot;,
+          &quot;name&quot;: &quot;<data:blog.title/>&quot;,
+          &quot;url&quot;: &quot;<data:blog.canonicalHomepageUrl/>&quot;
+        }
+      }
+    </script>
+  </b:if>
+
+  <b:include data='blog' name='all-head-content'/>
+
+  <!-- Theme Color -->
+  <meta content='#0f172a' name='theme-color'/>
+
+  <!-- Favicon (SVG) -->
+  <link href='data:image/svg+xml,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 64 64&quot;&gt;&lt;path d=&quot;M52 34a12 12 0 00-11.4-12A16 16 0 0012 28a10 10 0 001 20h38a12 12 0 001-14z&quot; fill=&quot;%23ff1493&quot;/&gt;&lt;/svg&gt;' rel='icon' type='image/svg+xml'/>
+
+  <!-- Preconnect Hints -->
+  <link href='https://fonts.googleapis.com' rel='preconnect'/>
+  <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
+  <link href='https://cdn.jsdelivr.net' rel='preconnect'/>
+  <link href='https://cdnjs.cloudflare.com' rel='preconnect'/>
+
+  <!-- Fonts (combined, with display=swap) -->
+  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap' rel='stylesheet'/>
+
+  <!-- External CSS hosted on GitHub via jsDelivr CDN -->
   <link href='https://cdn.jsdelivr.net/gh/helloamitkr/theme-codecloudworld@main/css/theme.css' rel='stylesheet'/>
+
+  <!-- Prism CSS - only on single post pages -->
+  <b:if cond='data:view.isSingleItem'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css' rel='stylesheet'/>
+  </b:if>
 
   <b:skin><![CDATA[]]></b:skin>
 </head>
@@ -65,7 +162,7 @@
           </b:widget>
         </b:section>
         <div class='header-actions'>
-          <a class='search-icon' href='#' title='Search'>
+          <a aria-label='Search this site' class='search-icon' href='/search' title='Search'>
             <svg fill='none' height='20' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='20'><circle cx='11' cy='11' r='8'/><line x1='21' x2='16.65' y1='21' y2='16.65'/></svg>
           </a>
         </div>
@@ -111,7 +208,7 @@
                   <article class='post'>
                     <div class='post-thumbnail'>
                       <b:if cond='data:post.firstImageUrl'>
-                        <img expr:alt='data:post.title' expr:src='data:post.firstImageUrl'/>
+                        <img expr:alt='data:post.title' expr:src='data:post.firstImageUrl' loading='lazy'/>
                       <b:else/>
                         <svg fill='none' height='48' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' width='48'><path d='M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z' stroke-linecap='round' stroke-linejoin='round'/></svg>
                       </b:if>
@@ -313,15 +410,17 @@
     </div>
   </footer>
 
-  <!-- Prism JS for Syntax Highlighting -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js'/>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js'/>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js'/>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js'/>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js'/>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js'/>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js'/>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-docker.min.js'/>
+  <!-- Prism JS for Syntax Highlighting (only on post pages) -->
+  <b:if cond='data:view.isSingleItem'>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js'/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js'/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js'/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js'/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js'/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js'/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js'/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-docker.min.js'/>
+  </b:if>
   
   <script>
     //<![CDATA[
