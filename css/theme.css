@@ -97,13 +97,18 @@ h1, h2, h3, h4, h5, h6 {
 .header-nav-section,
 .header-nav-section .widget,
 .header-nav-section .widget.LinkList,
-#header-nav-section .widget {
+#header-nav-section,
+#header-nav-section .widget,
+#header-nav-section > div,
+#LinkList1,
+#LinkList1 .widget-content {
   background: transparent !important;
   border: none !important;
   margin: 0 !important;
   padding: 0 !important;
   box-shadow: none !important;
   border-radius: 0 !important;
+  max-width: none !important;
 }
 
 .site-title {
