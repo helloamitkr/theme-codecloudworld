@@ -142,6 +142,41 @@
         padding-left: 8px !important;
         padding-right: 8px !important;
       }
+      .post {
+        flex-direction: column !important;
+        background: transparent !important;
+        border: none !important;
+        border-bottom: 1px solid #3f3f46 !important;
+        border-radius: 0 !important;
+        margin-bottom: 0 !important;
+        box-shadow: none !important;
+      }
+      .post:last-child {
+        border-bottom: none !important;
+      }
+      .post:hover {
+        transform: none !important;
+        box-shadow: none !important;
+      }
+      .post-thumbnail {
+        width: 100% !important;
+        min-height: 160px !important;
+        max-height: 200px !important;
+      }
+      .post-content {
+        padding: 16px 4px !important;
+      }
+      .post-title {
+        font-size: 18px !important;
+      }
+      .post-meta {
+        font-size: 13px !important;
+      }
+      .post-full {
+        padding: 20px 12px !important;
+        background: transparent !important;
+        border: none !important;
+      }
     }
     @media (max-width: 480px) {
       .container, .layout-wrapper.container {
