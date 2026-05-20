@@ -192,19 +192,6 @@
     </div>
   </header>
 
-  <b:if cond='data:view.isHomepage'>
-    <section class='hero-section'>
-      <div class='hero-inner'>
-        <h1 class='hero-headline'>Become a Better <span class='hero-highlight'>DevOps/MLOps</span> Engineer</h1>
-        <p class='hero-subheadline'>Join 250,000+ DevOps &amp; MLOps community. Get weekly deep dives, handpicked tools, and career resources. Trusted by 19,500+ newsletter subscribers.</p>
-        <form action='#' class='hero-subscribe-form'>
-          <input placeholder='Enter your email' required='true' type='email'/>
-          <button type='submit'>Subscribe</button>
-        </form>
-      </div>
-    </section>
-  </b:if>
-
   <div class='layout-wrapper container'>
     
     <!-- Main Content (Blog Posts) -->
