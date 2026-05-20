@@ -114,7 +114,29 @@
     <link href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css' rel='stylesheet'/>
   </b:if>
 
-  <b:skin><![CDATA[]]></b:skin>
+  <b:skin><![CDATA[
+    #header-nav-section,
+    #header-nav-section .widget,
+    #header-nav-section > div,
+    #LinkList1,
+    #LinkList1 .widget-content,
+    .header-nav-section,
+    .header-nav-section .widget {
+      background: transparent !important;
+      border: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+    }
+    #header-left,
+    #header-left .widget {
+      background: transparent !important;
+      border: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  ]]></b:skin>
 </head>
 <body>
 
