@@ -137,6 +137,13 @@
       padding: 0 !important;
     }
   ]]></b:skin>
+
+  <!-- Force desktop theme on mobile (our theme is already responsive) -->
+  <script>
+    //<![CDATA[
+    if(window.location.search.indexOf('m=1')>-1){window.location.href=window.location.href.replace(/([?&])m=1/,'$1m=0');}
+    //]]>
+  </script>
 </head>
 <body>
 
