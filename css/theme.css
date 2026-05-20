@@ -94,6 +94,14 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
 }
 
+.header-nav-section,
+.header-nav-section .widget {
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
 .site-title {
   margin: 0;
   line-height: 1;

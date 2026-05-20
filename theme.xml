@@ -17,10 +17,7 @@
   <!-- External CSS hosted on GitHub via jsDelivr CDN for faster loading -->
   <link href='https://cdn.jsdelivr.net/gh/helloamitkr/theme-codecloudworld@main/css/theme.css' rel='stylesheet'/>
 
-  <b:skin><![CDATA[
-    /* Tech Tutorial Custom Theme by codecloud */
-    /* Main CSS loaded externally via jsDelivr CDN */
-  ]]></b:skin>
+  <b:skin><![CDATA[]]></b:skin>
 </head>
 <body>
 
@@ -52,34 +49,21 @@
         <div class='mobile-close-btn' id='mobileCloseBtn'>
            <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='18' x2='6' y1='6' y2='18'/><line x1='6' x2='18' y1='6' y2='18'/></svg>
         </div>
-        <nav class='header-nav custom-nav'>
-          <ul>
-            <li class='has-dropdown'>
-              <a href='#'>
-                <svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Tutorials 
-                <svg class='caret' fill="none" height="14" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-              <ul class='dropdown'>
-                 <li><a href='/search/label/DevOps'>DevOps</a></li>
-                 <li><a href='/search/label/Cloud Computing'>Cloud Computing</a></li>
-                 <li><a href='/search/label/Linux'>Linux</a></li>
-              </ul>
-            </li>
-            <li>
-              <a href='#'>
-                <svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Roadmaps
-              </a>
-            </li>
-            <li>
-              <a href='#'>
-                <svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Newsletter
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <b:section class='header-nav-section' id='header-nav-section' maxwidgets='1' showaddelement='yes'>
+          <b:widget id='LinkList1' locked='false' title='Navigation Menu' type='LinkList' version='2'>
+            <b:includable id='main'>
+              <nav class='header-nav custom-nav' aria-label='Main navigation'>
+                <ul>
+                  <b:loop values='data:links' var='link'>
+                    <li>
+                      <a expr:href='data:link.target'><data:link.name/></a>
+                    </li>
+                  </b:loop>
+                </ul>
+              </nav>
+            </b:includable>
+          </b:widget>
+        </b:section>
         <div class='header-actions'>
           <a class='search-icon' href='#' title='Search'>
             <svg fill='none' height='20' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='20'><circle cx='11' cy='11' r='8'/><line x1='21' x2='16.65' y1='21' y2='16.65'/></svg>
