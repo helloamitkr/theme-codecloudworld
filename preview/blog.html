@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>codecloudworld - Preview</title>
+  <title>codecloudworld - Blog Post</title>
   
   <!-- Fonts -->
   <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'>
@@ -21,6 +21,8 @@
     .blog-pager a { padding: 10px 20px; background: #fff; border: 1px solid #e5e7eb; border-radius: 4px; color: var(--primary-color); text-decoration: none; }
     .widget-title { font-size: 1.25rem; margin-bottom: 1rem; color: var(--heading-color); }
     .widget-content { margin-bottom: 2rem; }
+    .post-body h2 { font-size: 1.75rem; margin-top: 1.5em; }
+    .post-body h3 { font-size: 1.5rem; margin-top: 1.5em; }
   </style>
 </head>
 <body>
@@ -30,7 +32,7 @@
     <div class='header-inner'>
       <div class='header-left-col'>
         <div class='site-title'>
-          <a href='#'>
+          <a href='index.html'>
             <svg class='site-logo-svg' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M52 34a12 12 0 00-11.4-12A16 16 0 0012 28a10 10 0 001 20h38a12 12 0 001-14z' fill='#ff1493'/><path d='M30 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M42 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.6'/></svg>
             <span>codecloudworld</span>
           </a>
@@ -91,86 +93,57 @@
     </div>
   </header>
 
-  <section class='hero-section'>
-    <div class='hero-inner'>
-      <h1 class='hero-headline'>Become a Better <span class='hero-highlight'>DevOps/MLOps</span> Engineer</h1>
-      <p class='hero-subheadline'>Join 250,000+ DevOps &amp; MLOps community. Get weekly deep dives, handpicked tools, and career resources. Trusted by 19,500+ newsletter subscribers.</p>
-      <form action='#' class='hero-subscribe-form'>
-        <input placeholder='Enter your email' required='true' type='email'/>
-        <button type='submit'>Subscribe</button>
-      </form>
-    </div>
-  </section>
-
   <div class='layout-wrapper container'>
     
-    <!-- Main Content (Blog Posts) -->
+    <!-- Main Content (Blog Post) -->
     <main class='main-content'>
-      <div class='blog-section-header'>
-        <h2>Blog</h2>
-        <a href='blog.html'>View All &#8594;</a>
-      </div>
+      <article class='post-full'>
+        <header class='post-full-header'>
+          <h1 class='post-full-title'>Getting Started with Kubernetes Networking</h1>
+          <div class='post-meta'>
+            <span>&#128197; May 15, 2026</span>
+            <span>&#9997; codecloud</span>
+          </div>
+        </header>
 
-      <div class='post-list'>
-        <!-- Post 1 -->
-        <article class='post'>
-          <div class='post-thumbnail'>
-            <svg fill='none' height='48' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' width='48'><path d='M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z' stroke-linecap='round' stroke-linejoin='round'/></svg>
-          </div>
-          <div class='post-content'>
-            <h2 class='post-title'><a href="blog.html">Getting Started with Kubernetes Networking</a></h2>
-            <div class='post-meta'>
-              <span>&#128197; May 15, 2026</span>
-              <span>&#9997; codecloud</span>
-            </div>
-            <div class='post-body'>
-              <p>Learn the fundamentals of Kubernetes networking, including Pod-to-Pod communication, Services, and Ingress controllers.</p>
-              <div><a class='read-more-btn' href='blog.html'>Read Tutorial &#8594;</a></div>
-            </div>
-          </div>
-        </article>
+        <div class='post-full-content post-body'>
+          <p>This is a detailed blog post about Kubernetes networking. Here we would explain the fundamentals of how communication works within a Kubernetes cluster. This includes Pod-to-Pod communication, the role of Services, and how Ingress controllers manage external access.</p>
+          
+          <figure>
+            <img src="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Kubernetes Logo">
+            <figcaption>An illustrative image for the blog post.</figcaption>
+          </figure>
 
-        <!-- Post 2 -->
-        <article class='post'>
-          <div class='post-thumbnail'>
-            <svg fill='none' height='48' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' width='48'><path d='M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z' stroke-linecap='round' stroke-linejoin='round'/></svg>
-          </div>
-          <div class='post-content'>
-            <h2 class='post-title'><a href="#">Top 10 DevOps Tools in 2026</a></h2>
-            <div class='post-meta'>
-              <span>&#128197; May 10, 2026</span>
-              <span>&#9997; codecloud</span>
-            </div>
-            <div class='post-body'>
-              <p>Discover the most essential tools that every DevOps engineer should master this year to stay competitive.</p>
-              <div><a class='read-more-btn' href='#'>Read Tutorial &#8594;</a></div>
-            </div>
-          </div>
-        </article>
+          <h2>Understanding the Basics</h2>
+          <p>In Kubernetes, every Pod gets its own unique IP address. This means you don't need to worry about creating links between Pods or mapping container ports to host ports. This model creates a clean, backward-compatible model where Pods can be treated much like VMs or physical hosts from the perspectives of port allocation, naming, service discovery, load balancing, application configuration, and migration.</p>
 
-        <!-- Post 3 -->
-        <article class='post'>
-          <div class='post-thumbnail'>
-            <svg fill='none' height='48' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' width='48'><path d='M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z' stroke-linecap='round' stroke-linejoin='round'/></svg>
+          <h3>Pod-to-Pod Communication</h3>
+          <p>Communication between pods is a fundamental aspect of Kubernetes networking. The networking model stipulates that every pod should be able to communicate with every other pod in the cluster without NAT (Network Address Translation). This is typically achieved using a network overlay or an underlay that provides a flat network across all nodes.</p>
+
+          <pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80</code></pre>
+
+          <h2>Services: Exposing Your Application</h2>
+          <p>While Pods are ephemeral, Services provide a stable endpoint for a set of Pods. A Service is an abstraction which defines a logical set of Pods and a policy by which to access them. This is essential for microservices architectures where different components need to discover and communicate with each other reliably.</p>
+
+          <h3>Ingress: Managing External Access</h3>
+          <p>An Ingress is an API object that manages external access to the services in a cluster, typically HTTP. Ingress can provide load balancing, SSL termination and name-based virtual hosting. It acts as a smart router or an entry point into your cluster.</p>
+
+          <div class="post-labels">
+            <a href="#">Kubernetes</a>
+            <a href="#">Networking</a>
+            <a href="#">DevOps</a>
           </div>
-          <div class='post-content'>
-            <h2 class='post-title'><a href="#">Building CI/CD Pipelines with GitHub Actions</a></h2>
-            <div class='post-meta'>
-              <span>&#128197; May 05, 2026</span>
-              <span>&#9997; codecloud</span>
-            </div>
-            <div class='post-body'>
-              <p>A step-by-step tutorial on how to automate your software delivery process using GitHub Actions and Docker.</p>
-              <div><a class='read-more-btn' href='#'>Read Tutorial &#8594;</a></div>
-            </div>
-          </div>
-        </article>
-      </div>
-      
-      <div class='blog-pager'>
-        <a href="#">&#8592; Newer Posts</a>
-        <a href="#">Older Posts &#8594;</a>
-      </div>
+        </div>
+      </article>
     </main>
 
     <!-- Sidebar -->
@@ -206,7 +179,7 @@
     <div class='container'>
       <div class='footer-grid'>
         <div class='footer-col footer-brand'>
-          <a href='#'>
+          <a href='index.html'>
             <svg class='site-logo-svg' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg' style='height:28px;width:28px;'><path d='M52 34a12 12 0 00-11.4-12A16 16 0 0012 28a10 10 0 001 20h38a12 12 0 001-14z' fill='#ff1493'/><path d='M30 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M42 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.6'/></svg>
           </a>
           <p>Join 250,000+ DevOps & MLOps community. Get weekly deep dives, handpicked tools, and career resources.</p>
@@ -251,5 +224,8 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
 </body>
 </html>
