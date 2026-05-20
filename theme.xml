@@ -315,7 +315,7 @@
   </footer>
 
   <!-- Subscribe Modal -->
-  <div class='modal-overlay' id='subscribeModal'>
+  <div class='modal-overlay' id='subscribeModal' style='display:none'>
     <div class='modal-box'>
       <button class='modal-close' id='modalCloseBtn' type='button'>
         <svg fill='none' height='24' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='24'><line x1='18' x2='6' y1='6' y2='18'/><line x1='6' x2='18' y1='6' y2='18'/></svg>
@@ -390,12 +390,14 @@
       var modalClose = document.getElementById('modalCloseBtn');
 
       function openModal() {
-        modal.classList.add('active');
+        modal.style.display = 'flex';
+        setTimeout(function(){ modal.classList.add('active'); }, 10);
         document.body.style.overflow = 'hidden';
       }
       function closeModal() {
         modal.classList.remove('active');
         document.body.style.overflow = '';
+        setTimeout(function(){ modal.style.display = 'none'; }, 300);
       }
 
       if(subBtn) subBtn.addEventListener('click', openModal);
