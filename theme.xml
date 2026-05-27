@@ -433,7 +433,7 @@
           <a expr:href='data:blog.homepageUrl'>
             <svg class='site-logo-svg' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg' style='height:28px;width:28px;'><path d='M52 34a12 12 0 00-11.4-12A16 16 0 0012 28a10 10 0 001 20h38a12 12 0 001-14z' fill='#ff1493'/><path d='M30 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M42 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.6'/></svg>
           </a>
-          <p>Join 250,000+ DevOps &amp; MLOps community. Get weekly deep dives, handpicked tools, and career resources.</p>
+          <p>Join us for DevOps,Machine Learning,Cloud Computing,Agentic AI, Software Development &amp; MLOps community. Get weekly deep dives, handpicked tools, and AI NEWS.</p>
         </div>
         
         <div class='footer-col'>
