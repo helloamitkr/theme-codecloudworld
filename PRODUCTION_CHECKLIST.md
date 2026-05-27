@@ -75,10 +75,10 @@
 - ~~GitHub → `https://github.com/helloamitkr`~~
 - ~~YouTube → `https://youtube.com/@YOUR_CHANNEL`~~
 
-### 6. Submit Sitemap to Google
-- Go to https://search.google.com/search-console
-- Add your blog as a property
-- Go to **Sitemaps** → Submit: `https://testtheme731.blogspot.com/sitemap.xml`
+### ~~6. Submit Sitemap to Google~~ ✅
+- ~~Go to https://search.google.com/search-console~~
+- ~~Add your blog as a property~~
+- ~~Go to **Sitemaps** → Submit: `https://testtheme731.blogspot.com/sitemap.xml`~~
 
 ### 7. Set Up Google Analytics (optional)
 - Create a GA4 property at https://analytics.google.com
