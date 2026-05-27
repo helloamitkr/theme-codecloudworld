@@ -217,7 +217,7 @@
         <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='3' x2='21' y1='12' y2='12'/><line x1='3' x2='21' y1='6' y2='6'/><line x1='3' x2='21' y1='18' y2='18'/></svg>
       </div>
       
-      <div class='mobile-overlay' id='mobileOverlay'/>
+      <div class='mobile-overlay' id='mobileOverlay'></div>
 
       <div class='header-right-col' id='headerRightCol'>
         <div class='mobile-close-btn' id='mobileCloseBtn'>
@@ -286,7 +286,7 @@
                         </b:if>
                       </h2>
                       <div class='post-meta'>
-                        <span>&#128197; <data:post.dateHeader/></span>
+                        <span>&#128197; <data:post.date/></span>
                         <b:if cond='data:post.author'>
                           <span>&#9997; <data:post.author/></span>
                         </b:if>
@@ -316,7 +316,7 @@
               <header class='post-full-header'>
                 <h1 class='post-full-title'><data:post.title/></h1>
                 <div class='post-meta'>
-                  <span>&#128197; <data:post.dateHeader/></span>
+                  <span>&#128197; <data:post.date/></span>
                   <b:if cond='data:post.author'>
                     <span>&#9997; <data:post.author/></span>
                   </b:if>
@@ -325,7 +325,7 @@
 
               <div class='post-full-content post-body'>
                 <data:post.body/>
-                <div class="post-labels">
+                <div class='post-labels'>
                   <b:loop values='data:post.labels' var='label'>
                     <a expr:href='data:label.url' rel='tag'><data:label.name/></a>
                   </b:loop>
@@ -468,7 +468,7 @@
       </div>
       
       <div class='footer-bottom'>
-        <p>&amp;copy; 2026 <data:blog.title/>. All rights reserved.</p>
+        <p>© 2026 <data:blog.title/>. All rights reserved.</p>
         <p>Built by codecloud for the DevOps Community</p>
       </div>
     </div>
@@ -476,14 +476,14 @@
 
   <!-- Prism JS for Syntax Highlighting (only on post pages) -->
   <b:if cond='data:view.isSingleItem'>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js'/>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js'/>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js'/>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js'/>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js'/>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js'/>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js'/>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-docker.min.js'/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-docker.min.js'></script>
   </b:if>
   
   <script>
