@@ -85,10 +85,10 @@
 - ~~Get your Measurement ID (G-XXXXXXXXXX)~~
 - ~~Add to `theme.xml` just before `</head>`:~~
 
-### 8. Custom Domain (optional)
-- **Blogger Dashboard → Settings → Publishing → Custom domain**
-- Point your domain's CNAME to `ghs.google.com`
-- Enables HTTPS automatically
+### ~~8. Custom Domain (optional)~~ ✅
+- ~~**Blogger Dashboard → Settings → Publishing → Custom domain**~~
+- ~~Point your domain's CNAME to `ghs.google.com`~~
+- ~~Enables HTTPS automatically~~
 
 ---
 
