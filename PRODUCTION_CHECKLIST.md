@@ -27,6 +27,7 @@
 - [x] Dead CSS removed (hero, .pro-btn, dropdown, .email-capture-form, modal)
 - [x] Label widget link color fixed for dark theme
 - [x] Nav widget background forced transparent via `<b:skin>`
+- [x] HTML bugs fixed: self-closing `<div>`/`<script>` tags, `data:post.dateHeader` → `data:post.date`, footer `©` encoding, quote consistency
 
 ---
 
