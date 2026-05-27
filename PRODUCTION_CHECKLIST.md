@@ -80,20 +80,10 @@
 - ~~Add your blog as a property~~
 - ~~Go to **Sitemaps** → Submit: `https://testtheme731.blogspot.com/sitemap.xml`~~
 
-### 7. Set Up Google Analytics (optional)
-- Create a GA4 property at https://analytics.google.com
-- Get your Measurement ID (G-XXXXXXXXXX)
-- Add to `theme.xml` just before `</head>`:
-```xml
-<script async='async' src='https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX'/>
-<script>
-  //<![CDATA[
-  window.dataLayer=window.dataLayer||[];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js',new Date());gtag('config','G-XXXXXXXXXX');
-  //]]>
-</script>
-```
+### ~~7. Set Up Google Analytics (optional)~~ ✅
+- ~~Create a GA4 property at https://analytics.google.com~~
+- ~~Get your Measurement ID (G-XXXXXXXXXX)~~
+- ~~Add to `theme.xml` just before `</head>`:~~
 
 ### 8. Custom Domain (optional)
 - **Blogger Dashboard → Settings → Publishing → Custom domain**
