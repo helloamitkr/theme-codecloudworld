@@ -54,26 +54,26 @@
 - ~~Update `theme.xml` line ~364: replace `action='#'` with the follow.it URL~~
 - ~~**Result:** Subscribers automatically get emailed when you publish a new post~~
 
-### 5. Update Footer Links
-In `theme.xml` (lines ~442-466), replace all `href='#'` with real URLs:
+### ~~5. Update Footer Links~~ ✅
+~~In `theme.xml` (lines ~442-466), replace all `href='#'` with real URLs:~~
 
-**Resources section:**
-- Tutorials → `/search/label/Tutorials` (or your label URL)
-- Roadmaps → your roadmaps page URL
-- Certification Guides → your guides URL
-- Newsletter → link to follow.it public page or `/p/newsletter.html`
+~~**Resources section:**~~
+- ~~Tutorials → `/search/label/Tutorials` (or your label URL)~~
+- ~~Roadmaps → your roadmaps page URL~~
+- ~~Certification Guides → your guides URL~~
+- ~~Newsletter → link to follow.it public page or `/p/newsletter.html`~~
 
-**Company section:**
-- About Us → `/p/about.html` (create a Blogger static page)
-- Contact → `/p/contact.html`
-- Advertise → `/p/advertise.html`
-- Privacy Policy → `/p/privacy-policy.html`
+~~**Company section:**~~
+- ~~About Us → `/p/about.html` (create a Blogger static page)~~
+- ~~Contact → `/p/contact.html`~~
+- ~~Advertise → `/p/advertise.html`~~
+- ~~Privacy Policy → `/p/privacy-policy.html`~~
 
-**Follow Us section:**
-- Twitter → `https://twitter.com/YOUR_HANDLE`
-- LinkedIn → `https://linkedin.com/in/YOUR_PROFILE`
-- GitHub → `https://github.com/helloamitkr`
-- YouTube → `https://youtube.com/@YOUR_CHANNEL`
+~~**Follow Us section:**~~
+- ~~Twitter → `https://twitter.com/YOUR_HANDLE`~~
+- ~~LinkedIn → `https://linkedin.com/in/YOUR_PROFILE`~~
+- ~~GitHub → `https://github.com/helloamitkr`~~
+- ~~YouTube → `https://youtube.com/@YOUR_CHANNEL`~~
 
 ### 6. Submit Sitemap to Google
 - Go to https://search.google.com/search-console
