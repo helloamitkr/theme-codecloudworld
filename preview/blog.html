@@ -6,8 +6,7 @@
   <title>codecloudworld - Blog Post</title>
   
   <!-- Fonts -->
-  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'>
-  <link href='https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap' rel='stylesheet'>
   
   <!-- Prism JS CSS -->
   <link href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css' rel='stylesheet'>
@@ -15,15 +14,6 @@
   <!-- Theme CSS -->
   <link href="style.css" rel="stylesheet">
   
-  <style>
-    /* Fix local static preview missing blogger layout constraints */
-    .blog-pager { display: flex; justify-content: space-between; margin-top: 20px; }
-    .blog-pager a { padding: 10px 20px; background: #fff; border: 1px solid #e5e7eb; border-radius: 4px; color: var(--primary-color); text-decoration: none; }
-    .widget-title { font-size: 1.25rem; margin-bottom: 1rem; color: var(--heading-color); }
-    .widget-content { margin-bottom: 2rem; }
-    .post-body h2 { font-size: 1.75rem; margin-top: 1.5em; }
-    .post-body h3 { font-size: 1.5rem; margin-top: 1.5em; }
-  </style>
 </head>
 <body>
 
@@ -40,54 +30,26 @@
       </div>
 
       <div class='mobile-menu-toggle' id='mobileMenuBtn'>
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
+        <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='3' x2='21' y1='12' y2='12'/><line x1='3' x2='21' y1='6' y2='6'/><line x1='3' x2='21' y1='18' y2='18'/></svg>
       </div>
+
+      <div class='mobile-overlay' id='mobileOverlay'></div>
 
       <div class='header-right-col' id='headerRightCol'>
         <div class='mobile-close-btn' id='mobileCloseBtn'>
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
+          <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='18' x2='6' y1='6' y2='18'/><line x1='6' x2='18' y1='6' y2='18'/></svg>
         </div>
-
-        <nav class='header-nav'>
+        <nav class='header-nav custom-nav' aria-label='Main navigation'>
           <ul>
-            <li>
-              <a href='#'>
-                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                Tutorials
-                <svg class="caret" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-              </a>
-              <div class='dropdown'>
-                <a href='/search/label/DevOps'>DevOps</a>
-                <a href='/search/label/Cloud Computing'>Cloud Computing</a>
-                <a href='/search/label/Linux'>Linux</a>
-              </div>
-            </li>
-            <li>
-              <a href='#'>
-                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
-                Roadmaps
-              </a>
-            </li>
-            <li>
-              <a href='#'>
-                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                Newsletter
-              </a>
-            </li>
+            <li><a href='#'>Tutorials</a></li>
+            <li><a href='#'>Roadmaps</a></li>
+            <li><a href='#'>Newsletter</a></li>
           </ul>
         </nav>
-
-        <div class='header-actions' style='display: flex; align-items: center; gap: 24px; margin-left: 32px;'>
-          <a class='search-icon' href='#'>
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
+        <div class='header-actions'>
+          <a aria-label='Search this site' class='search-icon' href='#' title='Search'>
+            <svg fill='none' height='20' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='20'><circle cx='11' cy='11' r='8'/><line x1='21' x2='16.65' y1='21' y2='16.65'/></svg>
           </a>
-          <a class='pro-btn' href='#'>Sign In</a>
         </div>
       </div>
     </div>
@@ -163,15 +125,27 @@ spec:
         <h3 class='widget-title'>Popular Tutorials</h3>
         <div class='widget-content'>
           <ul class='popular-posts-list'>
-            <li>
-              <a href="#">Docker vs Podman: Which should you choose?</a>
-            </li>
-            <li>
-              <a href="#">Mastering Terraform State Management</a>
-            </li>
+            <li><a href="#">Docker vs Podman: Which should you choose?</a></li>
+            <li><a href="#">Mastering Terraform State Management</a></li>
+            <li><a href="#">Kubernetes RBAC Deep Dive</a></li>
           </ul>
         </div>
       </div>
+
+      <!-- Labels / Categories Widget -->
+      <div class='widget'>
+        <h3 class='widget-title'>Tutorial Categories</h3>
+        <div class='widget-content list-label-widget-content'>
+          <ul>
+            <li><a href="#">DevOps</a><span>12</span></li>
+            <li><a href="#">Kubernetes</a><span>8</span></li>
+            <li><a href="#">Docker</a><span>6</span></li>
+            <li><a href="#">CI/CD</a><span>5</span></li>
+            <li><a href="#">Cloud</a><span>9</span></li>
+          </ul>
+        </div>
+      </div>
+
     </aside>
   </div>
 
@@ -223,9 +197,42 @@ spec:
     </div>
   </footer>
 
-  <script src="script.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <!-- Prism JS for Syntax Highlighting -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-docker.min.js'></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var mobileBtn = document.getElementById('mobileMenuBtn');
+      var closeBtn = document.getElementById('mobileCloseBtn');
+      var overlay = document.getElementById('mobileOverlay');
+      var headerRight = document.getElementById('headerRightCol');
+
+      function toggleMenu() {
+        if(headerRight.classList.contains('open')) {
+          headerRight.classList.remove('open');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        } else {
+          headerRight.classList.add('open');
+          overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      if(mobileBtn && closeBtn && overlay && headerRight) {
+        mobileBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+      }
+    });
+  </script>
 
 </body>
 </html>
