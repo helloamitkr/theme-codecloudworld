@@ -41,10 +41,10 @@
 - ~~**Blogger Dashboard → Theme → click ⋮ (three dots) → Mobile Settings → Select "Desktop"**~~
 - ~~This prevents Blogger from serving its default mobile template~~
 
-### 3. Enable Search Description
-- **Blogger Dashboard → Settings → Search preferences → Meta tags → Enable**
-- Write a blog-level description (e.g., "DevOps, Cloud Computing, MLOps tutorials and guides")
-- For each post: **Post settings → Search description** — write a unique 150-160 char description
+### ~~3. Enable Search Description~~ ✅
+- ~~**Blogger Dashboard → Settings → Search preferences → Meta tags → Enable**~~
+- ~~Write a blog-level description (e.g., "DevOps, Cloud Computing, MLOps tutorials and guides")~~
+- ~~For each post: **Post settings → Search description** — write a unique 150-160 char description~~
 
 ### 4. Set Up Email Subscriptions (follow.it — recommended)
 - Go to https://follow.it and sign up (free)
