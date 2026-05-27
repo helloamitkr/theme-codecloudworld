@@ -46,13 +46,13 @@
 - ~~Write a blog-level description (e.g., "DevOps, Cloud Computing, MLOps tutorials and guides")~~
 - ~~For each post: **Post settings → Search description** — write a unique 150-160 char description~~
 
-### 4. Set Up Email Subscriptions (follow.it — recommended)
-- Go to https://follow.it and sign up (free)
-- Enter blog URL: `testtheme731.blogspot.com`
-- It auto-detects your RSS feed
-- Copy the form action URL it provides
-- Update `theme.xml` line ~364: replace `action='#'` with the follow.it URL
-- **Result:** Subscribers automatically get emailed when you publish a new post
+### ~~4. Set Up Email Subscriptions (follow.it — recommended)~~ ✅
+- ~~Go to https://follow.it and sign up (free)~~
+- ~~Enter blog URL: `testtheme731.blogspot.com`~~
+- ~~It auto-detects your RSS feed~~
+- ~~Copy the form action URL it provides~~
+- ~~Update `theme.xml` line ~364: replace `action='#'` with the follow.it URL~~
+- ~~**Result:** Subscribers automatically get emailed when you publish a new post~~
 
 ### 5. Update Footer Links
 In `theme.xml` (lines ~442-466), replace all `href='#'` with real URLs:
