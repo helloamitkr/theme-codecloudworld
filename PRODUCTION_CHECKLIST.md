@@ -37,9 +37,9 @@
 - ~~Go to **Blogger Dashboard → Theme → Edit HTML**~~
 - ~~Select all → Paste contents of `theme.xml` → Save~~
 
-### 2. Disable Mobile Theme
-- **Blogger Dashboard → Theme → click ⋮ (three dots) → Mobile Settings → Select "Desktop"**
-- This prevents Blogger from serving its default mobile template
+### ~~2. Disable Mobile Theme~~ ✅
+- ~~**Blogger Dashboard → Theme → click ⋮ (three dots) → Mobile Settings → Select "Desktop"**~~
+- ~~This prevents Blogger from serving its default mobile template~~
 
 ### 3. Enable Search Description
 - **Blogger Dashboard → Settings → Search preferences → Meta tags → Enable**
