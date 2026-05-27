@@ -33,9 +33,9 @@
 
 ## ACTION ITEMS (manual steps required)
 
-### 1. Upload Theme to Blogger
-- Go to **Blogger Dashboard → Theme → Edit HTML**
-- Select all → Paste contents of `theme.xml` → Save
+### ~~1. Upload Theme to Blogger~~ ✅
+- ~~Go to **Blogger Dashboard → Theme → Edit HTML**~~
+- ~~Select all → Paste contents of `theme.xml` → Save~~
 
 ### 2. Disable Mobile Theme
 - **Blogger Dashboard → Theme → click ⋮ (three dots) → Mobile Settings → Select "Desktop"**
