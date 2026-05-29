@@ -1,105 +1,140 @@
 # Production Readiness Checklist — codecloudworld
 
-## Status: ✅ All Complete
-
 ---
 
-## DONE (in theme code)
+## SEO — Implemented in Theme Code
 
-- [x] SEO title (dynamic per page type)
-- [x] Meta description (dynamic for posts, static for homepage)
-- [x] Canonical URL on every page
-- [x] Robots `noindex, follow` on archive/search/label pages
-- [x] Open Graph meta tags (title, url, site_name, image, description)
-- [x] Twitter Card meta tags (summary_large_image)
-- [x] JSON-LD structured data — WebSite (homepage) + BlogPosting (posts)
-- [x] Favicon (inline SVG cloud icon)
-- [x] Preconnect hints (fonts.googleapis.com, fonts.gstatic.com, cdn.jsdelivr.net, cdnjs.cloudflare.com)
-- [x] Google Fonts combined into single request with `display=swap`
-- [x] Theme-color meta (#0f172a)
+### On-Page SEO
+- [x] `lang="en"` on `<html>` tag
+- [x] Dynamic `<title>` — `PostName | BlogTitle` for posts, `pageTitle` for homepage
+- [x] Meta description — dynamic from post meta, fallback auto-generated
+- [x] Canonical URL (`<link rel="canonical">`) on every page
+- [x] Robots meta — `noindex, follow` on archive/search/label pages, full `index, follow` on posts/homepage
+
+### Open Graph (Facebook/LinkedIn)
+- [x] `og:type` — `article` on posts, `website` on homepage
+- [x] `og:title`, `og:url`, `og:site_name`, `og:image`, `og:description`
+
+### Twitter Cards
+- [x] `summary_large_image` card type
+- [x] `twitter:title`, `twitter:description`, `twitter:image`
+
+### JSON-LD Structured Data (Google Rich Results)
+- [x] `WebSite` schema on homepage with `SearchAction`
+- [x] `BlogPosting` schema on posts with `headline`, `datePublished`, `author`, `publisher`, `logo`, `mainEntityOfPage`
+- [x] `BreadcrumbList` schema on posts (Home → Post Title)
+
+### Accessibility & Semantic HTML
+- [x] `aria-label` on logo link, search icon, nav element
+- [x] `aria-hidden="true"` on decorative SVGs
+- [x] `alt` text on post images via `expr:alt='data:post.title'`
+- [x] `rel="noopener noreferrer"` + `target="_blank"` on external links
+- [x] Semantic `<header>`, `<main>`, `<aside>`, `<footer>`, `<article>`, `<nav>`
+
+### Performance
+- [x] Fonts combined into 1 request with `display=swap` (no FOIT)
+- [x] Preconnect hints (4 domains)
 - [x] Prism JS/CSS lazy-loaded only on single post pages
 - [x] `loading="lazy"` on post thumbnail images
-- [x] `aria-label` on search icon link
-- [x] Mobile `?m=1` → `?m=0` redirect (forces responsive theme)
-- [x] Mobile responsive layout (clean list style, edge-to-edge)
-- [x] Off-canvas mobile menu with overlay
+- [x] Dead CSS removed (~250 lines total)
+- [x] External CSS via jsDelivr CDN
+
+### Other
+- [x] Favicon (inline SVG)
+- [x] Theme-color meta `#0f172a`
+- [x] Mobile `?m=1` → `?m=0` redirect
+- [x] Responsive mobile layout
 - [x] 404 error page
-- [x] Dead CSS removed (hero, .pro-btn, dropdown, .email-capture-form, modal)
-- [x] Label widget link color fixed for dark theme
-- [x] Nav widget background forced transparent via `<b:skin>`
-- [x] HTML bugs fixed: self-closing `<div>`/`<script>` tags, `data:post.dateHeader` → `data:post.date`, footer `©` encoding, quote consistency
+- [x] Newsletter subscribe form (Google Forms via fetch no-cors)
 
 ---
 
-## ACTION ITEMS (manual steps required)
+## robots.txt — Blogger Dashboard Setup
 
-### ~~1. Upload Theme to Blogger~~ ✅
-- ~~Go to **Blogger Dashboard → Theme → Edit HTML**~~
-- ~~Select all → Paste contents of `theme.xml` → Save~~
+Blogger auto-generates a `robots.txt` at `https://testtheme731.blogspot.com/robots.txt`.
+To customize it:
 
-### ~~2. Disable Mobile Theme~~ ✅
-- ~~**Blogger Dashboard → Theme → click ⋮ (three dots) → Mobile Settings → Select "Desktop"**~~
-- ~~This prevents Blogger from serving its default mobile template~~
+1. Go to **Blogger Dashboard → Settings → Crawlers and indexing**
+2. Enable **Custom robots.txt**
+3. Paste this:
 
-### ~~3. Enable Search Description~~ ✅
-- ~~**Blogger Dashboard → Settings → Search preferences → Meta tags → Enable**~~
-- ~~Write a blog-level description (e.g., "DevOps, Cloud Computing, MLOps tutorials and guides")~~
-- ~~For each post: **Post settings → Search description** — write a unique 150-160 char description~~
+```
+User-agent: *
+Allow: /
+Disallow: /search
+Disallow: /search?
+Disallow: /search/label/*?
+Disallow: /*?m=1
+Disallow: /*?m=0
 
-### ~~4. Set Up Email Subscriptions (follow.it — recommended)~~ ✅
-- ~~Go to https://follow.it and sign up (free)~~
-- ~~Enter blog URL: `testtheme731.blogspot.com`~~
-- ~~It auto-detects your RSS feed~~
-- ~~Copy the form action URL it provides~~
-- ~~Update `theme.xml` line ~364: replace `action='#'` with the follow.it URL~~
-- ~~**Result:** Subscribers automatically get emailed when you publish a new post~~
+Sitemap: https://testtheme731.blogspot.com/sitemap.xml
+```
 
-### ~~5. Update Footer Links~~ ✅
-~~In `theme.xml` (lines ~442-466), replace all `href='#'` with real URLs:~~
+**What this does:**
+- **Allows** all crawlers to index posts, pages, homepage
+- **Blocks** search results pages, label pagination, and mobile parameter URLs (prevents duplicate content)
+- **Points** Google to your sitemap
 
-~~**Resources section:**~~
-- ~~Tutorials → `/search/label/Tutorials` (or your label URL)~~
-- ~~Roadmaps → your roadmaps page URL~~
-- ~~Certification Guides → your guides URL~~
-- ~~Newsletter → link to follow.it public page or `/p/newsletter.html`~~
+### Custom robots header tags (same page in Settings)
+Set these in **Blogger → Settings → Crawlers and indexing → Custom robots header tags**:
 
-~~**Company section:**~~
-- ~~About Us → `/p/about.html` (create a Blogger static page)~~
-- ~~Contact → `/p/contact.html`~~
-- ~~Advertise → `/p/advertise.html`~~
-- ~~Privacy Policy → `/p/privacy-policy.html`~~
+| Page Type | Setting |
+|-----------|---------|
+| Homepage | `index, follow` |
+| Archive pages | `noindex, follow` |
+| Search pages | `noindex, follow` |
+| Post pages | `index, follow` |
 
-~~**Follow Us section:**~~
-- ~~Twitter → `https://twitter.com/YOUR_HANDLE`~~
-- ~~LinkedIn → `https://linkedin.com/in/YOUR_PROFILE`~~
-- ~~GitHub → `https://github.com/helloamitkr`~~
-- ~~YouTube → `https://youtube.com/@YOUR_CHANNEL`~~
+---
 
-### ~~6. Submit Sitemap to Google~~ ✅
-- ~~Go to https://search.google.com/search-console~~
-- ~~Add your blog as a property~~
-- ~~Go to **Sitemaps** → Submit: `https://testtheme731.blogspot.com/sitemap.xml`~~
+## Remaining Action Items
 
-### ~~7. Set Up Google Analytics (optional)~~ ✅
-- ~~Create a GA4 property at https://analytics.google.com~~
-- ~~Get your Measurement ID (G-XXXXXXXXXX)~~
-- ~~Add to `theme.xml` just before `</head>`:~~
+### 1. Configure robots.txt (see above)
+- Blogger Dashboard → Settings → Crawlers and indexing → Custom robots.txt
 
-### ~~8. Custom Domain (optional)~~ ✅
-- ~~**Blogger Dashboard → Settings → Publishing → Custom domain**~~
-- ~~Point your domain's CNAME to `ghs.google.com`~~
-- ~~Enables HTTPS automatically~~
+### 2. Configure custom robots header tags (see above)
+- Same settings page — enables server-level noindex signals
+
+### 3. Submit Sitemap to Google Search Console
+- Go to https://search.google.com/search-console
+- Add property: `https://testtheme731.blogspot.com`
+- Sitemaps → Submit: `https://testtheme731.blogspot.com/sitemap.xml`
+
+### 4. Write Post Search Descriptions
+- For **every post**: Post editor → Post settings → Search description
+- Write unique 150-160 char descriptions (Google uses these in search results)
+
+### 5. Upload Latest theme.xml
+- Blogger Dashboard → Theme → Edit HTML → paste → Save
+
+### 6. Update Remaining Footer Links
+- LinkedIn → replace `href='#'` with your real URL
+- YouTube → replace `href='#'` with your real URL
+
+### 7. Google Analytics (optional)
+Add before `</head>` in theme.xml:
+```xml
+<script async='async' src='https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX'/>
+<script>
+  //<![CDATA[
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js',new Date());gtag('config','G-XXXXXXXXXX');
+  //]]>
+</script>
+```
 
 ---
 
 ## File Structure
 ```
 theme-codecloudworld/
-├── theme.xml              # Main Blogger template (upload to Blogger)
+├── theme.xml                # Main Blogger template (upload to Blogger)
 ├── css/
-│   └── theme.css          # External CSS (served via jsDelivr CDN)
-├── PRODUCTION_CHECKLIST.md # This file
-└── README.md              # (create if needed)
+│   └── theme.css            # External CSS (served via jsDelivr CDN)
+├── PRODUCTION_CHECKLIST.md  # This file
+├── blogger-pages/           # Static page HTML for Blogger
+└── preview/                 # Local preview versions
 ```
 
 ## CDN URL
