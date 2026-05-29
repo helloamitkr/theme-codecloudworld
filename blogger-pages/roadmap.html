@@ -1,0 +1,219 @@
+<!-- ============================================================
+   codecloudworld — Roadmap Page (Blogger-ready)
+   Paste this entire file into Blogger > Pages > HTML editor
+   ============================================================ -->
+
+<style>
+.ccw-page { font-family: 'Inter', sans-serif; color: #a1a1aa; }
+.ccw-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  border-radius: 14px; padding: 48px 36px; margin-bottom: 36px;
+  border: 1px solid #3f3f46;
+}
+.ccw-hero h1 { font-size: 2rem; color: #fff; margin: 0 0 10px; font-weight: 800; }
+.ccw-hero p  { font-size: 15px; color: #9ca3af; margin: 0; max-width: 600px; line-height: 1.65; }
+
+.ccw-rm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+
+.ccw-rm-card {
+  background: #27272a; border: 1px solid #3f3f46;
+  border-radius: 14px; overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+  display: flex; flex-direction: column;
+}
+.ccw-rm-card:hover { border-color: #ff1493; transform: translateY(-3px); }
+
+.ccw-rm-header {
+  padding: 22px 24px 18px;
+  display: flex; align-items: center; gap: 14px;
+  border-bottom: 1px solid #3f3f46;
+}
+.ccw-rm-icon {
+  width: 48px; height: 48px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.ccw-rm-header h3 { font-size: 1rem; color: #fff; margin: 0 0 4px; font-weight: 700; }
+.ccw-rm-header span { font-size: 12px; color: #9ca3af; }
+
+.ccw-level {
+  display: inline-block; font-size: 11px; font-weight: 700;
+  padding: 3px 9px; border-radius: 12px; text-transform: uppercase;
+  letter-spacing: 0.5px; margin-bottom: 6px;
+}
+.ccw-lvl-beginner     { background: rgba(16,185,129,0.12); color: #34d399; }
+.ccw-lvl-intermediate { background: rgba(245,158,11,0.12);  color: #fbbf24; }
+.ccw-lvl-advanced     { background: rgba(239,68,68,0.12);   color: #f87171; }
+
+.ccw-rm-steps { list-style: none; padding: 16px 24px; margin: 0; flex: 1; }
+.ccw-rm-steps li {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 9px 0; border-bottom: 1px solid rgba(63,63,70,0.45);
+  font-size: 13px; color: #a1a1aa;
+}
+.ccw-rm-steps li:last-child { border-bottom: none; }
+.ccw-step-num {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: rgba(255,20,147,0.12); color: #ff1493;
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+}
+.ccw-step-done .ccw-step-num { background: rgba(16,185,129,0.12); color: #34d399; }
+
+.ccw-rm-footer { padding: 0 24px 22px; }
+.ccw-btn-full {
+  display: block; text-align: center; padding: 11px;
+  border-radius: 8px; font-size: 14px; font-weight: 700;
+  background: #ff1493; color: #fff; text-decoration: none;
+  transition: background 0.2s;
+}
+.ccw-btn-full:hover { background: #ff69b4; color: #fff; }
+
+@media (max-width: 600px) {
+  .ccw-hero { padding: 30px 18px; }
+  .ccw-hero h1 { font-size: 1.5rem; }
+  .ccw-rm-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="ccw-page">
+
+  <div class="ccw-hero">
+    <h1>&#128200; Learning Roadmaps</h1>
+    <p>Step-by-step paths to master DevOps, Cloud, and AI. Know exactly what to learn and in what order — built by practitioners.</p>
+  </div>
+
+  <div class="ccw-rm-grid">
+
+    <div class="ccw-rm-card">
+      <div class="ccw-rm-header">
+        <div class="ccw-rm-icon" style="background:rgba(255,20,147,0.12)">&#128736;</div>
+        <div>
+          <span class="ccw-level ccw-lvl-beginner">Beginner</span>
+          <h3>DevOps Engineer</h3>
+          <span>8 skills &bull; ~6 months</span>
+        </div>
+      </div>
+      <ul class="ccw-rm-steps">
+        <li class="ccw-step-done"><span class="ccw-step-num">&#10003;</span>Linux &amp; Shell Scripting</li>
+        <li class="ccw-step-done"><span class="ccw-step-num">&#10003;</span>Git &amp; Version Control</li>
+        <li><span class="ccw-step-num">3</span>Docker &amp; Containers</li>
+        <li><span class="ccw-step-num">4</span>CI/CD with GitHub Actions</li>
+        <li><span class="ccw-step-num">5</span>Kubernetes Fundamentals</li>
+        <li><span class="ccw-step-num">6</span>Infrastructure as Code (Terraform)</li>
+        <li><span class="ccw-step-num">7</span>Cloud Platform (AWS / GCP / Azure)</li>
+        <li><span class="ccw-step-num">8</span>Monitoring &amp; Observability</li>
+      </ul>
+      <div class="ccw-rm-footer"><a class="ccw-btn-full" href="#">Start Roadmap &rarr;</a></div>
+    </div>
+
+    <div class="ccw-rm-card">
+      <div class="ccw-rm-header">
+        <div class="ccw-rm-icon" style="background:rgba(99,102,241,0.12)">&#9729;</div>
+        <div>
+          <span class="ccw-level ccw-lvl-intermediate">Intermediate</span>
+          <h3>Cloud Architect</h3>
+          <span>7 skills &bull; ~5 months</span>
+        </div>
+      </div>
+      <ul class="ccw-rm-steps">
+        <li class="ccw-step-done"><span class="ccw-step-num">&#10003;</span>Cloud Fundamentals &amp; IAM</li>
+        <li><span class="ccw-step-num">2</span>Networking: VPC, Subnets, DNS</li>
+        <li><span class="ccw-step-num">3</span>Compute: EC2, Lambda, ECS</li>
+        <li><span class="ccw-step-num">4</span>Storage: S3, RDS, DynamoDB</li>
+        <li><span class="ccw-step-num">5</span>Security &amp; Compliance</li>
+        <li><span class="ccw-step-num">6</span>Cost Optimization Strategies</li>
+        <li><span class="ccw-step-num">7</span>Multi-Cloud &amp; Hybrid Design</li>
+      </ul>
+      <div class="ccw-rm-footer"><a class="ccw-btn-full" href="#">Start Roadmap &rarr;</a></div>
+    </div>
+
+    <div class="ccw-rm-card">
+      <div class="ccw-rm-header">
+        <div class="ccw-rm-icon" style="background:rgba(16,185,129,0.12)">&#129302;</div>
+        <div>
+          <span class="ccw-level ccw-lvl-intermediate">Intermediate</span>
+          <h3>MLOps Engineer</h3>
+          <span>8 skills &bull; ~7 months</span>
+        </div>
+      </div>
+      <ul class="ccw-rm-steps">
+        <li class="ccw-step-done"><span class="ccw-step-num">&#10003;</span>Python for ML Workflows</li>
+        <li><span class="ccw-step-num">2</span>Data Pipelines &amp; ETL</li>
+        <li><span class="ccw-step-num">3</span>ML Experiment Tracking (MLflow)</li>
+        <li><span class="ccw-step-num">4</span>Model Packaging &amp; Versioning</li>
+        <li><span class="ccw-step-num">5</span>Feature Stores</li>
+        <li><span class="ccw-step-num">6</span>Model Serving &amp; APIs</li>
+        <li><span class="ccw-step-num">7</span>ML Monitoring &amp; Drift Detection</li>
+        <li><span class="ccw-step-num">8</span>LLMOps &amp; Generative AI Ops</li>
+      </ul>
+      <div class="ccw-rm-footer"><a class="ccw-btn-full" href="#">Start Roadmap &rarr;</a></div>
+    </div>
+
+    <div class="ccw-rm-card">
+      <div class="ccw-rm-header">
+        <div class="ccw-rm-icon" style="background:rgba(245,158,11,0.12)">&#9749;</div>
+        <div>
+          <span class="ccw-level ccw-lvl-advanced">Advanced</span>
+          <h3>Site Reliability Engineer</h3>
+          <span>9 skills &bull; ~8 months</span>
+        </div>
+      </div>
+      <ul class="ccw-rm-steps">
+        <li><span class="ccw-step-num">1</span>SLI, SLO &amp; Error Budgets</li>
+        <li><span class="ccw-step-num">2</span>Distributed Systems Concepts</li>
+        <li><span class="ccw-step-num">3</span>Kubernetes at Scale</li>
+        <li><span class="ccw-step-num">4</span>Chaos Engineering</li>
+        <li><span class="ccw-step-num">5</span>Incident Management &amp; Postmortems</li>
+        <li><span class="ccw-step-num">6</span>Advanced Observability (OpenTelemetry)</li>
+        <li><span class="ccw-step-num">7</span>Capacity Planning</li>
+        <li><span class="ccw-step-num">8</span>Toil Reduction &amp; Automation</li>
+        <li><span class="ccw-step-num">9</span>On-Call &amp; Escalation Design</li>
+      </ul>
+      <div class="ccw-rm-footer"><a class="ccw-btn-full" href="#">Start Roadmap &rarr;</a></div>
+    </div>
+
+    <div class="ccw-rm-card">
+      <div class="ccw-rm-header">
+        <div class="ccw-rm-icon" style="background:rgba(239,68,68,0.12)">&#128737;</div>
+        <div>
+          <span class="ccw-level ccw-lvl-intermediate">Intermediate</span>
+          <h3>DevSecOps Engineer</h3>
+          <span>7 skills &bull; ~5 months</span>
+        </div>
+      </div>
+      <ul class="ccw-rm-steps">
+        <li><span class="ccw-step-num">1</span>Security Fundamentals</li>
+        <li><span class="ccw-step-num">2</span>SAST &amp; DAST in Pipelines</li>
+        <li><span class="ccw-step-num">3</span>Container &amp; Image Scanning</li>
+        <li><span class="ccw-step-num">4</span>Secrets Management (Vault)</li>
+        <li><span class="ccw-step-num">5</span>Policy as Code (OPA)</li>
+        <li><span class="ccw-step-num">6</span>Kubernetes Security Hardening</li>
+        <li><span class="ccw-step-num">7</span>Compliance Automation</li>
+      </ul>
+      <div class="ccw-rm-footer"><a class="ccw-btn-full" href="#">Start Roadmap &rarr;</a></div>
+    </div>
+
+    <div class="ccw-rm-card">
+      <div class="ccw-rm-header">
+        <div class="ccw-rm-icon" style="background:rgba(99,102,241,0.12)">&#128200;</div>
+        <div>
+          <span class="ccw-level ccw-lvl-beginner">Beginner</span>
+          <h3>Platform Engineer</h3>
+          <span>6 skills &bull; ~4 months</span>
+        </div>
+      </div>
+      <ul class="ccw-rm-steps">
+        <li><span class="ccw-step-num">1</span>Developer Experience Basics</li>
+        <li><span class="ccw-step-num">2</span>Internal Developer Platforms</li>
+        <li><span class="ccw-step-num">3</span>Self-Service Infra with Backstage</li>
+        <li><span class="ccw-step-num">4</span>GitOps with ArgoCD / Flux</li>
+        <li><span class="ccw-step-num">5</span>Golden Paths &amp; Templates</li>
+        <li><span class="ccw-step-num">6</span>Platform Metrics &amp; Adoption</li>
+      </ul>
+      <div class="ccw-rm-footer"><a class="ccw-btn-full" href="#">Start Roadmap &rarr;</a></div>
+    </div>
+
+  </div>
+
+</div>

@@ -148,22 +148,28 @@
           <label>Message</label>
           <textarea id='cf-message' placeholder='Tell us what&#39;s on your mind...' required></textarea>
         </div>
+        <!-- Honeypot: hidden field, invisible to users, bots fill it in -->
+        <div style="position:absolute;left:-9999px;top:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
+          <label for="cf-website">Website</label>
+          <input type="text" id="cf-website" name="website" tabindex="-1" autocomplete="off">
+        </div>
         <button type='submit' class='btn-submit'>Send Message &rarr;</button>
       </form>
       <div id='contact-success' style='display:none; color:#10b981; text-align:center; padding:30px; font-size:18px; font-weight:600;'>Thanks for reaching out! We&#39;ll get back to you soon.</div>
       <script>
         document.getElementById('contact-form').addEventListener('submit', function(e) {
           e.preventDefault();
+          if (document.getElementById('cf-website').value !== '') return;
           var subject = document.getElementById('cf-subject').value;
           var message = document.getElementById('cf-message').value;
           var fullMessage = subject ? '[' + subject + '] ' + message : message;
-          var data = new FormData();
-          data.append('entry.69794924', document.getElementById('cf-fname').value);
-          data.append('entry.675533567', document.getElementById('cf-lname').value);
-          data.append('entry.983335122', document.getElementById('cf-email').value);
-          data.append('entry.1346755398', fullMessage);
+          var params = new URLSearchParams();
+          params.append('entry.69794924', document.getElementById('cf-fname').value);
+          params.append('entry.675533567', document.getElementById('cf-lname').value);
+          params.append('entry.983335122', document.getElementById('cf-email').value);
+          params.append('entry.1346755398', fullMessage);
           fetch('https://docs.google.com/forms/d/e/1FAIpQLSe8fbPmTOBhuDmp9RLMYDVsqSTZ02V_yQFr7Bgudh9PlwoLHg/formResponse', {
-            method: 'POST', mode: 'no-cors', body: data
+            method: 'POST', mode: 'no-cors', body: params
           });
           document.getElementById('contact-form').style.display = 'none';
           document.getElementById('contact-success').style.display = 'block';
@@ -231,7 +237,7 @@
           <p>Join 250,000+ DevOps &amp; MLOps community. Get weekly deep dives, handpicked tools, and career resources.</p>
         </div>
         <div class='footer-col'><h3>Resources</h3><ul><li><a href='index.html'>Tutorials</a></li><li><a href='roadmap.html'>Roadmaps</a></li><li><a href='services.html'>Services</a></li><li><a href='projects.html'>Projects</a></li></ul></div>
-        <div class='footer-col'><h3>Company</h3><ul><li><a href='about.html'>About Us</a></li><li><a href='contact.html'>Contact</a></li><li><a href='advertise.html'>Advertise</a></li><li><a href='privacy-policy.html'>Privacy Policy</a></li></ul></div>
+        <div class='footer-col'><h3>Company</h3><ul><li><a href='about-us.html'>About Us</a></li><li><a href='contact-us.html'>Contact</a></li><li><a href='advertise.html'>Advertise</a></li><li><a href='privacy-policy.html'>Privacy Policy</a></li></ul></div>
         <div class='footer-col'><h3>Follow Us</h3><ul><li><a href='#'>Twitter</a></li><li><a href='#'>LinkedIn</a></li><li><a href='#'>GitHub</a></li><li><a href='#'>YouTube</a></li></ul></div>
       </div>
       <div class='footer-bottom'>

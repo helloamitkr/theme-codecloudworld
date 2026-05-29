@@ -1,0 +1,180 @@
+<!-- ============================================================
+   codecloudworld — Certification Guides Page (Blogger-ready)
+   Paste this entire file into Blogger > Pages > HTML editor
+   ============================================================ -->
+
+<style>
+.ccw-page { font-family: 'Inter', sans-serif; color: #a1a1aa; }
+.ccw-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  border-radius: 14px; padding: 48px 36px; margin-bottom: 36px; border: 1px solid #3f3f46;
+}
+.ccw-hero h1 { font-size: 2rem; color: #fff; margin: 0 0 10px; font-weight: 800; }
+.ccw-hero p  { font-size: 15px; color: #9ca3af; margin: 0; max-width: 600px; line-height: 1.65; }
+
+.ccw-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 16px; margin-bottom: 36px; }
+.ccw-stat { background: #27272a; border: 1px solid #3f3f46; border-radius: 10px; padding: 18px; text-align: center; }
+.ccw-stat .num { font-size: 1.8rem; font-weight: 900; color: #ff1493; }
+.ccw-stat .lbl { font-size: 12px; color: #9ca3af; margin-top: 4px; }
+
+.ccw-cert-group-title {
+  font-size: 1.1rem; color: #fff; font-weight: 700;
+  margin: 32px 0 16px; display: flex; align-items: center; gap: 8px;
+  padding-bottom: 10px; border-bottom: 1px solid #3f3f46;
+}
+.ccw-cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 18px; margin-bottom: 8px; }
+.ccw-cert-card {
+  background: #27272a; border: 1px solid #3f3f46; border-radius: 12px;
+  padding: 20px; display: flex; gap: 16px; align-items: flex-start;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.ccw-cert-card:hover { border-color: #ff1493; transform: translateY(-2px); }
+.ccw-cert-icon {
+  width: 46px; height: 46px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.ccw-cert-info h3 { font-size: 14px; color: #fff; margin: 0 0 6px; font-weight: 700; line-height: 1.4; }
+.ccw-cert-info p  { font-size: 13px; color: #9ca3af; margin: 0 0 12px; line-height: 1.5; }
+.ccw-cert-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+.ccw-ct {
+  font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 12px;
+  background: #18181b; border: 1px solid #3f3f46; color: #a1a1aa;
+}
+.ccw-ct-hot { background: rgba(255,20,147,0.1); border-color: rgba(255,20,147,0.3); color: #ff1493; }
+.ccw-ct-new { background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.3); color: #34d399; }
+.ccw-btn-sm {
+  display: inline-block; font-size: 13px; font-weight: 600;
+  padding: 7px 14px; border-radius: 6px;
+  background: #ff1493; color: #fff; text-decoration: none; transition: background 0.2s;
+}
+.ccw-btn-sm:hover { background: #ff69b4; color: #fff; }
+
+@media (max-width: 600px) {
+  .ccw-hero { padding: 28px 16px; }
+  .ccw-hero h1 { font-size: 1.5rem; }
+  .ccw-cert-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="ccw-page">
+
+  <div class="ccw-hero">
+    <h1>&#127891; Certification Guides</h1>
+    <p>Free study guides, practice questions, and exam tips for the top Cloud, DevOps, and Kubernetes certifications.</p>
+  </div>
+
+  <div class="ccw-stats">
+    <div class="ccw-stat"><div class="num">24+</div><div class="lbl">Guides</div></div>
+    <div class="ccw-stat"><div class="num">1,200+</div><div class="lbl">Practice Questions</div></div>
+    <div class="ccw-stat"><div class="num">95%</div><div class="lbl">Reader Pass Rate</div></div>
+    <div class="ccw-stat"><div class="num">Free</div><div class="lbl">Always Free</div></div>
+  </div>
+
+  <div class="ccw-cert-group-title"><span>&#9729;</span> AWS Certifications</div>
+  <div class="ccw-cert-grid">
+    <div class="ccw-cert-card">
+      <div class="ccw-cert-icon" style="background:rgba(255,153,0,0.12)">&#9729;</div>
+      <div class="ccw-cert-info">
+        <h3>AWS Solutions Architect Associate (SAA-C03)</h3>
+        <div class="ccw-cert-tags"><span class="ccw-ct ccw-ct-hot">Hot</span><span class="ccw-ct">~3 months</span></div>
+        <p>All domains: resilient, high-performing, secure, and cost-optimized architectures.</p>
+        <a class="ccw-btn-sm" href="#">Read Guide &rarr;</a>
+      </div>
+    </div>
+    <div class="ccw-cert-card">
+      <div class="ccw-cert-icon" style="background:rgba(255,153,0,0.12)">&#9729;</div>
+      <div class="ccw-cert-info">
+        <h3>AWS DevOps Engineer Professional</h3>
+        <div class="ccw-cert-tags"><span class="ccw-ct">~4 months</span></div>
+        <p>SDLC automation, configuration management, monitoring, and high availability on AWS.</p>
+        <a class="ccw-btn-sm" href="#">Read Guide &rarr;</a>
+      </div>
+    </div>
+    <div class="ccw-cert-card">
+      <div class="ccw-cert-icon" style="background:rgba(255,153,0,0.12)">&#9729;</div>
+      <div class="ccw-cert-info">
+        <h3>AWS Cloud Practitioner (CLF-C02)</h3>
+        <div class="ccw-cert-tags"><span class="ccw-ct ccw-ct-new">Entry Level</span><span class="ccw-ct">~6 weeks</span></div>
+        <p>Cloud concepts, core AWS services, security, pricing, and support models.</p>
+        <a class="ccw-btn-sm" href="#">Read Guide &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ccw-cert-group-title"><span>&#9881;</span> Kubernetes Certifications</div>
+  <div class="ccw-cert-grid">
+    <div class="ccw-cert-card">
+      <div class="ccw-cert-icon" style="background:rgba(50,114,248,0.12)">&#9881;</div>
+      <div class="ccw-cert-info">
+        <h3>Certified Kubernetes Administrator (CKA)</h3>
+        <div class="ccw-cert-tags"><span class="ccw-ct ccw-ct-hot">Hot</span><span class="ccw-ct">~2 months</span></div>
+        <p>Cluster architecture, workloads, networking, storage, and troubleshooting — hands-on exam.</p>
+        <a class="ccw-btn-sm" href="#">Read Guide &rarr;</a>
+      </div>
+    </div>
+    <div class="ccw-cert-card">
+      <div class="ccw-cert-icon" style="background:rgba(50,114,248,0.12)">&#9881;</div>
+      <div class="ccw-cert-info">
+        <h3>Certified Kubernetes App Developer (CKAD)</h3>
+        <div class="ccw-cert-tags"><span class="ccw-ct">~6 weeks</span></div>
+        <p>Build, configure, and deploy cloud-native apps on Kubernetes. Pods, services, ConfigMaps &amp; more.</p>
+        <a class="ccw-btn-sm" href="#">Read Guide &rarr;</a>
+      </div>
+    </div>
+    <div class="ccw-cert-card">
+      <div class="ccw-cert-icon" style="background:rgba(50,114,248,0.12)">&#9881;</div>
+      <div class="ccw-cert-info">
+        <h3>Certified K8s Security Specialist (CKS)</h3>
+        <div class="ccw-cert-tags"><span class="ccw-ct ccw-ct-new">Advanced</span><span class="ccw-ct">~3 months</span></div>
+        <p>Cluster hardening, supply chain security, monitoring, and runtime security for production K8s.</p>
+        <a class="ccw-btn-sm" href="#">Read Guide &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ccw-cert-group-title"><span>&#128202;</span> Google Cloud Certifications</div>
+  <div class="ccw-cert-grid">
+    <div class="ccw-cert-card">
+      <div class="ccw-cert-icon" style="background:rgba(66,133,244,0.12)">&#128202;</div>
+      <div class="ccw-cert-info">
+        <h3>Google Professional Cloud DevOps Engineer</h3>
+        <div class="ccw-cert-tags"><span class="ccw-ct">~3 months</span></div>
+        <p>SRE practices, CI/CD on GCP, Stackdriver, and optimizing service reliability.</p>
+        <a class="ccw-btn-sm" href="#">Read Guide &rarr;</a>
+      </div>
+    </div>
+    <div class="ccw-cert-card">
+      <div class="ccw-cert-icon" style="background:rgba(66,133,244,0.12)">&#128202;</div>
+      <div class="ccw-cert-info">
+        <h3>Google Associate Cloud Engineer</h3>
+        <div class="ccw-cert-tags"><span class="ccw-ct ccw-ct-new">Entry Level</span><span class="ccw-ct">~2 months</span></div>
+        <p>Deploy applications, monitor operations, and manage enterprise solutions on GCP.</p>
+        <a class="ccw-btn-sm" href="#">Read Guide &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ccw-cert-group-title"><span>&#128737;</span> Security &amp; Other</div>
+  <div class="ccw-cert-grid">
+    <div class="ccw-cert-card">
+      <div class="ccw-cert-icon" style="background:rgba(239,68,68,0.12)">&#128737;</div>
+      <div class="ccw-cert-info">
+        <h3>HashiCorp Terraform Associate</h3>
+        <div class="ccw-cert-tags"><span class="ccw-ct ccw-ct-hot">Hot</span><span class="ccw-ct">~4 weeks</span></div>
+        <p>IaC fundamentals, Terraform workflow, state management, modules, and providers.</p>
+        <a class="ccw-btn-sm" href="#">Read Guide &rarr;</a>
+      </div>
+    </div>
+    <div class="ccw-cert-card">
+      <div class="ccw-cert-icon" style="background:rgba(239,68,68,0.12)">&#128737;</div>
+      <div class="ccw-cert-info">
+        <h3>CompTIA Security+</h3>
+        <div class="ccw-cert-tags"><span class="ccw-ct">~2 months</span></div>
+        <p>Threats, vulnerabilities, architecture, implementation, and compliance — industry baseline cert.</p>
+        <a class="ccw-btn-sm" href="#">Read Guide &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,185 @@
+<!-- ============================================================
+   codecloudworld — AI News Page (Blogger-ready)
+   Paste this entire file into Blogger > Pages > HTML editor
+   ============================================================ -->
+
+<style>
+.ccw-page { font-family: 'Inter', sans-serif; color: #a1a1aa; }
+.ccw-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #0d1f12 100%);
+  border-radius: 14px; padding: 48px 36px; margin-bottom: 36px; border: 1px solid #3f3f46;
+}
+.ccw-hero h1 { font-size: 2rem; color: #fff; margin: 0 0 10px; font-weight: 800; }
+.ccw-hero p  { font-size: 15px; color: #9ca3af; margin: 0; max-width: 600px; line-height: 1.65; }
+
+.ccw-news-layout { display: flex; gap: 32px; align-items: flex-start; }
+.ccw-news-main { flex: 1; min-width: 0; }
+.ccw-news-side { width: 260px; flex-shrink: 0; }
+
+.ccw-featured {
+  background: #27272a; border: 1px solid #3f3f46;
+  border-left: 3px solid #ff1493;
+  border-radius: 12px; padding: 24px; margin-bottom: 28px;
+}
+.ccw-feat-label { font-size: 11px; font-weight: 700; color: #ff1493; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+.ccw-featured h2 { font-size: 1.2rem; color: #fff; margin: 0 0 10px; font-weight: 700; line-height: 1.4; }
+.ccw-featured p  { font-size: 14px; color: #9ca3af; margin: 0 0 12px; line-height: 1.65; }
+.ccw-meta { font-size: 12px; color: #71717a; display: flex; gap: 10px; flex-wrap: wrap; }
+
+.ccw-article { display: flex; gap: 16px; padding: 20px 0; border-bottom: 1px solid #3f3f46; }
+.ccw-article:last-child { border-bottom: none; }
+.ccw-art-num { font-size: 1.4rem; font-weight: 900; color: #3f3f46; min-width: 32px; line-height: 1.2; }
+.ccw-cat { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px; }
+.ccw-cat-model    { color: #ff1493; }
+.ccw-cat-tool     { color: #818cf8; }
+.ccw-cat-research { color: #34d399; }
+.ccw-cat-industry { color: #fbbf24; }
+.ccw-article h3 { font-size: 15px; color: #fff; margin: 0 0 8px; font-weight: 700; line-height: 1.4; }
+.ccw-article h3 a { color: #fff; text-decoration: none; }
+.ccw-article h3 a:hover { color: #ff1493; }
+.ccw-article p  { font-size: 13px; color: #9ca3af; margin: 0 0 10px; line-height: 1.6; }
+
+.ccw-widget { background: #27272a; border: 1px solid #3f3f46; border-radius: 10px; padding: 18px; margin-bottom: 18px; }
+.ccw-widget h4 { font-size: 12px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 14px; }
+.ccw-nl-box { background: linear-gradient(135deg, rgba(255,20,147,0.08), rgba(99,102,241,0.08)); border: 1px solid rgba(255,20,147,0.2); border-radius: 10px; padding: 18px; margin-bottom: 18px; }
+.ccw-nl-box h4 { font-size: 14px; font-weight: 700; color: #fff; margin: 0 0 6px; }
+.ccw-nl-box p  { font-size: 13px; color: #9ca3af; margin: 0 0 12px; }
+.ccw-nl-input { width: 100%; padding: 9px 12px; border: 1px solid #3f3f46; border-radius: 6px; background: #18181b; color: #e4e4e7; font-size: 13px; box-sizing: border-box; margin-bottom: 8px; }
+.ccw-nl-btn { width: 100%; padding: 9px; border: none; border-radius: 6px; background: #ff1493; color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; }
+.ccw-top-item { display: flex; gap: 8px; padding: 8px 0; border-bottom: 1px solid rgba(63,63,70,0.4); }
+.ccw-top-item:last-child { border-bottom: none; }
+.ccw-top-n { font-size: 16px; font-weight: 900; color: #3f3f46; min-width: 22px; }
+.ccw-top-item a { font-size: 13px; color: #9ca3af; text-decoration: none; line-height: 1.5; }
+.ccw-top-item a:hover { color: #ff1493; }
+.ccw-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.ccw-tag { font-size: 12px; padding: 4px 10px; border-radius: 14px; border: 1px solid #3f3f46; color: #9ca3af; text-decoration: none; transition: all 0.2s; }
+.ccw-tag:hover { border-color: #ff1493; color: #ff1493; }
+
+@media (max-width: 768px) {
+  .ccw-news-layout { flex-direction: column; }
+  .ccw-news-side { width: 100%; }
+}
+@media (max-width: 600px) {
+  .ccw-hero { padding: 28px 16px; }
+  .ccw-hero h1 { font-size: 1.5rem; }
+}
+</style>
+
+<div class="ccw-page">
+
+  <div class="ccw-hero">
+    <h1>&#129302; AI News</h1>
+    <p>Daily digest of the most important AI, LLM, and MLOps developments — curated for engineers and practitioners.</p>
+  </div>
+
+  <div class="ccw-news-layout">
+    <main class="ccw-news-main">
+
+      <div class="ccw-featured">
+        <div class="ccw-feat-label">&#128293; Featured Story</div>
+        <h2>Claude 4 Brings Native Agentic Workflows to Enterprise DevOps Teams</h2>
+        <p>Anthropic's latest model family introduces persistent memory, multi-step planning, and direct tool integration that makes it dramatically easier to automate complex infrastructure workflows without custom orchestration code.</p>
+        <div class="ccw-meta"><span>May 29, 2026</span><span>&#183;</span><span>Anthropic</span><span>&#183;</span><span>5 min read</span></div>
+      </div>
+
+      <div class="ccw-article">
+        <div class="ccw-art-num">01</div>
+        <div>
+          <div class="ccw-cat ccw-cat-model">Foundation Models</div>
+          <h3><a href="#">OpenAI o3 Pro Sets New Benchmark on Competitive Programming Tasks</a></h3>
+          <p>The reasoning model surpassed human expert performance on Codeforces problems and introduced adaptive thinking budgets that scale compute based on problem complexity.</p>
+          <div class="ccw-meta"><span>May 28, 2026</span><span>&#183;</span><span>OpenAI</span><span>&#183;</span><span>4 min read</span></div>
+        </div>
+      </div>
+
+      <div class="ccw-article">
+        <div class="ccw-art-num">02</div>
+        <div>
+          <div class="ccw-cat ccw-cat-tool">Tools &amp; Platforms</div>
+          <h3><a href="#">GitHub Copilot Now Integrates with CI/CD Pipelines for Automated PR Reviews</a></h3>
+          <p>GitHub's AI assistant can trigger on every push, analyze test failures, suggest fixes, and post structured code review comments before a human reviews the PR.</p>
+          <div class="ccw-meta"><span>May 27, 2026</span><span>&#183;</span><span>GitHub</span><span>&#183;</span><span>3 min read</span></div>
+        </div>
+      </div>
+
+      <div class="ccw-article">
+        <div class="ccw-art-num">03</div>
+        <div>
+          <div class="ccw-cat ccw-cat-research">Research</div>
+          <h3><a href="#">Google DeepMind Releases AlphaFold 3 Open Weights for Academic Use</a></h3>
+          <p>The protein structure prediction model is now freely downloadable for research institutions, accelerating drug discovery and biosecurity research globally.</p>
+          <div class="ccw-meta"><span>May 26, 2026</span><span>&#183;</span><span>DeepMind</span><span>&#183;</span><span>6 min read</span></div>
+        </div>
+      </div>
+
+      <div class="ccw-article">
+        <div class="ccw-art-num">04</div>
+        <div>
+          <div class="ccw-cat ccw-cat-industry">Industry</div>
+          <h3><a href="#">AWS Launches Bedrock Agents for Kubernetes — Deploy LLM Workflows to EKS</a></h3>
+          <p>Amazon's new agent runtime for EKS allows teams to package LLM-based workflows as Kubernetes operators, with built-in retry logic, CloudWatch observability, and IAM-based security.</p>
+          <div class="ccw-meta"><span>May 25, 2026</span><span>&#183;</span><span>AWS</span><span>&#183;</span><span>5 min read</span></div>
+        </div>
+      </div>
+
+      <div class="ccw-article">
+        <div class="ccw-art-num">05</div>
+        <div>
+          <div class="ccw-cat ccw-cat-tool">Tools &amp; Platforms</div>
+          <h3><a href="#">LangChain 0.4 Drops: Streaming, Multi-Agent Handoff, and Built-in RAG Evaluation</a></h3>
+          <p>Lower latency streaming, first-class agent-to-agent handoffs, and a built-in evaluation harness for retrieval quality ship in the latest release.</p>
+          <div class="ccw-meta"><span>May 24, 2026</span><span>&#183;</span><span>LangChain</span><span>&#183;</span><span>4 min read</span></div>
+        </div>
+      </div>
+
+      <div class="ccw-article">
+        <div class="ccw-art-num">06</div>
+        <div>
+          <div class="ccw-cat ccw-cat-research">Research</div>
+          <h3><a href="#">Meta's Llama 4 Achieves GPT-4-Level Performance at 30% of the Inference Cost</a></h3>
+          <p>Meta's open-weight model family delivers top-tier reasoning and code generation benchmarks while dramatically reducing hardware requirements for self-hosted deployments.</p>
+          <div class="ccw-meta"><span>May 23, 2026</span><span>&#183;</span><span>Meta AI</span><span>&#183;</span><span>7 min read</span></div>
+        </div>
+      </div>
+
+      <div class="ccw-article">
+        <div class="ccw-art-num">07</div>
+        <div>
+          <div class="ccw-cat ccw-cat-industry">Industry</div>
+          <h3><a href="#">EU AI Act Compliance Deadline: What DevOps and ML Teams Need to Do Now</a></h3>
+          <p>We break down the specific technical obligations for teams deploying high-risk AI systems — from audit trails to human oversight mechanisms.</p>
+          <div class="ccw-meta"><span>May 22, 2026</span><span>&#183;</span><span>Policy</span><span>&#183;</span><span>8 min read</span></div>
+        </div>
+      </div>
+
+    </main>
+
+    <aside class="ccw-news-side">
+      <div class="ccw-nl-box">
+        <h4>&#129302; AI Weekly Digest</h4>
+        <p>Top 5 AI stories every Friday morning.</p>
+        <input class="ccw-nl-input" type="email" placeholder="your@email.com">
+        <button class="ccw-nl-btn">Subscribe Free</button>
+      </div>
+      <div class="ccw-widget">
+        <h4>Top Stories This Week</h4>
+        <div class="ccw-top-item"><div class="ccw-top-n">1</div><a href="#">Claude 4 agentic workflows for DevOps</a></div>
+        <div class="ccw-top-item"><div class="ccw-top-n">2</div><a href="#">OpenAI o3 Pro benchmark results</a></div>
+        <div class="ccw-top-item"><div class="ccw-top-n">3</div><a href="#">Llama 4 open-weight release</a></div>
+        <div class="ccw-top-item"><div class="ccw-top-n">4</div><a href="#">GitHub Copilot CI/CD integration</a></div>
+        <div class="ccw-top-item"><div class="ccw-top-n">5</div><a href="#">EU AI Act compliance deadline</a></div>
+      </div>
+      <div class="ccw-widget">
+        <h4>Browse by Topic</h4>
+        <div class="ccw-tags">
+          <a class="ccw-tag" href="#">LLMs</a><a class="ccw-tag" href="#">MLOps</a>
+          <a class="ccw-tag" href="#">Agents</a><a class="ccw-tag" href="#">OpenAI</a>
+          <a class="ccw-tag" href="#">Anthropic</a><a class="ccw-tag" href="#">Google AI</a>
+          <a class="ccw-tag" href="#">RAG</a><a class="ccw-tag" href="#">Fine-tuning</a>
+          <a class="ccw-tag" href="#">Open Source</a><a class="ccw-tag" href="#">Policy</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+</div>

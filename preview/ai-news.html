@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI News - codecloudworld</title>
+  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap' rel='stylesheet'>
+  <link href="style.css" rel="stylesheet">
+  <style>
+    .page-hero { background: linear-gradient(135deg, #0f172a 0%, #0d1f12 100%); padding: 60px 0 50px; border-bottom: 1px solid var(--border-color); }
+    .page-hero-inner { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+    .page-hero h1 { font-size: 2.4rem; margin: 0 0 12px; color: #fff; }
+    .page-hero p { font-size: 1.1rem; color: #9ca3af; max-width: 640px; margin: 0; }
+    .ai-layout { display: flex; gap: 36px; max-width: 1400px; width: 95%; margin: 0 auto; padding: 40px 20px 60px; }
+    .ai-main { flex: 1; min-width: 0; }
+    .ai-sidebar { width: 300px; flex-shrink: 0; }
+    .news-article {
+      display: flex;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .news-article:first-child { padding-top: 0; }
+    .news-num {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--border-color);
+      min-width: 36px;
+      line-height: 1.2;
+    }
+    .news-body {}
+    .news-category {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.8px;
+      margin-bottom: 6px;
+    }
+    .cat-model { color: #ff1493; }
+    .cat-tool  { color: #818cf8; }
+    .cat-research { color: #34d399; }
+    .cat-industry { color: #fbbf24; }
+    .news-body h3 { font-size: 1.05rem; margin: 0 0 8px; color: #fff; }
+    .news-body h3 a { color: #fff; }
+    .news-body h3 a:hover { color: var(--primary-color); }
+    .news-body p { font-size: 14px; color: #9ca3af; margin: 0 0 10px; line-height: 1.6; }
+    .news-meta { font-size: 12px; color: #71717a; display: flex; gap: 14px; }
+    .featured-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 32px;
+      border-left: 3px solid var(--primary-color);
+    }
+    .featured-label { font-size: 11px; font-weight: 700; color: var(--primary-color); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+    .featured-card h2 { font-size: 1.3rem; margin: 0 0 12px; color: #fff; }
+    .featured-card p { font-size: 14px; color: #9ca3af; line-height: 1.65; margin: 0 0 16px; }
+    .featured-card .news-meta { font-size: 12px; color: #71717a; }
+    .sidebar-widget { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+    .sidebar-widget h4 { font-size: 13px; font-weight: 700; color: #fff; margin: 0 0 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .topic-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .topic-tag { font-size: 12px; padding: 5px 11px; border-radius: 14px; border: 1px solid var(--border-color); color: #a1a1aa; transition: all 0.2s; }
+    .topic-tag:hover { border-color: var(--primary-color); color: var(--primary-color); }
+    .top-story { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(63,63,70,0.5); }
+    .top-story:last-child { border-bottom: none; }
+    .top-story-num { font-size: 18px; font-weight: 900; color: var(--border-color); min-width: 24px; }
+    .top-story a { font-size: 13px; color: #a1a1aa; line-height: 1.5; }
+    .top-story a:hover { color: var(--primary-color); }
+    .newsletter-box { background: linear-gradient(135deg, rgba(255,20,147,0.1), rgba(99,102,241,0.1)); border: 1px solid rgba(255,20,147,0.2); border-radius: 10px; padding: 20px; }
+    .newsletter-box h4 { font-size: 14px; font-weight: 700; color: #fff; margin: 0 0 8px; }
+    .newsletter-box p { font-size: 12px; color: #9ca3af; margin: 0 0 12px; }
+    .newsletter-box input[type=email] { width: 100%; padding: 9px 12px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-color); color: var(--text-color); font-size: 13px; margin-bottom: 8px; box-sizing: border-box; }
+    .newsletter-box button { width: 100%; padding: 9px; border: none; border-radius: 6px; background: var(--primary-color); color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; }
+    @media (max-width: 768px) { .ai-layout { flex-direction: column; } .ai-sidebar { width: 100%; } }
+  </style>
+</head>
+<body>
+
+  <header class='site-header professional-header'>
+    <div class='header-inner'>
+      <div class='header-left-col'>
+        <div class='site-title'>
+          <a href='index.html'>
+            <svg class='site-logo-svg' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M52 34a12 12 0 00-11.4-12A16 16 0 0012 28a10 10 0 001 20h38a12 12 0 001-14z' fill='#ff1493'/><path d='M30 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M42 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.6'/></svg>
+            <span>codecloudworld</span>
+          </a>
+        </div>
+      </div>
+      <div class='mobile-menu-toggle' id='mobileMenuBtn'>
+        <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='3' x2='21' y1='12' y2='12'/><line x1='3' x2='21' y1='6' y2='6'/><line x1='3' x2='21' y1='18' y2='18'/></svg>
+      </div>
+      <div class='mobile-overlay' id='mobileOverlay'></div>
+      <div class='header-right-col' id='headerRightCol'>
+        <div class='mobile-close-btn' id='mobileCloseBtn'>
+          <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='18' x2='6' y1='6' y2='18'/><line x1='6' x2='18' y1='6' y2='18'/></svg>
+        </div>
+        <nav class='header-nav custom-nav' aria-label='Main navigation'>
+          <ul>
+            <li><a href='index.html'>Tutorials</a></li>
+            <li><a href='roadmap.html'>Roadmaps</a></li>
+            <li><a href='ai-news.html' style='color:var(--primary-color)'>AI News</a></li>
+            <li><a href='projects.html'>Projects</a></li>
+          </ul>
+        </nav>
+        <div class='header-actions'>
+          <a aria-label='Search' class='search-icon' href='#' title='Search'>
+            <svg fill='none' height='20' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='20'><circle cx='11' cy='11' r='8'/><line x1='21' x2='16.65' y1='21' y2='16.65'/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class='page-hero'>
+    <div class='page-hero-inner'>
+      <h1>AI News</h1>
+      <p>Daily digest of the most important AI, LLM, and MLOps developments curated for engineers and practitioners.</p>
+    </div>
+  </div>
+
+  <div class='ai-layout'>
+    <main class='ai-main'>
+
+      <div class='featured-card'>
+        <div class='featured-label'>&#128293; Featured Story</div>
+        <h2>Claude 4 Brings Native Agentic Workflows to Enterprise DevOps Teams</h2>
+        <p>Anthropic's latest model family introduces persistent memory, multi-step planning, and direct tool integration that makes it dramatically easier to automate complex infrastructure workflows without writing custom orchestration code.</p>
+        <div class='news-meta'><span>May 29, 2026</span><span>&#183;</span><span>Anthropic</span><span>&#183;</span><span>5 min read</span></div>
+      </div>
+
+      <div class='news-article'>
+        <div class='news-num'>01</div>
+        <div class='news-body'>
+          <div class='news-category cat-model'>Foundation Models</div>
+          <h3><a href='#'>OpenAI o3 Pro Sets New Benchmark on Competitive Programming Tasks</a></h3>
+          <p>The reasoning model surpassed human expert performance on Codeforces problems and introduced adaptive thinking budgets that automatically scale compute based on problem complexity.</p>
+          <div class='news-meta'><span>May 28, 2026</span><span>&#183;</span><span>OpenAI</span><span>&#183;</span><span>4 min read</span></div>
+        </div>
+      </div>
+
+      <div class='news-article'>
+        <div class='news-num'>02</div>
+        <div class='news-body'>
+          <div class='news-category cat-tool'>Tools &amp; Platforms</div>
+          <h3><a href='#'>GitHub Copilot Now Integrates with CI/CD Pipelines for Automated PR Reviews</a></h3>
+          <p>GitHub's AI coding assistant can now trigger on every push, analyze test failures, suggest fixes, and post structured code review comments before a human reviewer looks at the PR.</p>
+          <div class='news-meta'><span>May 27, 2026</span><span>&#183;</span><span>GitHub</span><span>&#183;</span><span>3 min read</span></div>
+        </div>
+      </div>
+
+      <div class='news-article'>
+        <div class='news-num'>03</div>
+        <div class='news-body'>
+          <div class='news-category cat-research'>Research</div>
+          <h3><a href='#'>Google DeepMind Releases AlphaFold 3 Open Weights for Academic Use</a></h3>
+          <p>The protein structure prediction model is now freely downloadable for research institutions, accelerating drug discovery pipelines and biosecurity research globally.</p>
+          <div class='news-meta'><span>May 26, 2026</span><span>&#183;</span><span>DeepMind</span><span>&#183;</span><span>6 min read</span></div>
+        </div>
+      </div>
+
+      <div class='news-article'>
+        <div class='news-num'>04</div>
+        <div class='news-body'>
+          <div class='news-category cat-industry'>Industry</div>
+          <h3><a href='#'>AWS Launches Bedrock Agents for Kubernetes — Deploy LLM Workflows Directly to EKS</a></h3>
+          <p>Amazon's new agent runtime for EKS allows teams to package LLM-based workflows as Kubernetes operators, with built-in retry logic, observability via CloudWatch, and IAM-based security policies.</p>
+          <div class='news-meta'><span>May 25, 2026</span><span>&#183;</span><span>AWS</span><span>&#183;</span><span>5 min read</span></div>
+        </div>
+      </div>
+
+      <div class='news-article'>
+        <div class='news-num'>05</div>
+        <div class='news-body'>
+          <div class='news-category cat-tool'>Tools &amp; Platforms</div>
+          <h3><a href='#'>LangChain 0.4 Drops: Streaming, Multi-Agent Handoff, and Built-in RAG Evaluation</a></h3>
+          <p>The popular LLM framework ships a significant update with lower latency streaming, first-class support for agent-to-agent handoffs, and a built-in evaluation harness for retrieval quality.</p>
+          <div class='news-meta'><span>May 24, 2026</span><span>&#183;</span><span>LangChain</span><span>&#183;</span><span>4 min read</span></div>
+        </div>
+      </div>
+
+      <div class='news-article'>
+        <div class='news-num'>06</div>
+        <div class='news-body'>
+          <div class='news-category cat-research'>Research</div>
+          <h3><a href='#'>Meta's Llama 4 Achieves GPT-4-Level Performance at 30% of the Inference Cost</a></h3>
+          <p>Meta's open-weight model family delivers top-tier reasoning and code generation benchmarks while dramatically reducing the hardware requirements for self-hosted deployments.</p>
+          <div class='news-meta'><span>May 23, 2026</span><span>&#183;</span><span>Meta AI</span><span>&#183;</span><span>7 min read</span></div>
+        </div>
+      </div>
+
+      <div class='news-article'>
+        <div class='news-num'>07</div>
+        <div class='news-body'>
+          <div class='news-category cat-industry'>Industry</div>
+          <h3><a href='#'>EU AI Act Compliance Deadline: What DevOps and ML Teams Need to Do Now</a></h3>
+          <p>With the first enforcement phase live, we break down the specific technical obligations for teams deploying high-risk AI systems — from audit trails to human oversight mechanisms.</p>
+          <div class='news-meta'><span>May 22, 2026</span><span>&#183;</span><span>Policy</span><span>&#183;</span><span>8 min read</span></div>
+        </div>
+      </div>
+
+    </main>
+
+    <aside class='ai-sidebar'>
+
+      <div class='newsletter-box'>
+        <h4>&#129302; AI Weekly Digest</h4>
+        <p>Get the top 5 AI stories every Friday morning.</p>
+        <input type='email' placeholder='your@email.com'>
+        <button>Subscribe Free</button>
+      </div>
+
+      <div class='sidebar-widget'>
+        <h4>Top Stories This Week</h4>
+        <div class='top-story'><div class='top-story-num'>1</div><a href='#'>Claude 4 native agentic workflows for DevOps</a></div>
+        <div class='top-story'><div class='top-story-num'>2</div><a href='#'>OpenAI o3 Pro benchmark results</a></div>
+        <div class='top-story'><div class='top-story-num'>3</div><a href='#'>Llama 4 open-weight model release</a></div>
+        <div class='top-story'><div class='top-story-num'>4</div><a href='#'>GitHub Copilot CI/CD integration</a></div>
+        <div class='top-story'><div class='top-story-num'>5</div><a href='#'>EU AI Act compliance deadline</a></div>
+      </div>
+
+      <div class='sidebar-widget'>
+        <h4>Browse by Topic</h4>
+        <div class='topic-tags'>
+          <a class='topic-tag' href='#'>LLMs</a>
+          <a class='topic-tag' href='#'>MLOps</a>
+          <a class='topic-tag' href='#'>Agents</a>
+          <a class='topic-tag' href='#'>OpenAI</a>
+          <a class='topic-tag' href='#'>Anthropic</a>
+          <a class='topic-tag' href='#'>Google AI</a>
+          <a class='topic-tag' href='#'>Meta AI</a>
+          <a class='topic-tag' href='#'>RAG</a>
+          <a class='topic-tag' href='#'>Fine-tuning</a>
+          <a class='topic-tag' href='#'>Policy</a>
+          <a class='topic-tag' href='#'>Open Source</a>
+          <a class='topic-tag' href='#'>Benchmarks</a>
+        </div>
+      </div>
+
+      <div class='sidebar-widget'>
+        <h4>Follow for Updates</h4>
+        <div style='display:flex;flex-direction:column;gap:8px;'>
+          <a href='#' style='font-size:13px;color:#a1a1aa;display:flex;align-items:center;gap:8px;'>&#128038; Twitter / X &mdash; @codecloudworld</a>
+          <a href='#' style='font-size:13px;color:#a1a1aa;display:flex;align-items:center;gap:8px;'>&#128241; LinkedIn Page</a>
+          <a href='#' style='font-size:13px;color:#a1a1aa;display:flex;align-items:center;gap:8px;'>&#127922; YouTube Channel</a>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <footer class='site-footer'>
+    <div class='container'>
+      <div class='footer-grid'>
+        <div class='footer-col footer-brand'>
+          <a href='index.html'><svg class='site-logo-svg' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg' style='height:28px;width:28px;'><path d='M52 34a12 12 0 00-11.4-12A16 16 0 0012 28a10 10 0 001 20h38a12 12 0 001-14z' fill='#ff1493'/><path d='M30 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg></a>
+          <p>Join 250,000+ DevOps &amp; MLOps community. Get weekly deep dives, handpicked tools, and career resources.</p>
+        </div>
+        <div class='footer-col'><h3>Resources</h3><ul><li><a href='index.html'>Tutorials</a></li><li><a href='roadmap.html'>Roadmaps</a></li><li><a href='services.html'>Services</a></li><li><a href='projects.html'>Projects</a></li></ul></div>
+        <div class='footer-col'><h3>Company</h3><ul><li><a href='about-us.html'>About Us</a></li><li><a href='contact-us.html'>Contact</a></li><li><a href='advertise.html'>Advertise</a></li><li><a href='privacy-policy.html'>Privacy Policy</a></li></ul></div>
+        <div class='footer-col'><h3>Follow Us</h3><ul><li><a href='#'>Twitter</a></li><li><a href='#'>LinkedIn</a></li><li><a href='#'>GitHub</a></li><li><a href='#'>YouTube</a></li></ul></div>
+      </div>
+      <div class='footer-bottom'>
+        <p>&copy; 2026 codecloudworld. All rights reserved.</p>
+        <p>Built by codecloud for the DevOps Community</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var mobileBtn = document.getElementById('mobileMenuBtn');
+      var closeBtn = document.getElementById('mobileCloseBtn');
+      var overlay = document.getElementById('mobileOverlay');
+      var headerRight = document.getElementById('headerRightCol');
+      function toggleMenu() {
+        var open = headerRight.classList.contains('open');
+        headerRight.classList.toggle('open', !open);
+        overlay.classList.toggle('active', !open);
+        document.body.style.overflow = open ? '' : 'hidden';
+      }
+      if (mobileBtn) mobileBtn.addEventListener('click', toggleMenu);
+      if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+      if (overlay) overlay.addEventListener('click', toggleMenu);
+    });
+  </script>
+</body>
+</html>

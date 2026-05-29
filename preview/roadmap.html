@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roadmaps - codecloudworld</title>
+  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap' rel='stylesheet'>
+  <link href="style.css" rel="stylesheet">
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1a1a3e 100%);
+      padding: 60px 0 50px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .page-hero-inner { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+    .page-hero h1 { font-size: 2.4rem; margin: 0 0 12px; color: #fff; }
+    .page-hero p { font-size: 1.1rem; color: #9ca3af; max-width: 640px; margin: 0; }
+    .full-width-content { max-width: 1400px; width: 95%; margin: 0 auto; padding: 0 20px 60px; }
+    .roadmap-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 28px;
+      padding-top: 40px;
+    }
+    .roadmap-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .roadmap-card:hover { border-color: var(--primary-color); transform: translateY(-3px); }
+    .roadmap-card-header {
+      padding: 24px 28px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .roadmap-icon {
+      width: 48px; height: 48px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .roadmap-card-header h3 { font-size: 1.1rem; margin: 0 0 4px; color: #fff; }
+    .roadmap-card-header span { font-size: 13px; color: #9ca3af; }
+    .roadmap-steps { padding: 20px 28px 24px; list-style: none; }
+    .roadmap-steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(63,63,70,0.5);
+      font-size: 14px;
+      color: #a1a1aa;
+    }
+    .roadmap-steps li:last-child { border-bottom: none; }
+    .step-num {
+      width: 22px; height: 22px;
+      background: rgba(255,20,147,0.15);
+      color: #ff1493;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-done .step-num { background: rgba(16,185,129,0.15); color: #34d399; }
+    .level-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .level-beginner { background: rgba(16,185,129,0.15); color: #34d399; }
+    .level-intermediate { background: rgba(245,158,11,0.15); color: #fbbf24; }
+    .level-advanced { background: rgba(239,68,68,0.15); color: #f87171; }
+    .roadmap-card-footer { padding: 0 28px 24px; }
+    .btn-roadmap {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      padding: 11px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      background: var(--primary-color);
+      color: #fff;
+      transition: background 0.2s;
+    }
+    .btn-roadmap:hover { background: var(--primary-hover); color: #fff; }
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary-color);
+      margin: 40px 0 4px;
+    }
+    .section-title { font-size: 1.6rem; color: #fff; margin: 0 0 6px; }
+    .section-sub { color: #9ca3af; font-size: 15px; margin: 0 0 4px; }
+  </style>
+</head>
+<body>
+
+  <header class='site-header professional-header'>
+    <div class='header-inner'>
+      <div class='header-left-col'>
+        <div class='site-title'>
+          <a href='index.html'>
+            <svg class='site-logo-svg' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M52 34a12 12 0 00-11.4-12A16 16 0 0012 28a10 10 0 001 20h38a12 12 0 001-14z' fill='#ff1493'/><path d='M30 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M42 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.6'/></svg>
+            <span>codecloudworld</span>
+          </a>
+        </div>
+      </div>
+      <div class='mobile-menu-toggle' id='mobileMenuBtn'>
+        <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='3' x2='21' y1='12' y2='12'/><line x1='3' x2='21' y1='6' y2='6'/><line x1='3' x2='21' y1='18' y2='18'/></svg>
+      </div>
+      <div class='mobile-overlay' id='mobileOverlay'></div>
+      <div class='header-right-col' id='headerRightCol'>
+        <div class='mobile-close-btn' id='mobileCloseBtn'>
+          <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='18' x2='6' y1='6' y2='18'/><line x1='6' x2='18' y1='6' y2='18'/></svg>
+        </div>
+        <nav class='header-nav custom-nav' aria-label='Main navigation'>
+          <ul>
+            <li><a href='index.html'>Tutorials</a></li>
+            <li><a href='roadmap.html' style='color:var(--primary-color)'>Roadmaps</a></li>
+            <li><a href='ai-news.html'>AI News</a></li>
+            <li><a href='projects.html'>Projects</a></li>
+          </ul>
+        </nav>
+        <div class='header-actions'>
+          <a aria-label='Search' class='search-icon' href='#' title='Search'>
+            <svg fill='none' height='20' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='20'><circle cx='11' cy='11' r='8'/><line x1='21' x2='16.65' y1='21' y2='16.65'/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class='page-hero'>
+    <div class='page-hero-inner'>
+      <h1>Learning Roadmaps</h1>
+      <p>Step-by-step visual paths to master DevOps, Cloud, and AI. Know exactly what to learn and in what order.</p>
+    </div>
+  </div>
+
+  <div class='full-width-content'>
+
+    <div class='section-label'>Career Paths</div>
+    <h2 class='section-title'>Choose your path</h2>
+    <p class='section-sub'>Each roadmap is curated by practitioners and updated quarterly.</p>
+
+    <div class='roadmap-cards'>
+
+      <div class='roadmap-card'>
+        <div class='roadmap-card-header'>
+          <div class='roadmap-icon' style='background:rgba(255,20,147,0.12)'>&#128736;</div>
+          <div>
+            <span class='level-badge level-beginner'>Beginner</span>
+            <h3>DevOps Engineer</h3>
+            <span>8 core skills &bull; ~6 months</span>
+          </div>
+        </div>
+        <ul class='roadmap-steps'>
+          <li class='step-done'><span class='step-num'>&#10003;</span>Linux &amp; Shell Scripting</li>
+          <li class='step-done'><span class='step-num'>&#10003;</span>Git &amp; Version Control</li>
+          <li><span class='step-num'>3</span>Docker &amp; Containers</li>
+          <li><span class='step-num'>4</span>CI/CD with GitHub Actions</li>
+          <li><span class='step-num'>5</span>Kubernetes Fundamentals</li>
+          <li><span class='step-num'>6</span>Infrastructure as Code (Terraform)</li>
+          <li><span class='step-num'>7</span>Cloud Platform (AWS/GCP/Azure)</li>
+          <li><span class='step-num'>8</span>Monitoring &amp; Observability</li>
+        </ul>
+        <div class='roadmap-card-footer'>
+          <a class='btn-roadmap' href='#'>Start Roadmap &rarr;</a>
+        </div>
+      </div>
+
+      <div class='roadmap-card'>
+        <div class='roadmap-card-header'>
+          <div class='roadmap-icon' style='background:rgba(99,102,241,0.12)'>&#9729;</div>
+          <div>
+            <span class='level-badge level-intermediate'>Intermediate</span>
+            <h3>Cloud Architect</h3>
+            <span>7 core skills &bull; ~5 months</span>
+          </div>
+        </div>
+        <ul class='roadmap-steps'>
+          <li class='step-done'><span class='step-num'>&#10003;</span>Cloud Fundamentals &amp; IAM</li>
+          <li><span class='step-num'>2</span>Networking: VPC, Subnets, DNS</li>
+          <li><span class='step-num'>3</span>Compute: EC2, Lambda, ECS</li>
+          <li><span class='step-num'>4</span>Storage: S3, RDS, DynamoDB</li>
+          <li><span class='step-num'>5</span>Security &amp; Compliance</li>
+          <li><span class='step-num'>6</span>Cost Optimization Strategies</li>
+          <li><span class='step-num'>7</span>Multi-Cloud &amp; Hybrid Design</li>
+        </ul>
+        <div class='roadmap-card-footer'>
+          <a class='btn-roadmap' href='#'>Start Roadmap &rarr;</a>
+        </div>
+      </div>
+
+      <div class='roadmap-card'>
+        <div class='roadmap-card-header'>
+          <div class='roadmap-icon' style='background:rgba(16,185,129,0.12)'>&#129302;</div>
+          <div>
+            <span class='level-badge level-intermediate'>Intermediate</span>
+            <h3>MLOps Engineer</h3>
+            <span>8 core skills &bull; ~7 months</span>
+          </div>
+        </div>
+        <ul class='roadmap-steps'>
+          <li class='step-done'><span class='step-num'>&#10003;</span>Python for ML Workflows</li>
+          <li><span class='step-num'>2</span>Data Pipelines &amp; ETL</li>
+          <li><span class='step-num'>3</span>ML Experiment Tracking (MLflow)</li>
+          <li><span class='step-num'>4</span>Model Packaging &amp; Versioning</li>
+          <li><span class='step-num'>5</span>Feature Stores</li>
+          <li><span class='step-num'>6</span>Model Serving &amp; APIs</li>
+          <li><span class='step-num'>7</span>ML Monitoring &amp; Drift Detection</li>
+          <li><span class='step-num'>8</span>LLMOps &amp; Generative AI Ops</li>
+        </ul>
+        <div class='roadmap-card-footer'>
+          <a class='btn-roadmap' href='#'>Start Roadmap &rarr;</a>
+        </div>
+      </div>
+
+      <div class='roadmap-card'>
+        <div class='roadmap-card-header'>
+          <div class='roadmap-icon' style='background:rgba(245,158,11,0.12)'>&#9749;</div>
+          <div>
+            <span class='level-badge level-advanced'>Advanced</span>
+            <h3>Site Reliability Engineer</h3>
+            <span>9 core skills &bull; ~8 months</span>
+          </div>
+        </div>
+        <ul class='roadmap-steps'>
+          <li><span class='step-num'>1</span>SLI, SLO &amp; Error Budgets</li>
+          <li><span class='step-num'>2</span>Distributed Systems Concepts</li>
+          <li><span class='step-num'>3</span>Kubernetes at Scale</li>
+          <li><span class='step-num'>4</span>Chaos Engineering</li>
+          <li><span class='step-num'>5</span>Incident Management &amp; Postmortems</li>
+          <li><span class='step-num'>6</span>Advanced Observability (OTel)</li>
+          <li><span class='step-num'>7</span>Capacity Planning</li>
+          <li><span class='step-num'>8</span>Toil Reduction &amp; Automation</li>
+          <li><span class='step-num'>9</span>On-Call &amp; Escalation Design</li>
+        </ul>
+        <div class='roadmap-card-footer'>
+          <a class='btn-roadmap' href='#'>Start Roadmap &rarr;</a>
+        </div>
+      </div>
+
+      <div class='roadmap-card'>
+        <div class='roadmap-card-header'>
+          <div class='roadmap-icon' style='background:rgba(239,68,68,0.12)'>&#128737;</div>
+          <div>
+            <span class='level-badge level-intermediate'>Intermediate</span>
+            <h3>DevSecOps Engineer</h3>
+            <span>7 core skills &bull; ~5 months</span>
+          </div>
+        </div>
+        <ul class='roadmap-steps'>
+          <li><span class='step-num'>1</span>Security Fundamentals</li>
+          <li><span class='step-num'>2</span>SAST &amp; DAST in Pipelines</li>
+          <li><span class='step-num'>3</span>Container &amp; Image Scanning</li>
+          <li><span class='step-num'>4</span>Secrets Management (Vault)</li>
+          <li><span class='step-num'>5</span>Policy as Code (OPA)</li>
+          <li><span class='step-num'>6</span>Kubernetes Security Hardening</li>
+          <li><span class='step-num'>7</span>Compliance Automation</li>
+        </ul>
+        <div class='roadmap-card-footer'>
+          <a class='btn-roadmap' href='#'>Start Roadmap &rarr;</a>
+        </div>
+      </div>
+
+      <div class='roadmap-card'>
+        <div class='roadmap-card-header'>
+          <div class='roadmap-icon' style='background:rgba(99,102,241,0.12)'>&#128200;</div>
+          <div>
+            <span class='level-badge level-beginner'>Beginner</span>
+            <h3>Platform Engineer</h3>
+            <span>6 core skills &bull; ~4 months</span>
+          </div>
+        </div>
+        <ul class='roadmap-steps'>
+          <li><span class='step-num'>1</span>Developer Experience Basics</li>
+          <li><span class='step-num'>2</span>Internal Developer Platforms</li>
+          <li><span class='step-num'>3</span>Self-Service Infra with Backstage</li>
+          <li><span class='step-num'>4</span>GitOps with ArgoCD / Flux</li>
+          <li><span class='step-num'>5</span>Golden Paths &amp; Templates</li>
+          <li><span class='step-num'>6</span>Platform Metrics &amp; Adoption</li>
+        </ul>
+        <div class='roadmap-card-footer'>
+          <a class='btn-roadmap' href='#'>Start Roadmap &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class='site-footer'>
+    <div class='container'>
+      <div class='footer-grid'>
+        <div class='footer-col footer-brand'>
+          <a href='index.html'>
+            <svg class='site-logo-svg' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg' style='height:28px;width:28px;'><path d='M52 34a12 12 0 00-11.4-12A16 16 0 0012 28a10 10 0 001 20h38a12 12 0 001-14z' fill='#ff1493'/><path d='M30 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M42 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.6'/></svg>
+          </a>
+          <p>Join 250,000+ DevOps &amp; MLOps community. Get weekly deep dives, handpicked tools, and career resources.</p>
+        </div>
+        <div class='footer-col'>
+          <h3>Resources</h3>
+          <ul>
+            <li><a href='index.html'>Tutorials</a></li>
+            <li><a href='roadmap.html'>Roadmaps</a></li>
+            <li><a href='services.html'>Services</a></li>
+            <li><a href='projects.html'>Projects</a></li>
+          </ul>
+        </div>
+        <div class='footer-col'>
+          <h3>Company</h3>
+          <ul>
+            <li><a href='about-us.html'>About Us</a></li>
+            <li><a href='contact-us.html'>Contact</a></li>
+            <li><a href='advertise.html'>Advertise</a></li>
+            <li><a href='privacy-policy.html'>Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class='footer-col'>
+          <h3>Follow Us</h3>
+          <ul>
+            <li><a href='#'>Twitter</a></li>
+            <li><a href='#'>LinkedIn</a></li>
+            <li><a href='#'>GitHub</a></li>
+            <li><a href='#'>YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class='footer-bottom'>
+        <p>&copy; 2026 codecloudworld. All rights reserved.</p>
+        <p>Built by codecloud for the DevOps Community</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var mobileBtn = document.getElementById('mobileMenuBtn');
+      var closeBtn = document.getElementById('mobileCloseBtn');
+      var overlay = document.getElementById('mobileOverlay');
+      var headerRight = document.getElementById('headerRightCol');
+      function toggleMenu() {
+        var open = headerRight.classList.contains('open');
+        headerRight.classList.toggle('open', !open);
+        overlay.classList.toggle('active', !open);
+        document.body.style.overflow = open ? '' : 'hidden';
+      }
+      if (mobileBtn) mobileBtn.addEventListener('click', toggleMenu);
+      if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+      if (overlay) overlay.addEventListener('click', toggleMenu);
+    });
+  </script>
+</body>
+</html>

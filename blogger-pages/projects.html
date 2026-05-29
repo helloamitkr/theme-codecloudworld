@@ -1,0 +1,294 @@
+<!-- ============================================================
+   codecloudworld — Projects Page (Blogger-ready)
+   Paste this entire file into Blogger > Pages > HTML editor
+   Replace YouTube video IDs with your actual video IDs
+   ============================================================ -->
+
+<style>
+.ccw-page { font-family: 'Inter', sans-serif; color: #a1a1aa; }
+.ccw-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  border-radius: 14px;
+  padding: 48px 36px;
+  margin-bottom: 36px;
+  border: 1px solid #3f3f46;
+}
+.ccw-hero h1 { font-size: 2rem; color: #fff; margin: 0 0 10px; font-weight: 800; }
+.ccw-hero p  { font-size: 15px; color: #9ca3af; margin: 0; max-width: 580px; line-height: 1.65; }
+
+.ccw-filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+.ccw-filter-btn {
+  font-size: 13px; font-weight: 600;
+  padding: 7px 18px; border-radius: 20px;
+  border: 1px solid #3f3f46; color: #a1a1aa;
+  background: transparent; cursor: pointer; transition: all 0.2s;
+}
+.ccw-filter-btn:hover,
+.ccw-filter-btn.active { border-color: #ff1493; color: #ff1493; background: rgba(255,20,147,0.08); }
+
+.ccw-video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+.ccw-video-card {
+  background: #27272a;
+  border: 1px solid #3f3f46;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.ccw-video-card:hover { border-color: #ff1493; transform: translateY(-3px); }
+
+.ccw-video-wrap {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  background: #18181b;
+}
+.ccw-video-wrap iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+
+.ccw-card-body { padding: 18px 20px 20px; }
+.ccw-card-tag {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: 12px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+.ccw-tag-devops   { background: rgba(255,20,147,0.12); color: #ff1493; }
+.ccw-tag-cloud    { background: rgba(99,102,241,0.12); color: #818cf8; }
+.ccw-tag-ai       { background: rgba(16,185,129,0.12); color: #34d399; }
+.ccw-tag-k8s      { background: rgba(245,158,11,0.12); color: #fbbf24; }
+.ccw-tag-security { background: rgba(239,68,68,0.12);  color: #f87171; }
+
+.ccw-card-body h3 { font-size: 15px; color: #fff; margin: 0 0 8px; font-weight: 700; line-height: 1.4; }
+.ccw-card-body p  { font-size: 13px; color: #9ca3af; margin: 0 0 14px; line-height: 1.6; }
+.ccw-card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #71717a; }
+.ccw-watch-btn {
+  display: inline-block;
+  font-size: 13px; font-weight: 600;
+  padding: 7px 16px; border-radius: 6px;
+  background: #ff1493; color: #fff;
+  text-decoration: none; transition: background 0.2s;
+}
+.ccw-watch-btn:hover { background: #ff69b4; color: #fff; }
+
+@media (max-width: 600px) {
+  .ccw-hero { padding: 32px 20px; }
+  .ccw-hero h1 { font-size: 1.5rem; }
+  .ccw-video-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="ccw-page">
+
+  <div class="ccw-hero">
+    <h1>&#127916; Video Projects &amp; Tutorials</h1>
+    <p>Hands-on DevOps, Cloud, Kubernetes, and AI project walkthroughs. Watch, follow along, and build real-world skills.</p>
+  </div>
+
+  <div class="ccw-filter-bar">
+    <button class="ccw-filter-btn active" onclick="ccwFilter(this,'all')">All</button>
+    <button class="ccw-filter-btn" onclick="ccwFilter(this,'devops')">DevOps</button>
+    <button class="ccw-filter-btn" onclick="ccwFilter(this,'k8s')">Kubernetes</button>
+    <button class="ccw-filter-btn" onclick="ccwFilter(this,'cloud')">Cloud</button>
+    <button class="ccw-filter-btn" onclick="ccwFilter(this,'ai')">AI / ML</button>
+    <button class="ccw-filter-btn" onclick="ccwFilter(this,'security')">Security</button>
+  </div>
+
+  <div class="ccw-video-grid" id="ccwGrid">
+
+    <!-- VIDEO CARD 1 — replace VIDEO_ID_1 with your YouTube video ID -->
+    <div class="ccw-video-card" data-cat="devops">
+      <div class="ccw-video-wrap">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_1"
+                title="CI/CD Pipeline with GitHub Actions"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="ccw-card-body">
+        <span class="ccw-card-tag ccw-tag-devops">DevOps</span>
+        <h3>CI/CD Pipeline from Scratch with GitHub Actions &amp; Docker</h3>
+        <p>Build a complete CI/CD pipeline: lint, test, Docker build, push to registry, and deploy — all automated on every push.</p>
+        <div class="ccw-card-meta">
+          <span>&#9201; 28 min</span>
+          <a class="ccw-watch-btn" href="https://www.youtube.com/watch?v=VIDEO_ID_1" target="_blank" rel="noopener">Watch &#9654;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEO CARD 2 -->
+    <div class="ccw-video-card" data-cat="k8s">
+      <div class="ccw-video-wrap">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_2"
+                title="Kubernetes for Beginners"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="ccw-card-body">
+        <span class="ccw-card-tag ccw-tag-k8s">Kubernetes</span>
+        <h3>Kubernetes for Beginners — Pods, Deployments &amp; Services Explained</h3>
+        <p>Set up a local K8s cluster with Kind, deploy your first app, expose it with a Service, and understand the core concepts hands-on.</p>
+        <div class="ccw-card-meta">
+          <span>&#9201; 35 min</span>
+          <a class="ccw-watch-btn" href="https://www.youtube.com/watch?v=VIDEO_ID_2" target="_blank" rel="noopener">Watch &#9654;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEO CARD 3 -->
+    <div class="ccw-video-card" data-cat="cloud">
+      <div class="ccw-video-wrap">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_3"
+                title="Terraform AWS Infrastructure"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="ccw-card-body">
+        <span class="ccw-card-tag ccw-tag-cloud">Cloud</span>
+        <h3>Terraform on AWS — Build a Full VPC + EKS Cluster in 30 Minutes</h3>
+        <p>Provision a production-grade AWS environment using Terraform modules: VPC, subnets, NAT gateway, EKS cluster, and IAM roles.</p>
+        <div class="ccw-card-meta">
+          <span>&#9201; 42 min</span>
+          <a class="ccw-watch-btn" href="https://www.youtube.com/watch?v=VIDEO_ID_3" target="_blank" rel="noopener">Watch &#9654;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEO CARD 4 -->
+    <div class="ccw-video-card" data-cat="ai">
+      <div class="ccw-video-wrap">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_4"
+                title="MLOps with MLflow"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="ccw-card-body">
+        <span class="ccw-card-tag ccw-tag-ai">AI / ML</span>
+        <h3>MLOps in Practice — Track Experiments &amp; Deploy Models with MLflow</h3>
+        <p>End-to-end ML pipeline: train a model, log metrics in MLflow, register the best version, and serve it as a REST API in Docker.</p>
+        <div class="ccw-card-meta">
+          <span>&#9201; 38 min</span>
+          <a class="ccw-watch-btn" href="https://www.youtube.com/watch?v=VIDEO_ID_4" target="_blank" rel="noopener">Watch &#9654;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEO CARD 5 -->
+    <div class="ccw-video-card" data-cat="k8s">
+      <div class="ccw-video-wrap">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_5"
+                title="Prometheus and Grafana on Kubernetes"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="ccw-card-body">
+        <span class="ccw-card-tag ccw-tag-k8s">Kubernetes</span>
+        <h3>Prometheus + Grafana on Kubernetes — Full Monitoring Stack Setup</h3>
+        <p>Deploy the kube-prometheus-stack via Helm, set up pre-built dashboards, configure alerting rules, and send alerts to Slack.</p>
+        <div class="ccw-card-meta">
+          <span>&#9201; 31 min</span>
+          <a class="ccw-watch-btn" href="https://www.youtube.com/watch?v=VIDEO_ID_5" target="_blank" rel="noopener">Watch &#9654;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEO CARD 6 -->
+    <div class="ccw-video-card" data-cat="devops">
+      <div class="ccw-video-wrap">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_6"
+                title="Docker Compose Full Stack"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="ccw-card-body">
+        <span class="ccw-card-tag ccw-tag-devops">DevOps</span>
+        <h3>Docker Compose Multi-Service App — Nginx + Node + PostgreSQL + Redis</h3>
+        <p>Wire up a full-stack application with Docker Compose: Nginx reverse proxy, Node.js API, PostgreSQL database, and Redis cache.</p>
+        <div class="ccw-card-meta">
+          <span>&#9201; 24 min</span>
+          <a class="ccw-watch-btn" href="https://www.youtube.com/watch?v=VIDEO_ID_6" target="_blank" rel="noopener">Watch &#9654;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEO CARD 7 -->
+    <div class="ccw-video-card" data-cat="security">
+      <div class="ccw-video-wrap">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_7"
+                title="HashiCorp Vault Secrets Management"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="ccw-card-body">
+        <span class="ccw-card-tag ccw-tag-security">Security</span>
+        <h3>HashiCorp Vault — Secrets Management for Kubernetes &amp; CI/CD</h3>
+        <p>Deploy Vault on K8s, configure dynamic secrets for databases, integrate with GitHub Actions, and use the Vault Agent Injector.</p>
+        <div class="ccw-card-meta">
+          <span>&#9201; 44 min</span>
+          <a class="ccw-watch-btn" href="https://www.youtube.com/watch?v=VIDEO_ID_7" target="_blank" rel="noopener">Watch &#9654;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEO CARD 8 -->
+    <div class="ccw-video-card" data-cat="cloud">
+      <div class="ccw-video-wrap">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_8"
+                title="AWS Cost Optimization"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="ccw-card-body">
+        <span class="ccw-card-tag ccw-tag-cloud">Cloud</span>
+        <h3>AWS Cost Optimization — Cut Your Bill by 40% with These Techniques</h3>
+        <p>Rightsizing EC2, Reserved Instances vs Spot, S3 lifecycle policies, RDS scheduling, and automated cost anomaly detection with AWS Budgets.</p>
+        <div class="ccw-card-meta">
+          <span>&#9201; 27 min</span>
+          <a class="ccw-watch-btn" href="https://www.youtube.com/watch?v=VIDEO_ID_8" target="_blank" rel="noopener">Watch &#9654;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEO CARD 9 -->
+    <div class="ccw-video-card" data-cat="ai">
+      <div class="ccw-video-wrap">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_9"
+                title="Deploy LLM with FastAPI"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="ccw-card-body">
+        <span class="ccw-card-tag ccw-tag-ai">AI / ML</span>
+        <h3>Deploy an Open-Source LLM as a REST API with FastAPI &amp; Docker</h3>
+        <p>Run Llama or Mistral locally, wrap it in a FastAPI endpoint, containerize it, add rate limiting, and deploy to a cloud VM in minutes.</p>
+        <div class="ccw-card-meta">
+          <span>&#9201; 33 min</span>
+          <a class="ccw-watch-btn" href="https://www.youtube.com/watch?v=VIDEO_ID_9" target="_blank" rel="noopener">Watch &#9654;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add more VIDEO CARDs by copying a block above and changing VIDEO_ID_N -->
+
+  </div>
+
+</div>
+
+<script>
+function ccwFilter(btn, cat) {
+  document.querySelectorAll('.ccw-filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.ccw-video-card').forEach(function(card){
+    var show = cat === 'all' || card.getAttribute('data-cat') === cat;
+    card.style.display = show ? '' : 'none';
+  });
+}
+</script>

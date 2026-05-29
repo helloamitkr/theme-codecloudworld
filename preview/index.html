@@ -130,21 +130,18 @@
         <h3 class='widget-title'>Weekly DevOps &amp; Tech Updates</h3>
         <div class='widget-content'>
           <p style='margin-bottom: 15px; color: #9ca3af; font-size: 15px;'>Join our newsletter to get weekly hands-on tutorials and DevOps best practices.</p>
-          <form id='newsletter-form' style='display: flex; flex-direction: column; gap: 10px;'>
-            <input id='newsletter-email' placeholder='Enter your email address' required='required' style='padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 15px; width: 100%; box-sizing: border-box; background: var(--bg-color); color: var(--text-color);' type='email'/>
+          <iframe name='newsletter-iframe' style='display:none;'></iframe>
+          <form id='newsletter-form' action='https://docs.google.com/forms/d/e/1FAIpQLSeMVe-Sm4xa2L7ShMabxMveJZU5kFQrSH2QLymLlUrkFeRe6Q/formResponse' method='POST' target='newsletter-iframe' style='display: flex; flex-direction: column; gap: 10px;'>
+            <input name='entry.2134868049' placeholder='Enter your email address' required='required' style='padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 15px; width: 100%; box-sizing: border-box; background: var(--bg-color); color: var(--text-color);' type='email'/>
             <button style='background-color: var(--primary-color); color: white; border: none; padding: 12px 15px; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background-color 0.2s;' type='submit'>Subscribe Now</button>
           </form>
           <div id='newsletter-success' style='display:none; color: #10b981; text-align: center; padding: 15px; font-size: 15px; font-weight: 600;'>Thanks for subscribing!</div>
           <script>
-          document.getElementById('newsletter-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            var data = new FormData();
-            data.append('entry.2134868049', document.getElementById('newsletter-email').value);
-            fetch('https://docs.google.com/forms/d/e/1FAIpQLSeMVe-Sm4xa2L7ShMabxMveJZU5kFQrSH2QLymLlUrkFeRe6Q/formResponse', {
-              method: 'POST', mode: 'no-cors', body: data
-            });
-            document.getElementById('newsletter-form').style.display = 'none';
-            document.getElementById('newsletter-success').style.display = 'block';
+          document.getElementById('newsletter-form').addEventListener('submit', function() {
+            setTimeout(function() {
+              document.getElementById('newsletter-form').style.display = 'none';
+              document.getElementById('newsletter-success').style.display = 'block';
+            }, 500);
           });
           </script>
         </div>
@@ -203,8 +200,8 @@
         <div class='footer-col'>
           <h3>Company</h3>
           <ul>
-            <li><a href='about.html'>About Us</a></li>
-            <li><a href='contact.html'>Contact</a></li>
+            <li><a href='about-us.html'>About Us</a></li>
+            <li><a href='contact-us.html'>Contact</a></li>
             <li><a href='advertise.html'>Advertise</a></li>
             <li><a href='privacy-policy.html'>Privacy Policy</a></li>
           </ul>

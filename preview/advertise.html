@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Advertise - codecloudworld</title>
+  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap' rel='stylesheet'>
+  <link href="style.css" rel="stylesheet">
+  <style>
+    .page-hero { background: linear-gradient(135deg, #0f172a 0%, #1a0a2e 100%); padding: 80px 0 70px; border-bottom: 1px solid var(--border-color); text-align: center; }
+    .page-hero-inner { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    .page-hero .tag { display: inline-block; font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 20px; background: rgba(255,20,147,0.15); color: #ff1493; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 16px; }
+    .page-hero h1 { font-size: 2.6rem; margin: 0 0 16px; color: #fff; }
+    .page-hero p { font-size: 1.15rem; color: #9ca3af; margin: 0; line-height: 1.7; }
+    .full-width-content { max-width: 1100px; width: 95%; margin: 0 auto; padding: 0 20px 60px; }
+    .audience-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; margin: 50px 0; }
+    .stat-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; text-align: center; }
+    .stat-card .num { font-size: 2rem; font-weight: 900; color: var(--primary-color); }
+    .stat-card .lbl { font-size: 13px; color: #9ca3af; margin-top: 6px; }
+    .section-heading { font-size: 1.6rem; color: #fff; margin: 50px 0 8px; }
+    .section-sub { font-size: 15px; color: #9ca3af; margin: 0 0 28px; }
+    .packages-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+    .package-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .package-card.featured { border-color: var(--primary-color); position: relative; }
+    .package-card:hover { transform: translateY(-3px); }
+    .package-card.featured:hover { border-color: var(--primary-hover); }
+    .popular-badge {
+      position: absolute;
+      top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--primary-color);
+      color: #fff;
+      font-size: 11px; font-weight: 700;
+      padding: 4px 14px; border-radius: 12px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .package-icon { font-size: 28px; margin-bottom: 14px; }
+    .package-card h3 { font-size: 1.1rem; color: #fff; margin: 0 0 8px; }
+    .package-price { font-size: 1.5rem; font-weight: 900; color: var(--primary-color); margin: 0 0 16px; }
+    .package-price span { font-size: 14px; font-weight: 400; color: #9ca3af; }
+    .package-features { list-style: none; padding: 0; margin: 0 0 24px; flex: 1; }
+    .package-features li { font-size: 14px; color: #9ca3af; padding: 7px 0; border-bottom: 1px solid rgba(63,63,70,0.4); display: flex; gap: 8px; align-items: flex-start; }
+    .package-features li:last-child { border-bottom: none; }
+    .package-features li::before { content: '✓'; color: #34d399; font-weight: 700; flex-shrink: 0; }
+    .btn-package {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      background: var(--primary-color);
+      color: #fff;
+      transition: background 0.2s;
+    }
+    .btn-package:hover { background: var(--primary-hover); color: #fff; }
+    .btn-package-ghost {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      transition: all 0.2s;
+    }
+    .btn-package-ghost:hover { border-color: var(--primary-color); color: var(--primary-color); }
+    .audience-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 30px 0; }
+    .aud-list h4 { font-size: 15px; color: #fff; margin: 0 0 14px; }
+    .aud-list ul { list-style: none; padding: 0; }
+    .aud-list li { font-size: 14px; color: #9ca3af; padding: 8px 0; border-bottom: 1px solid rgba(63,63,70,0.4); display: flex; justify-content: space-between; }
+    .aud-list li:last-child { border-bottom: none; }
+    .aud-list li span { color: var(--primary-color); font-weight: 600; }
+    .contact-cta { background: linear-gradient(135deg, rgba(255,20,147,0.08), rgba(99,102,241,0.08)); border: 1px solid rgba(255,20,147,0.2); border-radius: 14px; padding: 48px; text-align: center; margin-top: 56px; }
+    .contact-cta h2 { font-size: 1.6rem; color: #fff; margin: 0 0 12px; }
+    .contact-cta p { color: #9ca3af; margin: 0 0 28px; font-size: 15px; }
+    .contact-cta a { display: inline-block; padding: 14px 32px; background: var(--primary-color); color: #fff; border-radius: 8px; font-weight: 700; font-size: 15px; transition: background 0.2s; }
+    .contact-cta a:hover { background: var(--primary-hover); color: #fff; }
+    @media (max-width: 600px) { .audience-breakdown { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header class='site-header professional-header'>
+    <div class='header-inner'>
+      <div class='header-left-col'>
+        <div class='site-title'>
+          <a href='index.html'>
+            <svg class='site-logo-svg' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M52 34a12 12 0 00-11.4-12A16 16 0 0012 28a10 10 0 001 20h38a12 12 0 001-14z' fill='#ff1493'/><path d='M30 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M42 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.6'/></svg>
+            <span>codecloudworld</span>
+          </a>
+        </div>
+      </div>
+      <div class='mobile-menu-toggle' id='mobileMenuBtn'>
+        <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='3' x2='21' y1='12' y2='12'/><line x1='3' x2='21' y1='6' y2='6'/><line x1='3' x2='21' y1='18' y2='18'/></svg>
+      </div>
+      <div class='mobile-overlay' id='mobileOverlay'></div>
+      <div class='header-right-col' id='headerRightCol'>
+        <div class='mobile-close-btn' id='mobileCloseBtn'>
+          <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='18' x2='6' y1='6' y2='18'/><line x1='6' x2='18' y1='6' y2='18'/></svg>
+        </div>
+        <nav class='header-nav custom-nav' aria-label='Main navigation'>
+          <ul>
+            <li><a href='index.html'>Tutorials</a></li>
+            <li><a href='roadmap.html'>Roadmaps</a></li>
+            <li><a href='ai-news.html'>AI News</a></li>
+            <li><a href='projects.html'>Projects</a></li>
+          </ul>
+        </nav>
+        <div class='header-actions'>
+          <a aria-label='Search' class='search-icon' href='#' title='Search'>
+            <svg fill='none' height='20' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='20'><circle cx='11' cy='11' r='8'/><line x1='21' x2='16.65' y1='21' y2='16.65'/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class='page-hero'>
+    <div class='page-hero-inner'>
+      <div class='tag'>Media Kit 2026</div>
+      <h1>Reach 250,000+ DevOps &amp; Cloud Engineers</h1>
+      <p>Partner with codecloudworld to put your product in front of the engineers, architects, and tech leads who evaluate and buy tools.</p>
+    </div>
+  </div>
+
+  <div class='full-width-content'>
+
+    <div class='audience-stats'>
+      <div class='stat-card'><div class='num'>250K+</div><div class='lbl'>Monthly Unique Visitors</div></div>
+      <div class='stat-card'><div class='num'>42K+</div><div class='lbl'>Newsletter Subscribers</div></div>
+      <div class='stat-card'><div class='num'>68%</div><div class='lbl'>Mid/Senior Engineers</div></div>
+      <div class='stat-card'><div class='num'>34%</div><div class='lbl'>Make Purchase Decisions</div></div>
+      <div class='stat-card'><div class='num'>4.2min</div><div class='lbl'>Avg. Time on Page</div></div>
+    </div>
+
+    <h2 class='section-heading'>Who We Reach</h2>
+    <p class='section-sub'>Our audience is highly technical, actively learning, and making real decisions about tools and platforms.</p>
+
+    <div class='audience-breakdown'>
+      <div class='aud-list'>
+        <h4>Job Roles</h4>
+        <ul>
+          <li>DevOps / Platform Engineer <span>38%</span></li>
+          <li>Cloud / Infrastructure Engineer <span>26%</span></li>
+          <li>Software Engineer <span>18%</span></li>
+          <li>MLOps / Data Engineer <span>10%</span></li>
+          <li>Engineering Manager <span>8%</span></li>
+        </ul>
+      </div>
+      <div class='aud-list'>
+        <h4>Top Topics Consumed</h4>
+        <ul>
+          <li>Kubernetes &amp; Containers <span>High</span></li>
+          <li>CI/CD &amp; Automation <span>High</span></li>
+          <li>Cloud (AWS/GCP/Azure) <span>High</span></li>
+          <li>AI / LLMOps <span>Growing</span></li>
+          <li>Security &amp; Compliance <span>Medium</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class='section-heading'>Advertising Packages</h2>
+    <p class='section-sub'>Flexible options for startups to enterprise vendors. All placements are clearly labeled as sponsored.</p>
+
+    <div class='packages-grid'>
+
+      <div class='package-card'>
+        <div class='package-icon'>&#128235;</div>
+        <h3>Newsletter Sponsor</h3>
+        <div class='package-price'>$499 <span>/ issue</span></div>
+        <ul class='package-features'>
+          <li>Solo placement in our weekly newsletter</li>
+          <li>42K+ opt-in subscribers</li>
+          <li>Custom CTA and tracking link</li>
+          <li>Avg. 38% open rate</li>
+          <li>1 issue guaranteed delivery</li>
+        </ul>
+        <a class='btn-package-ghost' href='contact-us.html'>Get in Touch</a>
+      </div>
+
+      <div class='package-card featured' style='position:relative'>
+        <span class='popular-badge'>Most Popular</span>
+        <div class='package-icon'>&#128196;</div>
+        <h3>Sponsored Tutorial</h3>
+        <div class='package-price'>$1,200 <span>/ post</span></div>
+        <ul class='package-features'>
+          <li>In-depth tutorial featuring your product</li>
+          <li>Written by our editorial team</li>
+          <li>SEO-optimized, evergreen content</li>
+          <li>Social promotion (Twitter, LinkedIn)</li>
+          <li>Newsletter feature in next issue</li>
+          <li>Permanently indexed on site</li>
+        </ul>
+        <a class='btn-package' href='contact-us.html'>Get in Touch</a>
+      </div>
+
+      <div class='package-card'>
+        <div class='package-icon'>&#127919;</div>
+        <h3>Banner Advertising</h3>
+        <div class='package-price'>$299 <span>/ week</span></div>
+        <ul class='package-features'>
+          <li>Sidebar and in-article banner slots</li>
+          <li>Targets DevOps / K8s / Cloud pages</li>
+          <li>250K+ monthly impressions</li>
+          <li>Custom creative accepted</li>
+          <li>Weekly performance report</li>
+        </ul>
+        <a class='btn-package-ghost' href='contact-us.html'>Get in Touch</a>
+      </div>
+
+      <div class='package-card'>
+        <div class='package-icon'>&#128200;</div>
+        <h3>Roadmap / Guide Sponsorship</h3>
+        <div class='package-price'>$2,500 <span>/ quarter</span></div>
+        <ul class='package-features'>
+          <li>Your brand on a popular roadmap or cert guide</li>
+          <li>Exclusive category sponsorship</li>
+          <li>Logo + CTA in guide header</li>
+          <li>Quarterly newsletter feature</li>
+          <li>Co-branded social posts</li>
+          <li>Lead generation form integration</li>
+        </ul>
+        <a class='btn-package-ghost' href='contact-us.html'>Get in Touch</a>
+      </div>
+
+    </div>
+
+    <div class='contact-cta'>
+      <h2>Ready to reach our audience?</h2>
+      <p>Send us your goals and we'll put together a custom media package that fits your budget and timeline.</p>
+      <a href='mailto:ads@codecloudworld.com'>Contact Our Ads Team &rarr;</a>
+    </div>
+
+  </div>
+
+  <footer class='site-footer'>
+    <div class='container'>
+      <div class='footer-grid'>
+        <div class='footer-col footer-brand'>
+          <a href='index.html'><svg class='site-logo-svg' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg' style='height:28px;width:28px;'><path d='M52 34a12 12 0 00-11.4-12A16 16 0 0012 28a10 10 0 001 20h38a12 12 0 001-14z' fill='#ff1493'/><path d='M30 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg></a>
+          <p>Join 250,000+ DevOps &amp; MLOps community. Get weekly deep dives, handpicked tools, and career resources.</p>
+        </div>
+        <div class='footer-col'><h3>Resources</h3><ul><li><a href='index.html'>Tutorials</a></li><li><a href='roadmap.html'>Roadmaps</a></li><li><a href='services.html'>Services</a></li><li><a href='projects.html'>Projects</a></li></ul></div>
+        <div class='footer-col'><h3>Company</h3><ul><li><a href='about-us.html'>About Us</a></li><li><a href='contact-us.html'>Contact</a></li><li><a href='advertise.html'>Advertise</a></li><li><a href='privacy-policy.html'>Privacy Policy</a></li></ul></div>
+        <div class='footer-col'><h3>Follow Us</h3><ul><li><a href='#'>Twitter</a></li><li><a href='#'>LinkedIn</a></li><li><a href='#'>GitHub</a></li><li><a href='#'>YouTube</a></li></ul></div>
+      </div>
+      <div class='footer-bottom'>
+        <p>&copy; 2026 codecloudworld. All rights reserved.</p>
+        <p>Built by codecloud for the DevOps Community</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var mobileBtn = document.getElementById('mobileMenuBtn');
+      var closeBtn = document.getElementById('mobileCloseBtn');
+      var overlay = document.getElementById('mobileOverlay');
+      var headerRight = document.getElementById('headerRightCol');
+      function toggleMenu() {
+        var open = headerRight.classList.contains('open');
+        headerRight.classList.toggle('open', !open);
+        overlay.classList.toggle('active', !open);
+        document.body.style.overflow = open ? '' : 'hidden';
+      }
+      if (mobileBtn) mobileBtn.addEventListener('click', toggleMenu);
+      if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+      if (overlay) overlay.addEventListener('click', toggleMenu);
+    });
+  </script>
+</body>
+</html>

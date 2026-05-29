@@ -1,0 +1,316 @@
+<!-- ============================================================
+   codecloudworld — Services Page (Blogger-ready)
+   Paste this entire file into Blogger > Pages > HTML editor
+   ============================================================ -->
+
+<style>
+.ccw-page { font-family: 'Inter', sans-serif; color: #a1a1aa; }
+
+.ccw-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1a0a2e 100%);
+  border-radius: 14px; padding: 60px 36px; margin-bottom: 40px;
+  border: 1px solid #3f3f46; text-align: center;
+}
+.ccw-hero-tag {
+  display: inline-block; font-size: 11px; font-weight: 700;
+  padding: 5px 16px; border-radius: 20px;
+  background: rgba(255,20,147,0.12); color: #ff1493;
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;
+}
+.ccw-hero h1 { font-size: 2.4rem; color: #fff; margin: 0 0 14px; font-weight: 900; line-height: 1.2; }
+.ccw-hero p  { font-size: 16px; color: #9ca3af; margin: 0 auto; max-width: 620px; line-height: 1.75; }
+
+/* Trust bar */
+.ccw-trust {
+  display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+  padding: 20px 0 36px; margin-bottom: 8px; border-bottom: 1px solid #3f3f46;
+}
+.ccw-trust-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #9ca3af; }
+.ccw-trust-item span.icon { font-size: 18px; }
+.ccw-trust-item strong { color: #fff; }
+
+/* Section headings */
+.ccw-sec-label { font-size: 12px; font-weight: 700; color: #ff1493; text-transform: uppercase; letter-spacing: 1px; margin: 48px 0 4px; }
+.ccw-sec-title { font-size: 1.8rem; color: #fff; font-weight: 800; margin: 0 0 6px; }
+.ccw-sec-sub   { font-size: 15px; color: #9ca3af; margin: 0 0 28px; }
+
+/* Services grid */
+.ccw-svc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px; margin-bottom: 56px;
+}
+.ccw-svc-card {
+  background: #27272a; border: 1px solid #3f3f46; border-radius: 16px;
+  padding: 30px; display: flex; flex-direction: column;
+  transition: border-color 0.25s, transform 0.25s;
+  position: relative; overflow: hidden;
+}
+.ccw-svc-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--accent, #ff1493); opacity: 0; transition: opacity 0.25s;
+}
+.ccw-svc-card:hover { border-color: var(--accent, #ff1493); transform: translateY(-4px); }
+.ccw-svc-card:hover::before { opacity: 1; }
+
+.ccw-svc-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; margin-bottom: 20px; flex-shrink: 0;
+}
+.ccw-svc-card h3 { font-size: 1.15rem; color: #fff; margin: 0 0 10px; font-weight: 800; }
+.ccw-svc-card > p { font-size: 14px; color: #9ca3af; line-height: 1.7; margin: 0 0 18px; flex: 1; }
+
+.ccw-svc-features { list-style: none; padding: 0; margin: 0 0 22px; }
+.ccw-svc-features li {
+  font-size: 13px; color: #a1a1aa; padding: 7px 0;
+  border-bottom: 1px solid rgba(63,63,70,0.4);
+  display: flex; gap: 9px; align-items: flex-start;
+}
+.ccw-svc-features li:last-child { border-bottom: none; }
+.ccw-svc-features li::before { content: '✓'; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+.ccw-svc-footer { display: flex; gap: 10px; align-items: center; margin-top: auto; }
+.ccw-btn-primary {
+  display: inline-block; padding: 10px 20px; border-radius: 8px;
+  background: #ff1493; color: #fff; font-size: 13px; font-weight: 700;
+  text-decoration: none; transition: background 0.2s; flex-shrink: 0;
+}
+.ccw-btn-primary:hover { background: #ff69b4; color: #fff; }
+.ccw-btn-outline {
+  display: inline-block; padding: 10px 20px; border-radius: 8px;
+  border: 1px solid #3f3f46; color: #a1a1aa; font-size: 13px; font-weight: 700;
+  text-decoration: none; transition: all 0.2s;
+}
+.ccw-btn-outline:hover { border-color: #ff1493; color: #ff1493; }
+
+/* Highlighted "one-to-one" card */
+.ccw-svc-card.ccw-featured-card {
+  background: linear-gradient(145deg, #1e1133 0%, #27272a 60%);
+  border-color: rgba(255,20,147,0.4);
+}
+.ccw-svc-card.ccw-featured-card::before { opacity: 1; }
+
+/* Process / How it works */
+.ccw-process { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 20px; margin-bottom: 56px; }
+.ccw-step {
+  background: #27272a; border: 1px solid #3f3f46; border-radius: 12px;
+  padding: 24px; text-align: center; position: relative;
+}
+.ccw-step-num {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,20,147,0.12); color: #ff1493;
+  font-size: 15px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px;
+}
+.ccw-step h4 { font-size: 14px; color: #fff; margin: 0 0 7px; font-weight: 700; }
+.ccw-step p  { font-size: 13px; color: #9ca3af; margin: 0; line-height: 1.55; }
+
+/* CTA */
+.ccw-cta-box {
+  background: linear-gradient(135deg, rgba(255,20,147,0.09), rgba(99,102,241,0.09));
+  border: 1px solid rgba(255,20,147,0.25); border-radius: 16px;
+  padding: 52px 36px; text-align: center; margin-bottom: 20px;
+}
+.ccw-cta-box h2 { font-size: 1.8rem; color: #fff; margin: 0 0 12px; font-weight: 800; }
+.ccw-cta-box p  { font-size: 15px; color: #9ca3af; margin: 0 auto 28px; max-width: 520px; line-height: 1.7; }
+.ccw-cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.ccw-btn-lg {
+  display: inline-block; padding: 14px 34px; border-radius: 10px;
+  font-size: 15px; font-weight: 700;
+  background: #ff1493; color: #fff; text-decoration: none; transition: background 0.2s;
+}
+.ccw-btn-lg:hover { background: #ff69b4; color: #fff; }
+.ccw-btn-lg-ghost {
+  display: inline-block; padding: 14px 34px; border-radius: 10px;
+  font-size: 15px; font-weight: 700;
+  border: 1px solid #3f3f46; color: #a1a1aa; text-decoration: none; transition: all 0.2s;
+}
+.ccw-btn-lg-ghost:hover { border-color: #ff1493; color: #ff1493; }
+
+@media (max-width: 600px) {
+  .ccw-hero { padding: 36px 18px; }
+  .ccw-hero h1 { font-size: 1.7rem; }
+  .ccw-svc-grid { grid-template-columns: 1fr; }
+  .ccw-cta-box { padding: 32px 18px; }
+  .ccw-trust { gap: 18px; }
+}
+</style>
+
+<div class="ccw-page">
+
+  <!-- Hero -->
+  <div class="ccw-hero">
+    <div class="ccw-hero-tag">Professional Services</div>
+    <h1>We Build. We Teach.<br>You Succeed.</h1>
+    <p>From cracking cloud certifications to shipping production-grade apps — we offer hands-on services and 1:1 mentorship for engineers and businesses ready to level up.</p>
+  </div>
+
+  <!-- Trust bar -->
+  <div class="ccw-trust">
+    <div class="ccw-trust-item"><span class="icon">&#127881;</span><strong>250K+</strong> community members</div>
+    <div class="ccw-trust-item"><span class="icon">&#9989;</span><strong>95%</strong> certification pass rate</div>
+    <div class="ccw-trust-item"><span class="icon">&#127758;</span><strong>40+</strong> countries served</div>
+    <div class="ccw-trust-item"><span class="icon">&#11088;</span><strong>4.9/5</strong> avg. client rating</div>
+  </div>
+
+  <!-- Services -->
+  <div class="ccw-sec-label">What We Offer</div>
+  <h2 class="ccw-sec-title">Our Services</h2>
+  <p class="ccw-sec-sub">Pick a service or combine them — we tailor every engagement to your goals.</p>
+
+  <div class="ccw-svc-grid">
+
+    <!-- 1. Crack Certifications -->
+    <div class="ccw-svc-card" style="--accent:#fbbf24">
+      <div class="ccw-svc-icon" style="background:rgba(245,158,11,0.12)">&#127891;</div>
+      <h3>Crack Certifications</h3>
+      <p>Structured, exam-focused coaching to help you pass AWS, Kubernetes (CKA/CKAD/CKS), Google Cloud, and Terraform certifications on the first attempt.</p>
+      <ul class="ccw-svc-features">
+        <li>Personalized study plan based on your gaps</li>
+        <li>1,200+ curated practice questions</li>
+        <li>Mock exams with detailed answer explanations</li>
+        <li>Exam-day tips and hands-on lab access</li>
+        <li>Covers: AWS SAA, CKA, CKAD, CKS, GCP, Terraform</li>
+      </ul>
+      <div class="ccw-svc-footer">
+        <a class="ccw-btn-primary" href="/p/contact-us.html">Get Started</a>
+        <a class="ccw-btn-outline" href="#">View Certs &rarr;</a>
+      </div>
+    </div>
+
+    <!-- 2. Mobile App Development -->
+    <div class="ccw-svc-card" style="--accent:#818cf8">
+      <div class="ccw-svc-icon" style="background:rgba(99,102,241,0.12)">&#128241;</div>
+      <h3>Mobile App Development</h3>
+      <p>Cross-platform and native mobile apps built for performance and scale — iOS and Android from a single codebase using React Native or Flutter.</p>
+      <ul class="ccw-svc-features">
+        <li>React Native &amp; Flutter development</li>
+        <li>UI/UX design to production delivery</li>
+        <li>REST API &amp; GraphQL integration</li>
+        <li>Push notifications, auth, payments</li>
+        <li>Play Store &amp; App Store deployment</li>
+      </ul>
+      <div class="ccw-svc-footer">
+        <a class="ccw-btn-primary" href="/p/contact-us.html">Get a Quote</a>
+        <a class="ccw-btn-outline" href="#">Our Work &rarr;</a>
+      </div>
+    </div>
+
+    <!-- 3. Software Development -->
+    <div class="ccw-svc-card" style="--accent:#34d399">
+      <div class="ccw-svc-icon" style="background:rgba(16,185,129,0.12)">&#128187;</div>
+      <h3>Software Development</h3>
+      <p>Full-stack web applications, APIs, and backend systems engineered for reliability, security, and long-term maintainability.</p>
+      <ul class="ccw-svc-features">
+        <li>React / Next.js frontend development</li>
+        <li>Node.js, Python, Go backend APIs</li>
+        <li>PostgreSQL, MongoDB, Redis databases</li>
+        <li>Microservices &amp; monorepo architecture</li>
+        <li>Code reviews, refactors &amp; legacy modernisation</li>
+      </ul>
+      <div class="ccw-svc-footer">
+        <a class="ccw-btn-primary" href="/p/contact-us.html">Get a Quote</a>
+        <a class="ccw-btn-outline" href="#">Our Work &rarr;</a>
+      </div>
+    </div>
+
+    <!-- 4. One-to-One Connect (featured) -->
+    <div class="ccw-svc-card ccw-featured-card" style="--accent:#ff1493">
+      <div class="ccw-svc-icon" style="background:rgba(255,20,147,0.15)">&#127891;</div>
+      <h3>1:1 Mentorship &amp; Connect</h3>
+      <p>Direct access to senior engineers and cloud practitioners. Get unstuck faster, accelerate your career, and get honest answers — not generic advice.</p>
+      <ul class="ccw-svc-features">
+        <li>Career roadmap planning sessions</li>
+        <li>Resume &amp; LinkedIn profile review</li>
+        <li>Live coding &amp; architecture walkthroughs</li>
+        <li>Interview prep (FAANG &amp; startups)</li>
+        <li>On-demand async Q&amp;A via Slack/Discord</li>
+        <li>Flexible: 1 session or monthly retainer</li>
+      </ul>
+      <div class="ccw-svc-footer">
+        <a class="ccw-btn-primary" href="/p/contact-us.html">Book a Session</a>
+        <a class="ccw-btn-outline" href="#">See Plans &rarr;</a>
+      </div>
+    </div>
+
+    <!-- 5. DevOps -->
+    <div class="ccw-svc-card" style="--accent:#ff1493">
+      <div class="ccw-svc-icon" style="background:rgba(255,20,147,0.12)">&#128736;</div>
+      <h3>DevOps Services</h3>
+      <p>End-to-end DevOps transformation — from messy deployments to automated, secure, observable production infrastructure that your team actually understands.</p>
+      <ul class="ccw-svc-features">
+        <li>CI/CD pipeline design &amp; implementation</li>
+        <li>Kubernetes cluster setup &amp; hardening</li>
+        <li>Infrastructure as Code (Terraform, Ansible)</li>
+        <li>Monitoring: Prometheus, Grafana, Loki</li>
+        <li>Cost optimisation &amp; cloud right-sizing</li>
+        <li>DevOps audit &amp; maturity assessment</li>
+      </ul>
+      <div class="ccw-svc-footer">
+        <a class="ccw-btn-primary" href="/p/contact-us.html">Get a Quote</a>
+        <a class="ccw-btn-outline" href="#">Learn More &rarr;</a>
+      </div>
+    </div>
+
+    <!-- 6. AI Integrations -->
+    <div class="ccw-svc-card" style="--accent:#34d399">
+      <div class="ccw-svc-icon" style="background:rgba(16,185,129,0.12)">&#129302;</div>
+      <h3>AI Integrations</h3>
+      <p>Add real AI capabilities to your existing products — not demos, but production-ready integrations that solve actual user problems and scale reliably.</p>
+      <ul class="ccw-svc-features">
+        <li>LLM integration (OpenAI, Claude, Gemini, Llama)</li>
+        <li>RAG pipelines &amp; semantic search</li>
+        <li>AI chatbots &amp; copilot features</li>
+        <li>Document processing &amp; data extraction</li>
+        <li>MLOps: model serving, monitoring &amp; retraining</li>
+        <li>AI cost optimisation &amp; prompt engineering</li>
+      </ul>
+      <div class="ccw-svc-footer">
+        <a class="ccw-btn-primary" href="/p/contact-us.html">Get a Quote</a>
+        <a class="ccw-btn-outline" href="#">Learn More &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- How it works -->
+  <div class="ccw-sec-label">Simple Process</div>
+  <h2 class="ccw-sec-title">How It Works</h2>
+  <p class="ccw-sec-sub">From first message to delivery — a clear, no-surprise process.</p>
+
+  <div class="ccw-process">
+    <div class="ccw-step">
+      <div class="ccw-step-num">1</div>
+      <h4>Tell Us Your Goal</h4>
+      <p>Fill out the contact form or book a free 20-minute discovery call. No commitment required.</p>
+    </div>
+    <div class="ccw-step">
+      <div class="ccw-step-num">2</div>
+      <h4>Get a Custom Plan</h4>
+      <p>We assess your needs and send a scoped proposal with timeline and pricing within 24 hours.</p>
+    </div>
+    <div class="ccw-step">
+      <div class="ccw-step-num">3</div>
+      <h4>We Start Work</h4>
+      <p>Kick off with a clear scope. Regular updates, demos, and check-ins throughout the engagement.</p>
+    </div>
+    <div class="ccw-step">
+      <div class="ccw-step-num">4</div>
+      <h4>You Ship &amp; Succeed</h4>
+      <p>Handover with full documentation, knowledge transfer, and 30 days of post-delivery support.</p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="ccw-cta-box">
+    <h2>Ready to get started?</h2>
+    <p>Whether you need to pass a cert next month, ship an app, or scale your DevOps practice — let's talk. First call is free.</p>
+    <div class="ccw-cta-btns">
+      <a class="ccw-btn-lg" href="/p/contact-us.html">&#128222; Book a Free Call</a>
+      <a class="ccw-btn-lg-ghost" href="mailto:hello@codecloudworld.com">&#128140; Email Us</a>
+    </div>
+  </div>
+
+</div>

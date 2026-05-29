@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects - codecloudworld</title>
+  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap' rel='stylesheet'>
+  <link href="style.css" rel="stylesheet">
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      padding: 60px 0 50px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .page-hero-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .page-hero h1 {
+      font-size: 2.4rem;
+      margin: 0 0 12px;
+      color: #fff;
+    }
+    .page-hero p {
+      font-size: 1.1rem;
+      color: #9ca3af;
+      max-width: 640px;
+      margin: 0;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      padding: 40px 0;
+    }
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .project-card:hover {
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+    .project-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-devops { background: rgba(255,20,147,0.15); color: #ff1493; }
+    .badge-cloud  { background: rgba(99,102,241,0.15); color: #818cf8; }
+    .badge-ai     { background: rgba(16,185,129,0.15); color: #34d399; }
+    .badge-k8s    { background: rgba(245,158,11,0.15); color: #fbbf24; }
+    .project-card h3 {
+      font-size: 1.15rem;
+      margin: 0 0 10px;
+      color: #fff;
+    }
+    .project-card p {
+      font-size: 14px;
+      color: #9ca3af;
+      line-height: 1.65;
+      margin: 0 0 20px;
+    }
+    .project-links {
+      display: flex;
+      gap: 12px;
+    }
+    .btn-outline {
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--primary-color); color: var(--primary-color); }
+    .btn-primary-sm {
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 6px;
+      background: var(--primary-color);
+      color: #fff;
+      transition: background 0.2s;
+    }
+    .btn-primary-sm:hover { background: var(--primary-hover); color: #fff; }
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .filter-btn {
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      background: rgba(255,20,147,0.08);
+    }
+    .full-width-content {
+      max-width: 1400px;
+      width: 95%;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class='site-header professional-header'>
+    <div class='header-inner'>
+      <div class='header-left-col'>
+        <div class='site-title'>
+          <a href='index.html'>
+            <svg class='site-logo-svg' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M52 34a12 12 0 00-11.4-12A16 16 0 0012 28a10 10 0 001 20h38a12 12 0 001-14z' fill='#ff1493'/><path d='M30 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M42 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.6'/></svg>
+            <span>codecloudworld</span>
+          </a>
+        </div>
+      </div>
+      <div class='mobile-menu-toggle' id='mobileMenuBtn'>
+        <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='3' x2='21' y1='12' y2='12'/><line x1='3' x2='21' y1='6' y2='6'/><line x1='3' x2='21' y1='18' y2='18'/></svg>
+      </div>
+      <div class='mobile-overlay' id='mobileOverlay'></div>
+      <div class='header-right-col' id='headerRightCol'>
+        <div class='mobile-close-btn' id='mobileCloseBtn'>
+          <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='18' x2='6' y1='6' y2='18'/><line x1='6' x2='18' y1='6' y2='18'/></svg>
+        </div>
+        <nav class='header-nav custom-nav' aria-label='Main navigation'>
+          <ul>
+            <li><a href='index.html'>Tutorials</a></li>
+            <li><a href='roadmap.html'>Roadmaps</a></li>
+            <li><a href='ai-news.html'>AI News</a></li>
+            <li><a href='projects.html' style='color:var(--primary-color)'>Projects</a></li>
+          </ul>
+        </nav>
+        <div class='header-actions'>
+          <a aria-label='Search' class='search-icon' href='#' title='Search'>
+            <svg fill='none' height='20' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='20'><circle cx='11' cy='11' r='8'/><line x1='21' x2='16.65' y1='21' y2='16.65'/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class='page-hero'>
+    <div class='page-hero-inner'>
+      <h1>Open Source Projects</h1>
+      <p>Explore hands-on DevOps, Cloud, and AI projects built by the community. Fork, contribute, and ship real-world skills.</p>
+    </div>
+  </div>
+
+  <div class='full-width-content'>
+    <div class='filter-bar' style='padding-top:32px'>
+      <button class='filter-btn active'>All</button>
+      <button class='filter-btn'>DevOps</button>
+      <button class='filter-btn'>Cloud</button>
+      <button class='filter-btn'>AI / ML</button>
+      <button class='filter-btn'>Kubernetes</button>
+    </div>
+
+    <div class='projects-grid'>
+
+      <div class='project-card'>
+        <span class='project-badge badge-devops'>DevOps</span>
+        <h3>CI/CD Pipeline Starter Kit</h3>
+        <p>A production-ready GitHub Actions template with Docker build, test, lint, and multi-environment deploy stages. Includes branch protection rules and release automation.</p>
+        <div class='project-links'>
+          <a class='btn-primary-sm' href='#'>View Project</a>
+          <a class='btn-outline' href='#'>GitHub</a>
+        </div>
+      </div>
+
+      <div class='project-card'>
+        <span class='project-badge badge-k8s'>Kubernetes</span>
+        <h3>K8s Monitoring Stack</h3>
+        <p>Deploy a full observability stack on Kubernetes using Prometheus, Grafana, and Loki. Helm charts included with pre-built dashboards for nodes, pods, and apps.</p>
+        <div class='project-links'>
+          <a class='btn-primary-sm' href='#'>View Project</a>
+          <a class='btn-outline' href='#'>GitHub</a>
+        </div>
+      </div>
+
+      <div class='project-card'>
+        <span class='project-badge badge-cloud'>Cloud</span>
+        <h3>Terraform AWS Infrastructure</h3>
+        <p>Modular Terraform code to provision a secure, scalable AWS environment: VPC, EKS, RDS, ALB, and IAM roles following the AWS Well-Architected Framework.</p>
+        <div class='project-links'>
+          <a class='btn-primary-sm' href='#'>View Project</a>
+          <a class='btn-outline' href='#'>GitHub</a>
+        </div>
+      </div>
+
+      <div class='project-card'>
+        <span class='project-badge badge-ai'>AI / ML</span>
+        <h3>MLOps Pipeline with MLflow</h3>
+        <p>End-to-end ML pipeline from data ingestion to model serving. Covers experiment tracking, model registry, containerized inference API, and automated retraining.</p>
+        <div class='project-links'>
+          <a class='btn-primary-sm' href='#'>View Project</a>
+          <a class='btn-outline' href='#'>GitHub</a>
+        </div>
+      </div>
+
+      <div class='project-card'>
+        <span class='project-badge badge-devops'>DevOps</span>
+        <h3>Docker Compose Dev Environment</h3>
+        <p>Spin up a full-stack local dev environment with Docker Compose: Nginx reverse proxy, Node.js API, PostgreSQL, Redis, and Adminer — one command setup.</p>
+        <div class='project-links'>
+          <a class='btn-primary-sm' href='#'>View Project</a>
+          <a class='btn-outline' href='#'>GitHub</a>
+        </div>
+      </div>
+
+      <div class='project-card'>
+        <span class='project-badge badge-cloud'>Cloud</span>
+        <h3>Multi-Cloud Cost Dashboard</h3>
+        <p>Python + Grafana dashboard that aggregates spending from AWS, GCP, and Azure. Tag-based allocation, budget alerts, and 30-day trend charts in a single pane of glass.</p>
+        <div class='project-links'>
+          <a class='btn-primary-sm' href='#'>View Project</a>
+          <a class='btn-outline' href='#'>GitHub</a>
+        </div>
+      </div>
+
+      <div class='project-card'>
+        <span class='project-badge badge-k8s'>Kubernetes</span>
+        <h3>Helm Chart Library</h3>
+        <p>A collection of opinionated Helm charts for common workloads: web apps, workers, cron jobs, and stateful sets. Designed for security-hardened production deployments.</p>
+        <div class='project-links'>
+          <a class='btn-primary-sm' href='#'>View Project</a>
+          <a class='btn-outline' href='#'>GitHub</a>
+        </div>
+      </div>
+
+      <div class='project-card'>
+        <span class='project-badge badge-ai'>AI / ML</span>
+        <h3>LLM Ops Starter</h3>
+        <p>Deploy and version-control open-source LLMs with LangChain, FastAPI, and Docker. Includes prompt caching, rate limiting, and a simple chat UI for evaluation.</p>
+        <div class='project-links'>
+          <a class='btn-primary-sm' href='#'>View Project</a>
+          <a class='btn-outline' href='#'>GitHub</a>
+        </div>
+      </div>
+
+      <div class='project-card'>
+        <span class='project-badge badge-devops'>DevOps</span>
+        <h3>Ansible Server Hardening</h3>
+        <p>Ansible playbooks implementing CIS Benchmark Level 1 &amp; 2 hardening for Ubuntu and RHEL servers. Covers SSH, firewall, auditing, and package management policies.</p>
+        <div class='project-links'>
+          <a class='btn-primary-sm' href='#'>View Project</a>
+          <a class='btn-outline' href='#'>GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class='site-footer'>
+    <div class='container'>
+      <div class='footer-grid'>
+        <div class='footer-col footer-brand'>
+          <a href='index.html'>
+            <svg class='site-logo-svg' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg' style='height:28px;width:28px;'><path d='M52 34a12 12 0 00-11.4-12A16 16 0 0012 28a10 10 0 001 20h38a12 12 0 001-14z' fill='#ff1493'/><path d='M30 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M42 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.6'/></svg>
+          </a>
+          <p>Join 250,000+ DevOps &amp; MLOps community. Get weekly deep dives, handpicked tools, and career resources.</p>
+        </div>
+        <div class='footer-col'>
+          <h3>Resources</h3>
+          <ul>
+            <li><a href='index.html'>Tutorials</a></li>
+            <li><a href='roadmap.html'>Roadmaps</a></li>
+            <li><a href='services.html'>Services</a></li>
+            <li><a href='projects.html'>Projects</a></li>
+          </ul>
+        </div>
+        <div class='footer-col'>
+          <h3>Company</h3>
+          <ul>
+            <li><a href='about-us.html'>About Us</a></li>
+            <li><a href='contact-us.html'>Contact</a></li>
+            <li><a href='advertise.html'>Advertise</a></li>
+            <li><a href='privacy-policy.html'>Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class='footer-col'>
+          <h3>Follow Us</h3>
+          <ul>
+            <li><a href='#'>Twitter</a></li>
+            <li><a href='#'>LinkedIn</a></li>
+            <li><a href='#'>GitHub</a></li>
+            <li><a href='#'>YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class='footer-bottom'>
+        <p>&copy; 2026 codecloudworld. All rights reserved.</p>
+        <p>Built by codecloud for the DevOps Community</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var mobileBtn = document.getElementById('mobileMenuBtn');
+      var closeBtn = document.getElementById('mobileCloseBtn');
+      var overlay = document.getElementById('mobileOverlay');
+      var headerRight = document.getElementById('headerRightCol');
+      function toggleMenu() {
+        var open = headerRight.classList.contains('open');
+        headerRight.classList.toggle('open', !open);
+        overlay.classList.toggle('active', !open);
+        document.body.style.overflow = open ? '' : 'hidden';
+      }
+      if (mobileBtn) mobileBtn.addEventListener('click', toggleMenu);
+      if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+      if (overlay) overlay.addEventListener('click', toggleMenu);
+
+      document.querySelectorAll('.filter-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+          btn.classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

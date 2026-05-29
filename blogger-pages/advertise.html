@@ -1,0 +1,210 @@
+<!-- ============================================================
+   codecloudworld — Advertise Page (Blogger-ready)
+   Paste this entire file into Blogger > Pages > HTML editor
+   ============================================================ -->
+
+<style>
+.ccw-page { font-family: 'Inter', sans-serif; color: #a1a1aa; }
+.ccw-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1a0a2e 100%);
+  border-radius: 14px; padding: 56px 36px; margin-bottom: 36px;
+  border: 1px solid #3f3f46; text-align: center;
+}
+.ccw-hero-tag {
+  display: inline-block; font-size: 11px; font-weight: 700; padding: 5px 14px;
+  border-radius: 20px; background: rgba(255,20,147,0.12); color: #ff1493;
+  text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px;
+}
+.ccw-hero h1 { font-size: 2.2rem; color: #fff; margin: 0 0 14px; font-weight: 800; }
+.ccw-hero p  { font-size: 16px; color: #9ca3af; margin: 0 auto; max-width: 600px; line-height: 1.7; }
+
+.ccw-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 16px; margin-bottom: 40px; }
+.ccw-stat { background: #27272a; border: 1px solid #3f3f46; border-radius: 12px; padding: 22px; text-align: center; }
+.ccw-stat .num { font-size: 1.9rem; font-weight: 900; color: #ff1493; }
+.ccw-stat .lbl { font-size: 12px; color: #9ca3af; margin-top: 5px; }
+
+.ccw-section h2  { font-size: 1.4rem; color: #fff; margin: 0 0 6px; font-weight: 800; }
+.ccw-section .sub{ font-size: 14px; color: #9ca3af; margin: 0 0 22px; }
+
+.ccw-aud-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 40px; }
+.ccw-aud-list h4 { font-size: 14px; color: #fff; margin: 0 0 12px; font-weight: 700; }
+.ccw-aud-list ul { list-style: none; padding: 0; }
+.ccw-aud-list li {
+  font-size: 13px; color: #9ca3af; padding: 9px 0;
+  border-bottom: 1px solid rgba(63,63,70,0.4);
+  display: flex; justify-content: space-between;
+}
+.ccw-aud-list li:last-child { border-bottom: none; }
+.ccw-aud-list li span { color: #ff1493; font-weight: 600; }
+
+.ccw-pkg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 22px; margin-bottom: 40px; }
+.ccw-pkg {
+  background: #27272a; border: 1px solid #3f3f46; border-radius: 14px;
+  padding: 26px; display: flex; flex-direction: column; position: relative;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.ccw-pkg:hover { transform: translateY(-3px); }
+.ccw-pkg.featured { border-color: #ff1493; }
+.ccw-popular {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: #ff1493; color: #fff; font-size: 11px; font-weight: 700;
+  padding: 3px 14px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+.ccw-pkg-icon { font-size: 26px; margin-bottom: 12px; }
+.ccw-pkg h3 { font-size: 1rem; color: #fff; margin: 0 0 6px; font-weight: 700; }
+.ccw-pkg-price { font-size: 1.5rem; font-weight: 900; color: #ff1493; margin: 0 0 14px; }
+.ccw-pkg-price span { font-size: 13px; font-weight: 400; color: #9ca3af; }
+.ccw-pkg ul { list-style: none; padding: 0; margin: 0 0 20px; flex: 1; }
+.ccw-pkg ul li {
+  font-size: 13px; color: #9ca3af; padding: 7px 0;
+  border-bottom: 1px solid rgba(63,63,70,0.4);
+  display: flex; gap: 7px;
+}
+.ccw-pkg ul li:last-child { border-bottom: none; }
+.ccw-pkg ul li::before { content: '✓'; color: #34d399; font-weight: 700; flex-shrink: 0; }
+.ccw-pkg-btn {
+  display: block; text-align: center; padding: 11px;
+  border-radius: 8px; font-size: 13px; font-weight: 700;
+  background: #ff1493; color: #fff; text-decoration: none; transition: background 0.2s;
+}
+.ccw-pkg-btn:hover { background: #ff69b4; color: #fff; }
+.ccw-pkg-btn-ghost {
+  display: block; text-align: center; padding: 11px;
+  border-radius: 8px; font-size: 13px; font-weight: 700;
+  border: 1px solid #3f3f46; color: #a1a1aa; text-decoration: none; transition: all 0.2s;
+}
+.ccw-pkg-btn-ghost:hover { border-color: #ff1493; color: #ff1493; }
+
+.ccw-cta-box {
+  background: linear-gradient(135deg, rgba(255,20,147,0.07), rgba(99,102,241,0.07));
+  border: 1px solid rgba(255,20,147,0.2); border-radius: 14px;
+  padding: 44px; text-align: center;
+}
+.ccw-cta-box h2 { font-size: 1.5rem; color: #fff; margin: 0 0 10px; }
+.ccw-cta-box p  { color: #9ca3af; margin: 0 0 24px; }
+.ccw-cta-box a  {
+  display: inline-block; padding: 13px 32px; border-radius: 8px;
+  background: #ff1493; color: #fff; font-weight: 700; font-size: 15px;
+  text-decoration: none; transition: background 0.2s;
+}
+.ccw-cta-box a:hover { background: #ff69b4; color: #fff; }
+
+@media (max-width: 600px) {
+  .ccw-hero { padding: 32px 16px; }
+  .ccw-hero h1 { font-size: 1.6rem; }
+  .ccw-aud-grid { grid-template-columns: 1fr; }
+  .ccw-cta-box { padding: 28px 16px; }
+}
+</style>
+
+<div class="ccw-page">
+
+  <div class="ccw-hero">
+    <div class="ccw-hero-tag">Media Kit 2026</div>
+    <h1>Reach 250,000+ DevOps &amp; Cloud Engineers</h1>
+    <p>Partner with codecloudworld to put your product in front of the engineers, architects, and tech leads who evaluate and buy tools.</p>
+  </div>
+
+  <div class="ccw-stats">
+    <div class="ccw-stat"><div class="num">250K+</div><div class="lbl">Monthly Visitors</div></div>
+    <div class="ccw-stat"><div class="num">42K+</div><div class="lbl">Newsletter Subscribers</div></div>
+    <div class="ccw-stat"><div class="num">68%</div><div class="lbl">Mid/Senior Engineers</div></div>
+    <div class="ccw-stat"><div class="num">34%</div><div class="lbl">Make Purchase Decisions</div></div>
+    <div class="ccw-stat"><div class="num">4.2min</div><div class="lbl">Avg. Time on Page</div></div>
+  </div>
+
+  <div class="ccw-section">
+    <h2>Who We Reach</h2>
+    <p class="sub">Our audience is highly technical, actively learning, and making real decisions about tools and platforms.</p>
+    <div class="ccw-aud-grid">
+      <div class="ccw-aud-list">
+        <h4>Job Roles</h4>
+        <ul>
+          <li>DevOps / Platform Engineer <span>38%</span></li>
+          <li>Cloud / Infrastructure Engineer <span>26%</span></li>
+          <li>Software Engineer <span>18%</span></li>
+          <li>MLOps / Data Engineer <span>10%</span></li>
+          <li>Engineering Manager <span>8%</span></li>
+        </ul>
+      </div>
+      <div class="ccw-aud-list">
+        <h4>Top Topics Consumed</h4>
+        <ul>
+          <li>Kubernetes &amp; Containers <span>High</span></li>
+          <li>CI/CD &amp; Automation <span>High</span></li>
+          <li>Cloud (AWS/GCP/Azure) <span>High</span></li>
+          <li>AI / LLMOps <span>Growing</span></li>
+          <li>Security &amp; Compliance <span>Medium</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="ccw-section">
+    <h2>Advertising Packages</h2>
+    <p class="sub">Flexible options from startups to enterprise. All placements are clearly labeled as sponsored.</p>
+    <div class="ccw-pkg-grid">
+      <div class="ccw-pkg">
+        <div class="ccw-pkg-icon">&#128235;</div>
+        <h3>Newsletter Sponsor</h3>
+        <div class="ccw-pkg-price">$499 <span>/ issue</span></div>
+        <ul>
+          <li>Solo placement in weekly newsletter</li>
+          <li>42K+ opt-in subscribers</li>
+          <li>Custom CTA and tracking link</li>
+          <li>Avg. 38% open rate</li>
+        </ul>
+        <a class="ccw-pkg-btn-ghost" href="/p/contact-us.html">Get in Touch</a>
+      </div>
+      <div class="ccw-pkg featured">
+        <span class="ccw-popular">Most Popular</span>
+        <div class="ccw-pkg-icon">&#128196;</div>
+        <h3>Sponsored Tutorial</h3>
+        <div class="ccw-pkg-price">$1,200 <span>/ post</span></div>
+        <ul>
+          <li>In-depth tutorial featuring your product</li>
+          <li>Written by our editorial team</li>
+          <li>SEO-optimized, evergreen content</li>
+          <li>Social promotion included</li>
+          <li>Newsletter feature in next issue</li>
+          <li>Permanently indexed on site</li>
+        </ul>
+        <a class="ccw-pkg-btn" href="/p/contact-us.html">Get in Touch</a>
+      </div>
+      <div class="ccw-pkg">
+        <div class="ccw-pkg-icon">&#127919;</div>
+        <h3>Banner Advertising</h3>
+        <div class="ccw-pkg-price">$299 <span>/ week</span></div>
+        <ul>
+          <li>Sidebar and in-article placements</li>
+          <li>Targets DevOps / K8s / Cloud pages</li>
+          <li>250K+ monthly impressions</li>
+          <li>Custom creative accepted</li>
+          <li>Weekly performance report</li>
+        </ul>
+        <a class="ccw-pkg-btn-ghost" href="/p/contact-us.html">Get in Touch</a>
+      </div>
+      <div class="ccw-pkg">
+        <div class="ccw-pkg-icon">&#128200;</div>
+        <h3>Roadmap Sponsorship</h3>
+        <div class="ccw-pkg-price">$2,500 <span>/ quarter</span></div>
+        <ul>
+          <li>Your brand on a popular roadmap or cert guide</li>
+          <li>Exclusive category sponsorship</li>
+          <li>Logo + CTA in guide header</li>
+          <li>Quarterly newsletter feature</li>
+          <li>Co-branded social posts</li>
+        </ul>
+        <a class="ccw-pkg-btn-ghost" href="/p/contact-us.html">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ccw-cta-box">
+    <h2>Ready to reach our audience?</h2>
+    <p>Send us your goals and we'll put together a custom media package that fits your budget and timeline.</p>
+    <a href="mailto:ads@codecloudworld.com">Contact Our Ads Team &rarr;</a>
+  </div>
+
+</div>

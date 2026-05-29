@@ -363,20 +363,35 @@
                 <p style='margin-bottom: 15px; color: #9ca3af; font-size: 15px;'>Join our newsletter to get weekly hands-on tutorials and DevOps best practices.</p>
                 <form id='newsletter-form' style='display: flex; flex-direction: column; gap: 10px;'>
                   <input id='newsletter-email' placeholder='Enter your email address' required='required' style='padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 15px; width: 100%; box-sizing: border-box; background: var(--bg-color); color: var(--text-color);' type='email'/>
-                  <button style='background-color: var(--primary-color); color: white; border: none; padding: 12px 15px; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background-color 0.2s;' type='submit'>Subscribe Now</button>
+                  <button id='newsletter-btn' style='background-color: var(--primary-color); color: white; border: none; padding: 12px 15px; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background-color 0.2s;' type='submit'>Subscribe Now</button>
                 </form>
                 <div id='newsletter-success' style='display:none; color: #10b981; text-align: center; padding: 15px; font-size: 15px; font-weight: 600;'>Thanks for subscribing!</div>
+                <div id='newsletter-error' style='display:none; color: #ef4444; text-align: center; padding: 10px; font-size: 14px;'>Something went wrong. Please try again.</div>
                 <script>
                 //<![CDATA[
                 document.getElementById('newsletter-form').addEventListener('submit', function(e) {
                   e.preventDefault();
-                  var data = new FormData();
-                  data.append('entry.2134868049', document.getElementById('newsletter-email').value);
+                  var email = document.getElementById('newsletter-email').value;
+                  var btn = document.getElementById('newsletter-btn');
+                  var form = document.getElementById('newsletter-form');
+                  var success = document.getElementById('newsletter-success');
+                  var error = document.getElementById('newsletter-error');
+                  btn.textContent = 'Submitting...';
+                  btn.disabled = true;
+                  var formData = new FormData();
+                  formData.append('entry.2134868049', email);
                   fetch('https://docs.google.com/forms/d/e/1FAIpQLSeMVe-Sm4xa2L7ShMabxMveJZU5kFQrSH2QLymLlUrkFeRe6Q/formResponse', {
-                    method: 'POST', mode: 'no-cors', body: data
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formData
+                  }).then(function() {
+                    form.style.display = 'none';
+                    success.style.display = 'block';
+                  }).catch(function() {
+                    btn.textContent = 'Subscribe Now';
+                    btn.disabled = false;
+                    error.style.display = 'block';
                   });
-                  document.getElementById('newsletter-form').style.display = 'none';
-                  document.getElementById('newsletter-success').style.display = 'block';
                 });
                 //]]>
                 </script>
@@ -456,7 +471,6 @@
           <ul>
             <li><a href='/p/projects.html'>Projects</a></li>
             <li><a href='/p/roadmap.html'>Roadmaps</a></li>
-            <li><a href='/p/certification-guides.html'>Certification Guides</a></li>
             <li><a href='/p/services.html'>Services</a></li>
           </ul>
         </div>
@@ -464,9 +478,8 @@
         <div class='footer-col'>
           <h3>Company</h3>
           <ul>
-            <li><a href='/p/about.html'>About Us</a></li>
-            <li><a href='/p/contact.html'>Contact</a></li>
-            <li><a href='/p/advertise.html'>Advertise</a></li>
+            <li><a href='/p/about-us.html'>About Us</a></li>
+            <li><a href='/p/contact-us.html'>Contact</a></li>
             <li><a href='/p/privacy-policy.html'>Privacy Policy</a></li>
           </ul>
         </div>

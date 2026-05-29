@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Services - codecloudworld</title>
+  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap' rel='stylesheet'>
+  <link href="style.css" rel="stylesheet">
+  <style>
+    .svc-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1a0a2e 100%);
+      padding: 80px 0 70px; border-bottom: 1px solid var(--border-color); text-align: center;
+    }
+    .svc-hero-inner { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    .svc-hero-tag {
+      display: inline-block; font-size: 11px; font-weight: 700; padding: 5px 16px;
+      border-radius: 20px; background: rgba(255,20,147,0.12); color: #ff1493;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;
+    }
+    .svc-hero h1 { font-size: 2.8rem; color: #fff; margin: 0 0 16px; font-weight: 900; line-height: 1.15; }
+    .svc-hero p  { font-size: 1.1rem; color: #9ca3af; margin: 0; line-height: 1.75; }
+
+    .trust-bar {
+      display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;
+      padding: 24px; background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--border-color);
+    }
+    .trust-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #9ca3af; }
+    .trust-item strong { color: #fff; }
+
+    .full-content { max-width: 1400px; width: 95%; margin: 0 auto; padding: 0 20px 60px; }
+    .sec-label { font-size: 12px; font-weight: 700; color: #ff1493; text-transform: uppercase; letter-spacing: 1px; margin: 56px 0 4px; }
+    .sec-title { font-size: 2rem; color: #fff; font-weight: 900; margin: 0 0 6px; }
+    .sec-sub   { font-size: 15px; color: #9ca3af; margin: 0 0 32px; }
+
+    .svc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 26px; margin-bottom: 60px; }
+    .svc-card {
+      background: var(--card-bg); border: 1px solid var(--border-color);
+      border-radius: 16px; padding: 32px; display: flex; flex-direction: column;
+      transition: border-color 0.25s, transform 0.25s; position: relative; overflow: hidden;
+    }
+    .svc-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--accent-clr, #ff1493); opacity: 0; transition: opacity 0.25s;
+    }
+    .svc-card:hover { border-color: var(--accent-clr, #ff1493); transform: translateY(-4px); }
+    .svc-card:hover::before { opacity: 1; }
+    .svc-card.featured { background: linear-gradient(145deg, #1e1133 0%, var(--card-bg) 60%); border-color: rgba(255,20,147,0.35); }
+    .svc-card.featured::before { opacity: 1; }
+
+    .svc-icon { width: 58px; height: 58px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 22px; flex-shrink: 0; }
+    .svc-card h3 { font-size: 1.2rem; color: #fff; margin: 0 0 12px; font-weight: 800; }
+    .svc-card > p { font-size: 14px; color: #9ca3af; line-height: 1.7; margin: 0 0 20px; flex: 1; }
+
+    .svc-features { list-style: none; padding: 0; margin: 0 0 24px; }
+    .svc-features li { font-size: 13px; color: #a1a1aa; padding: 8px 0; border-bottom: 1px solid rgba(63,63,70,0.4); display: flex; gap: 9px; }
+    .svc-features li:last-child { border-bottom: none; }
+    .svc-features li::before { content: '✓'; color: #34d399; font-weight: 700; flex-shrink: 0; }
+
+    .svc-footer { display: flex; gap: 10px; margin-top: auto; }
+    .btn-pink { background: #ff1493; color: #fff; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 700; transition: background 0.2s; }
+    .btn-pink:hover { background: #ff69b4; color: #fff; }
+    .btn-ghost-sm { border: 1px solid var(--border-color); color: #a1a1aa; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 700; transition: all 0.2s; }
+    .btn-ghost-sm:hover { border-color: #ff1493; color: #ff1493; }
+
+    .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: 20px; margin-bottom: 60px; }
+    .process-step { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 26px; text-align: center; }
+    .process-num { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,20,147,0.12); color: #ff1493; font-size: 15px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+    .process-step h4 { font-size: 14px; color: #fff; margin: 0 0 7px; font-weight: 700; }
+    .process-step p  { font-size: 13px; color: #9ca3af; margin: 0; line-height: 1.55; }
+
+    .cta-box { background: linear-gradient(135deg, rgba(255,20,147,0.09), rgba(99,102,241,0.09)); border: 1px solid rgba(255,20,147,0.25); border-radius: 16px; padding: 60px; text-align: center; }
+    .cta-box h2 { font-size: 2rem; color: #fff; margin: 0 0 12px; font-weight: 900; }
+    .cta-box p  { font-size: 16px; color: #9ca3af; margin: 0 auto 28px; max-width: 520px; line-height: 1.7; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-lg { background: #ff1493; color: #fff; padding: 15px 36px; border-radius: 10px; font-size: 15px; font-weight: 700; transition: background 0.2s; }
+    .btn-lg:hover { background: #ff69b4; color: #fff; }
+    .btn-lg-ghost { border: 1px solid var(--border-color); color: #a1a1aa; padding: 15px 36px; border-radius: 10px; font-size: 15px; font-weight: 700; transition: all 0.2s; }
+    .btn-lg-ghost:hover { border-color: #ff1493; color: #ff1493; }
+  </style>
+</head>
+<body>
+
+  <header class='site-header professional-header'>
+    <div class='header-inner'>
+      <div class='header-left-col'>
+        <div class='site-title'>
+          <a href='index.html'>
+            <svg class='site-logo-svg' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M52 34a12 12 0 00-11.4-12A16 16 0 0012 28a10 10 0 001 20h38a12 12 0 001-14z' fill='#ff1493'/><path d='M30 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M42 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.6'/></svg>
+            <span>codecloudworld</span>
+          </a>
+        </div>
+      </div>
+      <div class='mobile-menu-toggle' id='mobileMenuBtn'>
+        <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='3' x2='21' y1='12' y2='12'/><line x1='3' x2='21' y1='6' y2='6'/><line x1='3' x2='21' y1='18' y2='18'/></svg>
+      </div>
+      <div class='mobile-overlay' id='mobileOverlay'></div>
+      <div class='header-right-col' id='headerRightCol'>
+        <div class='mobile-close-btn' id='mobileCloseBtn'>
+          <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='18' x2='6' y1='6' y2='18'/><line x1='6' x2='18' y1='6' y2='18'/></svg>
+        </div>
+        <nav class='header-nav custom-nav' aria-label='Main navigation'>
+          <ul>
+            <li><a href='index.html'>Tutorials</a></li>
+            <li><a href='roadmap.html'>Roadmaps</a></li>
+            <li><a href='services.html' style='color:#ff1493'>Services</a></li>
+            <li><a href='projects.html'>Projects</a></li>
+            <li><a href='ai-news.html'>AI News</a></li>
+          </ul>
+        </nav>
+        <div class='header-actions'>
+          <a class='search-icon' href='#' title='Search'>
+            <svg fill='none' height='20' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='20'><circle cx='11' cy='11' r='8'/><line x1='21' x2='16.65' y1='21' y2='16.65'/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class='svc-hero'>
+    <div class='svc-hero-inner'>
+      <div class='svc-hero-tag'>Professional Services</div>
+      <h1>We Build. We Teach.<br>You Succeed.</h1>
+      <p>From cracking cloud certifications to shipping production-grade apps — hands-on services and 1:1 mentorship for engineers and businesses ready to level up.</p>
+    </div>
+  </div>
+
+  <div class='trust-bar'>
+    <div class='trust-item'>&#127881; <strong>250K+</strong>&nbsp;community members</div>
+    <div class='trust-item'>&#9989; <strong>95%</strong>&nbsp;certification pass rate</div>
+    <div class='trust-item'>&#127758; <strong>40+</strong>&nbsp;countries served</div>
+    <div class='trust-item'>&#11088; <strong>4.9/5</strong>&nbsp;avg. client rating</div>
+  </div>
+
+  <div class='full-content'>
+
+    <div class='sec-label'>What We Offer</div>
+    <h2 class='sec-title'>Our Services</h2>
+    <p class='sec-sub'>Pick a service or combine them — we tailor every engagement to your goals.</p>
+
+    <div class='svc-grid'>
+
+      <div class='svc-card' style='--accent-clr:#fbbf24'>
+        <div class='svc-icon' style='background:rgba(245,158,11,0.12)'>&#127891;</div>
+        <h3>Crack Certifications</h3>
+        <p>Structured, exam-focused coaching to help you pass AWS, Kubernetes, Google Cloud, and Terraform certifications on the first attempt.</p>
+        <ul class='svc-features'>
+          <li>Personalised study plan based on your gaps</li>
+          <li>1,200+ curated practice questions</li>
+          <li>Mock exams with detailed explanations</li>
+          <li>Exam-day tips and hands-on lab access</li>
+          <li>Covers: AWS SAA, CKA, CKAD, CKS, GCP, Terraform</li>
+        </ul>
+        <div class='svc-footer'>
+          <a class='btn-pink' href='contact-us.html'>Get Started</a>
+          <a class='btn-ghost-sm' href='#'>Learn More &rarr;</a>
+        </div>
+      </div>
+
+      <div class='svc-card' style='--accent-clr:#818cf8'>
+        <div class='svc-icon' style='background:rgba(99,102,241,0.12)'>&#128241;</div>
+        <h3>Mobile App Development</h3>
+        <p>Cross-platform mobile apps built for performance — iOS and Android from a single codebase using React Native or Flutter.</p>
+        <ul class='svc-features'>
+          <li>React Native &amp; Flutter development</li>
+          <li>UI/UX design to production delivery</li>
+          <li>REST API &amp; GraphQL integration</li>
+          <li>Push notifications, auth, in-app payments</li>
+          <li>Play Store &amp; App Store deployment</li>
+        </ul>
+        <div class='svc-footer'>
+          <a class='btn-pink' href='contact-us.html'>Get a Quote</a>
+          <a class='btn-ghost-sm' href='#'>Our Work &rarr;</a>
+        </div>
+      </div>
+
+      <div class='svc-card' style='--accent-clr:#34d399'>
+        <div class='svc-icon' style='background:rgba(16,185,129,0.12)'>&#128187;</div>
+        <h3>Software Development</h3>
+        <p>Full-stack web apps, APIs, and backend systems built for reliability, security, and long-term maintainability.</p>
+        <ul class='svc-features'>
+          <li>React / Next.js frontend development</li>
+          <li>Node.js, Python, Go backend APIs</li>
+          <li>PostgreSQL, MongoDB, Redis databases</li>
+          <li>Microservices &amp; monorepo architecture</li>
+          <li>Code reviews, refactors &amp; legacy modernisation</li>
+        </ul>
+        <div class='svc-footer'>
+          <a class='btn-pink' href='contact-us.html'>Get a Quote</a>
+          <a class='btn-ghost-sm' href='#'>Our Work &rarr;</a>
+        </div>
+      </div>
+
+      <div class='svc-card featured' style='--accent-clr:#ff1493'>
+        <div class='svc-icon' style='background:rgba(255,20,147,0.15)'>&#129309;</div>
+        <h3>1:1 Mentorship &amp; Connect</h3>
+        <p>Direct access to senior engineers and cloud practitioners. Get unstuck faster, accelerate your career, and get honest answers — not generic advice.</p>
+        <ul class='svc-features'>
+          <li>Career roadmap planning sessions</li>
+          <li>Resume &amp; LinkedIn profile review</li>
+          <li>Live coding &amp; architecture walkthroughs</li>
+          <li>Interview prep — FAANG &amp; startups</li>
+          <li>On-demand async Q&amp;A via Slack/Discord</li>
+          <li>Flexible: single session or monthly retainer</li>
+        </ul>
+        <div class='svc-footer'>
+          <a class='btn-pink' href='contact-us.html'>Book a Session</a>
+          <a class='btn-ghost-sm' href='#'>See Plans &rarr;</a>
+        </div>
+      </div>
+
+      <div class='svc-card' style='--accent-clr:#ff1493'>
+        <div class='svc-icon' style='background:rgba(255,20,147,0.12)'>&#128736;</div>
+        <h3>DevOps Services</h3>
+        <p>End-to-end DevOps transformation — from messy deployments to automated, observable, production-grade infrastructure your team actually owns.</p>
+        <ul class='svc-features'>
+          <li>CI/CD pipeline design &amp; implementation</li>
+          <li>Kubernetes cluster setup &amp; hardening</li>
+          <li>Infrastructure as Code (Terraform, Ansible)</li>
+          <li>Monitoring: Prometheus, Grafana, Loki stack</li>
+          <li>Cloud cost optimisation &amp; right-sizing</li>
+          <li>DevOps audit &amp; maturity assessment</li>
+        </ul>
+        <div class='svc-footer'>
+          <a class='btn-pink' href='contact-us.html'>Get a Quote</a>
+          <a class='btn-ghost-sm' href='#'>Learn More &rarr;</a>
+        </div>
+      </div>
+
+      <div class='svc-card' style='--accent-clr:#34d399'>
+        <div class='svc-icon' style='background:rgba(16,185,129,0.12)'>&#129302;</div>
+        <h3>AI Integrations</h3>
+        <p>Add real AI capabilities to your products — production-ready integrations that solve actual user problems and scale reliably, not just demos.</p>
+        <ul class='svc-features'>
+          <li>LLM integration (OpenAI, Claude, Gemini, Llama)</li>
+          <li>RAG pipelines &amp; semantic search</li>
+          <li>AI chatbots &amp; copilot features</li>
+          <li>Document processing &amp; data extraction</li>
+          <li>MLOps: model serving, monitoring &amp; retraining</li>
+          <li>AI cost optimisation &amp; prompt engineering</li>
+        </ul>
+        <div class='svc-footer'>
+          <a class='btn-pink' href='contact-us.html'>Get a Quote</a>
+          <a class='btn-ghost-sm' href='#'>Learn More &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class='sec-label'>Simple Process</div>
+    <h2 class='sec-title'>How It Works</h2>
+    <p class='sec-sub'>From first message to delivery — a clear, no-surprise process.</p>
+
+    <div class='process-grid'>
+      <div class='process-step'><div class='process-num'>1</div><h4>Tell Us Your Goal</h4><p>Fill out the contact form or book a free 20-minute discovery call. No commitment required.</p></div>
+      <div class='process-step'><div class='process-num'>2</div><h4>Get a Custom Plan</h4><p>We assess your needs and send a scoped proposal with timeline and pricing within 24 hours.</p></div>
+      <div class='process-step'><div class='process-num'>3</div><h4>We Start Work</h4><p>Kick off with a clear scope. Regular updates, demos, and check-ins throughout.</p></div>
+      <div class='process-step'><div class='process-num'>4</div><h4>You Ship &amp; Succeed</h4><p>Handover with full docs, knowledge transfer, and 30 days of post-delivery support.</p></div>
+    </div>
+
+    <div class='cta-box'>
+      <h2>Ready to get started?</h2>
+      <p>Whether you need to pass a cert, ship an app, or scale your DevOps practice — let's talk. First call is free.</p>
+      <div class='cta-btns'>
+        <a class='btn-lg' href='contact-us.html'>&#128222; Book a Free Call</a>
+        <a class='btn-lg-ghost' href='mailto:hello@codecloudworld.com'>&#128140; Email Us</a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class='site-footer'>
+    <div class='container'>
+      <div class='footer-grid'>
+        <div class='footer-col footer-brand'>
+          <a href='index.html'><svg class='site-logo-svg' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg' style='height:28px;width:28px;'><path d='M52 34a12 12 0 00-11.4-12A16 16 0 0012 28a10 10 0 001 20h38a12 12 0 001-14z' fill='#ff1493'/><path d='M30 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg></a>
+          <p>Join 250,000+ DevOps &amp; MLOps community. Get weekly deep dives, handpicked tools, and career resources.</p>
+        </div>
+        <div class='footer-col'><h3>Resources</h3><ul><li><a href='index.html'>Tutorials</a></li><li><a href='roadmap.html'>Roadmaps</a></li><li><a href='services.html'>Services</a></li><li><a href='projects.html'>Projects</a></li></ul></div>
+        <div class='footer-col'><h3>Company</h3><ul><li><a href='about-us.html'>About Us</a></li><li><a href='contact-us.html'>Contact</a></li><li><a href='advertise.html'>Advertise</a></li><li><a href='privacy-policy.html'>Privacy Policy</a></li></ul></div>
+        <div class='footer-col'><h3>Follow Us</h3><ul><li><a href='#'>Twitter</a></li><li><a href='#'>LinkedIn</a></li><li><a href='#'>GitHub</a></li><li><a href='#'>YouTube</a></li></ul></div>
+      </div>
+      <div class='footer-bottom'>
+        <p>&copy; 2026 codecloudworld. All rights reserved.</p>
+        <p>Built by codecloud for the DevOps Community</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var mobileBtn = document.getElementById('mobileMenuBtn');
+      var closeBtn = document.getElementById('mobileCloseBtn');
+      var overlay = document.getElementById('mobileOverlay');
+      var headerRight = document.getElementById('headerRightCol');
+      function toggleMenu() {
+        var open = headerRight.classList.contains('open');
+        headerRight.classList.toggle('open', !open);
+        overlay.classList.toggle('active', !open);
+        document.body.style.overflow = open ? '' : 'hidden';
+      }
+      if (mobileBtn) mobileBtn.addEventListener('click', toggleMenu);
+      if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+      if (overlay) overlay.addEventListener('click', toggleMenu);
+    });
+  </script>
+</body>
+</html>
