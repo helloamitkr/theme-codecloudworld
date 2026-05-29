@@ -1,0 +1,185 @@
+<!-- ============================================================
+   codecloudworld — Contact Page (Blogger-ready)
+   Paste this entire file into Blogger > Pages > HTML editor
+   ============================================================ -->
+
+<style>
+.ccw-page { font-family: 'Inter', sans-serif; color: #a1a1aa; }
+.ccw-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  border-radius: 14px; padding: 48px 36px; margin-bottom: 36px; border: 1px solid #3f3f46;
+}
+.ccw-hero h1 { font-size: 2rem; color: #fff; margin: 0 0 10px; font-weight: 800; }
+.ccw-hero p  { font-size: 15px; color: #9ca3af; margin: 0; max-width: 540px; line-height: 1.65; }
+
+.ccw-contact-wrap { display: grid; grid-template-columns: 1fr 360px; gap: 40px; }
+.ccw-contact-wrap h2 { font-size: 1.3rem; color: #fff; margin: 0 0 22px; font-weight: 800; }
+
+/* Form */
+.ccw-form-group { margin-bottom: 18px; }
+.ccw-form-group label { display: block; font-size: 13px; font-weight: 600; color: #a1a1aa; margin-bottom: 6px; }
+.ccw-form-group input,
+.ccw-form-group select,
+.ccw-form-group textarea {
+  width: 100%; padding: 11px 14px;
+  border: 1px solid #3f3f46; border-radius: 8px;
+  background: #27272a; color: #e4e4e7;
+  font-size: 14px; font-family: inherit; box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+.ccw-form-group input:focus,
+.ccw-form-group select:focus,
+.ccw-form-group textarea:focus { outline: none; border-color: #ff1493; }
+.ccw-form-group textarea { resize: vertical; min-height: 130px; }
+.ccw-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.ccw-submit-btn {
+  width: 100%; padding: 13px; border: none; border-radius: 8px;
+  background: #ff1493; color: #fff; font-size: 15px; font-weight: 700;
+  cursor: pointer; transition: background 0.2s;
+}
+.ccw-submit-btn:hover { background: #ff69b4; }
+
+/* Info cards */
+.ccw-info-card {
+  background: #27272a; border: 1px solid #3f3f46; border-radius: 10px;
+  padding: 18px; margin-bottom: 14px; display: flex; gap: 14px; align-items: flex-start;
+}
+.ccw-info-icon {
+  width: 40px; height: 40px; border-radius: 9px;
+  background: rgba(255,20,147,0.1); display: flex; align-items: center;
+  justify-content: center; font-size: 16px; flex-shrink: 0;
+}
+.ccw-info-text h4 { font-size: 13px; color: #fff; margin: 0 0 3px; font-weight: 700; }
+.ccw-info-text p  { font-size: 13px; color: #9ca3af; margin: 0; }
+.ccw-info-text a  { font-size: 13px; color: #ff1493; text-decoration: none; }
+.ccw-info-text a:hover { color: #ff69b4; }
+
+.ccw-social-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+.ccw-soc {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border: 1px solid #3f3f46; border-radius: 8px;
+  font-size: 13px; color: #a1a1aa; text-decoration: none; transition: all 0.2s;
+}
+.ccw-soc:hover { border-color: #ff1493; color: #ff1493; }
+
+@media (max-width: 768px) {
+  .ccw-contact-wrap { grid-template-columns: 1fr; }
+  .ccw-form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .ccw-hero { padding: 28px 16px; }
+  .ccw-hero h1 { font-size: 1.5rem; }
+}
+</style>
+
+<div class="ccw-page">
+
+  <div class="ccw-hero">
+    <h1>&#128140; Contact Us</h1>
+    <p>Have a question, feedback, or a collaboration idea? We'd love to hear from you. We typically reply within 1–2 business days.</p>
+  </div>
+
+  <div class="ccw-contact-wrap">
+
+    <div>
+      <h2>Send us a message</h2>
+      <form id="contact-form">
+        <div class="ccw-form-row">
+          <div class="ccw-form-group">
+            <label>First Name</label>
+            <input type="text" id="cf-fname" placeholder="John" required>
+          </div>
+          <div class="ccw-form-group">
+            <label>Last Name</label>
+            <input type="text" id="cf-lname" placeholder="Doe">
+          </div>
+        </div>
+        <div class="ccw-form-group">
+          <label>Email Address</label>
+          <input type="email" id="cf-email" placeholder="john@example.com" required>
+        </div>
+        <div class="ccw-form-group">
+          <label>Subject</label>
+          <select id="cf-subject">
+            <option value="">Select a topic...</option>
+            <option>Tutorial Request</option>
+            <option>Content Correction</option>
+            <option>Guest Post / Collaboration</option>
+            <option>Advertising &amp; Sponsorship</option>
+            <option>Technical Question</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="ccw-form-group">
+          <label>Message</label>
+          <textarea id="cf-message" placeholder="Tell us what&#39;s on your mind..." required></textarea>
+        </div>
+        <button type="submit" class="ccw-submit-btn">Send Message &rarr;</button>
+      </form>
+      <div id="contact-success" style="display:none; color:#10b981; text-align:center; padding:30px; font-size:18px; font-weight:600;">Thanks for reaching out! We&#39;ll get back to you soon.</div>
+      <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          var subject = document.getElementById('cf-subject').value;
+          var message = document.getElementById('cf-message').value;
+          var fullMessage = subject ? '[' + subject + '] ' + message : message;
+          var data = new FormData();
+          data.append('entry.69794924', document.getElementById('cf-fname').value);
+          data.append('entry.675533567', document.getElementById('cf-lname').value);
+          data.append('entry.983335122', document.getElementById('cf-email').value);
+          data.append('entry.1346755398', fullMessage);
+          fetch('https://docs.google.com/forms/d/e/1FAIpQLSe8fbPmTOBhuDmp9RLMYDVsqSTZ02V_yQFr7Bgudh9PlwoLHg/formResponse', {
+            method: 'POST', mode: 'no-cors', body: data
+          });
+          document.getElementById('contact-form').style.display = 'none';
+          document.getElementById('contact-success').style.display = 'block';
+        });
+      </script>
+    </div>
+
+    <div>
+      <h2>Other ways to reach us</h2>
+      <div class="ccw-info-card">
+        <div class="ccw-info-icon">&#128140;</div>
+        <div class="ccw-info-text">
+          <h4>General Inquiries</h4>
+          <p>Questions, feedback, or tutorial requests.</p>
+          <a href="mailto:hello@codecloudworld.com">hello@codecloudworld.com</a>
+        </div>
+      </div>
+      <div class="ccw-info-card">
+        <div class="ccw-info-icon">&#128176;</div>
+        <div class="ccw-info-text">
+          <h4>Advertising &amp; Sponsorships</h4>
+          <p>Reach 250,000+ DevOps engineers monthly.</p>
+          <a href="/p/advertise.html">View media kit &rarr;</a>
+        </div>
+      </div>
+      <div class="ccw-info-card">
+        <div class="ccw-info-icon">&#9997;</div>
+        <div class="ccw-info-text">
+          <h4>Guest Posts &amp; Contributions</h4>
+          <p>Write for our community.</p>
+          <a href="#">Contributor guidelines &rarr;</a>
+        </div>
+      </div>
+      <div class="ccw-info-card">
+        <div class="ccw-info-icon">&#128204;</div>
+        <div class="ccw-info-text">
+          <h4>Content Corrections</h4>
+          <p>Found an error? Let us know.</p>
+          <a href="mailto:corrections@codecloudworld.com">corrections@codecloudworld.com</a>
+        </div>
+      </div>
+      <p style="font-size:12px;color:#71717a;margin:14px 0 10px;">Follow us</p>
+      <div class="ccw-social-row">
+        <a class="ccw-soc" href="#">&#128038; Twitter</a>
+        <a class="ccw-soc" href="#">&#128241; LinkedIn</a>
+        <a class="ccw-soc" href="#">&#128008; GitHub</a>
+        <a class="ccw-soc" href="#">&#127926; YouTube</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>

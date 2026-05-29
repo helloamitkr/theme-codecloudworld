@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact - codecloudworld</title>
+  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap' rel='stylesheet'>
+  <link href="style.css" rel="stylesheet">
+  <style>
+    .page-hero { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); padding: 60px 0 50px; border-bottom: 1px solid var(--border-color); }
+    .page-hero-inner { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+    .page-hero h1 { font-size: 2.4rem; margin: 0 0 12px; color: #fff; }
+    .page-hero p { font-size: 1.1rem; color: #9ca3af; max-width: 540px; margin: 0; }
+    .contact-layout { display: grid; grid-template-columns: 1fr 420px; gap: 48px; max-width: 1000px; width: 95%; margin: 0 auto; padding: 50px 20px 60px; }
+    .contact-form-wrap {}
+    .contact-form-wrap h2 { font-size: 1.4rem; color: #fff; margin: 0 0 24px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; color: #a1a1aa; margin-bottom: 7px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--card-bg);
+      color: var(--text-color);
+      font-size: 15px;
+      font-family: inherit;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { outline: none; border-color: var(--primary-color); }
+    .form-group textarea { resize: vertical; min-height: 140px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--primary-hover); }
+    .contact-info h2 { font-size: 1.4rem; color: #fff; margin: 0 0 24px; }
+    .info-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 22px; margin-bottom: 16px; display: flex; gap: 16px; align-items: flex-start; }
+    .info-icon { width: 42px; height: 42px; border-radius: 10px; background: rgba(255,20,147,0.12); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .info-text h4 { font-size: 14px; color: #fff; margin: 0 0 4px; }
+    .info-text p { font-size: 13px; color: #9ca3af; margin: 0; }
+    .info-text a { font-size: 13px; color: var(--primary-color); }
+    .social-links { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+    .social-link {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 13px;
+      color: #a1a1aa;
+      transition: all 0.2s;
+    }
+    .social-link:hover { border-color: var(--primary-color); color: var(--primary-color); }
+    @media (max-width: 768px) { .contact-layout { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header class='site-header professional-header'>
+    <div class='header-inner'>
+      <div class='header-left-col'>
+        <div class='site-title'>
+          <a href='index.html'>
+            <svg class='site-logo-svg' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M52 34a12 12 0 00-11.4-12A16 16 0 0012 28a10 10 0 001 20h38a12 12 0 001-14z' fill='#ff1493'/><path d='M30 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M42 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.6'/></svg>
+            <span>codecloudworld</span>
+          </a>
+        </div>
+      </div>
+      <div class='mobile-menu-toggle' id='mobileMenuBtn'>
+        <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='3' x2='21' y1='12' y2='12'/><line x1='3' x2='21' y1='6' y2='6'/><line x1='3' x2='21' y1='18' y2='18'/></svg>
+      </div>
+      <div class='mobile-overlay' id='mobileOverlay'></div>
+      <div class='header-right-col' id='headerRightCol'>
+        <div class='mobile-close-btn' id='mobileCloseBtn'>
+          <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='18' x2='6' y1='6' y2='18'/><line x1='6' x2='18' y1='6' y2='18'/></svg>
+        </div>
+        <nav class='header-nav custom-nav' aria-label='Main navigation'>
+          <ul>
+            <li><a href='index.html'>Tutorials</a></li>
+            <li><a href='roadmap.html'>Roadmaps</a></li>
+            <li><a href='ai-news.html'>AI News</a></li>
+            <li><a href='projects.html'>Projects</a></li>
+          </ul>
+        </nav>
+        <div class='header-actions'>
+          <a aria-label='Search' class='search-icon' href='#' title='Search'>
+            <svg fill='none' height='20' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='20'><circle cx='11' cy='11' r='8'/><line x1='21' x2='16.65' y1='21' y2='16.65'/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class='page-hero'>
+    <div class='page-hero-inner'>
+      <h1>Contact Us</h1>
+      <p>Have a question, feedback, or a collaboration idea? We'd love to hear from you. We typically reply within 1–2 business days.</p>
+    </div>
+  </div>
+
+  <div class='contact-layout'>
+
+    <div class='contact-form-wrap'>
+      <h2>Send us a message</h2>
+      <form id='contact-form'>
+        <div class='form-row'>
+          <div class='form-group'>
+            <label for='fname'>First Name</label>
+            <input type='text' id='cf-fname' placeholder='John' required>
+          </div>
+          <div class='form-group'>
+            <label for='lname'>Last Name</label>
+            <input type='text' id='cf-lname' placeholder='Doe'>
+          </div>
+        </div>
+        <div class='form-group'>
+          <label>Email Address</label>
+          <input type='email' id='cf-email' placeholder='john@example.com' required>
+        </div>
+        <div class='form-group'>
+          <label>Subject</label>
+          <select id='cf-subject'>
+            <option value=''>Select a topic...</option>
+            <option>Tutorial Request</option>
+            <option>Content Correction</option>
+            <option>Guest Post / Collaboration</option>
+            <option>Advertising &amp; Sponsorship</option>
+            <option>Technical Question</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class='form-group'>
+          <label>Message</label>
+          <textarea id='cf-message' placeholder='Tell us what&#39;s on your mind...' required></textarea>
+        </div>
+        <button type='submit' class='btn-submit'>Send Message &rarr;</button>
+      </form>
+      <div id='contact-success' style='display:none; color:#10b981; text-align:center; padding:30px; font-size:18px; font-weight:600;'>Thanks for reaching out! We&#39;ll get back to you soon.</div>
+      <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          var subject = document.getElementById('cf-subject').value;
+          var message = document.getElementById('cf-message').value;
+          var fullMessage = subject ? '[' + subject + '] ' + message : message;
+          var data = new FormData();
+          data.append('entry.69794924', document.getElementById('cf-fname').value);
+          data.append('entry.675533567', document.getElementById('cf-lname').value);
+          data.append('entry.983335122', document.getElementById('cf-email').value);
+          data.append('entry.1346755398', fullMessage);
+          fetch('https://docs.google.com/forms/d/e/1FAIpQLSe8fbPmTOBhuDmp9RLMYDVsqSTZ02V_yQFr7Bgudh9PlwoLHg/formResponse', {
+            method: 'POST', mode: 'no-cors', body: data
+          });
+          document.getElementById('contact-form').style.display = 'none';
+          document.getElementById('contact-success').style.display = 'block';
+        });
+      </script>
+    </div>
+
+    <div class='contact-info'>
+      <h2>Other ways to reach us</h2>
+
+      <div class='info-card'>
+        <div class='info-icon'>&#128140;</div>
+        <div class='info-text'>
+          <h4>General Inquiries</h4>
+          <p>For questions, feedback, or tutorial requests.</p>
+          <a href='mailto:hello@codecloudworld.com'>hello@codecloudworld.com</a>
+        </div>
+      </div>
+
+      <div class='info-card'>
+        <div class='info-icon'>&#128176;</div>
+        <div class='info-text'>
+          <h4>Advertising &amp; Sponsorships</h4>
+          <p>Reach 250,000+ DevOps engineers every month.</p>
+          <a href='advertise.html'>View media kit &rarr;</a>
+        </div>
+      </div>
+
+      <div class='info-card'>
+        <div class='info-icon'>&#9997;</div>
+        <div class='info-text'>
+          <h4>Guest Posts &amp; Contributions</h4>
+          <p>Write for our community. We welcome practitioners with real-world experience.</p>
+          <a href='#'>Contributor guidelines &rarr;</a>
+        </div>
+      </div>
+
+      <div class='info-card'>
+        <div class='info-icon'>&#128204;</div>
+        <div class='info-text'>
+          <h4>Content Corrections</h4>
+          <p>Found an error in a tutorial? Please let us know so we can fix it fast.</p>
+          <a href='mailto:corrections@codecloudworld.com'>corrections@codecloudworld.com</a>
+        </div>
+      </div>
+
+      <div>
+        <p style='font-size:13px;color:#71717a;margin-bottom:12px;margin-top:4px;'>Follow us on social media</p>
+        <div class='social-links'>
+          <a class='social-link' href='#'>&#128038; Twitter</a>
+          <a class='social-link' href='#'>&#128241; LinkedIn</a>
+          <a class='social-link' href='#'>&#128008; GitHub</a>
+          <a class='social-link' href='#'>&#127926; YouTube</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class='site-footer'>
+    <div class='container'>
+      <div class='footer-grid'>
+        <div class='footer-col footer-brand'>
+          <a href='index.html'><svg class='site-logo-svg' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg' style='height:28px;width:28px;'><path d='M52 34a12 12 0 00-11.4-12A16 16 0 0012 28a10 10 0 001 20h38a12 12 0 001-14z' fill='#ff1493'/><path d='M30 36l-4 4m0 0l-4-4m4 4V28' stroke='#fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg></a>
+          <p>Join 250,000+ DevOps &amp; MLOps community. Get weekly deep dives, handpicked tools, and career resources.</p>
+        </div>
+        <div class='footer-col'><h3>Resources</h3><ul><li><a href='index.html'>Tutorials</a></li><li><a href='roadmap.html'>Roadmaps</a></li><li><a href='services.html'>Services</a></li><li><a href='projects.html'>Projects</a></li></ul></div>
+        <div class='footer-col'><h3>Company</h3><ul><li><a href='about.html'>About Us</a></li><li><a href='contact.html'>Contact</a></li><li><a href='advertise.html'>Advertise</a></li><li><a href='privacy-policy.html'>Privacy Policy</a></li></ul></div>
+        <div class='footer-col'><h3>Follow Us</h3><ul><li><a href='#'>Twitter</a></li><li><a href='#'>LinkedIn</a></li><li><a href='#'>GitHub</a></li><li><a href='#'>YouTube</a></li></ul></div>
+      </div>
+      <div class='footer-bottom'>
+        <p>&copy; 2026 codecloudworld. All rights reserved.</p>
+        <p>Built by codecloud for the DevOps Community</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var mobileBtn = document.getElementById('mobileMenuBtn');
+      var closeBtn = document.getElementById('mobileCloseBtn');
+      var overlay = document.getElementById('mobileOverlay');
+      var headerRight = document.getElementById('headerRightCol');
+      function toggleMenu() {
+        var open = headerRight.classList.contains('open');
+        headerRight.classList.toggle('open', !open);
+        overlay.classList.toggle('active', !open);
+        document.body.style.overflow = open ? '' : 'hidden';
+      }
+      if (mobileBtn) mobileBtn.addEventListener('click', toggleMenu);
+      if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+      if (overlay) overlay.addEventListener('click', toggleMenu);
+    });
+  </script>
+</body>
+</html>

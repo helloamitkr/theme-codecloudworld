@@ -130,10 +130,23 @@
         <h3 class='widget-title'>Weekly DevOps &amp; Tech Updates</h3>
         <div class='widget-content'>
           <p style='margin-bottom: 15px; color: #9ca3af; font-size: 15px;'>Join our newsletter to get weekly hands-on tutorials and DevOps best practices.</p>
-          <form action='#' method='post' style='display: flex; flex-direction: column; gap: 10px;'>
-            <input name='email' placeholder='Enter your email address' required='required' style='padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 15px; width: 100%; box-sizing: border-box; background: var(--bg-color); color: var(--text-color);' type='email'/>
-            <input style='background-color: var(--primary-color); color: white; border: none; padding: 12px 15px; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background-color 0.2s;' type='submit' value='Subscribe Now'/>
+          <form id='newsletter-form' style='display: flex; flex-direction: column; gap: 10px;'>
+            <input id='newsletter-email' placeholder='Enter your email address' required='required' style='padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 15px; width: 100%; box-sizing: border-box; background: var(--bg-color); color: var(--text-color);' type='email'/>
+            <button style='background-color: var(--primary-color); color: white; border: none; padding: 12px 15px; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background-color 0.2s;' type='submit'>Subscribe Now</button>
           </form>
+          <div id='newsletter-success' style='display:none; color: #10b981; text-align: center; padding: 15px; font-size: 15px; font-weight: 600;'>Thanks for subscribing!</div>
+          <script>
+          document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var data = new FormData();
+            data.append('entry.2134868049', document.getElementById('newsletter-email').value);
+            fetch('https://docs.google.com/forms/d/e/1FAIpQLSeMVe-Sm4xa2L7ShMabxMveJZU5kFQrSH2QLymLlUrkFeRe6Q/formResponse', {
+              method: 'POST', mode: 'no-cors', body: data
+            });
+            document.getElementById('newsletter-form').style.display = 'none';
+            document.getElementById('newsletter-success').style.display = 'block';
+          });
+          </script>
         </div>
       </div>
 
@@ -180,20 +193,20 @@
         <div class='footer-col'>
           <h3>Resources</h3>
           <ul>
-            <li><a href='#'>Tutorials</a></li>
-            <li><a href='#'>Roadmaps</a></li>
-            <li><a href='#'>Certification Guides</a></li>
-            <li><a href='#'>Newsletter</a></li>
+            <li><a href='index.html'>Tutorials</a></li>
+            <li><a href='roadmap.html'>Roadmaps</a></li>
+            <li><a href='services.html'>Services</a></li>
+            <li><a href='projects.html'>Projects</a></li>
           </ul>
         </div>
 
         <div class='footer-col'>
           <h3>Company</h3>
           <ul>
-            <li><a href='#'>About Us</a></li>
-            <li><a href='#'>Contact</a></li>
-            <li><a href='#'>Advertise</a></li>
-            <li><a href='#'>Privacy Policy</a></li>
+            <li><a href='about.html'>About Us</a></li>
+            <li><a href='contact.html'>Contact</a></li>
+            <li><a href='advertise.html'>Advertise</a></li>
+            <li><a href='privacy-policy.html'>Privacy Policy</a></li>
           </ul>
         </div>
 
