@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>SEO &amp; Production Readiness Checklist</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface2: #334155;
+      --border: #475569;
+      --text: #cbd5e1;
+      --heading: #f1f5f9;
+      --accent: #ff1493;
+      --accent2: #3b82f6;
+      --green: #10b981;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
+    h1 { color: var(--heading); font-size: 32px; margin-bottom: 8px; }
+    .subtitle { color: var(--text); font-size: 16px; margin-bottom: 32px; }
+    .progress-bar { background: var(--surface); border-radius: 8px; height: 12px; margin-bottom: 32px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 8px; transition: width 0.4s ease; }
+    .progress-text { text-align: center; margin-top: -24px; margin-bottom: 24px; font-size: 14px; font-weight: 600; color: var(--heading); }
+    .section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 20px; overflow: hidden; }
+    .section-header { padding: 18px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+    .section-header:hover { background: rgba(255,255,255,0.03); }
+    .section-title { font-size: 18px; font-weight: 700; color: var(--heading); display: flex; align-items: center; gap: 10px; }
+    .section-badge { font-size: 12px; padding: 2px 10px; border-radius: 20px; font-weight: 600; }
+    .badge-critical { background: rgba(239,68,68,0.15); color: var(--red); }
+    .badge-important { background: rgba(245,158,11,0.15); color: var(--yellow); }
+    .badge-good { background: rgba(16,185,129,0.15); color: var(--green); }
+    .section-count { font-size: 13px; color: var(--text); }
+    .chevron { transition: transform 0.2s; color: var(--text); }
+    .section.open .chevron { transform: rotate(180deg); }
+    .section-body { display: none; padding: 0 20px 20px; }
+    .section.open .section-body { display: block; }
+    .check-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .check-item:last-child { border-bottom: none; }
+    .check-item input[type="checkbox"] { appearance: none; width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; cursor: pointer; margin-top: 2px; position: relative; }
+    .check-item input[type="checkbox"]:checked { background: var(--green); border-color: var(--green); }
+    .check-item input[type="checkbox"]:checked::after { content: '✓'; position: absolute; top: -1px; left: 3px; color: #fff; font-size: 14px; font-weight: 700; }
+    .check-item.checked .item-title { text-decoration: line-through; opacity: 0.5; }
+    .item-title { font-weight: 600; color: var(--heading); font-size: 15px; }
+    .item-desc { font-size: 13px; color: var(--text); margin-top: 4px; line-height: 1.5; }
+    .item-code { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin-top: 8px; font-family: 'Fira Code', monospace; font-size: 12px; overflow-x: auto; white-space: pre; color: #e2e8f0; }
+    .tag { display: inline-block; font-size: 11px; padding: 1px 8px; border-radius: 4px; margin-left: 6px; font-weight: 500; }
+    .tag-html { background: rgba(59,130,246,0.15); color: var(--accent2); }
+    .tag-dashboard { background: rgba(245,158,11,0.15); color: var(--yellow); }
+    .tag-content { background: rgba(16,185,129,0.15); color: var(--green); }
+    .guide-box { background: linear-gradient(135deg, rgba(255,20,147,0.08), rgba(59,130,246,0.08)); border: 1px solid rgba(255,20,147,0.2); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+    .guide-box h3 { color: var(--accent); margin-bottom: 12px; font-size: 18px; }
+    .guide-box p { margin-bottom: 12px; }
+    .guide-box ul { padding-left: 20px; }
+    .guide-box li { margin-bottom: 8px; }
+    .guide-box code { background: var(--bg); padding: 2px 6px; border-radius: 3px; font-size: 13px; }
+    .reset-btn { position: fixed; bottom: 20px; right: 20px; background: var(--surface2); color: var(--text); border: 1px solid var(--border); padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; z-index: 100; }
+    .reset-btn:hover { background: var(--red); color: #fff; border-color: var(--red); }
+    @media (max-width: 600px) {
+      h1 { font-size: 24px; }
+      .section-title { font-size: 15px; }
+      .item-code { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SEO &amp; Production Readiness Checklist</h1>
+    <p class="subtitle">Universal checklist for any website. Check items as you complete them — progress auto-saves.</p>
+
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="progress-text" id="progressText">0 / 0 completed</p>
+
+    <!-- ======================================== -->
+    <!-- SECTION 1: On-Page SEO -->
+    <!-- ======================================== -->
+    <div class="section open" data-section="onpage">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-title">
+          <span>1. On-Page SEO</span>
+          <span class="section-badge badge-critical">Critical</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span class="section-count" data-count="onpage"></span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="check-item"><input type="checkbox" data-id="title"/>
+          <div><div class="item-title">Dynamic &lt;title&gt; tag <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Each page must have a unique title. Format: <code>Post Title | Site Name</code> for posts, <code>Site Name — Tagline</code> for homepage. Keep under 60 characters.</div>
+          <div class="item-code">&lt;title&gt;How to Deploy on Kubernetes | codecloudworld&lt;/title&gt;</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="meta-desc"/>
+          <div><div class="item-title">Meta description <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Unique 150-160 character description per page. This is what Google shows below your title in search results. Include target keywords naturally.</div>
+          <div class="item-code">&lt;meta name="description" content="Step-by-step guide to deploying apps on Kubernetes with Helm charts, rolling updates, and monitoring."&gt;</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="canonical"/>
+          <div><div class="item-title">Canonical URL <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Prevents duplicate content issues. Every page must have one. Points to the "official" version of the page.</div>
+          <div class="item-code">&lt;link rel="canonical" href="https://yourblog.com/2026/01/my-post.html"&gt;</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="lang"/>
+          <div><div class="item-title">lang attribute on &lt;html&gt; <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Tells Google the language of your content. Helps with international SEO and accessibility.</div>
+          <div class="item-code">&lt;html lang="en"&gt;</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="headings"/>
+          <div><div class="item-title">Proper heading hierarchy <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">One &lt;h1&gt; per page (post title). Use &lt;h2&gt; for sections, &lt;h3&gt; for sub-sections. Never skip levels.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="img-alt"/>
+          <div><div class="item-title">Image alt text <span class="tag tag-content">Content</span></div>
+          <div class="item-desc">Every &lt;img&gt; must have descriptive alt text. Google Image Search uses this. Also critical for accessibility.</div>
+          <div class="item-code">&lt;img src="k8s-arch.png" alt="Kubernetes cluster architecture diagram showing pods, nodes, and services"&gt;</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="internal-links"/>
+          <div><div class="item-title">Internal linking <span class="tag tag-content">Content</span></div>
+          <div class="item-desc">Link to your other related posts within content. Helps Google discover pages and distributes page authority. Aim for 3-5 internal links per post.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="url-structure"/>
+          <div><div class="item-title">Clean URL structure <span class="tag tag-content">Content</span></div>
+          <div class="item-desc">URLs should be short, descriptive, and contain keywords. Avoid dates in URL if possible. Use hyphens to separate words.</div>
+          <div class="item-code">✅ /deploy-kubernetes-helm-guide
+❌ /2026/01/post-123.html</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================== -->
+    <!-- SECTION 2: Robots & Crawling -->
+    <!-- ======================================== -->
+    <div class="section" data-section="robots">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-title">
+          <span>2. Robots, Crawling &amp; Indexing</span>
+          <span class="section-badge badge-critical">Critical</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span class="section-count" data-count="robots"></span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="check-item"><input type="checkbox" data-id="robots-txt"/>
+          <div><div class="item-title">robots.txt <span class="tag tag-dashboard">Dashboard</span></div>
+          <div class="item-desc">Controls which pages search engines can crawl. For Blogger: Settings → Crawlers and indexing → Custom robots.txt</div>
+          <div class="item-code">User-agent: *
+Allow: /
+Disallow: /search
+Disallow: /search?
+Disallow: /search/label/*?
+Disallow: /*?m=1
+Disallow: /*?m=0
+
+Sitemap: https://yoursite.com/sitemap.xml</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="robots-meta"/>
+          <div><div class="item-title">Robots meta tags <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Page-level control. Index posts/pages, noindex search/archive/label pages to prevent thin content indexing.</div>
+          <div class="item-code">&lt;!-- Posts & Pages --&gt;
+&lt;meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large"&gt;
+
+&lt;!-- Archive/Search/Label pages --&gt;
+&lt;meta name="robots" content="noindex, follow"&gt;</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="robots-header"/>
+          <div><div class="item-title">Custom robots header tags <span class="tag tag-dashboard">Dashboard</span></div>
+          <div class="item-desc">Server-level noindex signals. Blogger: Settings → Crawlers → Custom robots header tags. Set Homepage & Posts to "index, follow". Archives & Search to "noindex, follow".</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="sitemap"/>
+          <div><div class="item-title">XML Sitemap submitted <span class="tag tag-dashboard">Dashboard</span></div>
+          <div class="item-desc">Submit your sitemap to Google Search Console. Blogger auto-generates one at /sitemap.xml</div>
+          <div class="item-code">https://yoursite.com/sitemap.xml
+→ Submit at: Google Search Console → Sitemaps</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="search-console"/>
+          <div><div class="item-title">Google Search Console verified <span class="tag tag-dashboard">Dashboard</span></div>
+          <div class="item-desc">Verify site ownership at search.google.com/search-console. Monitor indexing, coverage errors, and search performance.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================== -->
+    <!-- SECTION 3: Structured Data -->
+    <!-- ======================================== -->
+    <div class="section" data-section="structured">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-title">
+          <span>3. Structured Data (JSON-LD)</span>
+          <span class="section-badge badge-critical">Critical</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span class="section-count" data-count="structured"></span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="check-item"><input type="checkbox" data-id="jsonld-website"/>
+          <div><div class="item-title">WebSite schema (homepage) <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Enables sitelinks search box in Google. Add SearchAction for site search.</div>
+          <div class="item-code">{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "codecloudworld",
+  "url": "https://yoursite.com/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://yoursite.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="jsonld-article"/>
+          <div><div class="item-title">BlogPosting / Article schema (posts) <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Enables rich results: author name, date, image in search. Include headline, datePublished, author, publisher, mainEntityOfPage.</div>
+          <div class="item-code">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Post Title",
+  "datePublished": "2026-01-15",
+  "author": { "@type": "Person", "name": "Author" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Site Name",
+    "logo": { "@type": "ImageObject", "url": "https://..." }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://..." }
+}</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="jsonld-breadcrumb"/>
+          <div><div class="item-title">BreadcrumbList schema <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Shows breadcrumb trail in Google search results (Home › Category › Post). Improves click-through rate.</div>
+          <div class="item-code">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://..." },
+    { "@type": "ListItem", "position": 2, "name": "Post Title", "item": "https://..." }
+  ]
+}</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="jsonld-test"/>
+          <div><div class="item-title">Test with Rich Results Test <span class="tag tag-dashboard">Dashboard</span></div>
+          <div class="item-desc">Validate your structured data at <code>search.google.com/test/rich-results</code>. Fix all errors and warnings.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================== -->
+    <!-- SECTION 4: Social Sharing -->
+    <!-- ======================================== -->
+    <div class="section" data-section="social">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-title">
+          <span>4. Social Sharing (OG &amp; Twitter Cards)</span>
+          <span class="section-badge badge-important">Important</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span class="section-count" data-count="social"></span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="check-item"><input type="checkbox" data-id="og-type"/>
+          <div><div class="item-title">og:type <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc"><code>article</code> on posts, <code>website</code> on homepage. Controls how Facebook/LinkedIn display your link.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="og-tags"/>
+          <div><div class="item-title">og:title, og:url, og:description, og:image, og:site_name <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">All 5 tags required. og:image should be at least 1200x630px for best display. Test with Facebook Sharing Debugger.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="twitter-card"/>
+          <div><div class="item-title">Twitter Card tags <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc"><code>summary_large_image</code> for posts with images. Include twitter:title, twitter:description, twitter:image. Test with Twitter Card Validator.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="og-image"/>
+          <div><div class="item-title">Featured images on every post <span class="tag tag-content">Content</span></div>
+          <div class="item-desc">Every post should have a featured image. This appears in social shares, Google Discover, and rich results. Minimum 1200x630px.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================== -->
+    <!-- SECTION 5: Performance -->
+    <!-- ======================================== -->
+    <div class="section" data-section="performance">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-title">
+          <span>5. Performance &amp; Core Web Vitals</span>
+          <span class="section-badge badge-critical">Critical</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span class="section-count" data-count="performance"></span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="check-item"><input type="checkbox" data-id="lazy-images"/>
+          <div><div class="item-title">loading="lazy" on images <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Defers offscreen images. Don't lazy-load above-the-fold images (first image visible on load).</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="font-swap"/>
+          <div><div class="item-title">Font display=swap <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Prevents Flash of Invisible Text (FOIT). Text shows immediately with fallback font while custom font loads.</div>
+          <div class="item-code">&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"&gt;</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="preconnect"/>
+          <div><div class="item-title">Preconnect hints <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Early connection to CDNs/font servers saves 100-300ms per resource.</div>
+          <div class="item-code">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="combine-fonts"/>
+          <div><div class="item-title">Combine font requests <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Load multiple Google Fonts in a single request to reduce HTTP connections.</div>
+          <div class="item-code">&lt;!-- BAD: 2 requests --&gt;
+&lt;link href="...?family=Inter" rel="stylesheet"&gt;
+&lt;link href="...?family=Fira+Code" rel="stylesheet"&gt;
+
+&lt;!-- GOOD: 1 request --&gt;
+&lt;link href="...?family=Inter:wght@400;700&family=Fira+Code&display=swap" rel="stylesheet"&gt;</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="lazy-scripts"/>
+          <div><div class="item-title">Lazy-load non-critical JS <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Load syntax highlighters, analytics, etc. only where needed. Use conditional loading or async/defer.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="css-cleanup"/>
+          <div><div class="item-title">Remove unused CSS <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Dead CSS increases page weight and render time. Audit with Chrome DevTools → Coverage tab.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="pagespeed"/>
+          <div><div class="item-title">Test with PageSpeed Insights <span class="tag tag-dashboard">Dashboard</span></div>
+          <div class="item-desc">Run at <code>pagespeed.web.dev</code>. Aim for 90+ on mobile. Fix LCP, FID, CLS issues flagged.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================== -->
+    <!-- SECTION 6: Accessibility -->
+    <!-- ======================================== -->
+    <div class="section" data-section="a11y">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-title">
+          <span>6. Accessibility &amp; Semantic HTML</span>
+          <span class="section-badge badge-important">Important</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span class="section-count" data-count="a11y"></span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="check-item"><input type="checkbox" data-id="semantic"/>
+          <div><div class="item-title">Semantic HTML elements <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Use <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;footer&gt;</code> instead of generic divs.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="aria-labels"/>
+          <div><div class="item-title">aria-label on icon-only links <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Links with only an icon (search, menu, social) must have aria-label for screen readers.</div>
+          <div class="item-code">&lt;a href="/search" aria-label="Search this site"&gt;🔍&lt;/a&gt;</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="aria-hidden"/>
+          <div><div class="item-title">aria-hidden on decorative elements <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Decorative SVGs/icons should have <code>aria-hidden="true"</code> so screen readers skip them.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="noopener"/>
+          <div><div class="item-title">rel="noopener noreferrer" on external links <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Security + performance. Prevents target page from accessing window.opener. Add target="_blank" for external links.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="nav-aria"/>
+          <div><div class="item-title">aria-label on &lt;nav&gt; elements <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">If multiple navs exist, each needs a unique aria-label (e.g., "Main navigation", "Footer navigation").</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================== -->
+    <!-- SECTION 7: Technical SEO -->
+    <!-- ======================================== -->
+    <div class="section" data-section="technical">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-title">
+          <span>7. Technical SEO</span>
+          <span class="section-badge badge-important">Important</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span class="section-count" data-count="technical"></span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="check-item"><input type="checkbox" data-id="https"/>
+          <div><div class="item-title">HTTPS enabled <span class="tag tag-dashboard">Dashboard</span></div>
+          <div class="item-desc">Google uses HTTPS as a ranking signal. Blogger enables it by default. Verify in Settings → HTTPS.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="mobile"/>
+          <div><div class="item-title">Mobile-friendly / responsive <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Google uses mobile-first indexing. Test with Google's Mobile-Friendly Test tool. Ensure viewport meta tag is set.</div>
+          <div class="item-code">&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="favicon"/>
+          <div><div class="item-title">Favicon <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Shows in browser tabs, bookmarks, and Google search results. SVG preferred for crisp rendering at all sizes.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="theme-color"/>
+          <div><div class="item-title">theme-color meta <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Colors the browser address bar on mobile. Matches your brand.</div>
+          <div class="item-code">&lt;meta name="theme-color" content="#0f172a"&gt;</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="404-page"/>
+          <div><div class="item-title">Custom 404 error page <span class="tag tag-html">HTML</span></div>
+          <div class="item-desc">Helps users find content when they hit a broken link. Include a link back to homepage and search.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="no-broken-links"/>
+          <div><div class="item-title">No broken links <span class="tag tag-content">Content</span></div>
+          <div class="item-desc">Check all internal/external links. Broken links hurt crawl budget and user experience. Use a link checker tool.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================== -->
+    <!-- SECTION 8: Content SEO -->
+    <!-- ======================================== -->
+    <div class="section" data-section="content">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-title">
+          <span>8. Content SEO Best Practices</span>
+          <span class="section-badge badge-good">Ongoing</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span class="section-count" data-count="content"></span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="check-item"><input type="checkbox" data-id="search-desc"/>
+          <div><div class="item-title">Write search descriptions for every post <span class="tag tag-content">Content</span></div>
+          <div class="item-desc">In Blogger: Post settings → Search description. 150-160 chars, include primary keyword, call to action.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="keywords"/>
+          <div><div class="item-title">Target keywords in title, H1, first paragraph <span class="tag tag-content">Content</span></div>
+          <div class="item-desc">Put your primary keyword in the title, H1, and first 100 words. Use variations naturally throughout the post.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="long-content"/>
+          <div><div class="item-title">Comprehensive content (1500+ words) <span class="tag tag-content">Content</span></div>
+          <div class="item-desc">Longer, in-depth posts tend to rank better. Cover the topic thoroughly. Include examples, code snippets, images.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="labels"/>
+          <div><div class="item-title">Use labels/categories consistently <span class="tag tag-content">Content</span></div>
+          <div class="item-desc">Organize posts with consistent labels. Helps Google understand site structure and creates useful category pages.</div></div>
+        </div>
+
+        <div class="check-item"><input type="checkbox" data-id="fresh-content"/>
+          <div><div class="item-title">Publish regularly <span class="tag tag-content">Content</span></div>
+          <div class="item-desc">Consistent publishing signals an active site. Aim for at least 1-2 quality posts per week.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================== -->
+    <!-- GUIDE: Google Search Appearance -->
+    <!-- ======================================== -->
+    <div class="guide-box">
+      <h3>How Your Website Appears in Google Search</h3>
+      <p>Google search results show different elements based on what structured data and meta tags you provide:</p>
+
+      <p><strong>Standard Result:</strong></p>
+      <div class="item-code" style="background:#1a1a2e; border-color:#334155; margin-bottom:16px;">
+<span style="color:#8ab4f8;">codecloudworld.com › kubernetes-deploy-guide</span>
+<span style="color:#dadce0; font-size:16px; font-weight:600;">How to Deploy on Kubernetes with Helm | codecloudworld</span>
+<span style="color:#9aa0a6;">Step-by-step guide to deploying apps on Kubernetes
+with Helm charts, rolling updates, and monitoring...</span></div>
+
+      <p><strong>With Rich Results (Article schema):</strong></p>
+      <div class="item-code" style="background:#1a1a2e; border-color:#334155; margin-bottom:16px;">
+<span style="color:#8ab4f8;">codecloudworld.com › kubernetes-deploy-guide</span>
+<span style="color:#dadce0; font-size:16px; font-weight:600;">How to Deploy on Kubernetes with Helm | codecloudworld</span>
+<span style="color:#9aa0a6;">Amit Kumar · Jan 15, 2026 — Step-by-step guide to
+deploying apps on Kubernetes with Helm charts...</span></div>
+
+      <p><strong>With Breadcrumbs:</strong></p>
+      <div class="item-code" style="background:#1a1a2e; border-color:#334155; margin-bottom:16px;">
+<span style="color:#8ab4f8;">codecloudworld.com › Home › Kubernetes</span>
+<span style="color:#dadce0; font-size:16px; font-weight:600;">How to Deploy on Kubernetes with Helm | codecloudworld</span>
+<span style="color:#9aa0a6;">Step-by-step guide to deploying apps on Kubernetes...</span></div>
+
+      <p><strong>With Sitelinks Search Box (WebSite schema):</strong></p>
+      <div class="item-code" style="background:#1a1a2e; border-color:#334155; margin-bottom:16px;">
+<span style="color:#dadce0; font-size:18px; font-weight:600;">codecloudworld — DevOps &amp; MLOps Tutorials</span>
+<span style="color:#8ab4f8;">https://codecloudworld.com</span>
+<span style="color:#9aa0a6;">Join 250,000+ DevOps community. Weekly tutorials...</span>
+┌─────────────────────────────────────┐
+│ 🔍 Search codecloudworld.com       │
+└─────────────────────────────────────┘
+<span style="color:#8ab4f8;">Kubernetes  ·  Docker  ·  CI/CD  ·  About Us</span></div>
+
+      <p><strong>Key things that control your Google appearance:</strong></p>
+      <ul>
+        <li><strong>&lt;title&gt;</strong> → Blue clickable headline</li>
+        <li><strong>meta description</strong> → Gray snippet text below title</li>
+        <li><strong>Canonical URL</strong> → Green URL line shown</li>
+        <li><strong>BreadcrumbList JSON-LD</strong> → Breadcrumb trail replaces URL</li>
+        <li><strong>BlogPosting JSON-LD</strong> → Author name + date shown</li>
+        <li><strong>WebSite JSON-LD + SearchAction</strong> → Sitelinks search box (homepage only)</li>
+        <li><strong>Good site structure + internal links</strong> → Sitelinks (sub-pages shown below homepage result)</li>
+      </ul>
+    </div>
+
+    <div class="guide-box">
+      <h3>Testing Tools</h3>
+      <ul>
+        <li><strong>Rich Results Test:</strong> <code>search.google.com/test/rich-results</code> — Validate JSON-LD</li>
+        <li><strong>PageSpeed Insights:</strong> <code>pagespeed.web.dev</code> — Performance + Core Web Vitals</li>
+        <li><strong>Mobile-Friendly Test:</strong> <code>search.google.com/test/mobile-friendly</code></li>
+        <li><strong>Facebook Debugger:</strong> <code>developers.facebook.com/tools/debug</code> — Test OG tags</li>
+        <li><strong>Twitter Card Validator:</strong> <code>cards-dev.twitter.com/validator</code></li>
+        <li><strong>Schema Validator:</strong> <code>validator.schema.org</code></li>
+        <li><strong>Google Search Console:</strong> <code>search.google.com/search-console</code> — Monitor everything</li>
+      </ul>
+    </div>
+
+    <button class="reset-btn" onclick="resetAll()">Reset All</button>
+  </div>
+
+  <script>
+    //<![CDATA[
+    const STORAGE_KEY = 'seo-checklist-state';
+
+    function getState() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+      catch(e) { return {}; }
+    }
+    function saveState(state) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function toggleSection(header) {
+      header.closest('.section').classList.toggle('open');
+    }
+
+    function updateProgress() {
+      var checks = document.querySelectorAll('.check-item input[type="checkbox"]');
+      var total = checks.length;
+      var done = 0;
+      checks.forEach(function(c) { if(c.checked) done++; });
+      var pct = total > 0 ? Math.round((done / total) * 100) : 0;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressText').textContent = done + ' / ' + total + ' completed (' + pct + '%)';
+
+      // Update section counts
+      document.querySelectorAll('.section').forEach(function(sec) {
+        var items = sec.querySelectorAll('.check-item input[type="checkbox"]');
+        var secDone = 0;
+        items.forEach(function(c) { if(c.checked) secDone++; });
+        var countEl = sec.querySelector('.section-count');
+        if(countEl) countEl.textContent = secDone + '/' + items.length;
+      });
+    }
+
+    function initChecklist() {
+      var state = getState();
+      var checks = document.querySelectorAll('.check-item input[type="checkbox"]');
+      checks.forEach(function(cb) {
+        var id = cb.getAttribute('data-id');
+        if(state[id]) {
+          cb.checked = true;
+          cb.closest('.check-item').classList.add('checked');
+        }
+        cb.addEventListener('change', function() {
+          var st = getState();
+          st[id] = cb.checked;
+          saveState(st);
+          cb.closest('.check-item').classList.toggle('checked', cb.checked);
+          updateProgress();
+        });
+      });
+      updateProgress();
+    }
+
+    function resetAll() {
+      if(!confirm('Reset all checkboxes? This cannot be undone.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      document.querySelectorAll('.check-item input[type="checkbox"]').forEach(function(cb) {
+        cb.checked = false;
+        cb.closest('.check-item').classList.remove('checked');
+      });
+      updateProgress();
+    }
+
+    initChecklist();
+    //]]>
+  </script>
+</body>
+</html>
