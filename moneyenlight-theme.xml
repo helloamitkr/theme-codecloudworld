@@ -1,0 +1,1125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:version='2' class='v2' lang='en' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <meta charset='UTF-8'/>
+  <meta content='width=device-width, initial-scale=1' name='viewport'/>
+  <meta content='IE=edge' http-equiv='X-UA-Compatible'/>
+
+  <!-- SEO: Title -->
+  <b:if cond='data:view.isSingleItem'>
+    <title><data:blog.pageName/> | <data:blog.title/></title>
+  <b:else/>
+    <title><data:blog.pageTitle/></title>
+  </b:if>
+
+  <!-- SEO: Meta Description -->
+  <b:if cond='data:view.isSingleItem'>
+    <b:if cond='data:blog.metaDescription'>
+      <meta expr:content='data:blog.metaDescription' name='description'/>
+    <b:else/>
+      <meta expr:content='data:blog.pageName + &quot; - Read this article on &quot; + data:blog.title' name='description'/>
+    </b:if>
+  <b:else/>
+    <meta content='MoneyEnlight - a documented 12-year smart investing journey. Mutual funds, SIP, swing trading, market updates and free financial calculators.' name='description'/>
+  </b:if>
+
+  <!-- SEO: Canonical URL -->
+  <link expr:href='data:blog.canonicalUrl' rel='canonical'/>
+
+  <!-- SEO: Robots - noindex archive/search/label pages -->
+  <b:if cond='data:view.isLabelSearch or data:view.isSearch or data:view.isArchive'>
+    <meta content='noindex, follow' name='robots'/>
+  <b:else/>
+    <meta content='index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' name='robots'/>
+  </b:if>
+
+  <!-- Open Graph -->
+  <b:if cond='data:view.isSingleItem'>
+    <meta content='article' property='og:type'/>
+  <b:else/>
+    <meta content='website' property='og:type'/>
+  </b:if>
+  <meta expr:content='data:blog.pageTitle' property='og:title'/>
+  <meta expr:content='data:blog.canonicalUrl' property='og:url'/>
+  <meta expr:content='data:blog.title' property='og:site_name'/>
+  <b:if cond='data:blog.postImageThumbnailUrl'>
+    <meta expr:content='data:blog.postImageThumbnailUrl' property='og:image'/>
+  </b:if>
+  <b:if cond='data:blog.metaDescription'>
+    <meta expr:content='data:blog.metaDescription' property='og:description'/>
+  </b:if>
+
+  <!-- Twitter Card -->
+  <meta content='summary_large_image' name='twitter:card'/>
+  <meta expr:content='data:blog.pageTitle' name='twitter:title'/>
+  <b:if cond='data:blog.metaDescription'>
+    <meta expr:content='data:blog.metaDescription' name='twitter:description'/>
+  </b:if>
+  <b:if cond='data:blog.postImageThumbnailUrl'>
+    <meta expr:content='data:blog.postImageThumbnailUrl' name='twitter:image'/>
+  </b:if>
+
+  <!-- JSON-LD Structured Data -->
+  <b:if cond='data:view.isHomepage'>
+    <script type='application/ld+json'>
+      {
+        &quot;@context&quot;: &quot;https://schema.org&quot;,
+        &quot;@type&quot;: &quot;WebSite&quot;,
+        &quot;name&quot;: &quot;<data:blog.title/>&quot;,
+        &quot;url&quot;: &quot;<data:blog.canonicalHomepageUrl/>&quot;,
+        &quot;potentialAction&quot;: {
+          &quot;@type&quot;: &quot;SearchAction&quot;,
+          &quot;target&quot;: &quot;<data:blog.canonicalHomepageUrl/>search?q={search_term_string}&quot;,
+          &quot;query-input&quot;: &quot;required name=search_term_string&quot;
+        }
+      }
+    </script>
+  </b:if>
+
+  <b:if cond='data:view.isSingleItem'>
+    <script type='application/ld+json'>
+      {
+        &quot;@context&quot;: &quot;https://schema.org&quot;,
+        &quot;@type&quot;: &quot;BlogPosting&quot;,
+        &quot;headline&quot;: &quot;<data:blog.pageName/>&quot;,
+        &quot;url&quot;: &quot;<data:blog.canonicalUrl/>&quot;,
+        &quot;datePublished&quot;: &quot;<data:blog.dateHeader/>&quot;,
+        &quot;author&quot;: {
+          &quot;@type&quot;: &quot;Person&quot;,
+          &quot;name&quot;: &quot;<data:blog.pageAuthor/>&quot;
+        },
+        &quot;publisher&quot;: {
+          &quot;@type&quot;: &quot;Organization&quot;,
+          &quot;name&quot;: &quot;<data:blog.title/>&quot;,
+          &quot;url&quot;: &quot;<data:blog.canonicalHomepageUrl/>&quot;,
+          &quot;logo&quot;: {
+            &quot;@type&quot;: &quot;ImageObject&quot;,
+            &quot;url&quot;: &quot;<data:blog.canonicalHomepageUrl/>favicon.ico&quot;
+          }
+        },
+        &quot;mainEntityOfPage&quot;: {
+          &quot;@type&quot;: &quot;WebPage&quot;,
+          &quot;@id&quot;: &quot;<data:blog.canonicalUrl/>&quot;
+        }
+      }
+    </script>
+    <script type='application/ld+json'>
+      {
+        &quot;@context&quot;: &quot;https://schema.org&quot;,
+        &quot;@type&quot;: &quot;BreadcrumbList&quot;,
+        &quot;itemListElement&quot;: [
+          {
+            &quot;@type&quot;: &quot;ListItem&quot;,
+            &quot;position&quot;: 1,
+            &quot;name&quot;: &quot;Home&quot;,
+            &quot;item&quot;: &quot;<data:blog.canonicalHomepageUrl/>&quot;
+          },
+          {
+            &quot;@type&quot;: &quot;ListItem&quot;,
+            &quot;position&quot;: 2,
+            &quot;name&quot;: &quot;<data:blog.pageName/>&quot;,
+            &quot;item&quot;: &quot;<data:blog.canonicalUrl/>&quot;
+          }
+        ]
+      }
+    </script>
+  </b:if>
+
+  <b:include data='blog' name='all-head-content'/>
+
+  <!-- Theme Color -->
+  <meta content='#050b10' name='theme-color'/>
+
+  <!-- Favicon (SVG) - green sparkle -->
+  <link href='data:image/svg+xml,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 64 64&quot;&gt;&lt;path d=&quot;M32 4l6 20 20 8-20 8-6 20-6-20-20-8 20-8z&quot; fill=&quot;%2334d399&quot;/&gt;&lt;/svg&gt;' rel='icon' type='image/svg+xml'/>
+
+  <!-- Preconnect Hints -->
+  <link href='https://fonts.googleapis.com' rel='preconnect'/>
+  <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
+
+  <!-- Fonts -->
+  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap' rel='stylesheet'/>
+
+  <b:skin><![CDATA[
+    /* ==========================================================
+       MoneyEnlight Blogger Theme
+       Dark finance theme: #050b10 bg, emerald brand, glass cards
+       ========================================================== */
+
+    :root {
+      --bg: #050b10;
+      --bg-card: rgba(255, 255, 255, 0.04);
+      --bg-card-hover: rgba(255, 255, 255, 0.07);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.15);
+      --text: #e6f4ef;
+      --text-soft: rgba(255, 255, 255, 0.65);
+      --text-faint: rgba(255, 255, 255, 0.45);
+      --brand-50: #ecfdf5;
+      --brand-400: #34d399;
+      --brand-500: #10b981;
+      --brand-600: #059669;
+      --brand-700: #047857;
+      --red: #dc2626;
+      --red-hover: #ef4444;
+      --radius: 10px;
+      color-scheme: dark;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      background-image:
+        radial-gradient(circle at 25% 0%, rgba(16,185,129,0.12), transparent 40%),
+        radial-gradient(circle at 80% 0%, rgba(99,102,241,0.10), transparent 40%);
+      background-repeat: no-repeat;
+    }
+
+    a { color: var(--brand-400); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--brand-50); }
+
+    img { max-width: 100%; height: auto; }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      background: rgba(5, 11, 16, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .site-title a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .site-title a:hover { color: var(--text); }
+    .site-title .brand-accent { color: var(--brand-400); }
+    .site-logo-svg { height: 22px; width: 22px; flex-shrink: 0; }
+    .site-tagline {
+      display: none;
+      font-size: 12px;
+      color: var(--text-faint);
+      font-weight: 400;
+      margin-left: 4px;
+    }
+    @media (min-width: 900px) { .site-tagline { display: inline; } }
+
+    .header-right-col {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-nav ul {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      list-style: none;
+    }
+    .header-nav a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      font-weight: 500;
+    }
+    .header-nav a:hover { color: #fff; }
+
+    .header-actions { display: flex; align-items: center; gap: 12px; }
+
+    .yt-subscribe-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--red);
+      color: #fff !important;
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .yt-subscribe-btn:hover { background: var(--red-hover); color: #fff; }
+    .yt-subscribe-btn svg { height: 15px; width: 15px; }
+
+    .search-icon {
+      display: inline-flex;
+      align-items: center;
+      color: rgba(255,255,255,0.6);
+      padding: 6px;
+    }
+    .search-icon:hover { color: #fff; }
+
+    /* Mobile menu */
+    .mobile-menu-toggle {
+      display: none;
+      cursor: pointer;
+      color: var(--text);
+      padding: 4px;
+    }
+    .mobile-close-btn { display: none; cursor: pointer; color: var(--text); }
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 90;
+    }
+    .mobile-overlay.active { display: block; }
+
+    @media (max-width: 768px) {
+      .mobile-menu-toggle { display: block; }
+      .header-right-col {
+        position: fixed;
+        top: 0;
+        right: -290px;
+        width: 280px;
+        height: 100vh;
+        background: #0a1118;
+        border-left: 1px solid var(--border);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 60px 24px 24px;
+        gap: 24px;
+        z-index: 100;
+        transition: right 0.3s ease;
+        overflow-y: auto;
+      }
+      .header-right-col.open { right: 0; }
+      .mobile-close-btn {
+        display: block;
+        position: absolute;
+        top: 16px;
+        right: 16px;
+      }
+      .header-nav ul { flex-direction: column; align-items: flex-start; gap: 18px; }
+      .header-nav a { font-size: 16px; }
+    }
+
+    /* ---------- Hero (homepage) ---------- */
+    .hero-section {
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 64px 0 56px;
+    }
+    .hero-kicker {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-faint);
+    }
+    .hero-title {
+      margin-top: 16px;
+      max-width: 760px;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .hero-title .gradient-text {
+      background: linear-gradient(90deg, #34d399, #60a5fa, #a78bfa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-sub {
+      margin-top: 16px;
+      max-width: 620px;
+      color: var(--text-soft);
+      font-size: 16.5px;
+    }
+    .hero-actions {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--brand-600);
+      color: #fff !important;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 11px 18px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--brand-500); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-strong);
+      color: #fff !important;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 11px 18px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+
+    /* ---------- Layout ---------- */
+    .layout-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 40px;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+    @media (max-width: 980px) {
+      .layout-wrapper { grid-template-columns: 1fr; }
+    }
+
+    .blog-section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .blog-section-header h2 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .blog-section-header a { font-size: 14px; color: var(--brand-400); }
+
+    /* ---------- Post cards (list view) ---------- */
+    .post-list { display: flex; flex-direction: column; gap: 20px; }
+
+    .post {
+      display: flex;
+      gap: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .post:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(52, 211, 153, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .post-thumbnail {
+      width: 240px;
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-faint);
+      overflow: hidden;
+    }
+    .post-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .post-content { padding: 20px 24px; min-width: 0; }
+
+    .post-title {
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .post-title a { color: var(--text); }
+    .post-title a:hover { color: var(--brand-400); }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-faint);
+      margin-bottom: 10px;
+    }
+
+    .post-body { color: var(--text-soft); font-size: 15px; }
+    .post-body p { margin-bottom: 12px; }
+
+    .read-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--brand-400);
+    }
+    .read-more-btn:hover { color: var(--brand-50); }
+
+    @media (max-width: 640px) {
+      .post { flex-direction: column; }
+      .post-thumbnail { width: 100%; height: 180px; }
+      .post-content { padding: 16px; }
+    }
+
+    /* ---------- Single post ---------- */
+    .post-full {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+    }
+    @media (max-width: 640px) {
+      .post-full { padding: 20px 16px; background: transparent; border: none; }
+    }
+
+    .post-full-title {
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .post-full-content { margin-top: 24px; color: var(--text-soft); }
+    .post-full-content h2, .post-full-content h3, .post-full-content h4 {
+      color: var(--text);
+      margin: 28px 0 12px;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+    .post-full-content h2 { font-size: 24px; }
+    .post-full-content h3 { font-size: 20px; }
+    .post-full-content p { margin-bottom: 16px; }
+    .post-full-content ul, .post-full-content ol { margin: 0 0 16px 22px; }
+    .post-full-content li { margin-bottom: 6px; }
+    .post-full-content img { border-radius: 8px; margin: 8px 0; }
+    .post-full-content blockquote {
+      border-left: 3px solid var(--brand-500);
+      background: rgba(16,185,129,0.06);
+      padding: 12px 18px;
+      margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+      color: var(--text);
+    }
+    .post-full-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14.5px;
+      display: block;
+      overflow-x: auto;
+    }
+    .post-full-content th, .post-full-content td {
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      text-align: left;
+    }
+    .post-full-content th {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      font-weight: 600;
+    }
+    .post-full-content code {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 2px 6px;
+      font-size: 0.9em;
+      color: var(--brand-400);
+    }
+    .post-full-content pre {
+      background: #0a1118;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+    .post-full-content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--text);
+    }
+
+    .post-labels { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .post-labels a {
+      display: inline-block;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--brand-400);
+      background: rgba(16,185,129,0.08);
+      border: 1px solid rgba(16,185,129,0.25);
+      border-radius: 999px;
+      padding: 4px 12px;
+    }
+    .post-labels a:hover { background: rgba(16,185,129,0.15); }
+
+    /* ---------- Pagination ---------- */
+    .blog-pager {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .blog-pager a {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-strong);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 9px 16px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .blog-pager a:hover { background: rgba(255,255,255,0.1); }
+    .blog-pager-older-link { margin-left: auto; }
+
+    /* ---------- Sidebar widgets ---------- */
+    .sidebar-area { min-width: 0; }
+    .sidebar .widget {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+    .widget-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-faint);
+      margin-bottom: 14px;
+    }
+
+    .popular-posts-list { list-style: none; }
+    .popular-posts-list li {
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .popular-posts-list li:last-child { border-bottom: none; }
+    .popular-posts-list a {
+      color: var(--text-soft);
+      font-size: 14.5px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .popular-posts-list a:hover { color: var(--brand-400); }
+
+    .list-label-widget-content ul { list-style: none; }
+    .list-label-widget-content li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .list-label-widget-content li:last-child { border-bottom: none; }
+    .list-label-widget-content a { color: var(--text-soft); font-size: 14.5px; }
+    .list-label-widget-content a:hover { color: var(--brand-400); }
+    .list-label-widget-content span {
+      font-size: 12px;
+      color: var(--brand-400);
+      background: rgba(16,185,129,0.1);
+      border-radius: 999px;
+      padding: 1px 9px;
+    }
+
+    /* Newsletter form */
+    .newsletter-text { margin-bottom: 14px; color: var(--text-soft); font-size: 14.5px; }
+    .newsletter-input {
+      width: 100%;
+      padding: 11px 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 14.5px;
+      font-family: inherit;
+    }
+    .newsletter-input:focus {
+      outline: none;
+      border-color: var(--brand-500);
+    }
+    .newsletter-input::placeholder { color: var(--text-faint); }
+    .newsletter-btn {
+      width: 100%;
+      background: var(--brand-600);
+      color: #fff;
+      border: none;
+      padding: 11px 14px;
+      border-radius: 8px;
+      font-size: 14.5px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .newsletter-btn:hover { background: var(--brand-500); }
+    .newsletter-btn:disabled { opacity: 0.6; cursor: default; }
+
+    /* ---------- Error page ---------- */
+    .error-page {
+      text-align: center;
+      padding: 100px 16px;
+    }
+    .error-page h1 {
+      font-size: 72px;
+      font-weight: 700;
+      background: linear-gradient(90deg, #34d399, #60a5fa, #a78bfa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .error-page p { color: var(--text-soft); margin: 12px 0 24px; }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+      margin-top: 80px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 40px 0 32px;
+      font-size: 14px;
+      color: var(--text-faint);
+    }
+    .footer-top {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      text-align: center;
+    }
+    @media (min-width: 640px) {
+      .footer-top {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+    .footer-social { display: flex; align-items: center; gap: 18px; }
+    .footer-social a {
+      color: rgba(255,255,255,0.55);
+      display: inline-flex;
+      align-items: center;
+    }
+    .footer-social a:hover { color: var(--brand-400); }
+    .footer-social svg { height: 20px; width: 20px; }
+
+    .footer-links {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      font-size: 12.5px;
+    }
+    @media (min-width: 640px) { .footer-links { justify-content: flex-start; } }
+    .footer-links a { color: var(--text-faint); }
+    .footer-links a:hover { color: #fff; }
+
+    /* Hide Blogger default clutter */
+    .widget-item-control, .quickedit { display: none !important; }
+
+    /* Entrance animation */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-section .container > * { animation: fadeSlideUp 0.7s ease-out both; }
+    .hero-section .container > *:nth-child(2) { animation-delay: 0.1s; }
+    .hero-section .container > *:nth-child(3) { animation-delay: 0.22s; }
+    .hero-section .container > *:nth-child(4) { animation-delay: 0.34s; }
+  ]]></b:skin>
+
+  <!-- Force desktop theme on mobile (theme is already responsive) -->
+  <script>
+    //<![CDATA[
+    if(window.location.search.indexOf('m=1')>-1){window.location.href=window.location.href.replace(/([?&])m=1/,'$1m=0');}
+    //]]>
+  </script>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header class='site-header'>
+    <div class='header-inner'>
+      <div class='header-left-col'>
+        <b:section class='header-left' id='header-left' maxwidgets='1' showaddelement='no'>
+          <b:widget id='Header1' locked='true' title='Blog Header' type='Header' version='1'>
+            <b:includable id='main'>
+              <div class='site-title'>
+                <a aria-label='MoneyEnlight home' expr:href='data:blog.homepageUrl'>
+                  <svg aria-hidden='true' class='site-logo-svg' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M32 4l6 20 20 8-20 8-6 20-6-20-20-8 20-8z' fill='#34d399'/><circle cx='52' cy='12' r='4' fill='#34d399' opacity='0.6'/><circle cx='12' cy='52' r='3' fill='#34d399' opacity='0.4'/></svg>
+                  <span>Money<span class='brand-accent'>Enlight</span></span>
+                  <span class='site-tagline'>&#183; smart investing, documented</span>
+                </a>
+              </div>
+            </b:includable>
+          </b:widget>
+        </b:section>
+      </div>
+
+      <div class='mobile-menu-toggle' id='mobileMenuBtn'>
+        <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='3' x2='21' y1='12' y2='12'/><line x1='3' x2='21' y1='6' y2='6'/><line x1='3' x2='21' y1='18' y2='18'/></svg>
+      </div>
+
+      <div class='mobile-overlay' id='mobileOverlay'></div>
+
+      <div class='header-right-col' id='headerRightCol'>
+        <div class='mobile-close-btn' id='mobileCloseBtn'>
+           <svg fill='none' height='26' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='26'><line x1='18' x2='6' y1='6' y2='18'/><line x1='6' x2='18' y1='6' y2='18'/></svg>
+        </div>
+        <b:section class='header-nav-section' id='header-nav-section' maxwidgets='1' showaddelement='yes'>
+          <b:widget id='LinkList1' locked='false' title='Navigation Menu' type='LinkList' version='2'>
+            <b:includable id='main'>
+              <nav class='header-nav' aria-label='Main navigation'>
+                <ul>
+                  <b:loop values='data:links' var='link'>
+                    <li>
+                      <a expr:href='data:link.target'><data:link.name/></a>
+                    </li>
+                  </b:loop>
+                </ul>
+              </nav>
+            </b:includable>
+          </b:widget>
+        </b:section>
+        <div class='header-actions'>
+          <a aria-label='Search this site' class='search-icon' href='/search' title='Search'>
+            <svg fill='none' height='20' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='20'><circle cx='11' cy='11' r='8'/><line x1='21' x2='16.65' y1='21' y2='16.65'/></svg>
+          </a>
+          <a class='yt-subscribe-btn' href='https://www.youtube.com/@moneyenlight' rel='noopener noreferrer' target='_blank'>
+            <svg fill='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z'/></svg>
+            Subscribe
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero (homepage only) -->
+  <b:if cond='data:view.isHomepage'>
+    <section class='hero-section'>
+      <div class='container'>
+        <div class='hero-kicker'>MoneyEnlight &#183; a 12-year investing journey</div>
+        <h1 class='hero-title'>
+          Smart investing, <span class='gradient-text'>documented every month.</span>
+        </h1>
+        <p class='hero-sub'>
+          No projections. No guesses. Just the real journey &#8212; mutual funds, SIP, swing trading and market insights, tracked openly on YouTube.
+        </p>
+        <div class='hero-actions'>
+          <a class='btn-primary' href='https://www.youtube.com/@moneyenlight' rel='noopener noreferrer' target='_blank'>
+            <svg fill='currentColor' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z'/></svg>
+            Follow on YouTube
+          </a>
+          <a class='btn-ghost' href='/search'>Browse Articles</a>
+        </div>
+      </div>
+    </section>
+  </b:if>
+
+  <div class='layout-wrapper container'>
+
+    <!-- Main Content (Blog Posts) -->
+    <main class='main-content'>
+      <b:if cond='data:view.isHomepage'>
+        <div class='blog-section-header'>
+          <h2>Latest Updates</h2>
+          <a href='/search'>View All &#8594;</a>
+        </div>
+      </b:if>
+
+      <b:section class='main' id='main' showaddelement='no'>
+        <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='1'>
+          <b:includable id='main' var='top'>
+            <b:if cond='data:view.isSingleItem'>
+              <b:loop values='data:posts' var='post'>
+                <b:include data='post' name='post-full'/>
+              </b:loop>
+            <b:else/>
+              <!-- Posts Loop -->
+              <div class='post-list'>
+                <b:loop values='data:posts' var='post'>
+                  <article class='post'>
+                    <div class='post-thumbnail'>
+                      <b:if cond='data:post.firstImageUrl'>
+                        <img expr:alt='data:post.title' expr:src='data:post.firstImageUrl' loading='lazy'/>
+                      <b:else/>
+                        <svg fill='none' height='42' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' width='42'><path d='M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941' stroke-linecap='round' stroke-linejoin='round'/></svg>
+                      </b:if>
+                    </div>
+                    <div class='post-content'>
+                      <h2 class='post-title'>
+                        <b:if cond='data:post.url'>
+                          <a expr:href='data:post.url'><data:post.title/></a>
+                        <b:else/>
+                          <data:post.title/>
+                        </b:if>
+                      </h2>
+                      <div class='post-meta'>
+                        <span><data:post.date/></span>
+                        <b:if cond='data:post.author'>
+                          <span><data:post.author/></span>
+                        </b:if>
+                      </div>
+                      <div class='post-body'>
+                        <b:if cond='data:post.snippet'>
+                          <p><data:post.snippet/></p>
+                          <div>
+                            <a class='read-more-btn' expr:href='data:post.url'>Read More &#8594;</a>
+                          </div>
+                        <b:else/>
+                           <p><data:post.body/></p>
+                        </b:if>
+                      </div>
+                    </div>
+                  </article>
+                </b:loop>
+              </div>
+            </b:if>
+
+            <!-- Pagination -->
+            <b:include name='nextprev'/>
+          </b:includable>
+
+          <b:includable id='post-full' var='post'>
+            <article class='post-full'>
+              <header class='post-full-header'>
+                <h1 class='post-full-title'><data:post.title/></h1>
+                <div class='post-meta'>
+                  <span><data:post.date/></span>
+                  <b:if cond='data:post.author'>
+                    <span><data:post.author/></span>
+                  </b:if>
+                </div>
+              </header>
+
+              <div class='post-full-content post-body'>
+                <data:post.body/>
+                <div class='post-labels'>
+                  <b:loop values='data:post.labels' var='label'>
+                    <a expr:href='data:label.url' rel='tag'><data:label.name/></a>
+                  </b:loop>
+                </div>
+              </div>
+            </article>
+          </b:includable>
+
+          <b:includable id='nextprev'>
+            <div class='blog-pager' id='blog-pager'>
+              <b:if cond='data:newerPageUrl'>
+                <a class='blog-pager-newer-link' expr:href='data:newerPageUrl' id='blog-pager-newer-link'>&#8592; Newer Posts</a>
+              </b:if>
+              <b:if cond='data:olderPageUrl'>
+                <a class='blog-pager-older-link' expr:href='data:olderPageUrl' id='blog-pager-older-link'>Older Posts &#8594;</a>
+              </b:if>
+            </div>
+          </b:includable>
+        </b:widget>
+      </b:section>
+    </main>
+
+    <!-- Sidebar -->
+    <aside class='sidebar-area'>
+      <b:section class='sidebar' id='sidebar' preferred='yes'>
+
+        <!-- Email Capture Widget -->
+        <b:widget id='HTML1' locked='false' title='Weekly Money Insights' type='HTML' version='1'>
+          <b:includable id='main'>
+            <div class='widget HTML'>
+              <b:if cond='data:title != &quot;&quot;'>
+                <h3 class='widget-title'><data:title/></h3>
+              </b:if>
+              <div class='widget-content'>
+                <p class='newsletter-text'>Join the newsletter for monthly portfolio updates, market insights and investing lessons.</p>
+                <form id='newsletter-form' style='display: flex; flex-direction: column; gap: 10px;'>
+                  <input class='newsletter-input' id='newsletter-email' placeholder='Enter your email address' required='required' type='email'/>
+                  <button class='newsletter-btn' id='newsletter-btn' type='submit'>Subscribe Now</button>
+                </form>
+                <div id='newsletter-success' style='display:none; color: #34d399; text-align: center; padding: 15px; font-size: 15px; font-weight: 600;'>Thanks for subscribing!</div>
+                <div id='newsletter-error' style='display:none; color: #ef4444; text-align: center; padding: 10px; font-size: 14px;'>Something went wrong. Please try again.</div>
+                <script>
+                //<![CDATA[
+                document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+                  e.preventDefault();
+                  var email = document.getElementById('newsletter-email').value;
+                  var btn = document.getElementById('newsletter-btn');
+                  var form = document.getElementById('newsletter-form');
+                  var success = document.getElementById('newsletter-success');
+                  var error = document.getElementById('newsletter-error');
+                  btn.textContent = 'Submitting...';
+                  btn.disabled = true;
+                  var formData = new FormData();
+                  formData.append('entry.2134868049', email);
+                  fetch('https://docs.google.com/forms/d/e/1FAIpQLSeMVe-Sm4xa2L7ShMabxMveJZU5kFQrSH2QLymLlUrkFeRe6Q/formResponse', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formData
+                  }).then(function() {
+                    form.style.display = 'none';
+                    success.style.display = 'block';
+                  }).catch(function() {
+                    btn.textContent = 'Subscribe Now';
+                    btn.disabled = false;
+                    error.style.display = 'block';
+                  });
+                });
+                //]]>
+                </script>
+              </div>
+            </div>
+          </b:includable>
+        </b:widget>
+
+        <!-- Popular Posts Widget -->
+        <b:widget id='PopularPosts1' locked='false' title='Popular Articles' type='PopularPosts' version='1'>
+          <b:includable id='main'>
+            <div class='widget PopularPosts'>
+              <b:if cond='data:title != &quot;&quot;'>
+                <h3 class='widget-title'><data:title/></h3>
+              </b:if>
+              <div class='widget-content'>
+                <ul class='popular-posts-list'>
+                  <b:loop values='data:posts' var='post'>
+                    <li>
+                      <a expr:href='data:post.href'><data:post.title/></a>
+                    </li>
+                  </b:loop>
+                </ul>
+              </div>
+            </div>
+          </b:includable>
+        </b:widget>
+
+        <!-- Labels / Categories Widget -->
+        <b:widget id='Label1' locked='false' title='Topics' type='Label' version='1'>
+          <b:includable id='main'>
+            <div class='widget'>
+              <b:if cond='data:title != &quot;&quot;'>
+                <h3 class='widget-title'><data:title/></h3>
+              </b:if>
+              <div class='widget-content list-label-widget-content'>
+                <ul>
+                  <b:loop values='data:labels' var='label'>
+                    <li>
+                      <a expr:dir='data:blog.languageDirection' expr:href='data:label.url'><data:label.name/></a>
+                      <span dir='ltr'><data:label.count/></span>
+                    </li>
+                  </b:loop>
+                </ul>
+              </div>
+            </div>
+          </b:includable>
+        </b:widget>
+
+      </b:section>
+    </aside>
+
+  </div>
+
+  <!-- Error Page -->
+  <b:if cond='data:view.isError'>
+    <div class='error-page'>
+      <h1>404</h1>
+      <p>The page you are looking for does not exist or has been moved.</p>
+      <a class='btn-ghost' expr:href='data:blog.homepageUrl'>Back to Home</a>
+    </div>
+  </b:if>
+
+  <!-- Footer -->
+  <footer class='site-footer'>
+    <div class='container'>
+      <div class='footer-top'>
+        <p>&#169; 2026 <data:blog.title/>. Educational content only &#8212; not financial advice.</p>
+        <div class='footer-social'>
+          <a href='https://www.youtube.com/@moneyenlight' rel='noopener noreferrer' target='_blank' title='YouTube' aria-label='YouTube'>
+            <svg fill='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z'/></svg>
+          </a>
+          <a href='#' rel='noopener noreferrer' target='_blank' title='WhatsApp' aria-label='WhatsApp'>
+            <svg fill='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07a8.2 8.2 0 01-2.4-1.49 9 9 0 01-1.66-2.07c-.17-.3 0-.46.13-.61.14-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.68-1.62-.93-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.1 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.05 21.8h-.03a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 01-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.83 9.83 0 019.89 9.89c0 5.45-4.44 9.88-9.88 9.88zm8.42-18.3A11.82 11.82 0 0012.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.95L.05 24l6.3-1.65a11.88 11.88 0 005.68 1.45c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.16-3.46-8.4z'/></svg>
+          </a>
+          <a href='#' rel='noopener noreferrer' target='_blank' title='Telegram' aria-label='Telegram'>
+            <svg fill='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M11.94 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.06 0zm4.96 7.22c.1 0 .32.02.46.14a.5.5 0 01.17.33c.02.1.04.32.02.5-.18 1.9-.96 6.5-1.36 8.63-.17.9-.5 1.2-.82 1.23-.7.06-1.23-.46-1.9-.9-1.06-.7-1.66-1.13-2.69-1.81-1.19-.78-.42-1.21.26-1.91.18-.18 3.25-2.98 3.31-3.23.01-.03.01-.15-.06-.21s-.18-.04-.25-.02c-.1.02-1.79 1.14-5.06 3.35-.48.33-.91.49-1.3.48-.43-.01-1.25-.24-1.86-.44-.75-.24-1.35-.37-1.3-.79.03-.22.33-.44.9-.68 3.5-1.53 5.85-2.54 7.02-3.02 3.34-1.39 4.03-1.63 4.49-1.64z'/></svg>
+          </a>
+          <a href='mailto:helloamit3107@gmail.com' title='Email' aria-label='Email'>
+            <svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><rect height='16' rx='2' width='20' x='2' y='4'/><path d='m2 7 10 6 10-6' stroke-linecap='round' stroke-linejoin='round'/></svg>
+          </a>
+        </div>
+      </div>
+      <div class='footer-links'>
+        <a expr:href='data:blog.homepageUrl'>Home</a>
+        <a href='/p/about-us.html'>About</a>
+        <a href='/p/contact-us.html'>Contact</a>
+        <a href='/p/privacy-policy.html'>Privacy Policy</a>
+        <a href='/p/disclaimer.html'>Disclaimer</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    //<![CDATA[
+    document.addEventListener('DOMContentLoaded', function() {
+      var mobileBtn = document.getElementById('mobileMenuBtn');
+      var closeBtn = document.getElementById('mobileCloseBtn');
+      var overlay = document.getElementById('mobileOverlay');
+      var headerRight = document.getElementById('headerRightCol');
+
+      function toggleMenu() {
+        if(headerRight.classList.contains('open')) {
+          headerRight.classList.remove('open');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        } else {
+          headerRight.classList.add('open');
+          overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      if(mobileBtn && closeBtn && overlay && headerRight) {
+        mobileBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+      }
+    });
+    //]]>
+  </script>
+</body>
+</html>
