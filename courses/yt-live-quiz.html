@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ytLiveQuiz — Govt Job Series</title>
+<meta name="description" content="Live government job quiz on YouTube. Register and participate in SSC, UPSC, Banking, Railway quiz sessions.">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070e07;
+  --bg2:#0d1a0d;
+  --bg3:#142814;
+  --bg4:#1a3a1a;
+  --border:rgba(57,211,83,0.1);
+  --border2:rgba(57,211,83,0.22);
+  --border3:rgba(57,211,83,0.4);
+  --text:#d4f0d4;
+  --text2:#6fa86f;
+  --text3:#3a5a3a;
+  --green:#39d353;
+  --green2:#26a641;
+  --amber:#f0b429;
+  --red:#ff4040;
+  --redglow:rgba(255,64,64,0.25);
+  --greenglow:rgba(57,211,83,0.18);
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'DM Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--bg);color:var(--text);font-family:var(--mono);
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;
+  position:relative;overflow-x:hidden;
+}
+
+/* Scanline overlay */
+body::after{
+  content:'';pointer-events:none;position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px);
+  z-index:9999;
+}
+
+/* Grid background */
+body::before{
+  content:'';pointer-events:none;position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(57,211,83,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(57,211,83,0.03) 1px,transparent 1px);
+  background-size:40px 40px;
+  z-index:0;
+}
+
+/* Brand bar */
+.brand{
+  width:100%;max-width:700px;padding:1.75rem 2rem 0;
+  display:flex;align-items:center;gap:10px;position:relative;z-index:1;
+}
+.brand-diamond{
+  width:8px;height:8px;background:var(--green);
+  transform:rotate(45deg);flex-shrink:0;
+  box-shadow:0 0 8px var(--green);
+}
+.brand-text{
+  font-family:var(--mono);font-size:13px;letter-spacing:.12em;
+  color:var(--text2);text-transform:uppercase;
+}
+.brand-text strong{color:var(--green);font-weight:600}
+.sys-tag{
+  margin-left:auto;font-size:10px;letter-spacing:.1em;
+  color:var(--text3);text-transform:uppercase;
+}
+.sys-tag .blip{
+  display:inline-block;width:5px;height:5px;border-radius:50%;
+  background:var(--green);margin-right:5px;
+  box-shadow:0 0 6px var(--green);
+  animation:blip 2s ease-in-out infinite;
+  vertical-align:middle;
+}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* Main container */
+.container{
+  width:100%;max-width:700px;padding:2.5rem 2rem 4rem;
+  display:flex;flex-direction:column;gap:2rem;position:relative;z-index:1;
+}
+
+/* ── MISSION CARD ── */
+.mission-card{
+  border:1px solid var(--border2);border-radius:4px;
+  background:var(--bg2);position:relative;overflow:hidden;
+}
+.mission-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--green),var(--amber),transparent);
+  opacity:.85;
+}
+
+/* Corner brackets */
+.corner{position:absolute;width:14px;height:14px;border-color:var(--border3);border-style:solid}
+.corner-tl{top:8px;left:8px;border-width:1px 0 0 1px}
+.corner-tr{top:8px;right:8px;border-width:1px 1px 0 0}
+.corner-bl{bottom:8px;left:8px;border-width:0 0 1px 1px}
+.corner-br{bottom:8px;right:8px;border-width:0 1px 1px 0}
+
+.card-inner{padding:2rem 2rem 1.75rem}
+
+.card-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:1.5rem;gap:8px;flex-wrap:wrap;
+}
+.mission-label{
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--text3);
+}
+.mission-label span{color:var(--green);font-weight:600}
+
+/* Status badges */
+.status{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 10px;border-radius:2px;
+}
+.status-standby{
+  background:rgba(57,211,83,0.07);border:1px solid rgba(57,211,83,0.2);
+  color:var(--green);
+}
+.status-live{
+  background:rgba(255,64,64,0.1);border:1px solid rgba(255,64,64,0.3);
+  color:var(--red);display:none;
+}
+.status-ended{
+  background:rgba(58,90,58,0.2);border:1px solid var(--border);
+  color:var(--text3);display:none;
+}
+.pulse{
+  width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;
+  animation:pulse 1.2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.75)}}
+
+/* Mission title */
+.mission-title{
+  font-family:var(--mono);font-size:24px;font-weight:600;
+  color:var(--text);line-height:1.25;margin-bottom:1rem;
+  text-shadow:0 0 20px rgba(57,211,83,0.15);
+}
+
+/* Exam tag */
+.exam-tag{
+  display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 10px;border-radius:2px;margin-bottom:1rem;
+  background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.25);color:var(--amber);
+}
+
+/* Meta items */
+.meta-grid{display:flex;flex-wrap:wrap;gap:1rem 2rem;margin-bottom:1.5rem}
+.meta-item{
+  font-size:12px;color:var(--text2);letter-spacing:.04em;
+  display:flex;align-items:center;gap:6px;
+}
+.meta-item::before{content:'◈';color:var(--text3);font-size:10px}
+
+/* Tactical countdown */
+.tac-timer{
+  background:var(--bg3);border:1px solid var(--border);border-radius:2px;
+  padding:1rem 1.25rem;margin-bottom:1.75rem;
+  display:flex;align-items:center;gap:0;
+  width:fit-content;
+}
+.tac-label{
+  font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text3);margin-right:1rem;
+}
+.tac-units{display:flex;align-items:flex-start;gap:.75rem}
+.tac-unit{display:flex;flex-direction:column;align-items:center;gap:3px}
+.tac-val{
+  font-size:26px;font-weight:600;color:var(--green);line-height:1;
+  min-width:2ch;text-align:center;
+  text-shadow:0 0 12px rgba(57,211,83,0.5);
+  transition:color .3s;
+}
+.tac-val.danger{color:var(--red);text-shadow:0 0 12px var(--redglow)}
+.tac-lbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
+.tac-sep{font-size:22px;color:var(--text3);padding-top:3px;opacity:.5}
+
+/* Buttons */
+.btn-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  font-family:var(--mono);font-size:13px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:12px 28px;border-radius:2px;cursor:pointer;
+  transition:all .15s;border:none;display:inline-flex;
+  align-items:center;gap:8px;text-decoration:none;white-space:nowrap;
+}
+.btn-register{
+  background:transparent;border:1px solid var(--border2);color:var(--text2);
+}
+.btn-register:hover{
+  border-color:var(--border3);color:var(--text);background:rgba(57,211,83,0.05);
+}
+.btn-participate{
+  background:var(--bg4);border:1px solid var(--border2);color:var(--green);
+  opacity:.45;cursor:not-allowed;
+}
+.btn-participate.active{
+  background:rgba(57,211,83,0.12);border-color:var(--green);
+  opacity:1;cursor:pointer;
+  box-shadow:0 0 16px rgba(57,211,83,0.15);
+}
+.btn-participate.active:hover{
+  background:rgba(57,211,83,0.2);box-shadow:0 0 24px rgba(57,211,83,0.25);
+}
+.btn-participate.is-live{
+  background:rgba(255,64,64,0.12);border-color:var(--red);
+  color:var(--red);opacity:1;cursor:pointer;
+  box-shadow:0 0 16px var(--redglow);
+  animation:liveGlow 1.5s ease-in-out infinite;
+}
+@keyframes liveGlow{0%,100%{box-shadow:0 0 16px var(--redglow)}50%{box-shadow:0 0 28px var(--redglow)}}
+.btn-participate.is-live:hover{background:rgba(255,64,64,0.2)}
+
+/* ── MISSION LOG (schedule) ── */
+.mission-log{position:relative;z-index:1}
+.log-header{
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);
+  padding-bottom:10px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;
+}
+.log-header::before{content:'//';color:var(--green);opacity:.6}
+
+.log-list{display:flex;flex-direction:column}
+.log-item{
+  display:grid;grid-template-columns:36px 1fr 60px auto;
+  align-items:center;gap:1rem;
+  padding:12px 0;border-bottom:1px solid var(--border);
+  transition:background .15s;
+}
+.log-item:last-child{border-bottom:none}
+.log-item:hover{background:rgba(57,211,83,0.03)}
+.log-num{font-size:11px;color:var(--text3);letter-spacing:.05em}
+.log-topic{font-size:13px;color:var(--text);font-weight:500;letter-spacing:.01em}
+.log-topic small{display:block;font-size:11px;color:var(--text2);margin-top:1px;font-weight:400}
+.log-date{font-size:11px;color:var(--text2);white-space:nowrap;letter-spacing:.03em}
+.log-badge{
+  font-size:10px;padding:2px 8px;border-radius:2px;
+  letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;
+}
+.b-open{background:rgba(57,211,83,0.09);color:var(--green);border:1px solid rgba(57,211,83,0.2)}
+.b-soon{background:rgba(240,180,41,0.09);color:var(--amber);border:1px solid rgba(240,180,41,0.2)}
+.b-tba{background:var(--bg3);color:var(--text3);border:1px solid var(--border)}
+
+/* Divider */
+.divider{
+  height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);
+  position:relative;z-index:1;
+}
+
+@media(max-width:520px){
+  .container{padding:2rem 1.25rem 3.5rem}
+  .card-inner{padding:1.5rem}
+  .mission-title{font-size:20px}
+  .tac-val{font-size:21px}
+  .tac-timer{padding:.875rem 1rem}
+  .btn-row{flex-direction:column}
+  .btn-row .btn{width:100%;justify-content:center}
+  .log-date{display:none}
+  .log-item{grid-template-columns:30px 1fr auto}
+}
+</style>
+</head>
+<body>
+
+<!-- Brand bar -->
+<div class="brand">
+  <div class="brand-diamond"></div>
+  <div class="brand-text"><strong>ytLiveQuiz</strong> &nbsp;// govt job series</div>
+  <div class="sys-tag"><span class="blip"></span>ONLINE</div>
+</div>
+
+<div class="container">
+
+  <!-- MISSION CARD -->
+  <div class="mission-card">
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+    <div class="card-inner">
+
+      <div class="card-header">
+        <span class="mission-label">▶ <span>NEXT MISSION</span></span>
+        <span class="status status-standby" id="badge-standby"><span class="pulse"></span>STANDBY</span>
+        <span class="status status-live" id="badge-live"><span class="pulse"></span>LIVE NOW</span>
+        <span class="status status-ended" id="badge-ended">MISSION ENDED</span>
+      </div>
+
+      <div class="exam-tag">SSC CGL · General Awareness</div>
+
+      <div class="mission-title">Polity &amp; Constitution<br>Speed Challenge</div>
+
+      <div class="meta-grid">
+        <span class="meta-item">Sat, 14 Jun 2026</span>
+        <span class="meta-item">21:00 HRS IST</span>
+        <span class="meta-item">20 Questions / 30 Min</span>
+        <span class="meta-item">Live on YouTube</span>
+      </div>
+
+      <div class="tac-timer" id="countdown">
+        <span class="tac-label">T-Minus</span>
+        <div class="tac-units">
+          <div class="tac-unit"><span class="tac-val" id="cd-d">--</span><span class="tac-lbl">days</span></div>
+          <span class="tac-sep">:</span>
+          <div class="tac-unit"><span class="tac-val" id="cd-h">--</span><span class="tac-lbl">hrs</span></div>
+          <span class="tac-sep">:</span>
+          <div class="tac-unit"><span class="tac-val" id="cd-m">--</span><span class="tac-lbl">min</span></div>
+          <span class="tac-sep">:</span>
+          <div class="tac-unit"><span class="tac-val" id="cd-s">--</span><span class="tac-lbl">sec</span></div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-register" id="btn-register">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          [ Register ]
+        </button>
+        <button class="btn btn-participate" id="btn-participate">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          [ Participate ]
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- MISSION LOG -->
+  <div class="mission-log">
+    <div class="log-header">Upcoming Missions</div>
+    <div class="log-list">
+      <div class="log-item">
+        <span class="log-num">OP-02</span>
+        <span class="log-topic">Reasoning &amp; Aptitude Blitz<small>SSC CHSL · Quantitative</small></span>
+        <span class="log-date">21 Jun</span>
+        <span class="log-badge b-open">Open</span>
+      </div>
+      <div class="log-item">
+        <span class="log-num">OP-03</span>
+        <span class="log-topic">Banking &amp; Financial Awareness<small>IBPS PO · General Awareness</small></span>
+        <span class="log-date">28 Jun</span>
+        <span class="log-badge b-open">Open</span>
+      </div>
+      <div class="log-item">
+        <span class="log-num">OP-04</span>
+        <span class="log-topic">Railway GK Rapid Fire<small>RRB NTPC · General Knowledge</small></span>
+        <span class="log-date">5 Jul</span>
+        <span class="log-badge b-soon">Soon</span>
+      </div>
+      <div class="log-item">
+        <span class="log-num">OP-05</span>
+        <span class="log-topic">UPSC Prelims Essentials<small>UPSC CSE · History &amp; Polity</small></span>
+        <span class="log-date">12 Jul</span>
+        <span class="log-badge b-tba">TBA</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const QUIZ_START    = new Date('2026-06-14T21:00:00+05:30');
+const QUIZ_DURATION = 30 * 60 * 1000;
+
+const elD   = document.getElementById('cd-d');
+const elH   = document.getElementById('cd-h');
+const elM   = document.getElementById('cd-m');
+const elS   = document.getElementById('cd-s');
+const elCountdown  = document.getElementById('countdown');
+const elStandby    = document.getElementById('badge-standby');
+const elLive       = document.getElementById('badge-live');
+const elEnded      = document.getElementById('badge-ended');
+const btnParticipate = document.getElementById('btn-participate');
+
+function pad(n){ return String(n).padStart(2,'0'); }
+
+function tick(){
+  const now   = new Date();
+  const toStart = QUIZ_START - now;
+  const toEnd   = (QUIZ_START.getTime() + QUIZ_DURATION) - now;
+  const allVals = [elD, elH, elM, elS];
+
+  if(toStart > 0){
+    const d = Math.floor(toStart / 86400000);
+    const h = Math.floor((toStart % 86400000) / 3600000);
+    const m = Math.floor((toStart % 3600000) / 60000);
+    const s = Math.floor((toStart % 60000) / 1000);
+    elD.textContent = pad(d);
+    elH.textContent = pad(h);
+    elM.textContent = pad(m);
+    elS.textContent = pad(s);
+    // Turn red in last hour
+    const danger = toStart < 3600000;
+    allVals.forEach(el => el.classList.toggle('danger', danger));
+    elStandby.style.display = '';
+    elLive.style.display    = 'none';
+    elEnded.style.display   = 'none';
+    btnParticipate.classList.remove('active','is-live');
+    btnParticipate.title = 'Opens when the quiz goes live';
+
+  } else if(toEnd > 0){
+    const m = Math.floor(toEnd / 60000);
+    const s = Math.floor((toEnd % 60000) / 1000);
+    elD.textContent = '00';
+    elH.textContent = '00';
+    elM.textContent = pad(m);
+    elS.textContent = pad(s);
+    allVals.forEach(el => el.classList.add('danger'));
+    elStandby.style.display = 'none';
+    elLive.style.display    = '';
+    elEnded.style.display   = 'none';
+    btnParticipate.classList.add('is-live');
+    btnParticipate.classList.remove('active');
+    btnParticipate.title = '';
+
+  } else {
+    elCountdown.style.display = 'none';
+    elStandby.style.display   = 'none';
+    elLive.style.display      = 'none';
+    elEnded.style.display     = '';
+    btnParticipate.classList.remove('active','is-live');
+    btnParticipate.title = 'This mission has ended';
+  }
+}
+
+tick();
+setInterval(tick, 1000);
+
+// ── Button handlers — swap URLs before publishing ──
+document.getElementById('btn-register').addEventListener('click', function(){
+  // Replace with your Google Form or registration link
+  window.open('https://www.youtube.com/@codecloudworld?sub_confirmation=1', '_blank', 'noopener');
+});
+
+document.getElementById('btn-participate').addEventListener('click', function(){
+  if(!this.classList.contains('active') && !this.classList.contains('is-live')) return;
+  // Replace with your YouTube Live stream URL
+  window.open('https://www.youtube.com/@codecloudworld/live', '_blank', 'noopener');
+});
+</script>
+
+</body>
+</html>

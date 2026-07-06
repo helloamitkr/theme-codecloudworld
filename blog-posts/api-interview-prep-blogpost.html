@@ -1,0 +1,650 @@
+<!--
+  API INTERVIEW PREP GUIDE — COMPLETE BEGINNER EDITION
+  Paste this into Blogger: New Post → switch to HTML view → paste → publish
+-->
+<style>
+.api-prep{font-family:'DM Sans',sans-serif;color:#e8eaf0;line-height:1.7}
+.api-prep *{box-sizing:border-box}
+.api-prep .ai-banner{background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid rgba(245,158,11,0.3);border-radius:10px;padding:14px 20px;margin:0 0 28px;display:flex;align-items:center;gap:12px}
+.api-prep .ai-banner svg{flex-shrink:0}
+.api-prep .ai-banner-text{font-size:13px;color:#d4a84b;line-height:1.5}
+.api-prep .ai-banner-text strong{color:#f59e0b;font-weight:600}
+.api-prep .intro{color:#8a90a0;font-size:16px;margin:0 0 32px;padding:20px 24px;background:#13161b;border-radius:10px;border-left:3px solid #3b82f6}
+.api-prep .toc{background:#13161b;border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:24px 28px;margin:0 0 32px}
+.api-prep .toc h3{font-size:16px;color:#a594fa;margin:0 0 12px;font-weight:600}
+.api-prep .toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:600px){.api-prep .toc-grid{grid-template-columns:1fr}}
+.api-prep .toc a{display:block;font-size:13px;color:#8a90a0;text-decoration:none;padding:4px 0}
+.api-prep .toc a:hover{color:#a594fa}
+.api-prep .toc .toc-label{font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;margin:8px 0 4px;padding:0}
+.api-prep .toc .tl-fund{color:#3ecf8e}
+.api-prep .toc .tl-design{color:#3b82f6}
+.api-prep .toc .tl-auth{color:#f59e0b}
+.api-prep .toc .tl-scale{color:#a594fa}
+.api-prep .section-head{display:flex;align-items:center;gap:12px;margin:44px 0 20px}
+.api-prep .section-line{flex:1;height:1px;background:rgba(255,255,255,0.07)}
+.api-prep .section-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding:4px 14px;border-radius:4px}
+.api-prep .st-fund{background:rgba(62,207,142,0.12);color:#3ecf8e;border:1px solid rgba(62,207,142,0.2)}
+.api-prep .st-design{background:rgba(59,130,246,0.12);color:#3b82f6;border:1px solid rgba(59,130,246,0.2)}
+.api-prep .st-auth{background:rgba(245,158,11,0.12);color:#f59e0b;border:1px solid rgba(245,158,11,0.2)}
+.api-prep .st-scale{background:rgba(124,106,247,0.12);color:#a594fa;border:1px solid rgba(124,106,247,0.2)}
+.api-prep .st-quick{background:rgba(236,72,153,0.12);color:#ec4899;border:1px solid rgba(236,72,153,0.2)}
+.api-prep .qblock{padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.07)}
+.api-prep .qblock:last-child{border-bottom:none}
+.api-prep .q-num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#555c6e;letter-spacing:0.08em;margin:0 0 4px}
+.api-prep .q-title{font-size:22px;font-weight:600;color:#e8eaf0;margin:0 0 16px;line-height:1.3}
+.api-prep .q-answer{color:#8a90a0;font-size:15px;margin:0 0 16px}
+.api-prep .kp{background:#1a1e26;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:16px 20px;margin:16px 0}
+.api-prep .kp h4{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#3ecf8e;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 10px}
+.api-prep .kp ul{margin:0;padding-left:18px}
+.api-prep .kp ul li{color:#8a90a0;font-size:14px;margin-bottom:4px}
+.api-prep .dont{background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:12px 16px;margin:12px 0;font-size:14px}
+.api-prep .dont .lb{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#ef4444;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 4px}
+.api-prep .dont p{color:#8a90a0;margin:0}
+.api-prep .trick{background:rgba(245,158,11,0.07);border-left:3px solid #f59e0b;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:14px}
+.api-prep .trick .lb{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#f59e0b;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 4px}
+.api-prep .trick p{color:#8a90a0;margin:0}
+.api-prep .tip{background:rgba(62,207,142,0.07);border-left:3px solid #3ecf8e;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:14px}
+.api-prep .tip .lb{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#3ecf8e;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 4px}
+.api-prep .tip p{color:#8a90a0;margin:0}
+.api-prep .info{background:rgba(59,130,246,0.07);border-left:3px solid #3b82f6;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:14px}
+.api-prep .info .lb{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#3b82f6;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 4px}
+.api-prep .info p{color:#8a90a0;margin:0}
+.api-prep table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.api-prep th{background:#1a1e26;color:#a594fa;font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;padding:10px 14px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}
+.api-prep td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.05);color:#8a90a0;vertical-align:middle}
+.api-prep tr:hover td{background:rgba(255,255,255,0.02)}
+.api-prep .cw{margin:16px 0;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.07)}
+.api-prep .ch{background:#1a1e26;border-bottom:1px solid rgba(255,255,255,0.07);padding:8px 12px;display:flex;align-items:center;justify-content:space-between}
+.api-prep .cf{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#a594fa}
+.api-prep .cl{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#555c6e}
+.api-prep pre{background:#0a0c0f!important;padding:16px 20px!important;overflow-x:auto;font-family:'IBM Plex Mono',monospace!important;font-size:13px!important;line-height:1.7!important;color:#c9d1d9!important;margin:0!important;border:none!important;border-radius:0!important}
+.api-prep .kw{color:#ff79c6}.api-prep .str{color:#f1fa8c}.api-prep .cm{color:#6272a4;font-style:italic}.api-prep .val{color:#bd93f9}.api-prep .attr{color:#50fa7b}.api-prep .num{color:#bd93f9}.api-prep .key{color:#8be9fd}
+.api-prep .states{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0}
+@media(max-width:600px){.api-prep .states{grid-template-columns:1fr}}
+.api-prep .state-card{background:#1a1e26;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px 16px}
+.api-prep .state-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;margin:0 0 6px}
+.api-prep .state-closed .state-label{color:#3ecf8e}
+.api-prep .state-open .state-label{color:#ef4444}
+.api-prep .state-half .state-label{color:#f59e0b}
+.api-prep .state-desc{font-size:13px;color:#8a90a0;margin:0}
+.api-prep .quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+@media(max-width:600px){.api-prep .quick-grid{grid-template-columns:1fr}}
+.api-prep .quick-card{background:#1a1e26;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:16px 20px}
+.api-prep .quick-q{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#a594fa;margin:0 0 8px;font-weight:600}
+.api-prep .quick-a{font-size:14px;color:#8a90a0;margin:0;line-height:1.6}
+.api-prep .tips-grid{display:flex;flex-direction:column;gap:12px;margin:16px 0}
+.api-prep .tip-item{display:flex;gap:14px;align-items:flex-start;background:#1a1e26;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px 16px}
+.api-prep .tip-num{font-family:'IBM Plex Mono',monospace;font-size:20px;color:#3b82f6;font-weight:700;line-height:1;min-width:28px}
+.api-prep .tip-text{font-size:14px;color:#8a90a0;margin:0;line-height:1.6}
+.api-prep .tip-text strong{color:#e8eaf0}
+.api-prep .methods-grid{display:flex;flex-direction:column;gap:8px;margin:16px 0}
+.api-prep .method-row{display:flex;align-items:center;gap:12px;background:#1a1e26;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:10px 14px}
+.api-prep .method-badge{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;min-width:70px;text-align:center}
+.api-prep .m-get{background:rgba(62,207,142,0.15);color:#3ecf8e;border:1px solid rgba(62,207,142,0.25)}
+.api-prep .m-post{background:rgba(59,130,246,0.15);color:#3b82f6;border:1px solid rgba(59,130,246,0.25)}
+.api-prep .m-put{background:rgba(245,158,11,0.15);color:#f59e0b;border:1px solid rgba(245,158,11,0.25)}
+.api-prep .m-patch{background:rgba(236,72,153,0.15);color:#ec4899;border:1px solid rgba(236,72,153,0.25)}
+.api-prep .m-delete{background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.25)}
+.api-prep .method-desc{font-size:14px;color:#8a90a0;flex:1}
+.api-prep .method-idem{font-family:'IBM Plex Mono',monospace;font-size:12px;margin-left:auto}
+.api-prep .i-yes{color:#3ecf8e}
+.api-prep .i-no{color:#ef4444}
+.api-prep .i-maybe{color:#f59e0b}
+.api-prep h1{font-size:32px;font-weight:700;color:#e8eaf0;margin:0 0 8px;line-height:1.2}
+.api-prep .subtitle{font-size:16px;color:#8a90a0;margin:0 0 28px}
+.api-prep .tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 28px}
+.api-prep .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:3px 10px;border-radius:4px;background:#1a1e26;border:1px solid rgba(255,255,255,0.07);color:#8a90a0}
+.api-prep .status-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:600px){.api-prep .status-grid{grid-template-columns:1fr}}
+.api-prep .status-group{background:#1a1e26;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px 16px}
+.api-prep .status-group-label{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 8px}
+.api-prep .sg-2xx .status-group-label{color:#3ecf8e}
+.api-prep .sg-4xx .status-group-label{color:#f59e0b}
+.api-prep .sg-5xx .status-group-label{color:#ef4444}
+.api-prep .status-item{font-size:13px;color:#8a90a0;margin:0 0 4px;display:flex;gap:8px}
+.api-prep .status-code{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#e8eaf0;min-width:36px}
+.api-prep .version-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:600px){.api-prep .version-grid{grid-template-columns:1fr}}
+.api-prep .version-card{background:#1a1e26;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px 16px}
+.api-prep .version-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#a594fa;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 6px}
+.api-prep .version-desc{font-size:13px;color:#8a90a0;margin:0}
+.api-prep .auth-grid{display:flex;flex-direction:column;gap:12px;margin:16px 0}
+.api-prep .auth-card{background:#1a1e26;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:16px 20px}
+.api-prep .auth-label{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 8px}
+.api-prep .ak-label{color:#3ecf8e}
+.api-prep .jwt-label{color:#3b82f6}
+.api-prep .oauth-label{color:#a594fa}
+.api-prep .auth-points{margin:0;padding-left:16px}
+.api-prep .auth-points li{font-size:14px;color:#8a90a0;margin-bottom:4px}
+.api-prep .auth-when{font-size:13px;color:#555c6e;margin:8px 0 0;font-style:italic}
+.api-prep .rl-algos{display:flex;flex-direction:column;gap:10px;margin:12px 0}
+.api-prep .rl-algo{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;background:#1a1e26;border-radius:8px;border:1px solid rgba(255,255,255,0.07)}
+.api-prep .rl-name{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#a594fa;font-weight:600;min-width:160px;flex-shrink:0}
+.api-prep .rl-desc{font-size:14px;color:#8a90a0;margin:0}
+.api-prep .headers-block{background:#0a0c0f;border-radius:8px;padding:14px 20px;margin:12px 0;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.8;border:1px solid rgba(255,255,255,0.07)}
+.api-prep .h-key{color:#8be9fd}
+.api-prep .h-val{color:#f1fa8c}
+.api-prep .pagination-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:12px 0}
+@media(max-width:600px){.api-prep .pagination-grid{grid-template-columns:1fr}}
+.api-prep .pag-card{background:#1a1e26;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:16px 20px}
+.api-prep .pag-label{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 8px}
+.api-prep .pag-offset .pag-label{color:#3b82f6}
+.api-prep .pag-cursor .pag-label{color:#3ecf8e}
+.api-prep .pag-points{margin:0;padding-left:16px}
+.api-prep .pag-points li{font-size:13px;color:#8a90a0;margin-bottom:4px}
+</style>
+
+<div class="api-prep">
+
+  <!-- AI Banner -->
+  <div class="ai-banner">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
+      <circle cx="7.5" cy="14.5" r="1.5" fill="#f59e0b" stroke="none"/>
+      <circle cx="16.5" cy="14.5" r="1.5" fill="#f59e0b" stroke="none"/>
+    </svg>
+    <div class="ai-banner-text">
+      <strong>AI Generated Content</strong> — This guide was created with the assistance of AI. Use it as a study reference alongside hands-on practice and official documentation.
+    </div>
+  </div>
+
+  <!-- Title -->
+  <h1>API Interview Prep Guide</h1>
+  <p class="subtitle">Complete Beginner Edition — The most commonly asked API questions in system design and backend interviews</p>
+
+  <div class="tags">
+    <span class="tag">APIs</span>
+    <span class="tag">REST</span>
+    <span class="tag">System Design</span>
+    <span class="tag">Backend</span>
+    <span class="tag">Authentication</span>
+    <span class="tag">Interview Prep</span>
+    <span class="tag">Beginner</span>
+  </div>
+
+  <p class="intro">Each question includes a clear answer, key points to mention, and what <em>not</em> to say. Whether you're preparing for your first backend role or brushing up before a system design round, this guide covers what interviewers actually test.</p>
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h3>Contents</h3>
+    <div class="toc-grid">
+      <div>
+        <p class="toc-label tl-fund">Part 1 — Fundamentals</p>
+        <a href="#q1">Q1: What is an API?</a>
+        <a href="#q2">Q2: What is REST?</a>
+        <a href="#q3">Q3: HTTP Methods</a>
+        <a href="#q4">Q4: HTTP Status Codes</a>
+      </div>
+      <div>
+        <p class="toc-label tl-design">Part 2 — API Design</p>
+        <a href="#q5">Q5: API Versioning</a>
+        <a href="#q6">Q6: Pagination</a>
+        <a href="#q7">Q7: Error Handling</a>
+      </div>
+      <div>
+        <p class="toc-label tl-auth">Part 3 — Authentication</p>
+        <a href="#q8">Q8: Auth Methods</a>
+        <a href="#q9">Q9: AuthN vs AuthZ</a>
+      </div>
+      <div>
+        <p class="toc-label tl-scale">Part 4 — Scalability</p>
+        <a href="#q10">Q10: Rate Limiting</a>
+        <a href="#q11">Q11: Idempotency</a>
+        <a href="#q12">Q12: Circuit Breaker</a>
+        <a href="#quickfire">Quick-Fire Answers</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Part 1: Fundamentals -->
+  <div class="section-head">
+    <span class="section-tag st-fund">Part 1 — Fundamentals</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="qblock" id="q1">
+    <div class="q-num">Q01</div>
+    <div class="q-title">What is an API?</div>
+    <p class="q-answer">An API (Application Programming Interface) is a <strong style="color:#e8eaf0">contract</strong> that allows two systems to communicate. It defines what requests can be made, how to make them, and what responses to expect. In web development, this typically means a server exposing endpoints over HTTP that clients can call to read or manipulate data.</p>
+    <div class="kp">
+      <h4>Key points to mention</h4>
+      <ul>
+        <li>It's a <em>contract</em> between client and server</li>
+        <li>Abstracts internal implementation — clients don't need to know how data is stored</li>
+        <li>Enables reusability (e.g. Stripe, Google Maps, Twilio)</li>
+      </ul>
+    </div>
+    <div class="dont">
+      <div class="lb">Don't say</div>
+      <p>"It's just a URL you call to get data" — too vague and shows surface-level understanding.</p>
+    </div>
+  </div>
+
+  <div class="qblock" id="q2">
+    <div class="q-num">Q02</div>
+    <div class="q-title">What is REST? What makes an API RESTful?</div>
+    <p class="q-answer">REST (Representational State Transfer) is an architectural style for designing APIs. A RESTful API follows these constraints:</p>
+    <div class="methods-grid">
+      <div class="method-row" style="flex-direction:column;align-items:flex-start;gap:4px">
+        <div style="display:flex;gap:10px;align-items:center;width:100%">
+          <span class="method-badge m-get">Stateless</span>
+          <span class="method-desc">Each request contains all information needed; server stores no session state</span>
+        </div>
+      </div>
+      <div class="method-row" style="flex-direction:column;align-items:flex-start;gap:4px">
+        <div style="display:flex;gap:10px;align-items:center;width:100%">
+          <span class="method-badge m-post">Client-Server</span>
+          <span class="method-desc">Client and server evolve independently</span>
+        </div>
+      </div>
+      <div class="method-row" style="flex-direction:column;align-items:flex-start;gap:4px">
+        <div style="display:flex;gap:10px;align-items:center;width:100%">
+          <span class="method-badge m-put">Uniform</span>
+          <span class="method-desc">Consistent use of HTTP methods and resource URLs</span>
+        </div>
+      </div>
+      <div class="method-row" style="flex-direction:column;align-items:flex-start;gap:4px">
+        <div style="display:flex;gap:10px;align-items:center;width:100%">
+          <span class="method-badge m-patch">Resource URLs</span>
+          <span class="method-desc">URLs identify resources (<code style="color:#a594fa">/users/42</code>), not actions (<code style="color:#ef4444">/getUser</code>)</span>
+        </div>
+      </div>
+      <div class="method-row" style="flex-direction:column;align-items:flex-start;gap:4px">
+        <div style="display:flex;gap:10px;align-items:center;width:100%">
+          <span class="method-badge m-delete">Cacheable</span>
+          <span class="method-desc">Responses can be cached when appropriate</span>
+        </div>
+      </div>
+    </div>
+    <div class="kp">
+      <h4>Key points to mention</h4>
+      <ul>
+        <li>Statelessness is the most important constraint — enables horizontal scaling</li>
+        <li>Use nouns in URLs, not verbs: <code style="color:#3ecf8e">/orders</code> not <code style="color:#ef4444">/createOrder</code></li>
+        <li>HTTP methods express the action, not the URL</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qblock" id="q3">
+    <div class="q-num">Q03</div>
+    <div class="q-title">What are HTTP methods and when do you use each?</div>
+    <div class="methods-grid">
+      <div class="method-row">
+        <span class="method-badge m-get">GET</span>
+        <span class="method-desc">Read a resource</span>
+        <span class="method-idem i-yes">✓ Idempotent</span>
+      </div>
+      <div class="method-row">
+        <span class="method-badge m-post">POST</span>
+        <span class="method-desc">Create a resource</span>
+        <span class="method-idem i-no">✗ Not idempotent</span>
+      </div>
+      <div class="method-row">
+        <span class="method-badge m-put">PUT</span>
+        <span class="method-desc">Replace a resource entirely</span>
+        <span class="method-idem i-yes">✓ Idempotent</span>
+      </div>
+      <div class="method-row">
+        <span class="method-badge m-patch">PATCH</span>
+        <span class="method-desc">Partially update a resource</span>
+        <span class="method-idem i-maybe">~ Usually</span>
+      </div>
+      <div class="method-row">
+        <span class="method-badge m-delete">DELETE</span>
+        <span class="method-desc">Delete a resource</span>
+        <span class="method-idem i-yes">✓ Idempotent</span>
+      </div>
+    </div>
+    <div class="info">
+      <div class="lb">Idempotency Defined</div>
+      <p>Calling the operation multiple times produces the same result as calling it once. Critical for safe retries over unreliable networks.</p>
+    </div>
+    <div class="trick">
+      <div class="lb">Trick Question Alert</div>
+      <p>GET and DELETE are idempotent. POST is <em>not</em> — calling it twice creates two resources. Interviewers love this distinction.</p>
+    </div>
+  </div>
+
+  <div class="qblock" id="q4">
+    <div class="q-num">Q04</div>
+    <div class="q-title">What are HTTP status codes? Name the important ones.</div>
+    <div class="status-grid">
+      <div class="status-group sg-2xx">
+        <div class="status-group-label">2xx — Success</div>
+        <div class="status-item"><span class="status-code">200</span> OK — general success</div>
+        <div class="status-item"><span class="status-code">201</span> Created — resource created</div>
+        <div class="status-item"><span class="status-code">204</span> No Content — success, no body</div>
+      </div>
+      <div class="status-group sg-4xx">
+        <div class="status-group-label">4xx — Client Errors</div>
+        <div class="status-item"><span class="status-code">400</span> Bad Request</div>
+        <div class="status-item"><span class="status-code">401</span> Unauthorized</div>
+        <div class="status-item"><span class="status-code">403</span> Forbidden</div>
+        <div class="status-item"><span class="status-code">404</span> Not Found</div>
+        <div class="status-item"><span class="status-code">409</span> Conflict</div>
+        <div class="status-item"><span class="status-code">422</span> Unprocessable</div>
+        <div class="status-item"><span class="status-code">429</span> Too Many Requests</div>
+      </div>
+      <div class="status-group sg-5xx">
+        <div class="status-group-label">5xx — Server Errors</div>
+        <div class="status-item"><span class="status-code">500</span> Internal Server Error</div>
+        <div class="status-item"><span class="status-code">503</span> Service Unavailable</div>
+      </div>
+    </div>
+    <div class="trick">
+      <div class="lb">Classic Trick: 401 vs 403</div>
+      <p>"You're not logged in" = <strong style="color:#f1fa8c">401</strong>. &nbsp;"You're logged in but can't do this" = <strong style="color:#f1fa8c">403</strong>. Interviewers ask this constantly.</p>
+    </div>
+  </div>
+
+  <!-- Part 2: API Design -->
+  <div class="section-head">
+    <span class="section-tag st-design">Part 2 — API Design</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="qblock" id="q5">
+    <div class="q-num">Q05</div>
+    <div class="q-title">How do you version an API?</div>
+    <p class="q-answer">Versioning prevents breaking existing clients when you make changes. Three common strategies:</p>
+    <div class="version-grid">
+      <div class="version-card">
+        <div class="version-label">URL Versioning</div>
+        <p class="version-desc">Most common. Visible and simple.</p>
+        <div class="cw" style="margin-top:10px">
+          <pre>GET /v1/users
+GET /v2/users</pre>
+        </div>
+      </div>
+      <div class="version-card">
+        <div class="version-label">Header Versioning</div>
+        <p class="version-desc">Cleaner URLs, harder to test in browser.</p>
+        <div class="cw" style="margin-top:10px">
+          <pre>GET /users
+API-Version: 2</pre>
+        </div>
+      </div>
+      <div class="version-card">
+        <div class="version-label">Query Parameter</div>
+        <p class="version-desc">Easy but can clutter query strings.</p>
+        <div class="cw" style="margin-top:10px">
+          <pre>GET /users?version=2</pre>
+        </div>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="lb">Key Rule</div>
+      <p>Never remove or change existing fields in a version — only add. When breaking changes are needed, create a new version. Support old versions for a deprecation period (usually 6–12 months).</p>
+    </div>
+  </div>
+
+  <div class="qblock" id="q6">
+    <div class="q-num">Q06</div>
+    <div class="q-title">How do you design pagination for a list endpoint?</div>
+    <div class="pagination-grid">
+      <div class="pag-card pag-offset">
+        <div class="pag-label">Offset-Based</div>
+        <div class="cw">
+          <div class="ch"><span class="cf">HTTP</span></div>
+          <pre>GET /posts?page=3&amp;limit=20</pre>
+        </div>
+        <ul class="pag-points">
+          <li>Easy to implement</li>
+          <li>Can jump to any page</li>
+          <li style="color:#ef4444">Breaks when items inserted/deleted mid-pagination</li>
+        </ul>
+        <p style="font-size:13px;color:#555c6e;margin:8px 0 0">Best for: admin panels, reports, page jumps</p>
+      </div>
+      <div class="pag-card pag-cursor">
+        <div class="pag-label">Cursor-Based</div>
+        <div class="cw">
+          <div class="ch"><span class="cf">HTTP</span></div>
+          <pre>GET /posts?cursor=eyJpZ&amp;limit=20</pre>
+        </div>
+        <ul class="pag-points">
+          <li>Stable even when data changes</li>
+          <li>Cursor = opaque base64 token</li>
+          <li style="color:#ef4444">Can't jump to arbitrary pages</li>
+        </ul>
+        <p style="font-size:13px;color:#555c6e;margin:8px 0 0">Best for: real-time feeds, large datasets, infinite scroll</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="qblock" id="q7">
+    <div class="q-num">Q07</div>
+    <div class="q-title">How do you handle errors in an API?</div>
+    <p class="q-answer">Always return structured, consistent error responses — not just an HTTP status code:</p>
+    <div class="cw">
+      <div class="ch"><span class="cf">JSON</span><span class="cl">error response</span></div>
+      <pre>{
+  <span class="key">"error"</span>: {
+    <span class="key">"code"</span>: <span class="str">"VALIDATION_ERROR"</span>,
+    <span class="key">"message"</span>: <span class="str">"Request validation failed"</span>,
+    <span class="key">"details"</span>: [
+      { <span class="key">"field"</span>: <span class="str">"email"</span>, <span class="key">"issue"</span>: <span class="str">"Invalid email format"</span> }
+    ],
+    <span class="key">"request_id"</span>: <span class="str">"req_abc123"</span>
+  }
+}</pre>
+    </div>
+    <div class="kp">
+      <h4>Key principles</h4>
+      <ul>
+        <li>Use correct HTTP status codes — <strong style="color:#ef4444">never return 200 with an error body</strong></li>
+        <li>Include a machine-readable <code style="color:#a594fa">code</code> for programmatic handling</li>
+        <li>Include a human-readable <code style="color:#a594fa">message</code></li>
+        <li>Include a <code style="color:#a594fa">request_id</code> for traceability in logs</li>
+        <li>For validation errors, list <em>all</em> failing fields — not just the first one</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Part 3: Authentication -->
+  <div class="section-head">
+    <span class="section-tag st-auth">Part 3 — Authentication</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="qblock" id="q8">
+    <div class="q-num">Q08</div>
+    <div class="q-title">What are the different ways to authenticate an API?</div>
+    <div class="auth-grid">
+      <div class="auth-card">
+        <div class="auth-label ak-label">API Keys</div>
+        <ul class="auth-points">
+          <li>Simple random string in a header: <code style="color:#f1fa8c">X-API-Key: sk_live_abc123</code></li>
+          <li>Good for server-to-server and developer APIs</li>
+          <li>No user context, no expiry by default</li>
+        </ul>
+        <p class="auth-when">Use for: developer-facing APIs, service-to-service</p>
+      </div>
+      <div class="auth-card">
+        <div class="auth-label jwt-label">JWT (JSON Web Token)</div>
+        <ul class="auth-points">
+          <li>Three parts: <code style="color:#a594fa">header.payload.signature</code></li>
+          <li>Stateless — server verifies signature without a DB lookup</li>
+          <li>Sent as: <code style="color:#f1fa8c">Authorization: Bearer eyJhbG...</code></li>
+          <li>Contains claims: user_id, role, expiry</li>
+          <li>Can't be invalidated before expiry without a blocklist</li>
+        </ul>
+        <p class="auth-when">Use for: user authentication in your own system</p>
+      </div>
+      <div class="auth-card">
+        <div class="auth-label oauth-label">OAuth 2.0</div>
+        <ul class="auth-points">
+          <li>For third-party access: "Login with Google", "Connect Spotify"</li>
+          <li>Issues access tokens + refresh tokens</li>
+          <li>User grants your app permission to access their data on another service</li>
+        </ul>
+        <p class="auth-when">Use for: when your app needs access to a user's data on another platform</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="qblock" id="q9">
+    <div class="q-num">Q09</div>
+    <div class="q-title">What is the difference between authentication and authorization?</div>
+    <div class="pagination-grid">
+      <div class="pag-card pag-offset">
+        <div class="pag-label">Authentication (AuthN)</div>
+        <p style="font-size:15px;color:#e8eaf0;font-weight:600;margin:4px 0 6px">"Proving who you are"</p>
+        <p style="font-size:14px;color:#8a90a0;margin:0">Validating the JWT token or API key. <em>"I am Alice."</em></p>
+      </div>
+      <div class="pag-card pag-cursor">
+        <div class="pag-label">Authorization (AuthZ)</div>
+        <p style="font-size:15px;color:#e8eaf0;font-weight:600;margin:4px 0 6px">"Determining what you can do"</p>
+        <p style="font-size:14px;color:#8a90a0;margin:0">Checking if that user/role has permission for this action. <em>"Alice can read but not delete."</em></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Part 4: Scalability -->
+  <div class="section-head">
+    <span class="section-tag st-scale">Part 4 — Scalability</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="qblock" id="q10">
+    <div class="q-num">Q10</div>
+    <div class="q-title">How do you implement rate limiting?</div>
+    <p class="q-answer">Rate limiting protects your API from abuse and ensures fair usage. The algorithm you choose depends on your tolerance for burst traffic.</p>
+    <div class="rl-algos">
+      <div class="rl-algo">
+        <span class="rl-name">Token Bucket</span>
+        <p class="rl-desc">Bucket holds N tokens, refills at fixed rate. Allows bursting up to bucket size. Most commonly used — Stripe and AWS use this.</p>
+      </div>
+      <div class="rl-algo">
+        <span class="rl-name">Fixed Window</span>
+        <p class="rl-desc">Count requests per minute. Simple but has an edge case: 1000 req at 0:59 + 1000 req at 1:01 = 2000 requests in 2 seconds.</p>
+      </div>
+      <div class="rl-algo">
+        <span class="rl-name">Sliding Window</span>
+        <p class="rl-desc">Rolling time window — fixes the fixed-window edge case. More accurate, slightly more memory required.</p>
+      </div>
+    </div>
+    <div class="kp">
+      <h4>Implementation details</h4>
+      <ul>
+        <li>Store counters in Redis with TTL</li>
+        <li>Key by <code style="color:#a594fa">user_id</code> or IP address</li>
+        <li>Return <code style="color:#f1fa8c">429 Too Many Requests</code> when exceeded</li>
+      </ul>
+    </div>
+    <p style="font-size:14px;color:#8a90a0;margin:12px 0 8px">Return these response headers so clients can self-throttle:</p>
+    <div class="headers-block">
+      <span class="h-key">X-RateLimit-Limit</span>: <span class="h-val">1000</span><br>
+      <span class="h-key">X-RateLimit-Remaining</span>: <span class="h-val">723</span><br>
+      <span class="h-key">X-RateLimit-Reset</span>: <span class="h-val">1735689600</span><br>
+      <span class="h-key">Retry-After</span>: <span class="h-val">30</span>
+    </div>
+  </div>
+
+  <div class="qblock" id="q11">
+    <div class="q-num">Q11</div>
+    <div class="q-title">What is idempotency and why does it matter?</div>
+    <p class="q-answer">An operation is idempotent if calling it multiple times has the same effect as calling it once.</p>
+    <div class="info">
+      <div class="lb">Why it matters</div>
+      <p>Networks fail. Clients retry. Without idempotency, retries can cause duplicate payments, duplicate orders, and duplicate emails sent to customers.</p>
+    </div>
+    <p style="font-size:14px;color:#8a90a0;margin:16px 0 8px"><strong style="color:#e8eaf0">Idempotency keys</strong> (used by Stripe) — client generates a unique key per operation:</p>
+    <div class="cw">
+      <div class="ch"><span class="cf">HTTP</span><span class="cl">POST /payments</span></div>
+      <pre><span class="kw">POST</span> /payments
+<span class="key">Idempotency-Key</span>: <span class="str">a8098c1a-f86e-11da-bd1a-00112444be1e</span>
+
+{ <span class="key">"amount"</span>: <span class="num">100</span>, <span class="key">"currency"</span>: <span class="str">"USD"</span> }</pre>
+    </div>
+    <p style="font-size:14px;color:#8a90a0;margin:8px 0">Server stores the key and response. If the same key arrives again, returns the stored response instead of processing again. Client can safely retry after a network failure.</p>
+  </div>
+
+  <div class="qblock" id="q12">
+    <div class="q-num">Q12</div>
+    <div class="q-title">What is a circuit breaker?</div>
+    <p class="q-answer">A pattern that prevents cascading failures when a downstream service is slow or down.</p>
+    <div class="states">
+      <div class="state-card state-closed">
+        <div class="state-label">CLOSED</div>
+        <p class="state-desc">Normal operation. Requests flow through. Failures are counted.</p>
+      </div>
+      <div class="state-card state-open">
+        <div class="state-label">OPEN</div>
+        <p class="state-desc">Service is failing. Requests fail immediately without calling downstream.</p>
+      </div>
+      <div class="state-card state-half">
+        <div class="state-label">HALF-OPEN</div>
+        <p class="state-desc">After a timeout, one test request is allowed. Success → CLOSED. Failure → OPEN.</p>
+      </div>
+    </div>
+    <div class="info">
+      <div class="lb">Why it matters</div>
+      <p>Without a circuit breaker, a slow downstream service causes all your threads to block waiting for it — eventually exhausting your thread pool and crashing your service too. The circuit breaker cuts the damage fast.</p>
+    </div>
+  </div>
+
+  <!-- Part 5: Quick Fire -->
+  <div class="section-head" id="quickfire">
+    <span class="section-tag st-quick">Part 5 — Quick-Fire Answers</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="quick-grid" style="margin-bottom:32px">
+    <div class="quick-card">
+      <div class="quick-q">What is CORS?</div>
+      <p class="quick-a">Cross-Origin Resource Sharing. A browser security policy that blocks requests from a different domain unless the server explicitly allows it via headers like <code style="color:#a594fa">Access-Control-Allow-Origin</code>.</p>
+    </div>
+    <div class="quick-card">
+      <div class="quick-q">REST vs GraphQL?</div>
+      <p class="quick-a">REST has multiple endpoints with fixed data shapes. GraphQL has one endpoint; the client specifies exactly what data it needs. GraphQL avoids over-fetching and under-fetching but adds query complexity.</p>
+    </div>
+    <div class="quick-card">
+      <div class="quick-q">What is an API Gateway?</div>
+      <p class="quick-a">A single entry point for all API requests. Handles cross-cutting concerns: authentication, rate limiting, routing, SSL termination, logging. Examples: AWS API Gateway, Kong, NGINX.</p>
+    </div>
+    <div class="quick-card">
+      <div class="quick-q">What is a Webhook?</div>
+      <p class="quick-a">The reverse of an API call. Instead of polling for updates, the server pushes events to your URL when something happens. Used by Stripe (payment events), GitHub (push events), etc.</p>
+    </div>
+    <div class="quick-card">
+      <div class="quick-q">What is gRPC?</div>
+      <p class="quick-a">A high-performance RPC framework using Protocol Buffers instead of JSON. Faster and more efficient than REST. Primarily used for internal microservice communication.</p>
+    </div>
+  </div>
+
+  <!-- Interview Tips -->
+  <div class="section-head">
+    <span class="section-tag st-fund">Interview Tips</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="tips-grid" style="margin-bottom:32px">
+    <div class="tip-item">
+      <span class="tip-num">1</span>
+      <p class="tip-text"><strong>Think out loud.</strong> Interviewers want to hear your reasoning process, not just the final answer.</p>
+    </div>
+    <div class="tip-item">
+      <span class="tip-num">2</span>
+      <p class="tip-text"><strong>Ask clarifying questions.</strong> "Is this a public API or internal? What's the expected scale?" Shows senior thinking.</p>
+    </div>
+    <div class="tip-item">
+      <span class="tip-num">3</span>
+      <p class="tip-text"><strong>Start simple, then optimize.</strong> Design the basic version first, then layer on caching, rate limiting, pagination, etc.</p>
+    </div>
+    <div class="tip-item">
+      <span class="tip-num">4</span>
+      <p class="tip-text"><strong>Use the right vocabulary.</strong> Idempotency, stateless, pagination, circuit breaker — drop these naturally to signal depth.</p>
+    </div>
+    <div class="tip-item">
+      <span class="tip-num">5</span>
+      <p class="tip-text"><strong>Draw it out.</strong> For system design, a quick diagram of <code style="color:#a594fa">client → API gateway → service → DB</code> goes a long way.</p>
+    </div>
+    <div class="tip-item">
+      <span class="tip-num">6</span>
+      <p class="tip-text"><strong>Know trade-offs.</strong> For every choice, be ready to say what you're giving up. "Cursor pagination is more stable but you can't jump to page 50."</p>
+    </div>
+  </div>
+
+</div>

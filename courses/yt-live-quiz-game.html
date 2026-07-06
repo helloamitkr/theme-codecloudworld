@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission Active — ytLiveQuiz</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070e07;--bg2:#0d1a0d;--bg3:#142814;--bg4:#1a3a1a;
+  --border:rgba(57,211,83,0.1);--border2:rgba(57,211,83,0.22);--border3:rgba(57,211,83,0.5);
+  --text:#d4f0d4;--text2:#6fa86f;--text3:#3a5a3a;
+  --green:#39d353;--green2:#26a641;
+  --amber:#f0b429;--red:#ff4040;
+  --greenglow:rgba(57,211,83,0.2);--redglow:rgba(255,64,64,0.22);
+  --mono:'IBM Plex Mono',monospace;--sans:'DM Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{height:100%}
+body{
+  background:var(--bg);color:var(--text);font-family:var(--mono);
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;overflow-x:hidden;position:relative;
+}
+
+/* Scanlines */
+body::after{
+  content:'';pointer-events:none;position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px);
+  z-index:9999;
+}
+body::before{
+  content:'';pointer-events:none;position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(57,211,83,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(57,211,83,0.025) 1px,transparent 1px);
+  background-size:40px 40px;z-index:0;
+}
+
+/* HUD Top bar */
+.hud{
+  width:100%;background:var(--bg2);border-bottom:1px solid var(--border2);
+  padding:.875rem 2rem;display:flex;align-items:center;gap:1rem;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 20px rgba(0,0,0,0.6);
+}
+.hud-brand{
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text3);display:flex;align-items:center;gap:6px;
+}
+.hud-brand .diamond{
+  width:6px;height:6px;background:var(--green);transform:rotate(45deg);
+  box-shadow:0 0 6px var(--green);flex-shrink:0;
+}
+.hud-mission{
+  font-size:11px;letter-spacing:.08em;color:var(--text2);margin-left:.25rem;
+}
+.hud-mission strong{color:var(--amber);font-weight:600}
+
+/* Progress bar */
+.hud-progress{flex:1;margin:0 1rem}
+.prog-track{
+  height:3px;background:var(--bg4);border-radius:2px;
+  position:relative;overflow:hidden;
+}
+.prog-fill{
+  height:100%;background:linear-gradient(90deg,var(--green),var(--amber));
+  border-radius:2px;transition:width .4s ease;
+  box-shadow:0 0 8px rgba(57,211,83,0.4);
+}
+.prog-label{
+  font-size:10px;letter-spacing:.08em;color:var(--text3);
+  text-align:right;margin-top:3px;
+}
+
+/* Score */
+.hud-score{
+  display:flex;flex-direction:column;align-items:flex-end;gap:1px;
+}
+.score-val{
+  font-size:16px;font-weight:600;color:var(--green);line-height:1;
+  text-shadow:0 0 10px var(--greenglow);
+}
+.score-lbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
+
+/* Timer */
+.hud-timer{
+  display:flex;flex-direction:column;align-items:center;gap:1px;
+  min-width:50px;
+}
+.timer-val{
+  font-size:20px;font-weight:600;line-height:1;color:var(--green);
+  text-shadow:0 0 12px var(--greenglow);transition:color .3s;
+}
+.timer-val.warn{color:var(--amber);text-shadow:0 0 12px rgba(240,180,41,.4)}
+.timer-val.danger{color:var(--red);text-shadow:0 0 12px var(--redglow);animation:timerPulse .6s ease-in-out infinite}
+@keyframes timerPulse{0%,100%{opacity:1}50%{opacity:.5}}
+.timer-lbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
+
+/* Main game area */
+.game{
+  width:100%;max-width:720px;padding:2.5rem 2rem;
+  position:relative;z-index:1;flex:1;
+  display:flex;flex-direction:column;gap:1.75rem;
+}
+
+/* Question card */
+.q-card{
+  border:1px solid var(--border2);border-radius:4px;
+  background:var(--bg2);position:relative;overflow:hidden;
+}
+.q-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--green),transparent);
+}
+.corner{position:absolute;width:12px;height:12px;border-color:var(--border3);border-style:solid}
+.corner-tl{top:7px;left:7px;border-width:1px 0 0 1px}
+.corner-tr{top:7px;right:7px;border-width:1px 1px 0 0}
+.corner-bl{bottom:7px;left:7px;border-width:0 0 1px 1px}
+.corner-br{bottom:7px;right:7px;border-width:0 1px 1px 0}
+.q-inner{padding:1.75rem 2rem}
+
+.q-meta{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:1.25rem;gap:8px;flex-wrap:wrap;
+}
+.q-num{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text3)}
+.q-num span{color:var(--green)}
+.q-category{
+  font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 8px;border-radius:2px;
+  background:rgba(240,180,41,.08);border:1px solid rgba(240,180,41,.2);color:var(--amber);
+}
+.q-points{
+  font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text2);margin-left:auto;
+}
+
+.q-text{
+  font-family:var(--sans);font-size:18px;font-weight:500;
+  color:var(--text);line-height:1.5;margin-bottom:.5rem;
+}
+
+/* Answer options */
+.options{
+  display:flex;flex-direction:column;gap:.75rem;
+  margin-top:1.25rem;
+}
+.option{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:.875rem 1.25rem;border-radius:3px;
+  border:1px solid var(--border);background:var(--bg3);
+  cursor:pointer;transition:all .15s;
+  font-family:var(--sans);font-size:15px;color:var(--text2);
+  line-height:1.4;
+}
+.option:hover:not(.disabled){
+  border-color:var(--border2);color:var(--text);
+  background:rgba(57,211,83,0.04);
+}
+.option.selected{
+  border-color:var(--green);color:var(--text);
+  background:rgba(57,211,83,0.08);
+  box-shadow:0 0 0 1px rgba(57,211,83,0.12),inset 0 0 20px rgba(57,211,83,0.04);
+}
+.option.correct{
+  border-color:var(--green);color:var(--green);
+  background:rgba(57,211,83,0.1);
+}
+.option.wrong{
+  border-color:var(--red);color:var(--red);
+  background:rgba(255,64,64,0.07);
+}
+.option.disabled{pointer-events:none;opacity:.5}
+.option-key{
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  min-width:22px;height:22px;display:flex;align-items:center;justify-content:center;
+  border-radius:2px;border:1px solid var(--border2);
+  color:var(--text3);transition:all .15s;flex-shrink:0;margin-top:1px;
+}
+.option.selected .option-key{border-color:var(--green);color:var(--green)}
+.option.correct .option-key{border-color:var(--green);color:var(--green);background:rgba(57,211,83,0.12)}
+.option.wrong   .option-key{border-color:var(--red);color:var(--red);background:rgba(255,64,64,0.1)}
+
+/* Feedback box */
+.feedback{
+  border-radius:3px;padding:1rem 1.25rem;margin-top:.25rem;
+  border-left:3px solid;font-size:14px;display:none;
+  font-family:var(--sans);
+}
+.feedback.correct-fb{
+  background:rgba(57,211,83,0.07);border-color:var(--green);display:block;
+}
+.feedback.wrong-fb{
+  background:rgba(255,64,64,0.06);border-color:var(--red);display:block;
+}
+.feedback .fb-label{
+  font-family:var(--mono);font-size:10px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;
+}
+.feedback.correct-fb .fb-label{color:var(--green)}
+.feedback.wrong-fb .fb-label{color:var(--red)}
+.feedback p{color:var(--text2);line-height:1.55}
+
+/* Submit / Next button */
+.action-row{display:flex;justify-content:flex-end;margin-top:.5rem}
+.btn{
+  font-family:var(--mono);font-size:12px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:11px 28px;border-radius:2px;cursor:pointer;
+  transition:all .15s;border:none;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-submit{
+  background:rgba(57,211,83,0.1);border:1px solid var(--border2);
+  color:var(--text2);
+}
+.btn-submit:not(:disabled):hover{
+  background:rgba(57,211,83,0.18);border-color:var(--border3);color:var(--green);
+}
+.btn-submit:disabled{opacity:.3;cursor:not-allowed}
+.btn-next{
+  background:rgba(57,211,83,0.12);border:1px solid var(--border3);color:var(--green);
+  box-shadow:0 0 12px rgba(57,211,83,0.15);
+}
+.btn-next:hover{background:rgba(57,211,83,0.2);box-shadow:0 0 20px rgba(57,211,83,0.22)}
+
+/* Question dots strip */
+.q-strip{
+  display:flex;flex-wrap:wrap;gap:6px;
+  position:relative;z-index:1;
+}
+.q-dot{
+  width:26px;height:26px;border-radius:2px;
+  border:1px solid var(--border);background:var(--bg3);
+  font-family:var(--mono);font-size:10px;color:var(--text3);
+  display:flex;align-items:center;justify-content:center;
+  cursor:default;transition:all .2s;
+}
+.q-dot.answered-c{background:rgba(57,211,83,0.12);border-color:var(--green);color:var(--green)}
+.q-dot.answered-w{background:rgba(255,64,64,0.1);border-color:var(--red);color:var(--red)}
+.q-dot.current{border-color:var(--amber);color:var(--amber);box-shadow:0 0 8px rgba(240,180,41,.2)}
+
+/* Results overlay */
+.results-overlay{
+  display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(7,14,7,0.95);
+  align-items:center;justify-content:center;
+  backdrop-filter:blur(4px);
+}
+.results-overlay.show{display:flex}
+.results-card{
+  background:var(--bg2);border:1px solid var(--border2);border-radius:4px;
+  padding:2.5rem 2.5rem 2rem;max-width:480px;width:90%;
+  position:relative;text-align:center;
+}
+.results-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--green),var(--amber),transparent);
+}
+.result-icon{font-size:3rem;margin-bottom:1rem;filter:drop-shadow(0 0 12px var(--greenglow))}
+.result-heading{font-size:22px;font-weight:600;color:var(--text);margin-bottom:.5rem}
+.result-sub{font-size:13px;color:var(--text2);margin-bottom:1.75rem;line-height:1.5}
+.result-stats{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;
+  margin-bottom:2rem;
+}
+.stat{
+  background:var(--bg3);border:1px solid var(--border);border-radius:3px;
+  padding:.875rem .5rem;
+}
+.stat-val{font-size:22px;font-weight:600;color:var(--green);line-height:1}
+.stat-val.wrong-col{color:var(--red)}
+.stat-val.score-col{color:var(--amber)}
+.stat-lbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-top:4px}
+.result-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-retry{
+  background:transparent;border:1px solid var(--border2);color:var(--text2);
+}
+.btn-retry:hover{border-color:var(--border3);color:var(--text)}
+.btn-share{
+  background:rgba(57,211,83,0.1);border:1px solid var(--border3);color:var(--green);
+}
+.btn-share:hover{background:rgba(57,211,83,0.18)}
+
+@media(max-width:540px){
+  .hud{padding:.75rem 1rem;gap:.5rem}
+  .hud-mission{display:none}
+  .game{padding:1.5rem 1rem}
+  .q-inner{padding:1.25rem}
+  .q-text{font-size:16px}
+  .option{font-size:14px}
+  .result-stats{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HUD -->
+<header class="hud">
+  <div class="hud-brand">
+    <div class="diamond"></div>
+    <span>ytLiveQuiz</span>
+  </div>
+  <div class="hud-mission">Mission: <strong id="hud-mission-name">SSC CGL · Polity</strong></div>
+  <div class="hud-progress">
+    <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:5%"></div></div>
+    <div class="prog-label"><span id="prog-text">Q 1 of 20</span></div>
+  </div>
+  <div class="hud-score">
+    <div class="score-val" id="score-display">0</div>
+    <div class="score-lbl">score</div>
+  </div>
+  <div class="hud-timer">
+    <div class="timer-val" id="timer-val">60</div>
+    <div class="timer-lbl">sec</div>
+  </div>
+</header>
+
+<!-- GAME AREA -->
+<div class="game">
+
+  <!-- Question dots -->
+  <div class="q-strip" id="q-strip"></div>
+
+  <!-- Question card -->
+  <div class="q-card" id="q-card">
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+    <div class="q-inner">
+      <div class="q-meta">
+        <span class="q-num">Question <span id="q-num-display">01</span> / <span id="q-total">20</span></span>
+        <span class="q-category" id="q-cat">Polity</span>
+        <span class="q-points" id="q-pts">+100 pts</span>
+      </div>
+      <div class="q-text" id="q-text">Loading question…</div>
+      <div class="options" id="options-list"></div>
+      <div class="feedback" id="feedback">
+        <div class="fb-label" id="fb-label">Correct!</div>
+        <p id="fb-text"></p>
+      </div>
+      <div class="action-row">
+        <button class="btn btn-submit" id="btn-submit" disabled>[ Submit ]</button>
+        <button class="btn btn-next" id="btn-next" style="display:none">Next →</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- RESULTS OVERLAY -->
+<div class="results-overlay" id="results-overlay">
+  <div class="results-card">
+    <div class="result-icon" id="result-icon">🎯</div>
+    <div class="result-heading" id="result-heading">Mission Complete</div>
+    <div class="result-sub" id="result-sub">You've completed the Polity &amp; Constitution challenge.</div>
+    <div class="result-stats">
+      <div class="stat"><div class="stat-val" id="res-correct">0</div><div class="stat-lbl">Correct</div></div>
+      <div class="stat"><div class="stat-val wrong-col" id="res-wrong">0</div><div class="stat-lbl">Wrong</div></div>
+      <div class="stat"><div class="stat-val score-col" id="res-score">0</div><div class="stat-lbl">Score</div></div>
+    </div>
+    <div class="result-btns">
+      <button class="btn btn-retry" onclick="initQuiz()">[ Retry ]</button>
+      <button class="btn btn-share" onclick="shareResult()">[ Share Score ]</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+//  QUIZ DATA — replace with your real questions
+// ─────────────────────────────────────────────
+const QUIZ = {
+  name: 'SSC CGL · Polity &amp; Constitution',
+  timePerQuestion: 45,  // seconds
+  questions: [
+    {
+      text: 'Who appoints the Chief Election Commissioner of India?',
+      category: 'Polity',
+      options: ['President of India', 'Prime Minister', 'Supreme Court', 'Parliament of India'],
+      answer: 0,
+      explanation: 'The Chief Election Commissioner is appointed by the President of India under Article 324 of the Constitution.'
+    },
+    {
+      text: 'Which article of the Indian Constitution deals with the Right to Equality?',
+      category: 'Constitution',
+      options: ['Article 12', 'Article 14', 'Article 19', 'Article 21'],
+      answer: 1,
+      explanation: 'Article 14 guarantees equality before law and equal protection of laws to all persons in India.'
+    },
+    {
+      text: 'The Directive Principles of State Policy are contained in which Part of the Constitution?',
+      category: 'Constitution',
+      options: ['Part III', 'Part IV', 'Part V', 'Part VI'],
+      answer: 1,
+      explanation: 'Part IV (Articles 36–51) contains the Directive Principles of State Policy, which are non-justiciable guidelines for the government.'
+    },
+    {
+      text: 'Who is the constitutional head of the Union Executive?',
+      category: 'Polity',
+      options: ['Prime Minister', 'President', 'Vice President', 'Speaker of Lok Sabha'],
+      answer: 1,
+      explanation: 'The President of India is the constitutional (nominal) head of the Union Executive. The Prime Minister is the real/effective head.'
+    },
+    {
+      text: 'Which Schedule of the Indian Constitution lists official languages?',
+      category: 'Constitution',
+      options: ['Sixth Schedule', 'Seventh Schedule', 'Eighth Schedule', 'Ninth Schedule'],
+      answer: 2,
+      explanation: 'The Eighth Schedule of the Indian Constitution lists 22 officially recognized languages of India.'
+    },
+    {
+      text: 'Panchayati Raj institutions were given constitutional status by which Amendment?',
+      category: 'Polity',
+      options: ['42nd Amendment', '44th Amendment', '73rd Amendment', '86th Amendment'],
+      answer: 2,
+      explanation: 'The 73rd Constitutional Amendment Act (1992) gave constitutional status to Panchayati Raj institutions and added Part IX to the Constitution.'
+    },
+    {
+      text: 'The Comptroller and Auditor General of India is appointed by whom?',
+      category: 'Polity',
+      options: ['Prime Minister', 'Finance Minister', 'President of India', 'Parliament'],
+      answer: 2,
+      explanation: 'The CAG is appointed by the President of India under Article 148. The CAG audits the accounts of Union and State governments.'
+    },
+    {
+      text: 'Which body is described as the "Fourth Estate" in a democracy?',
+      category: 'General',
+      options: ['Judiciary', 'Executive', 'Legislature', 'Press / Media'],
+      answer: 3,
+      explanation: 'The press (media) is called the Fourth Estate because of its role as a public watchdog and its influence on public opinion alongside the three branches of government.'
+    },
+    {
+      text: 'Under which article can the President of India declare a National Emergency?',
+      category: 'Constitution',
+      options: ['Article 352', 'Article 356', 'Article 360', 'Article 365'],
+      answer: 0,
+      explanation: 'Article 352 empowers the President to proclaim a National Emergency when the security of India is threatened by war, external aggression, or armed rebellion.'
+    },
+    {
+      text: 'The concept of "Judicial Review" in India is borrowed from which country?',
+      category: 'Constitution',
+      options: ['United Kingdom', 'Canada', 'USA', 'Australia'],
+      answer: 2,
+      explanation: 'India borrowed the concept of Judicial Review from the United States of America, where the Supreme Court can strike down laws that violate the Constitution.'
+    }
+  ]
+};
+
+// ─────────────────────────────────────────────
+//  GAME STATE
+// ─────────────────────────────────────────────
+let currentQ = 0;
+let score    = 0;
+let correct  = 0;
+let wrong    = 0;
+let selected = null;
+let submitted = false;
+let timerInterval = null;
+let timeLeft = 0;
+let results  = [];
+
+const KEYS = ['A','B','C','D'];
+const PTS_PER_Q = 100;
+
+// ─────────────────────────────────────────────
+//  DOM refs
+// ─────────────────────────────────────────────
+const elScore     = document.getElementById('score-display');
+const elTimer     = document.getElementById('timer-val');
+const elProg      = document.getElementById('prog-fill');
+const elProgText  = document.getElementById('prog-text');
+const elQNum      = document.getElementById('q-num-display');
+const elQTotal    = document.getElementById('q-total');
+const elQText     = document.getElementById('q-text');
+const elQCat      = document.getElementById('q-cat');
+const elQPts      = document.getElementById('q-pts');
+const elOptions   = document.getElementById('options-list');
+const elFeedback  = document.getElementById('feedback');
+const elFbLabel   = document.getElementById('fb-label');
+const elFbText    = document.getElementById('fb-text');
+const elBtnSubmit = document.getElementById('btn-submit');
+const elBtnNext   = document.getElementById('btn-next');
+const elStrip     = document.getElementById('q-strip');
+const elOverlay   = document.getElementById('results-overlay');
+
+// ─────────────────────────────────────────────
+//  INIT
+// ─────────────────────────────────────────────
+function initQuiz(){
+  currentQ = 0; score = 0; correct = 0; wrong = 0;
+  results = [];
+  elScore.textContent = 0;
+  elOverlay.classList.remove('show');
+  document.getElementById('hud-mission-name').innerHTML = QUIZ.name;
+  elQTotal.textContent = QUIZ.questions.length;
+  buildStrip();
+  loadQuestion(0);
+}
+
+function buildStrip(){
+  elStrip.innerHTML = '';
+  QUIZ.questions.forEach((_,i) => {
+    const d = document.createElement('div');
+    d.className = 'q-dot' + (i === 0 ? ' current' : '');
+    d.id = 'dot-' + i;
+    d.textContent = String(i+1).padStart(2,'0');
+    elStrip.appendChild(d);
+  });
+}
+
+function loadQuestion(idx){
+  const q = QUIZ.questions[idx];
+  selected = null; submitted = false;
+
+  // Meta
+  elQNum.textContent  = String(idx+1).padStart(2,'0');
+  elQCat.textContent  = q.category;
+  elQPts.textContent  = '+' + PTS_PER_Q + ' pts';
+  elQText.textContent = q.text;
+
+  // Progress
+  const pct = (idx / QUIZ.questions.length) * 100;
+  elProg.style.width = pct + '%';
+  elProgText.textContent = 'Q ' + (idx+1) + ' of ' + QUIZ.questions.length;
+
+  // Dots
+  document.querySelectorAll('.q-dot').forEach((d,i) => {
+    d.classList.toggle('current', i === idx);
+    if(results[i] !== undefined){
+      d.classList.toggle('answered-c', results[i]);
+      d.classList.toggle('answered-w', !results[i]);
+    }
+  });
+
+  // Options
+  elOptions.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const div = document.createElement('div');
+    div.className = 'option';
+    div.innerHTML = `<span class="option-key">${KEYS[i]}</span><span>${opt}</span>`;
+    div.addEventListener('click', () => selectOption(i));
+    elOptions.appendChild(div);
+  });
+
+  // Reset UI
+  elFeedback.className = 'feedback';
+  elFeedback.style.display = 'none';
+  elBtnSubmit.style.display = '';
+  elBtnSubmit.disabled = true;
+  elBtnNext.style.display = 'none';
+
+  // Start timer
+  clearInterval(timerInterval);
+  timeLeft = QUIZ.timePerQuestion;
+  updateTimer();
+  timerInterval = setInterval(tickTimer, 1000);
+}
+
+function selectOption(idx){
+  if(submitted) return;
+  selected = idx;
+  elBtnSubmit.disabled = false;
+  document.querySelectorAll('.option').forEach((el,i) => {
+    el.classList.toggle('selected', i === idx);
+  });
+}
+
+function tickTimer(){
+  timeLeft--;
+  updateTimer();
+  if(timeLeft <= 0){ clearInterval(timerInterval); autoSubmit(); }
+}
+
+function updateTimer(){
+  elTimer.textContent = timeLeft;
+  elTimer.className = 'timer-val';
+  if(timeLeft <= 10) elTimer.classList.add('danger');
+  else if(timeLeft <= 20) elTimer.classList.add('warn');
+}
+
+function autoSubmit(){
+  if(!submitted) submitAnswer();
+}
+
+function submitAnswer(){
+  if(submitted) return;
+  submitted = true;
+  clearInterval(timerInterval);
+
+  const q = QUIZ.questions[currentQ];
+  const isCorrect = selected === q.answer;
+  results[currentQ] = isCorrect;
+
+  if(isCorrect){
+    score += PTS_PER_Q;
+    correct++;
+    elScore.textContent = score;
+  } else {
+    wrong++;
+  }
+
+  // Style options
+  document.querySelectorAll('.option').forEach((el,i) => {
+    el.classList.add('disabled');
+    if(i === q.answer) el.classList.add('correct');
+    else if(i === selected && !isCorrect) el.classList.add('wrong');
+  });
+
+  // Feedback
+  elFeedback.style.display = 'block';
+  if(isCorrect){
+    elFeedback.className = 'feedback correct-fb';
+    elFbLabel.textContent = '◆ CORRECT INTEL';
+  } else {
+    elFeedback.className = 'feedback wrong-fb';
+    elFbLabel.textContent = '✕ WRONG — Correct answer: ' + KEYS[q.answer];
+  }
+  elFbText.textContent = q.explanation;
+
+  // Update dot
+  const dot = document.getElementById('dot-' + currentQ);
+  dot.classList.remove('current');
+  dot.classList.add(isCorrect ? 'answered-c' : 'answered-w');
+
+  elBtnSubmit.style.display = 'none';
+
+  if(currentQ < QUIZ.questions.length - 1){
+    elBtnNext.style.display = '';
+  } else {
+    setTimeout(showResults, 1000);
+  }
+}
+
+function nextQuestion(){
+  currentQ++;
+  if(currentQ < QUIZ.questions.length) loadQuestion(currentQ);
+}
+
+function showResults(){
+  clearInterval(timerInterval);
+  const total = QUIZ.questions.length;
+  const pct   = Math.round((correct / total) * 100);
+
+  document.getElementById('res-correct').textContent = correct;
+  document.getElementById('res-wrong').textContent   = wrong;
+  document.getElementById('res-score').textContent   = score;
+
+  let icon = '🎯', heading = 'Mission Complete';
+  if(pct >= 80)     { icon = '🏆'; heading = 'Outstanding Performance!'; }
+  else if(pct >= 60){ icon = '⚡'; heading = 'Mission Accomplished'; }
+  else if(pct >= 40){ icon = '📋'; heading = 'Partial Mission Success'; }
+  else              { icon = '🔄'; heading = 'Regroup &amp; Retry'; }
+
+  document.getElementById('result-icon').textContent = icon;
+  document.getElementById('result-heading').innerHTML = heading;
+  document.getElementById('result-sub').textContent =
+    `${pct}% accuracy · ${correct} correct out of ${total} questions`;
+
+  // Final progress
+  elProg.style.width = '100%';
+  elProgText.textContent = 'Complete';
+  elOverlay.classList.add('show');
+}
+
+function shareResult(){
+  const text = `I scored ${score} pts (${correct}/${QUIZ.questions.length} correct) on ytLiveQuiz — Govt Job Series! 🎯 #ytLiveQuiz #SSC #UPSC`;
+  if(navigator.share){
+    navigator.share({ title: 'ytLiveQuiz Score', text });
+  } else {
+    navigator.clipboard.writeText(text).then(() => alert('Score copied to clipboard!'));
+  }
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if(e.key >= '1' && e.key <= '4') selectOption(parseInt(e.key) - 1);
+  if(e.key === 'Enter'){
+    if(!submitted) submitAnswer();
+    else if(elBtnNext.style.display !== 'none') nextQuestion();
+  }
+});
+
+elBtnSubmit.addEventListener('click', submitAnswer);
+elBtnNext.addEventListener('click', nextQuestion);
+
+// Start
+initQuiz();
+</script>
+
+</body>
+</html>

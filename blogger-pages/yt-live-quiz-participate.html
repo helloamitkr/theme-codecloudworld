@@ -1,0 +1,473 @@
+<!-- ============================================================
+   ytLiveQuiz — Participate Page (Blogger-ready)
+   Paste this entire file into Blogger > Pages > HTML editor
+   Steps:
+     1. Create a Google Form with 4 questions:
+        - Full Name (Short answer)
+        - WhatsApp Number (Short answer)
+        - YouTube Channel ID (Short answer)
+        - Contest ID (Short answer)
+     2. Replace PARTICIPATE_GF_URL with the /formResponse URL
+     3. Replace the entry.XXXXXXXXX values with your real entry IDs
+   ============================================================ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+.pp-wrap {
+  font-family: 'IBM Plex Mono', monospace;
+  color: #d4f0d4;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #070e07;
+  padding: 1.5rem 0;
+}
+
+/* Card */
+.pp-card {
+  background: #0d1a0d;
+  border: 1px solid rgba(57,211,83,0.22);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+.pp-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #f0b429, #39d353, transparent);
+}
+
+/* Corners */
+.pp-c { position: absolute; width: 14px; height: 14px; border-color: rgba(57,211,83,0.50); border-style: solid; }
+.pp-tl { top: 8px;    left: 8px;  border-width: 1px 0 0 1px; }
+.pp-tr { top: 8px;    right: 8px; border-width: 1px 1px 0 0; }
+.pp-bl { bottom: 8px; left: 8px;  border-width: 0 0 1px 1px; }
+.pp-br { bottom: 8px; right: 8px; border-width: 0 1px 1px 0; }
+
+/* Head */
+.pp-head {
+  padding: 1.75rem 1.75rem 1.5rem;
+  border-bottom: 1px solid rgba(57,211,83,0.10);
+}
+.pp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 2px;
+  background: rgba(240,180,41,.07);
+  border: 1px solid rgba(240,180,41,.25);
+  color: #f0b429;
+  margin-bottom: 1rem;
+}
+.pp-badge-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #f0b429;
+  box-shadow: 0 0 6px #f0b429;
+  display: inline-block;
+  animation: pp-blink 2s ease-in-out infinite;
+}
+@keyframes pp-blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+.pp-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #d4f0d4;
+  line-height: 1.3;
+  margin-bottom: .375rem;
+}
+.pp-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem 1.25rem;
+  font-size: 11px;
+  color: #6fa86f;
+  margin-top: .625rem;
+}
+.pp-meta span::before { content: '&#9672;  '; color: #3a5a3a; }
+
+/* Body */
+.pp-body { padding: 1.75rem; }
+
+/* Field rows */
+.pp-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.125rem; }
+.pp-row.full { grid-template-columns: 1fr; }
+.pp-field { display: flex; flex-direction: column; gap: 5px; }
+.pp-label {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #3a5a3a;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.pp-req { color: #f0b429; font-size: 13px; line-height: 1; }
+
+.pp-input {
+  background: #142814;
+  border: 1px solid rgba(57,211,83,0.22);
+  border-radius: 3px;
+  color: #d4f0d4;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  padding: 10px 13px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color .15s, box-shadow .15s;
+}
+.pp-input::placeholder { color: #3a5a3a; }
+.pp-input:focus {
+  border-color: rgba(57,211,83,0.50);
+  box-shadow: 0 0 0 3px rgba(57,211,83,.09);
+}
+.pp-input.err { border-color: rgba(255,64,64,.5); }
+.pp-phone.err { border-color: rgba(255,64,64,.5); }
+
+.pp-hint { font-size: 10px; color: #3a5a3a; margin-top: 1px; }
+.pp-err  { font-size: 10px; color: #ff4040; display: none; }
+.pp-err.show { display: block; }
+
+/* Phone */
+.pp-phone {
+  display: flex;
+  border: 1px solid rgba(57,211,83,0.22);
+  border-radius: 3px;
+  overflow: hidden;
+  transition: border-color .15s, box-shadow .15s;
+}
+.pp-phone:focus-within {
+  border-color: rgba(57,211,83,0.50);
+  box-shadow: 0 0 0 3px rgba(57,211,83,.09);
+}
+.pp-pfx {
+  background: #1a3a1a;
+  border-right: 1px solid rgba(57,211,83,0.22);
+  color: #6fa86f;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.pp-pnum {
+  background: #142814;
+  border: none;
+  color: #d4f0d4;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  padding: 10px 13px;
+  outline: none;
+  width: 100%;
+}
+.pp-pnum::placeholder { color: #3a5a3a; }
+
+/* Divider */
+.pp-div {
+  height: 1px;
+  margin: 1.375rem 0;
+  background: linear-gradient(90deg, transparent, rgba(57,211,83,0.22), transparent);
+}
+
+/* Contest ID highlight box */
+.pp-contest-box {
+  background: rgba(240,180,41,.04);
+  border: 1px solid rgba(240,180,41,.18);
+  border-radius: 3px;
+  padding: .875rem 1rem;
+  margin-bottom: 1.375rem;
+  font-size: 11px;
+  color: #8a7040;
+  line-height: 1.6;
+}
+.pp-contest-box strong { color: #f0b429; display: block; margin-bottom: .25rem; font-size: 12px; }
+
+/* Submit */
+.pp-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+}
+.pp-note { font-size: 10px; color: #3a5a3a; text-align: center; letter-spacing: .04em; }
+.pp-submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(240,180,41,.10);
+  border: 1px solid rgba(240,180,41,0.30);
+  border-radius: 3px;
+  color: #f0b429;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 13px 36px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.pp-submit:hover {
+  background: rgba(240,180,41,.18);
+  border-color: rgba(240,180,41,0.55);
+  box-shadow: 0 0 18px rgba(240,180,41,.12);
+}
+.pp-submit:disabled { opacity: .5; cursor: not-allowed; pointer-events: none; }
+.pp-spin {
+  width: 14px; height: 14px;
+  border: 2px solid rgba(240,180,41,.3);
+  border-top-color: #f0b429;
+  border-radius: 50%;
+  animation: pp-spin .7s linear infinite;
+  display: none;
+  flex-shrink: 0;
+}
+.pp-submit.loading .pp-spin { display: block; }
+.pp-submit.loading .pp-stxt { display: none; }
+@keyframes pp-spin { to { transform: rotate(360deg); } }
+
+/* Success */
+.pp-ok {
+  display: none;
+  text-align: center;
+  padding: 3rem 1.75rem;
+}
+.pp-ok.show { display: block; }
+.pp-ok-ico {
+  width: 62px; height: 62px;
+  margin: 0 auto 1.25rem;
+  border: 2px solid #39d353;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(57,211,83,.22);
+  animation: pp-pop .45s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes pp-pop { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+.pp-ok-ico svg { color: #39d353; }
+.pp-ok-title { font-size: 19px; font-weight: 600; color: #39d353; margin-bottom: .625rem; text-shadow: 0 0 18px rgba(57,211,83,.3); }
+.pp-ok-msg   { font-size: 13px; color: #6fa86f; line-height: 1.65; margin-bottom: .75rem; }
+.pp-ok-meta  { font-size: 11px; color: #3a5a3a; letter-spacing: .06em; margin-bottom: 1.75rem; }
+.pp-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #6fa86f;
+  border: 1px solid rgba(57,211,83,0.10);
+  padding: 9px 22px;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: all .15s;
+}
+.pp-back:hover { border-color: rgba(57,211,83,0.22); color: #39d353; }
+
+@media (max-width: 520px) {
+  .pp-row  { grid-template-columns: 1fr; }
+  .pp-body { padding: 1.25rem; }
+  .pp-head { padding: 1.25rem; }
+}
+</style>
+
+<div class="pp-wrap">
+  <div class="pp-card">
+    <div class="pp-c pp-tl"></div>
+    <div class="pp-c pp-tr"></div>
+    <div class="pp-c pp-bl"></div>
+    <div class="pp-c pp-br"></div>
+
+    <!-- Header -->
+    <div class="pp-head">
+      <div class="pp-badge"><span class="pp-badge-dot"></span>Participation &#183; Live</div>
+      <div class="pp-title">Join the Quiz</div>
+      <div class="pp-meta">
+        <span>SSC CGL &#183; General Awareness</span>
+        <span>Sat, 14 Jun 2026 &#183; 21:00 IST</span>
+        <span>Live on YouTube</span>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="pp-body" id="pp-form-body">
+      <form id="pp-form" novalidate="novalidate">
+
+        <!-- Name -->
+        <div class="pp-row">
+          <div class="pp-field">
+            <label class="pp-label" for="pp-fname">First Name <span class="pp-req">*</span></label>
+            <input class="pp-input" id="pp-fname" type="text" placeholder="Rahul"/>
+            <span class="pp-err" id="pp-err-fname">Enter your first name</span>
+          </div>
+          <div class="pp-field">
+            <label class="pp-label" for="pp-lname">Last Name <span class="pp-req">*</span></label>
+            <input class="pp-input" id="pp-lname" type="text" placeholder="Sharma"/>
+            <span class="pp-err" id="pp-err-lname">Enter your last name</span>
+          </div>
+        </div>
+
+        <!-- WhatsApp -->
+        <div class="pp-row full">
+          <div class="pp-field">
+            <label class="pp-label" for="pp-wa">WhatsApp Number <span class="pp-req">*</span></label>
+            <div class="pp-phone" id="pp-phone">
+              <div class="pp-pfx">&#127470;&#127475; +91</div>
+              <input class="pp-pnum" id="pp-wa" type="tel" placeholder="98765 43210" maxlength="10"/>
+            </div>
+            <span class="pp-err" id="pp-err-wa">Enter a valid 10-digit WhatsApp number</span>
+          </div>
+        </div>
+
+        <!-- Channel ID -->
+        <div class="pp-row full">
+          <div class="pp-field">
+            <label class="pp-label" for="pp-channel">YouTube Channel ID <span class="pp-req">*</span></label>
+            <input class="pp-input" id="pp-channel" type="text" placeholder="@YourChannel or UCxxxxx"/>
+            <span class="pp-hint">Your YouTube channel handle or channel ID</span>
+            <span class="pp-err" id="pp-err-channel">Enter your YouTube channel ID</span>
+          </div>
+        </div>
+
+        <div class="pp-div"></div>
+
+        <!-- Contest ID -->
+        <div class="pp-contest-box">
+          <strong>&#9654; Where to find the Contest ID</strong>
+          The contest code is shown live on screen during the YouTube quiz session.
+          Watch the stream and enter the code displayed by the host.
+        </div>
+
+        <div class="pp-row full">
+          <div class="pp-field">
+            <label class="pp-label" for="pp-contest">Contest ID <span class="pp-req">*</span></label>
+            <input class="pp-input" id="pp-contest" type="text" placeholder="Enter code shown on stream"/>
+            <span class="pp-err" id="pp-err-contest">Enter the contest ID from the live stream</span>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="pp-actions">
+          <button type="submit" class="pp-submit" id="pp-btn">
+            <span class="pp-spin"></span>
+            <span class="pp-stxt">[ Submit &amp; Participate ]</span>
+          </button>
+          <div class="pp-note">Enter your details to register your participation in this session.</div>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Success screen -->
+    <div class="pp-ok" id="pp-ok">
+      <div class="pp-ok-ico">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <div class="pp-ok-title">Participation Confirmed</div>
+      <div class="pp-ok-msg">Your entry has been recorded.<br/>Good luck in the quiz!</div>
+      <div class="pp-ok-meta" id="pp-ok-meta"></div>
+      <a class="pp-back" href="/">&#8592; Back to Home</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var GF = 'https://docs.google.com/forms/d/e/1FAIpQLSdTLbM8li5tk7TIjx0rj5Ce2nl5-tIT2z2wpvNrNCr-Xnv6Mw/formResponse';
+  var E = {
+    name:    'entry.1930094438',  /* Full Name          */
+    wa:      'entry.774527992',   /* WhatsApp Number    */
+    channel: 'entry.1544801000',  /* Channel Handlers   */
+    contest: 'entry.669208939'    /* ContestID          */
+  };
+
+  /* WhatsApp: digits only */
+  document.getElementById('pp-wa').addEventListener('input', function(){
+    this.value = this.value.replace(/\D/g,'').slice(0,10);
+  });
+
+  /* Validation */
+  function chk(id, eid, pw, fn) {
+    var el  = document.getElementById(id);
+    var err = document.getElementById(eid);
+    var ww  = pw ? document.getElementById(pw) : null;
+    var ok  = fn(el.value);
+    el.classList.toggle('err', !ok);
+    if(ww) ww.classList.toggle('err', !ok);
+    err.classList.toggle('show', !ok);
+    return ok;
+  }
+
+  function validate() {
+    var ok = true;
+    ok = chk('pp-fname',   'pp-err-fname',   null,       function(v){ return v.trim().length>=2; }) && ok;
+    ok = chk('pp-lname',   'pp-err-lname',   null,       function(v){ return v.trim().length>=2; }) && ok;
+    ok = chk('pp-wa',      'pp-err-wa',      'pp-phone', function(v){ return /^\d{10}$/.test(v); }) && ok;
+    ok = chk('pp-channel', 'pp-err-channel', null,       function(v){ return v.trim().length>=2; }) && ok;
+    ok = chk('pp-contest', 'pp-err-contest', null,       function(v){ return v.trim().length>=2; }) && ok;
+    return ok;
+  }
+
+  /* Submit */
+  document.getElementById('pp-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!validate()) return;
+
+    var fn = document.getElementById('pp-fname').value.trim();
+    var ln = document.getElementById('pp-lname').value.trim();
+    var wa = document.getElementById('pp-wa').value.trim();
+    var ch = document.getElementById('pp-channel').value.trim();
+    var ct = document.getElementById('pp-contest').value.trim();
+
+    var fd = new URLSearchParams();
+    fd.append(E.name,    fn+' '+ln);
+    fd.append(E.wa,      '+91'+wa);
+    fd.append(E.channel, ch);
+    fd.append(E.contest, ct);
+    fd.append('fvv',         '1');
+    fd.append('pageHistory', '0');
+
+    var btn = document.getElementById('pp-btn');
+    btn.classList.add('loading'); btn.disabled = true;
+
+    fetch(GF, {method:'POST', mode:'no-cors', body:fd})
+      .catch(function(){})
+      .finally(function(){
+        document.getElementById('pp-form-body').style.display = 'none';
+        document.getElementById('pp-ok').classList.add('show');
+        document.getElementById('pp-ok-meta').textContent = fn+' '+ln+' · '+ch;
+      });
+  });
+
+  /* Clear errors on input */
+  ['pp-fname','pp-lname','pp-channel','pp-contest'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('input', function(){
+      this.classList.remove('err');
+      var sfx = id.replace('pp-','');
+      var e = document.getElementById('pp-err-'+sfx);
+      if(e) e.classList.remove('show');
+    });
+  });
+
+})();
+</script>

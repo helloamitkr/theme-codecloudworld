@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terraform on AWS — Full Course | codecloudworld</title>
+<meta name="description" content="Complete Terraform on AWS course: 15 modules from beginner to advanced. Learn IaC, VPC, ECS, EKS, CI/CD, Terragrunt, and multi-account setups with hands-on projects.">
+<link rel="canonical" href="https://www.codecloudworld.com/p/terraform-aws-course.html">
+<meta property="og:title" content="Terraform on AWS — Full Course">
+<meta property="og:type" content="article">
+<meta property="og:description" content="15 modules, 3 projects. Master Terraform on AWS from zero to production.">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&amp;family=DM+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0f12;--bg2:#13161b;--bg3:#1a1e26;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#e8eaf0;--text2:#8a90a0;--text3:#555c6e;--accent:#7c6af7;--accent2:#a594fa;--green:#3ecf8e;--blue:#3b82f6;--amber:#f59e0b;--red:#ef4444;--mono:'IBM Plex Mono',monospace;--serif:'Fraunces',serif;--sans:'DM Sans',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.7;min-height:100vh}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:280px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100;transition:transform .3s}
+.main{margin-left:280px;flex:1;max-width:900px;padding:0 2.5rem 6rem}
+.sidebar-logo{padding:1.5rem 1.25rem 1rem;border-bottom:1px solid var(--border)}
+.logo-label{font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+.logo-title{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--text)}
+.logo-sub{font-size:12px;color:var(--text2);margin-top:2px}
+.sidebar-section{padding:.75rem 0}
+.sidebar-section-label{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;padding:.25rem 1.25rem .5rem}
+.sidebar-item{display:flex;align-items:center;gap:8px;padding:.4rem 1.25rem;cursor:pointer;border-left:2px solid transparent;transition:all .15s;font-size:13px;color:var(--text2);text-decoration:none}
+.sidebar-item:hover{color:var(--text);background:rgba(255,255,255,0.03)}
+.sidebar-item.active{color:var(--accent2);border-left-color:var(--accent);background:rgba(124,106,247,0.07)}
+.sidebar-item .num{font-family:var(--mono);font-size:10px;color:var(--text3);min-width:20px}
+.sidebar-item .badge{margin-left:auto;font-size:10px;padding:1px 6px;border-radius:3px}
+.badge-beg{background:rgba(62,207,142,0.15);color:var(--green)}
+.badge-int{background:rgba(59,130,246,0.15);color:var(--blue)}
+.badge-adv{background:rgba(124,106,247,0.15);color:var(--accent2)}
+.sidebar-divider{height:1px;background:var(--border);margin:.5rem 1.25rem}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(13,15,18,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.875rem 2.5rem;display:flex;align-items:center;gap:1rem}
+.topbar-breadcrumb{font-family:var(--mono);font-size:12px;color:var(--text3)}
+.topbar-breadcrumb span{color:var(--text2)}
+.mode-toggle{margin-left:auto;display:flex;background:var(--bg3);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.mode-btn{font-size:12px;padding:5px 14px;cursor:pointer;color:var(--text2);font-family:var(--mono);transition:all .15s;border:none;background:none}
+.mode-btn.active{background:var(--accent);color:#fff}
+.module-section{padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.module-section:last-child{border-bottom:none}
+.level-divider{display:flex;align-items:center;gap:1rem;padding:2.5rem 0 .5rem}
+.level-divider-line{flex:1;height:1px;background:var(--border)}
+.level-divider-label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:4px 14px;border-radius:4px}
+.level-beg .level-divider-label{background:rgba(62,207,142,0.12);color:var(--green);border:1px solid rgba(62,207,142,0.2)}
+.level-int .level-divider-label{background:rgba(59,130,246,0.12);color:var(--blue);border:1px solid rgba(59,130,246,0.2)}
+.level-adv .level-divider-label{background:rgba(124,106,247,0.12);color:var(--accent2);border:1px solid rgba(124,106,247,0.2)}
+.module-header{margin-bottom:1.75rem}
+.module-number{font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacing:.08em;margin-bottom:6px}
+.module-title{font-family:var(--serif);font-size:28px;font-weight:600;color:var(--text);line-height:1.2;margin-bottom:.75rem}
+.module-desc{color:var(--text2);font-size:15px;line-height:1.6;max-width:620px}
+.mode-concise,.mode-full{display:none}
+.mode-concise.show,.mode-full.show{display:block}
+.concept-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;margin:1.25rem 0}
+.concept-box h4{font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem}
+.concept-box p{color:var(--text2);font-size:14px;line-height:1.65}
+.code-wrap{margin:1.25rem 0;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.code-header{background:var(--bg3);border-bottom:1px solid var(--border);padding:.6rem 1rem;display:flex;align-items:center;justify-content:space-between}
+.code-lang{font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacing:.06em}
+.code-filename{font-family:var(--mono);font-size:12px;color:var(--accent2)}
+.copy-btn{font-family:var(--mono);font-size:11px;color:var(--text3);background:none;border:1px solid var(--border);padding:3px 10px;border-radius:4px;cursor:pointer;transition:all .15s}
+.copy-btn:hover{color:var(--text);border-color:var(--border2)}
+pre{background:#0a0c0f;padding:1.25rem 1.5rem;overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.7;color:#c9d1d9}
+.kw{color:#ff79c6}.str{color:#f1fa8c}.cm{color:#6272a4;font-style:italic}.fn{color:#8be9fd}.val{color:#bd93f9}.attr{color:#50fa7b}.op{color:#ff79c6}
+.callout{border-radius:8px;padding:1rem 1.25rem;margin:1.25rem 0;border-left:3px solid;font-size:14px}
+.callout-tip{background:rgba(62,207,142,0.07);border-color:var(--green)}
+.callout-tip .callout-label{color:var(--green)}
+.callout-warn{background:rgba(245,158,11,0.07);border-color:var(--amber)}
+.callout-warn .callout-label{color:var(--amber)}
+.callout-info{background:rgba(59,130,246,0.07);border-color:var(--blue)}
+.callout-info .callout-label{color:var(--blue)}
+.callout .callout-label{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.callout p{color:var(--text2);line-height:1.6}
+.cmd-list{list-style:none;margin:1rem 0;display:flex;flex-direction:column;gap:8px}
+.cmd-list li{display:flex;gap:1rem;align-items:baseline}
+.cmd-list .cmd{font-family:var(--mono);font-size:13px;color:var(--accent2);min-width:260px}
+.cmd-list .desc{font-size:13px;color:var(--text2)}
+.topics{display:flex;flex-wrap:wrap;gap:6px;margin:.75rem 0 1.25rem}
+.topic{font-family:var(--mono);font-size:11px;padding:3px 10px;border-radius:4px;background:var(--bg3);border:1px solid var(--border);color:var(--text2)}
+.project-card{border-radius:12px;padding:1.5rem;margin:2rem 0 0}
+.project-card-beg{background:linear-gradient(135deg,rgba(62,207,142,0.08),rgba(62,207,142,0.03));border:1px solid rgba(62,207,142,0.2)}
+.project-card-int{background:linear-gradient(135deg,rgba(59,130,246,0.08),rgba(59,130,246,0.03));border:1px solid rgba(59,130,246,0.2)}
+.project-card-adv{background:linear-gradient(135deg,rgba(124,106,247,0.08),rgba(124,106,247,0.03));border:1px solid rgba(124,106,247,0.2)}
+.project-tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.project-card-beg .project-tag{color:var(--green)}
+.project-card-int .project-tag{color:var(--blue)}
+.project-card-adv .project-tag{color:var(--accent2)}
+.project-card h3{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--text);margin-bottom:8px}
+.project-card p{color:var(--text2);font-size:14px;line-height:1.65}
+.project-steps{margin-top:1rem;display:flex;flex-direction:column;gap:6px}
+.project-step{font-size:13px;color:var(--text2);display:flex;gap:10px;align-items:baseline}
+.project-step::before{content:attr(data-n);font-family:var(--mono);font-size:11px;color:var(--text3);min-width:20px}
+.section-h{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--text);margin:2rem 0 .75rem}
+.section-sub{font-size:14px;color:var(--text2);margin-bottom:1.25rem}
+code{font-family:var(--mono);font-size:12.5px;background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:1px 6px;color:var(--accent2)}
+.progress-bar{position:fixed;top:0;left:280px;right:0;height:2px;background:var(--bg3);z-index:200}
+.progress-fill{height:100%;background:var(--accent);width:0%;transition:width .1s}
+.menu-toggle{display:none;position:fixed;bottom:1.5rem;right:1.5rem;background:var(--accent);color:#fff;border:none;border-radius:50%;width:48px;height:48px;font-size:20px;cursor:pointer;z-index:300}
+@media(max-width:768px){
+.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:0 1.25rem 5rem}.topbar{padding:.75rem 1.25rem}.progress-bar{left:0}.menu-toggle{display:flex;align-items:center;justify-content:center}.cmd-list li{flex-direction:column;gap:2px}.cmd-list .cmd{min-width:auto}
+}
+</style>
+</head>
+<body>
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-logo"><div class="logo-label">Full course</div><div class="logo-title">Terraform × AWS</div><div class="logo-sub">15 modules · 3 projects</div></div>
+<div class="sidebar-section"><div class="sidebar-section-label">Beginner</div>
+<a class="sidebar-item active" href="#m1" onclick="setActive(this)"><span class="num">01</span>Setup &amp; core concepts<span class="badge badge-beg">BEG</span></a>
+<a class="sidebar-item" href="#m2" onclick="setActive(this)"><span class="num">02</span>Variables &amp; outputs<span class="badge badge-beg">BEG</span></a>
+<a class="sidebar-item" href="#m3" onclick="setActive(this)"><span class="num">03</span>State management<span class="badge badge-beg">BEG</span></a>
+<a class="sidebar-item" href="#m4" onclick="setActive(this)"><span class="num">04</span>Core AWS resources<span class="badge badge-beg">BEG</span></a>
+<a class="sidebar-item" href="#p1" onclick="setActive(this)"><span class="num">★</span>Project 1</a>
+</div>
+<div class="sidebar-divider"></div>
+<div class="sidebar-section"><div class="sidebar-section-label">Intermediate</div>
+<a class="sidebar-item" href="#m5" onclick="setActive(this)"><span class="num">05</span>Modules<span class="badge badge-int">INT</span></a>
+<a class="sidebar-item" href="#m6" onclick="setActive(this)"><span class="num">06</span>Networking (VPC)<span class="badge badge-int">INT</span></a>
+<a class="sidebar-item" href="#m7" onclick="setActive(this)"><span class="num">07</span>Remote state<span class="badge badge-int">INT</span></a>
+<a class="sidebar-item" href="#m8" onclick="setActive(this)"><span class="num">08</span>Compute &amp; load balancing<span class="badge badge-int">INT</span></a>
+<a class="sidebar-item" href="#m9" onclick="setActive(this)"><span class="num">09</span>CI/CD integration<span class="badge badge-int">INT</span></a>
+<a class="sidebar-item" href="#p2" onclick="setActive(this)"><span class="num">★</span>Project 2</a>
+</div>
+<div class="sidebar-divider"></div>
+<div class="sidebar-section"><div class="sidebar-section-label">Advanced</div>
+<a class="sidebar-item" href="#m10" onclick="setActive(this)"><span class="num">10</span>Advanced HCL<span class="badge badge-adv">ADV</span></a>
+<a class="sidebar-item" href="#m11" onclick="setActive(this)"><span class="num">11</span>Containers (ECS/EKS)<span class="badge badge-adv">ADV</span></a>
+<a class="sidebar-item" href="#m12" onclick="setActive(this)"><span class="num">12</span>Serverless<span class="badge badge-adv">ADV</span></a>
+<a class="sidebar-item" href="#m13" onclick="setActive(this)"><span class="num">13</span>Terragrunt<span class="badge badge-adv">ADV</span></a>
+<a class="sidebar-item" href="#m14" onclick="setActive(this)"><span class="num">14</span>Security &amp; compliance<span class="badge badge-adv">ADV</span></a>
+<a class="sidebar-item" href="#m15" onclick="setActive(this)"><span class="num">15</span>Multi-region &amp; multi-account<span class="badge badge-adv">ADV</span></a>
+<a class="sidebar-item" href="#p3" onclick="setActive(this)"><span class="num">★</span>Project 3</a>
+</div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+<div class="topbar"><div class="topbar-breadcrumb">Terraform AWS <span>/ Full Course</span></div><div class="mode-toggle"><button class="mode-btn active" id="btn-concise" onclick="setMode('concise')">Concise</button><button class="mode-btn" id="btn-full" onclick="setMode('full')">Full</button></div></div>
+
+<div class="level-divider level-beg"><div class="level-divider-line"></div><div class="level-divider-label">Beginner · Modules 1–4</div><div class="level-divider-line"></div></div>
+
+<!-- MODULE 1 -->
+<section class="module-section" id="m1">
+<div class="module-header"><div class="module-number">MODULE 01</div><div class="module-title">Setup &amp; core concepts</div><div class="module-desc">Install Terraform, configure AWS credentials, and understand the fundamental workflow that everything else is built on.</div></div>
+<div class="topics"><span class="topic">terraform install</span><span class="topic">HCL syntax</span><span class="topic">providers</span><span class="topic">resources</span><span class="topic">init/plan/apply/destroy</span></div>
+<div class="mode-concise show">
+<div class="concept-box"><h4>What is Terraform?</h4><p>Terraform is an Infrastructure as Code (IaC) tool. You describe infrastructure in <code>.tf</code> files using HashiCorp Configuration Language (HCL), and Terraform creates/manages it on AWS (or any cloud).</p></div>
+<ul class="cmd-list">
+<li><span class="cmd">terraform init</span><span class="desc">Download providers, set up backend</span></li>
+<li><span class="cmd">terraform plan</span><span class="desc">Preview changes (dry run)</span></li>
+<li><span class="cmd">terraform apply</span><span class="desc">Create/update infrastructure</span></li>
+<li><span class="cmd">terraform destroy</span><span class="desc">Tear down all resources</span></li>
+<li><span class="cmd">terraform fmt</span><span class="desc">Auto-format .tf files</span></li>
+<li><span class="cmd">terraform validate</span><span class="desc">Check config for errors</span></li>
+</ul>
+<div class="code-wrap"><div class="code-header"><span class="code-filename">main.tf</span><span class="code-lang">HCL</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cm"># Configure the AWS provider</span>
+<span class="kw">terraform</span> {
+  <span class="fn">required_providers</span> {
+    <span class="attr">aws</span> = {
+      <span class="attr">source</span>  = <span class="str">"hashicorp/aws"</span>
+      <span class="attr">version</span> = <span class="str">"~&gt; 5.0"</span>
+    }
+  }
+}
+
+<span class="kw">provider</span> <span class="str">"aws"</span> {
+  <span class="attr">region</span> = <span class="str">"us-east-1"</span>
+}
+
+<span class="cm"># Create an EC2 instance</span>
+<span class="kw">resource</span> <span class="str">"aws_instance"</span> <span class="str">"web"</span> {
+  <span class="attr">ami</span>           = <span class="str">"ami-0c55b159cbfafe1f0"</span>
+  <span class="attr">instance_type</span> = <span class="str">"t2.micro"</span>
+  <span class="fn">tags</span> = { <span class="attr">Name</span> = <span class="str">"MyFirstServer"</span> }
+}</pre></div>
+</div>
+<div class="mode-full">
+<div class="section-h">Installation</div>
+<div class="code-wrap"><div class="code-header"><span class="code-filename">terminal</span><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cm"># Mac (Homebrew)</span>
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
+
+<span class="cm"># Verify</span>
+terraform --version
+
+<span class="cm"># Install &amp; configure AWS CLI</span>
+brew install awscli
+aws configure</pre></div>
+<div class="callout callout-tip"><div class="callout-label">Tip</div><p>Create a dedicated IAM user with <code>AdministratorAccess</code>. Never use root credentials.</p></div>
+<div class="section-h">The Terraform workflow</div>
+<div class="code-wrap"><div class="code-header"><span class="code-filename">terminal</span><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre>terraform init      <span class="cm"># Download providers</span>
+terraform plan      <span class="cm"># Preview changes</span>
+terraform apply     <span class="cm"># Create infrastructure</span>
+terraform destroy   <span class="cm"># Tear down</span>
+terraform fmt       <span class="cm"># Format files</span>
+terraform validate  <span class="cm"># Check for errors</span></pre></div>
+<div class="callout callout-warn"><div class="callout-label">Warning</div><p>Always run <code>terraform plan</code> before <code>apply</code>. Look for unexpected destroys (shown in red).</p></div>
+</div>
+</section>
+
+<!-- MODULE 2 -->
+<section class="module-section" id="m2">
+<div class="module-header"><div class="module-number">MODULE 02</div><div class="module-title">Variables &amp; outputs</div><div class="module-desc">Make configs reusable with input variables, output values, locals, and data sources.</div></div>
+<div class="topics"><span class="topic">variable</span><span class="topic">output</span><span class="topic">locals</span><span class="topic">data sources</span><span class="topic">.tfvars</span></div>
+<div class="mode-concise show">
+<div class="code-wrap"><div class="code-header"><span class="code-filename">variables.tf</span><span class="code-lang">HCL</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">variable</span> <span class="str">"instance_type"</span> {
+  <span class="attr">description</span> = <span class="str">"EC2 instance type"</span>
+  <span class="attr">type</span>        = <span class="fn">string</span>
+  <span class="attr">default</span>     = <span class="str">"t2.micro"</span>
+}
+
+<span class="kw">resource</span> <span class="str">"aws_instance"</span> <span class="str">"web"</span> {
+  <span class="attr">instance_type</span> = <span class="val">var.instance_type</span>
+}
+
+<span class="kw">locals</span> {
+  <span class="attr">env</span>  = <span class="str">"dev"</span>
+  <span class="attr">name</span> = <span class="str">"myapp-${<span class="val">local.env</span>}"</span>
+}
+
+<span class="kw">output</span> <span class="str">"instance_ip"</span> {
+  <span class="attr">value</span> = <span class="val">aws_instance.web.public_ip</span>
+}</pre></div>
+<div class="callout callout-tip"><div class="callout-label">Tip</div><p>Put values in <code>terraform.tfvars</code>. Never commit secrets — use <code>TF_VAR_name</code> env vars or Secrets Manager.</p></div>
+</div>
+<div class="mode-full">
+<div class="section-h">Data sources</div>
+<div class="code-wrap"><div class="code-header"><span class="code-filename">data.tf</span><span class="code-lang">HCL</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">data</span> <span class="str">"aws_ami"</span> <span class="str">"amazon_linux"</span> {
+  <span class="attr">most_recent</span> = <span class="val">true</span>
+  <span class="attr">owners</span>      = [<span class="str">"amazon"</span>]
+  <span class="fn">filter</span> {
+    <span class="attr">name</span>   = <span class="str">"name"</span>
+    <span class="attr">values</span> = [<span class="str">"amzn2-ami-hvm-*-x86_64-gp2"</span>]
+  }
+}
+<span class="kw">resource</span> <span class="str">"aws_instance"</span> <span class="str">"web"</span> {
+  <span class="attr">ami</span> = <span class="val">data.aws_ami.amazon_linux.id</span>
+}</pre></div>
+</div>
+</section>
+
+<!-- MODULE 3 -->
+<section class="module-section" id="m3">
+<div class="module-header"><div class="module-number">MODULE 03</div><div class="module-title">State management</div><div class="module-desc">Terraform tracks what it has created in a state file. Understanding state is critical to avoiding disasters.</div></div>
+<div class="topics"><span class="topic">terraform.tfstate</span><span class="topic">state commands</span><span class="topic">import</span><span class="topic">state locking</span></div>
+<div class="mode-concise show">
+<div class="concept-box"><h4>What is state?</h4><p><code>terraform.tfstate</code> maps your config to real AWS resources. It records IDs, metadata, and dependencies.</p></div>
+<ul class="cmd-list">
+<li><span class="cmd">terraform state list</span><span class="desc">List all resources in state</span></li>
+<li><span class="cmd">terraform state show aws_instance.web</span><span class="desc">Show resource attributes</span></li>
+<li><span class="cmd">terraform state rm aws_instance.web</span><span class="desc">Remove from state (keeps AWS resource)</span></li>
+<li><span class="cmd">terraform import aws_instance.web i-1234</span><span class="desc">Import existing resource</span></li>
+</ul>
+<div class="callout callout-warn"><div class="callout-label">Warning</div><p>Never manually edit <code>terraform.tfstate</code>. For teams, use remote state (Module 7).</p></div>
+</div>
+<div class="mode-full">
+<div class="section-h">Import block (Terraform 1.5+)</div>
+<div class="code-wrap"><div class="code-header"><span class="code-filename">imports.tf</span><span class="code-lang">HCL</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">import</span> {
+  <span class="attr">to</span> = <span class="val">aws_instance.existing</span>
+  <span class="attr">id</span> = <span class="str">"i-0a1b2c3d4e5f67890"</span>
+}</pre></div>
+</div>
+</section>
+
+<!-- MODULE 4 -->
+<section class="module-section" id="m4">
+<div class="module-header"><div class="module-number">MODULE 04</div><div class="module-title">Core AWS resources</div><div class="module-desc">Essential building blocks: EC2, S3, IAM, and security groups.</div></div>
+<div class="topics"><span class="topic">aws_instance</span><span class="topic">aws_s3_bucket</span><span class="topic">aws_iam_role</span><span class="topic">aws_security_group</span></div>
+<div class="mode-concise show">
+<div class="code-wrap"><div class="code-header"><span class="code-filename">main.tf</span><span class="code-lang">HCL</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">resource</span> <span class="str">"aws_security_group"</span> <span class="str">"web_sg"</span> {
+  <span class="attr">name</span> = <span class="str">"web-sg"</span>
+  <span class="fn">ingress</span> {
+    <span class="attr">from_port</span> = <span class="val">80</span>; <span class="attr">to_port</span> = <span class="val">80</span>
+    <span class="attr">protocol</span> = <span class="str">"tcp"</span>; <span class="attr">cidr_blocks</span> = [<span class="str">"0.0.0.0/0"</span>]
+  }
+  <span class="fn">egress</span> {
+    <span class="attr">from_port</span> = <span class="val">0</span>; <span class="attr">to_port</span> = <span class="val">0</span>
+    <span class="attr">protocol</span> = <span class="str">"-1"</span>; <span class="attr">cidr_blocks</span> = [<span class="str">"0.0.0.0/0"</span>]
+  }
+}
+<span class="kw">resource</span> <span class="str">"aws_instance"</span> <span class="str">"web"</span> {
+  <span class="attr">ami</span>                    = <span class="str">"ami-0c55b159cbfafe1f0"</span>
+  <span class="attr">instance_type</span>          = <span class="str">"t2.micro"</span>
+  <span class="attr">vpc_security_group_ids</span> = [<span class="val">aws_security_group.web_sg.id</span>]
+}</pre></div>
+</div>
+<div class="mode-full">
+<div class="callout callout-tip"><div class="callout-label">Tip</div><p>Always prefer IAM roles over access keys for EC2. Instances get temporary credentials automatically.</p></div>
+</div>
+</section>
+
+<!-- PROJECT 1 -->
+<section class="module-section" id="p1">
+<div class="project-card project-card-beg"><div class="project-tag">★ Beginner Project</div><h3>Static website on S3 + CloudFront</h3><p>Deploy a static website using S3 for storage and CloudFront as the CDN.</p>
+<div class="project-steps">
+<div class="project-step" data-n="1">Create S3 bucket with static hosting</div>
+<div class="project-step" data-n="2">Upload index.html via aws_s3_object</div>
+<div class="project-step" data-n="3">Create CloudFront distribution</div>
+<div class="project-step" data-n="4">Create IAM OAC for S3 access</div>
+<div class="project-step" data-n="5">Output CloudFront URL</div>
+<div class="project-step" data-n="6">Apply, test, then destroy</div>
+</div></div>
+</section>
+
+<div class="level-divider level-int"><div class="level-divider-line"></div><div class="level-divider-label">Intermediate · Modules 5–9</div><div class="level-divider-line"></div></div>
+
+<!-- MODULE 5 -->
+<section class="module-section" id="m5">
+<div class="module-header"><div class="module-number">MODULE 05</div><div class="module-title">Modules</div><div class="module-desc">Package reusable infrastructure into modules and share them across projects.</div></div>
+<div class="topics"><span class="topic">module blocks</span><span class="topic">inputs/outputs</span><span class="topic">registry</span><span class="topic">versioning</span></div>
+<div class="mode-concise show">
+<div class="concept-box"><h4>What is a module?</h4><p>A directory of <code>.tf</code> files. Call with a <code>module</code> block, pass variables, get outputs. Root module = your main dir; child modules = subdirs or registry.</p></div>
+<div class="code-wrap"><div class="code-header"><span class="code-filename">main.tf</span><span class="code-lang">HCL</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">module</span> <span class="str">"vpc"</span> {
+  <span class="attr">source</span>  = <span class="str">"terraform-aws-modules/vpc/aws"</span>
+  <span class="attr">version</span> = <span class="str">"5.0.0"</span>
+  <span class="attr">name</span>    = <span class="str">"my-vpc"</span>
+  <span class="attr">cidr</span>    = <span class="str">"10.0.0.0/16"</span>
+}
+<span class="kw">resource</span> <span class="str">"aws_instance"</span> <span class="str">"web"</span> {
+  <span class="attr">subnet_id</span> = <span class="val">module.vpc.public_subnets[0]</span>
+}</pre></div>
+</div><div class="mode-full"></div>
+</section>
+
+<!-- MODULE 6 -->
+<section class="module-section" id="m6">
+<div class="module-header"><div class="module-number">MODULE 06</div><div class="module-title">Networking — VPC deep dive</div><div class="module-desc">Production networking: VPC, subnets, route tables, NAT gateways, security boundaries.</div></div>
+<div class="topics"><span class="topic">aws_vpc</span><span class="topic">subnets</span><span class="topic">route tables</span><span class="topic">NAT gateway</span></div>
+<div class="mode-concise show">
+<div class="code-wrap"><div class="code-header"><span class="code-filename">vpc.tf</span><span class="code-lang">HCL</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">module</span> <span class="str">"vpc"</span> {
+  <span class="attr">source</span>  = <span class="str">"terraform-aws-modules/vpc/aws"</span>
+  <span class="attr">version</span> = <span class="str">"5.1.0"</span>
+  <span class="attr">name</span>    = <span class="str">"prod-vpc"</span>
+  <span class="attr">cidr</span>    = <span class="str">"10.0.0.0/16"</span>
+  <span class="attr">azs</span>             = [<span class="str">"us-east-1a"</span>, <span class="str">"us-east-1b"</span>]
+  <span class="attr">public_subnets</span>  = [<span class="str">"10.0.1.0/24"</span>, <span class="str">"10.0.2.0/24"</span>]
+  <span class="attr">private_subnets</span> = [<span class="str">"10.0.11.0/24"</span>, <span class="str">"10.0.12.0/24"</span>]
+  <span class="attr">enable_nat_gateway</span> = <span class="val">true</span>
+  <span class="attr">single_nat_gateway</span> = <span class="val">true</span>
+}</pre></div>
+</div><div class="mode-full"><div class="callout callout-warn"><div class="callout-label">Cost</div><p>NAT Gateways cost ~$0.045/hr. Use <code>single_nat_gateway = true</code> for learning. Remember <code>terraform destroy</code>.</p></div></div>
+</section>
+
+<!-- MODULE 7 -->
+<section class="module-section" id="m7">
+<div class="module-header"><div class="module-number">MODULE 07</div><div class="module-title">Remote state &amp; workspaces</div><div class="module-desc">Store state in S3 with DynamoDB locking for team collaboration.</div></div>
+<div class="topics"><span class="topic">S3 backend</span><span class="topic">DynamoDB locking</span><span class="topic">workspaces</span></div>
+<div class="mode-concise show">
+<div class="code-wrap"><div class="code-header"><span class="code-filename">backend.tf</span><span class="code-lang">HCL</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">terraform</span> {
+  <span class="fn">backend</span> <span class="str">"s3"</span> {
+    <span class="attr">bucket</span>         = <span class="str">"my-terraform-state-bucket"</span>
+    <span class="attr">key</span>            = <span class="str">"prod/terraform.tfstate"</span>
+    <span class="attr">region</span>         = <span class="str">"us-east-1"</span>
+    <span class="attr">dynamodb_table</span> = <span class="str">"terraform-locks"</span>
+    <span class="attr">encrypt</span>        = <span class="val">true</span>
+  }
+}</pre></div>
+<ul class="cmd-list">
+<li><span class="cmd">terraform workspace new staging</span><span class="desc">Create workspace</span></li>
+<li><span class="cmd">terraform workspace select prod</span><span class="desc">Switch workspace</span></li>
+</ul>
+</div><div class="mode-full"></div>
+</section>
+
+<!-- MODULE 8 -->
+<section class="module-section" id="m8">
+<div class="module-header"><div class="module-number">MODULE 08</div><div class="module-title">Compute &amp; load balancing</div><div class="module-desc">Auto Scaling Groups, Application Load Balancers, and RDS databases.</div></div>
+<div class="topics"><span class="topic">ASG</span><span class="topic">ALB</span><span class="topic">RDS</span><span class="topic">launch templates</span></div>
+<div class="mode-concise show">
+<div class="code-wrap"><div class="code-header"><span class="code-filename">asg.tf</span><span class="code-lang">HCL</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">resource</span> <span class="str">"aws_launch_template"</span> <span class="str">"web"</span> {
+  <span class="attr">name_prefix</span>   = <span class="str">"web-"</span>
+  <span class="attr">image_id</span>      = <span class="val">data.aws_ami.amazon_linux.id</span>
+  <span class="attr">instance_type</span> = <span class="str">"t3.micro"</span>
+}
+<span class="kw">resource</span> <span class="str">"aws_autoscaling_group"</span> <span class="str">"web"</span> {
+  <span class="attr">desired_capacity</span> = <span class="val">2</span>; <span class="attr">max_size</span> = <span class="val">5</span>; <span class="attr">min_size</span> = <span class="val">1</span>
+  <span class="attr">target_group_arns</span> = [<span class="val">aws_lb_target_group.web.arn</span>]
+  <span class="fn">launch_template</span> {
+    <span class="attr">id</span> = <span class="val">aws_launch_template.web.id</span>
+    <span class="attr">version</span> = <span class="str">"$Latest"</span>
+  }
+}</pre></div>
+</div><div class="mode-full"></div>
+</section>
+
+<!-- MODULE 9 -->
+<section class="module-section" id="m9">
+<div class="module-header"><div class="module-number">MODULE 09</div><div class="module-title">CI/CD integration</div><div class="module-desc">Automate Terraform with GitHub Actions using OIDC — no stored credentials.</div></div>
+<div class="topics"><span class="topic">GitHub Actions</span><span class="topic">OIDC</span><span class="topic">plan on PR</span><span class="topic">apply on merge</span></div>
+<div class="mode-concise show">
+<div class="code-wrap"><div class="code-header"><span class="code-filename">.github/workflows/terraform.yml</span><span class="code-lang">YAML</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre>name: Terraform
+on:
+  push: { branches: [main] }
+  pull_request:
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::123456789:role/GHRole
+          aws-region: us-east-1
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform init
+      - run: terraform plan
+        if: github.event_name == 'pull_request'
+      - run: terraform apply -auto-approve
+        if: github.ref == 'refs/heads/main'</pre></div>
+</div><div class="mode-full"></div>
+</section>
+
+<!-- PROJECT 2 -->
+<section class="module-section" id="p2">
+<div class="project-card project-card-int"><div class="project-tag">★ Intermediate Project</div><h3>3-tier web app on AWS</h3><p>VPC + ALB + ASG + RDS with CI/CD via GitHub Actions.</p>
+<div class="project-steps">
+<div class="project-step" data-n="1">Create S3+DynamoDB backend</div>
+<div class="project-step" data-n="2">Build VPC with public+private subnets</div>
+<div class="project-step" data-n="3">Create ALB in public subnets</div>
+<div class="project-step" data-n="4">Launch template + ASG in private subnets</div>
+<div class="project-step" data-n="5">Add RDS PostgreSQL in private subnets</div>
+<div class="project-step" data-n="6">Store DB password in Secrets Manager</div>
+<div class="project-step" data-n="7">GitHub Actions OIDC pipeline</div>
+</div></div>
+</section>
+
+<div class="level-divider level-adv"><div class="level-divider-line"></div><div class="level-divider-label">Advanced · Modules 10–15</div><div class="level-divider-line"></div></div>
+
+<!-- MODULE 10 -->
+<section class="module-section" id="m10">
+<div class="module-header"><div class="module-number">MODULE 10</div><div class="module-title">Advanced HCL</div><div class="module-desc">for_each, dynamic blocks, complex types, and lifecycle rules.</div></div>
+<div class="topics"><span class="topic">for_each</span><span class="topic">count</span><span class="topic">dynamic blocks</span><span class="topic">lifecycle</span></div>
+<div class="mode-concise show">
+<div class="code-wrap"><div class="code-header"><span class="code-filename">advanced.tf</span><span class="code-lang">HCL</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cm"># for_each over a map</span>
+<span class="kw">resource</span> <span class="str">"aws_s3_bucket"</span> <span class="str">"all"</span> {
+  <span class="attr">for_each</span> = { <span class="str">"logs"</span> = <span class="str">"us-east-1"</span>, <span class="str">"backups"</span> = <span class="str">"us-west-2"</span> }
+  <span class="attr">bucket</span>   = <span class="str">"myapp-${<span class="val">each.key</span>}"</span>
+}
+
+<span class="cm"># Dynamic block</span>
+<span class="kw">resource</span> <span class="str">"aws_security_group"</span> <span class="str">"web"</span> {
+  <span class="kw">dynamic</span> <span class="str">"ingress"</span> {
+    <span class="attr">for_each</span> = [<span class="val">80</span>, <span class="val">443</span>, <span class="val">8080</span>]
+    <span class="fn">content</span> {
+      <span class="attr">from_port</span> = <span class="val">ingress.value</span>
+      <span class="attr">to_port</span>   = <span class="val">ingress.value</span>
+      <span class="attr">protocol</span>  = <span class="str">"tcp"</span>
+      <span class="attr">cidr_blocks</span> = [<span class="str">"0.0.0.0/0"</span>]
+    }
+  }
+}
+
+<span class="cm"># Lifecycle rules</span>
+<span class="kw">resource</span> <span class="str">"aws_instance"</span> <span class="str">"web"</span> {
+  <span class="fn">lifecycle</span> {
+    <span class="attr">create_before_destroy</span> = <span class="val">true</span>
+    <span class="attr">prevent_destroy</span>       = <span class="val">true</span>
+    <span class="attr">ignore_changes</span>        = [<span class="val">ami</span>]
+  }
+}</pre></div>
+</div><div class="mode-full"></div>
+</section>
+
+<!-- MODULE 11 -->
+<section class="module-section" id="m11">
+<div class="module-header"><div class="module-number">MODULE 11</div><div class="module-title">Containers — ECS &amp; EKS</div><div class="module-desc">Deploy containers on ECS Fargate or EKS with Helm.</div></div>
+<div class="topics"><span class="topic">ECS</span><span class="topic">Fargate</span><span class="topic">ECR</span><span class="topic">EKS</span><span class="topic">Helm</span></div>
+<div class="mode-concise show">
+<div class="code-wrap"><div class="code-header"><span class="code-filename">ecs.tf</span><span class="code-lang">HCL</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">resource</span> <span class="str">"aws_ecs_cluster"</span> <span class="str">"main"</span> { <span class="attr">name</span> = <span class="str">"app-cluster"</span> }
+
+<span class="kw">resource</span> <span class="str">"aws_ecs_task_definition"</span> <span class="str">"app"</span> {
+  <span class="attr">family</span>                   = <span class="str">"app"</span>
+  <span class="attr">network_mode</span>             = <span class="str">"awsvpc"</span>
+  <span class="attr">requires_compatibilities</span> = [<span class="str">"FARGATE"</span>]
+  <span class="attr">cpu</span> = <span class="str">"256"</span>; <span class="attr">memory</span> = <span class="str">"512"</span>
+  <span class="attr">container_definitions</span> = <span class="fn">jsonencode</span>([{
+    <span class="attr">name</span>  = <span class="str">"app"</span>
+    <span class="attr">image</span> = <span class="str">"nginx:latest"</span>
+    <span class="attr">portMappings</span> = [{ <span class="attr">containerPort</span> = <span class="val">80</span> }]
+  }])
+}
+
+<span class="kw">resource</span> <span class="str">"aws_ecs_service"</span> <span class="str">"app"</span> {
+  <span class="attr">name</span>            = <span class="str">"app"</span>
+  <span class="attr">cluster</span>         = <span class="val">aws_ecs_cluster.main.id</span>
+  <span class="attr">task_definition</span> = <span class="val">aws_ecs_task_definition.app.arn</span>
+  <span class="attr">desired_count</span>   = <span class="val">2</span>
+  <span class="attr">launch_type</span>     = <span class="str">"FARGATE"</span>
+}</pre></div>
+</div><div class="mode-full"></div>
+</section>
+
+<!-- MODULE 12 -->
+<section class="module-section" id="m12">
+<div class="module-header"><div class="module-number">MODULE 12</div><div class="module-title">Serverless &amp; event-driven</div><div class="module-desc">Lambda, API Gateway, SQS, and DynamoDB in Terraform.</div></div>
+<div class="topics"><span class="topic">Lambda</span><span class="topic">API Gateway</span><span class="topic">SQS</span><span class="topic">DynamoDB</span></div>
+<div class="mode-concise show">
+<div class="code-wrap"><div class="code-header"><span class="code-filename">lambda.tf</span><span class="code-lang">HCL</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">data</span> <span class="str">"archive_file"</span> <span class="str">"zip"</span> {
+  <span class="attr">type</span> = <span class="str">"zip"</span>
+  <span class="attr">source_file</span> = <span class="str">"lambda/handler.py"</span>
+  <span class="attr">output_path</span> = <span class="str">"lambda/handler.zip"</span>
+}
+<span class="kw">resource</span> <span class="str">"aws_lambda_function"</span> <span class="str">"api"</span> {
+  <span class="attr">filename</span>      = <span class="val">data.archive_file.zip.output_path</span>
+  <span class="attr">function_name</span> = <span class="str">"my-api"</span>
+  <span class="attr">role</span>          = <span class="val">aws_iam_role.lambda_role.arn</span>
+  <span class="attr">handler</span>       = <span class="str">"handler.lambda_handler"</span>
+  <span class="attr">runtime</span>       = <span class="str">"python3.12"</span>
+}
+<span class="kw">resource</span> <span class="str">"aws_apigatewayv2_api"</span> <span class="str">"api"</span> {
+  <span class="attr">name</span> = <span class="str">"my-api"</span>
+  <span class="attr">protocol_type</span> = <span class="str">"HTTP"</span>
+  <span class="attr">target</span> = <span class="val">aws_lambda_function.api.arn</span>
+}</pre></div>
+</div><div class="mode-full"></div>
+</section>
+
+<!-- MODULE 13 -->
+<section class="module-section" id="m13">
+<div class="module-header"><div class="module-number">MODULE 13</div><div class="module-title">Terragrunt</div><div class="module-desc">Keep Terraform DRY across environments. Dependency management and run-all.</div></div>
+<div class="topics"><span class="topic">terragrunt.hcl</span><span class="topic">DRY configs</span><span class="topic">dependencies</span><span class="topic">run-all</span></div>
+<div class="mode-concise show">
+<div class="code-wrap"><div class="code-header"><span class="code-filename">live/prod/vpc/terragrunt.hcl</span><span class="code-lang">HCL</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre><span class="fn">include</span> <span class="str">"root"</span> {
+  <span class="attr">path</span> = <span class="fn">find_in_parent_folders</span>()
+}
+<span class="fn">terraform</span> {
+  <span class="attr">source</span> = <span class="str">"../../../modules/vpc"</span>
+}
+<span class="fn">inputs</span> = {
+  <span class="attr">cidr</span>        = <span class="str">"10.1.0.0/16"</span>
+  <span class="attr">environment</span> = <span class="str">"prod"</span>
+}</pre></div>
+</div><div class="mode-full"></div>
+</section>
+
+<!-- MODULE 14 -->
+<section class="module-section" id="m14">
+<div class="module-header"><div class="module-number">MODULE 14</div><div class="module-title">Security &amp; compliance</div><div class="module-desc">Scan configs with tfsec/Checkov. Enforce policies with OPA. Detect drift.</div></div>
+<div class="topics"><span class="topic">tfsec</span><span class="topic">Checkov</span><span class="topic">OPA</span><span class="topic">drift detection</span></div>
+<div class="mode-concise show">
+<div class="code-wrap"><div class="code-header"><span class="code-filename">terminal</span><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre>tfsec .                              <span class="cm"># Static analysis</span>
+checkov -d .                         <span class="cm"># Policy checks</span>
+trivy config .                       <span class="cm"># Vulnerability scan</span>
+terraform plan -detailed-exitcode    <span class="cm"># Exit 2 = drift</span></pre></div>
+</div><div class="mode-full"></div>
+</section>
+
+<!-- MODULE 15 -->
+<section class="module-section" id="m15">
+<div class="module-header"><div class="module-number">MODULE 15</div><div class="module-title">Multi-region &amp; multi-account</div><div class="module-desc">Provider aliases, AWS Organizations, and cross-account IAM roles.</div></div>
+<div class="topics"><span class="topic">provider aliases</span><span class="topic">Organizations</span><span class="topic">cross-account</span></div>
+<div class="mode-concise show">
+<div class="code-wrap"><div class="code-header"><span class="code-filename">multi_region.tf</span><span class="code-lang">HCL</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">provider</span> <span class="str">"aws"</span> {
+  <span class="attr">alias</span>  = <span class="str">"primary"</span>
+  <span class="attr">region</span> = <span class="str">"us-east-1"</span>
+}
+<span class="kw">provider</span> <span class="str">"aws"</span> {
+  <span class="attr">alias</span>  = <span class="str">"dr"</span>
+  <span class="attr">region</span> = <span class="str">"us-west-2"</span>
+}
+<span class="kw">resource</span> <span class="str">"aws_s3_bucket"</span> <span class="str">"primary"</span> {
+  <span class="attr">provider</span> = <span class="val">aws.primary</span>
+  <span class="attr">bucket</span>   = <span class="str">"myapp-primary"</span>
+}
+<span class="kw">resource</span> <span class="str">"aws_s3_bucket"</span> <span class="str">"dr"</span> {
+  <span class="attr">provider</span> = <span class="val">aws.dr</span>
+  <span class="attr">bucket</span>   = <span class="str">"myapp-dr-replica"</span>
+}
+<span class="cm"># Cross-account</span>
+<span class="kw">provider</span> <span class="str">"aws"</span> {
+  <span class="attr">alias</span> = <span class="str">"prod"</span>
+  <span class="fn">assume_role</span> {
+    <span class="attr">role_arn</span> = <span class="str">"arn:aws:iam::PROD_ID:role/TerraformRole"</span>
+  }
+}</pre></div>
+</div><div class="mode-full"></div>
+</section>
+
+<!-- PROJECT 3 -->
+<section class="module-section" id="p3">
+<div class="project-card project-card-adv"><div class="project-tag">★ Advanced Project</div><h3>Production EKS platform (multi-account)</h3><p>The capstone: full production platform using everything in this course.</p>
+<div class="project-steps">
+<div class="project-step" data-n="1">AWS Organizations with dev/staging/prod</div>
+<div class="project-step" data-n="2">Terragrunt per-account state backends</div>
+<div class="project-step" data-n="3">Shared VPC per environment</div>
+<div class="project-step" data-n="4">EKS cluster with managed node groups</div>
+<div class="project-step" data-n="5">ALB Ingress + Cluster Autoscaler via Helm</div>
+<div class="project-step" data-n="6">RDS Aurora with Secrets Manager rotation</div>
+<div class="project-step" data-n="7">Lambda + SQS event processing</div>
+<div class="project-step" data-n="8">GitHub Actions OIDC CI/CD pipeline</div>
+<div class="project-step" data-n="9">OPA policies for tags + no public S3</div>
+<div class="project-step" data-n="10">CloudTrail + Config for audit</div>
+</div></div>
+</section>
+
+</main>
+</div>
+
+<button class="menu-toggle" id="menuBtn" onclick="toggleSidebar()" aria-label="Toggle menu">☰</button>
+
+<script>
+let currentMode='concise';
+function setMode(m){currentMode=m;document.querySelectorAll('.mode-concise').forEach(e=>e.classList.toggle('show',m==='concise'));document.querySelectorAll('.mode-full').forEach(e=>e.classList.toggle('show',m==='full'));document.getElementById('btn-concise').classList.toggle('active',m==='concise');document.getElementById('btn-full').classList.toggle('active',m==='full')}
+function setActive(el){document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'));el.classList.add('active');if(window.innerWidth<=768)document.getElementById('sidebar').classList.remove('open')}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open')}
+function copyCode(btn){const pre=btn.closest('.code-wrap').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(()=>{btn.textContent='copied!';setTimeout(()=>btn.textContent='copy',1800)})}
+window.addEventListener('scroll',()=>{const d=document.documentElement;const s=d.scrollTop/(d.scrollHeight-d.clientHeight);document.getElementById('progress').style.width=(s*100)+'%';document.querySelectorAll('.module-section').forEach(sec=>{const r=sec.getBoundingClientRect();if(r.top<=120&&r.bottom>=120){const id=sec.id;document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.toggle('active',i.getAttribute('href')==='#'+id))}})});
+</script>
+</body>
+</html>

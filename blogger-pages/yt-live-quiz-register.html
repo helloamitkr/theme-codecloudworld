@@ -1,0 +1,652 @@
+<!-- ============================================================
+   ytLiveQuiz — Registration Page (Blogger-ready)
+   Paste this entire file into Blogger > Pages > HTML editor
+   Google Form ID: 1FAIpQLSdn3T2JLbJBOwSJVH5JueaObUQbtJZSqocTquTjXWgh72wNQQ
+   ============================================================ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+.rp-wrap {
+  font-family: 'IBM Plex Mono', monospace;
+  color: #d4f0d4;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #070e07;
+  padding: 1.5rem 0;
+}
+
+/* Card */
+.rp-card {
+  background: #0d1a0d;
+  border: 1px solid rgba(57,211,83,0.22);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+.rp-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #39d353, #f0b429, transparent);
+}
+
+/* Corners */
+.rp-c { position: absolute; width: 14px; height: 14px; border-color: rgba(57,211,83,0.50); border-style: solid; }
+.rp-tl { top: 8px;    left: 8px;  border-width: 1px 0 0 1px; }
+.rp-tr { top: 8px;    right: 8px; border-width: 1px 1px 0 0; }
+.rp-bl { bottom: 8px; left: 8px;  border-width: 0 0 1px 1px; }
+.rp-br { bottom: 8px; right: 8px; border-width: 0 1px 1px 0; }
+
+/* Head */
+.rp-head {
+  padding: 1.75rem 1.75rem 1.5rem;
+  border-bottom: 1px solid rgba(57,211,83,0.10);
+}
+.rp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 2px;
+  background: rgba(57,211,83,.07);
+  border: 1px solid rgba(57,211,83,.2);
+  color: #39d353;
+  margin-bottom: 1rem;
+}
+.rp-badge-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #39d353;
+  box-shadow: 0 0 6px #39d353;
+  display: inline-block;
+  animation: rp-blink 2s ease-in-out infinite;
+}
+@keyframes rp-blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+.rp-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #d4f0d4;
+  line-height: 1.3;
+  margin-bottom: .375rem;
+}
+.rp-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem 1.25rem;
+  font-size: 11px;
+  color: #6fa86f;
+  margin-top: .625rem;
+}
+.rp-meta span::before { content: '◈  '; color: #3a5a3a; }
+
+/* Body */
+.rp-body { padding: 1.75rem; }
+
+/* Field rows */
+.rp-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.125rem; }
+.rp-row.full { grid-template-columns: 1fr; }
+.rp-field { display: flex; flex-direction: column; gap: 5px; }
+.rp-label {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #3a5a3a;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.rp-req { color: #f0b429; font-size: 13px; line-height: 1; }
+
+.rp-input, .rp-select {
+  background: #142814;
+  border: 1px solid rgba(57,211,83,0.22);
+  border-radius: 3px;
+  color: #d4f0d4;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  padding: 10px 13px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color .15s, box-shadow .15s;
+}
+.rp-select { cursor: pointer; appearance: none; -webkit-appearance: none; }
+.rp-select option { background: #142814; color: #d4f0d4; }
+.rp-input::placeholder { color: #3a5a3a; }
+.rp-input:focus, .rp-select:focus {
+  border-color: rgba(57,211,83,0.50);
+  box-shadow: 0 0 0 3px rgba(57,211,83,.09);
+}
+.rp-input.err, .rp-select.err, .rp-phone.err { border-color: rgba(255,64,64,.5); }
+
+.rp-sel-wrap { position: relative; }
+.rp-sel-arrow {
+  position: absolute; right: 11px; top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; color: #3a5a3a; font-size: 10px;
+}
+
+.rp-hint { font-size: 10px; color: #3a5a3a; margin-top: 1px; }
+.rp-err  { font-size: 10px; color: #ff4040; display: none; }
+.rp-err.show { display: block; }
+
+/* Phone */
+.rp-phone {
+  display: flex;
+  border: 1px solid rgba(57,211,83,0.22);
+  border-radius: 3px;
+  overflow: hidden;
+  transition: border-color .15s, box-shadow .15s;
+}
+.rp-phone:focus-within {
+  border-color: rgba(57,211,83,0.50);
+  box-shadow: 0 0 0 3px rgba(57,211,83,.09);
+}
+.rp-pfx {
+  background: #1a3a1a;
+  border-right: 1px solid rgba(57,211,83,0.22);
+  color: #6fa86f;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.rp-pnum {
+  background: #142814;
+  border: none;
+  color: #d4f0d4;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  padding: 10px 13px;
+  outline: none;
+  width: 100%;
+}
+.rp-pnum::placeholder { color: #3a5a3a; }
+
+/* DOB row */
+.rp-dob { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: .5rem; }
+
+/* Divider */
+.rp-div {
+  height: 1px;
+  margin: 1.375rem 0;
+  background: linear-gradient(90deg, transparent, rgba(57,211,83,0.22), transparent);
+}
+
+/* Radio */
+.rp-rlbl {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #3a5a3a;
+  margin-bottom: .625rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.rp-ropts { display: flex; flex-direction: column; gap: .4rem; }
+.rp-ropt {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  cursor: pointer;
+  padding: 9px 13px;
+  border-radius: 3px;
+  border: 1px solid rgba(57,211,83,0.10);
+  background: #142814;
+  transition: border-color .15s, background .15s;
+}
+.rp-ropt:hover { border-color: rgba(57,211,83,0.22); background: #1a3a1a; }
+.rp-ropt.yes { border-color: rgba(57,211,83,.35);  background: rgba(57,211,83,.04); }
+.rp-ropt.no  { border-color: rgba(255,64,64,.30);  background: rgba(255,64,64,.03); }
+
+.rp-ropt input[type='radio'] {
+  appearance: none; -webkit-appearance: none;
+  width: 15px; height: 15px;
+  border: 1px solid rgba(57,211,83,0.22);
+  border-radius: 50%;
+  background: #070e07;
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+  transition: border-color .15s;
+}
+.rp-ropt input[type='radio']:checked { border-color: #39d353; }
+.rp-ropt input[type='radio']:checked::after {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #39d353;
+  box-shadow: 0 0 5px rgba(57,211,83,.6);
+}
+.rp-ropt-txt { font-size: 13px; color: #d4f0d4; font-weight: 500; flex: 1; line-height: 1.3; }
+.rp-ropt-txt small { display: block; font-size: 11px; color: #6fa86f; font-weight: 400; margin-top: 2px; }
+.rp-ropt-ico { font-size: 16px; flex-shrink: 0; }
+
+/* Subscribe prompt */
+.rp-sub {
+  display: none;
+  margin-top: .875rem;
+  padding: 1rem 1.125rem;
+  border: 1px solid rgba(255,64,64,.22);
+  border-radius: 3px;
+  background: rgba(255,64,64,.04);
+}
+.rp-sub.show { display: block; }
+.rp-sub-txt {
+  font-size: 12px;
+  color: #6fa86f;
+  margin-bottom: .875rem;
+  line-height: 1.6;
+}
+.rp-sub-txt strong { color: #f0b429; }
+.rp-yt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ff0000;
+  color: #fff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 9px 16px;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: background .15s, box-shadow .15s;
+}
+.rp-yt-btn:hover { background: #cc0000; color: #fff; box-shadow: 0 0 14px rgba(255,0,0,.3); }
+
+/* Submit */
+.rp-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+}
+.rp-note { font-size: 10px; color: #3a5a3a; text-align: center; letter-spacing: .04em; }
+.rp-submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(57,211,83,.12);
+  border: 1px solid rgba(57,211,83,0.22);
+  border-radius: 3px;
+  color: #39d353;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 13px 36px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.rp-submit:hover {
+  background: rgba(57,211,83,.2);
+  border-color: rgba(57,211,83,0.50);
+  box-shadow: 0 0 18px rgba(57,211,83,.15);
+}
+.rp-submit:disabled { opacity: .5; cursor: not-allowed; pointer-events: none; }
+.rp-spin {
+  width: 14px; height: 14px;
+  border: 2px solid rgba(57,211,83,.3);
+  border-top-color: #39d353;
+  border-radius: 50%;
+  animation: rp-spin .7s linear infinite;
+  display: none;
+  flex-shrink: 0;
+}
+.rp-submit.loading .rp-spin { display: block; }
+.rp-submit.loading .rp-stxt { display: none; }
+@keyframes rp-spin { to { transform: rotate(360deg); } }
+
+/* Success */
+.rp-ok {
+  display: none;
+  text-align: center;
+  padding: 3rem 1.75rem;
+}
+.rp-ok.show { display: block; }
+.rp-ok-ico {
+  width: 62px; height: 62px;
+  margin: 0 auto 1.25rem;
+  border: 2px solid #39d353;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(57,211,83,.22);
+  animation: rp-pop .45s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes rp-pop { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+.rp-ok-ico svg { color: #39d353; }
+.rp-ok-title { font-size: 19px; font-weight: 600; color: #39d353; margin-bottom: .625rem; text-shadow: 0 0 18px rgba(57,211,83,.3); }
+.rp-ok-msg   { font-size: 13px; color: #6fa86f; line-height: 1.65; margin-bottom: .75rem; }
+.rp-ok-meta  { font-size: 11px; color: #3a5a3a; letter-spacing: .06em; margin-bottom: 1.75rem; }
+.rp-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #6fa86f;
+  border: 1px solid rgba(57,211,83,0.10);
+  padding: 9px 22px;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: all .15s;
+}
+.rp-back:hover { border-color: rgba(57,211,83,0.22); color: #39d353; }
+
+@media (max-width: 520px) {
+  .rp-row  { grid-template-columns: 1fr; }
+  .rp-body { padding: 1.25rem; }
+  .rp-head { padding: 1.25rem; }
+  .rp-dob  { grid-template-columns: 1fr 1fr 1fr; }
+}
+</style>
+
+<div class="rp-wrap">
+  <div class="rp-card">
+    <div class="rp-c rp-tl"></div>
+    <div class="rp-c rp-tr"></div>
+    <div class="rp-c rp-bl"></div>
+    <div class="rp-c rp-br"></div>
+
+    <!-- Header -->
+    <div class="rp-head">
+      <div class="rp-badge"><span class="rp-badge-dot"></span>Registration &#183; Open</div>
+      <div class="rp-title">Secure Your Slot</div>
+      <div class="rp-meta">
+        <span>SSC CGL &#183; General Awareness</span>
+        <span>Sat, 14 Jun 2026 &#183; 21:00 IST</span>
+        <span>Live on YouTube</span>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="rp-body" id="rp-form-body">
+      <form id="rp-form" novalidate="novalidate">
+
+        <!-- Name -->
+        <div class="rp-row">
+          <div class="rp-field">
+            <label class="rp-label" for="rp-fname">First Name <span class="rp-req">*</span></label>
+            <input class="rp-input" id="rp-fname" type="text" placeholder="Rahul"/>
+            <span class="rp-err" id="rp-err-fname">Enter your first name</span>
+          </div>
+          <div class="rp-field">
+            <label class="rp-label" for="rp-lname">Last Name <span class="rp-req">*</span></label>
+            <input class="rp-input" id="rp-lname" type="text" placeholder="Sharma"/>
+            <span class="rp-err" id="rp-err-lname">Enter your last name</span>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="rp-row full">
+          <div class="rp-field">
+            <label class="rp-label" for="rp-email">Email Address <span class="rp-req">*</span></label>
+            <input class="rp-input" id="rp-email" type="email" placeholder="rahul@gmail.com"/>
+            <span class="rp-err" id="rp-err-email">Enter a valid email address</span>
+          </div>
+        </div>
+
+        <!-- WhatsApp -->
+        <div class="rp-row full">
+          <div class="rp-field">
+            <label class="rp-label" for="rp-wa">WhatsApp Number <span class="rp-req">*</span></label>
+            <div class="rp-phone" id="rp-phone">
+              <div class="rp-pfx">&#127470;&#127475; +91</div>
+              <input class="rp-pnum" id="rp-wa" type="tel" placeholder="98765 43210" maxlength="10"/>
+            </div>
+            <span class="rp-err" id="rp-err-wa">Enter a valid 10-digit WhatsApp number</span>
+          </div>
+        </div>
+
+        <!-- Gender + DOB -->
+        <div class="rp-row">
+          <div class="rp-field">
+            <label class="rp-label" for="rp-gender">Gender <span class="rp-req">*</span></label>
+            <div class="rp-sel-wrap">
+              <select class="rp-select" id="rp-gender">
+                <option value="" disabled="disabled" selected="selected">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+              </select>
+              <span class="rp-sel-arrow">&#9660;</span>
+            </div>
+            <span class="rp-err" id="rp-err-gender">Select your gender</span>
+          </div>
+          <div class="rp-field">
+            <label class="rp-label">Date of Birth <span class="rp-req">*</span></label>
+            <div class="rp-dob">
+              <select class="rp-select" id="rp-dob-d" title="Day"></select>
+              <select class="rp-select" id="rp-dob-m" title="Month"></select>
+              <select class="rp-select" id="rp-dob-y" title="Year"></select>
+            </div>
+            <span class="rp-err" id="rp-err-dob">Select your date of birth</span>
+          </div>
+        </div>
+
+        <div class="rp-div"></div>
+
+        <!-- Subscribed -->
+        <div class="rp-row full">
+          <div class="rp-field">
+            <div class="rp-rlbl">Subscribed to CodeCloudWorld? <span class="rp-req">*</span></div>
+            <div class="rp-ropts">
+              <label class="rp-ropt" id="rp-opt-yes">
+                <input type="radio" name="rp-sub" value="Yes"/>
+                <span class="rp-ropt-txt">
+                  Yes, I&#8217;m subscribed
+                  <small>You&#8217;ll get live quiz alerts on YouTube</small>
+                </span>
+                <span class="rp-ropt-ico">&#9989;</span>
+              </label>
+              <label class="rp-ropt" id="rp-opt-no">
+                <input type="radio" name="rp-sub" value="No"/>
+                <span class="rp-ropt-txt">
+                  Not yet
+                  <small>Subscribe to get notified when the quiz starts</small>
+                </span>
+                <span class="rp-ropt-ico">&#9651;</span>
+              </label>
+            </div>
+            <span class="rp-err" id="rp-err-sub" style="margin-top:5px">Please select an option</span>
+
+            <div class="rp-sub" id="rp-sub-prompt">
+              <div class="rp-sub-txt">
+                <strong>&#9888; Subscribe before you participate!</strong><br/>
+                Subscribers receive live alerts when the quiz goes live on YouTube.
+                Hit Subscribe, then come back and select &#8220;Yes&#8221;.
+              </div>
+              <a class="rp-yt-btn"
+                 href="https://www.youtube.com/@codecloudworld?sub_confirmation=1"
+                 target="_blank" rel="noopener noreferrer">
+                &#9654; Subscribe to CodeCloudWorld
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="rp-actions">
+          <button type="submit" class="rp-submit" id="rp-btn">
+            <span class="rp-spin"></span>
+            <span class="rp-stxt">[ Submit Registration ]</span>
+          </button>
+          <div class="rp-note">Your data is used only to notify you about quiz sessions.</div>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Success screen -->
+    <div class="rp-ok" id="rp-ok">
+      <div class="rp-ok-ico">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <div class="rp-ok-title">Mission Slot Secured</div>
+      <div class="rp-ok-msg">Registration confirmed.<br/>We&#8217;ll notify you before the quiz goes live.</div>
+      <div class="rp-ok-meta" id="rp-ok-meta"></div>
+      <a class="rp-back" href="/">&#8592; Back to Home</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var GF = 'https://docs.google.com/forms/d/e/1FAIpQLSdn3T2JLbJBOwSJVH5JueaObUQbtJZSqocTquTjXWgh72wNQQ/formResponse';
+  var E = {
+    name:  'entry.304816631',
+    email: 'entry.1557075527',
+    wa:    'entry.1218916148',
+    gen:   'entry.1885205178',
+    dy:    'entry.1199713675_year',
+    dm:    'entry.1199713675_month',
+    dd:    'entry.1199713675_day',
+    sub:   'entry.902891137'
+  };
+
+  /* Populate DOB dropdowns */
+  var selD = document.getElementById('rp-dob-d');
+  var selM = document.getElementById('rp-dob-m');
+  var selY = document.getElementById('rp-dob-y');
+  var MON  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function opt(sel, val, lbl) {
+    var o = document.createElement('option');
+    o.value = val; o.textContent = lbl || val; sel.appendChild(o);
+  }
+  opt(selD,'','DD'); opt(selM,'','MM'); opt(selY,'','YYYY');
+  for(var d=1;d<=31;d++) opt(selD,d,d<10?'0'+d:d);
+  for(var m=0;m<12;m++) opt(selM,m+1,MON[m]);
+  var y0 = new Date().getFullYear();
+  for(var y=y0-15;y>=y0-60;y--) opt(selY,y);
+
+  /* Radio toggle */
+  var optYes = document.getElementById('rp-opt-yes');
+  var optNo  = document.getElementById('rp-opt-no');
+  var subBox = document.getElementById('rp-sub-prompt');
+
+  document.querySelectorAll('input[name="rp-sub"]').forEach(function(r){
+    r.addEventListener('change', function(){
+      optYes.classList.remove('yes','no');
+      optNo.classList.remove('yes','no');
+      document.getElementById('rp-err-sub').classList.remove('show');
+      if(this.value==='Yes'){
+        optYes.classList.add('yes');
+        subBox.classList.remove('show');
+      } else {
+        optNo.classList.add('no');
+        subBox.classList.add('show');
+      }
+    });
+  });
+
+  /* WhatsApp digits only */
+  document.getElementById('rp-wa').addEventListener('input', function(){
+    this.value = this.value.replace(/\D/g,'').slice(0,10);
+  });
+
+  /* Validation */
+  function chk(id, eid, pw, fn) {
+    var el  = document.getElementById(id);
+    var err = document.getElementById(eid);
+    var ww  = pw ? document.getElementById(pw) : null;
+    var ok  = fn(el.value);
+    el.classList.toggle('err', !ok);
+    if(ww) ww.classList.toggle('err', !ok);
+    err.classList.toggle('show', !ok);
+    return ok;
+  }
+
+  function validate() {
+    var ok = true;
+    ok = chk('rp-fname','rp-err-fname',null,      function(v){ return v.trim().length>=2; }) && ok;
+    ok = chk('rp-lname','rp-err-lname',null,      function(v){ return v.trim().length>=2; }) && ok;
+    ok = chk('rp-email','rp-err-email',null,      function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }) && ok;
+    ok = chk('rp-wa',   'rp-err-wa',  'rp-phone', function(v){ return /^\d{10}$/.test(v); }) && ok;
+    ok = chk('rp-gender','rp-err-gender',null,    function(v){ return v!==''; }) && ok;
+    var dobOk = selD.value && selM.value && selY.value;
+    document.getElementById('rp-err-dob').classList.toggle('show',!dobOk);
+    if(!dobOk) ok = false;
+    var sc = document.querySelector('input[name="rp-sub"]:checked');
+    document.getElementById('rp-err-sub').classList.toggle('show',!sc);
+    if(!sc) ok = false;
+    return ok;
+  }
+
+  /* Submit */
+  document.getElementById('rp-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!validate()) return;
+
+    var fn = document.getElementById('rp-fname').value.trim();
+    var ln = document.getElementById('rp-lname').value.trim();
+    var em = document.getElementById('rp-email').value.trim();
+    var wa = document.getElementById('rp-wa').value.trim();
+    var gn = document.getElementById('rp-gender').value;
+    var sv = document.querySelector('input[name="rp-sub"]:checked').value;
+
+    var fd = new URLSearchParams();
+    fd.append(E.name,  fn+' '+ln);
+    fd.append(E.email, em);
+    fd.append(E.wa,    '+91'+wa);
+    fd.append(E.gen,   gn);
+    fd.append(E.dy,    selY.value);
+    fd.append(E.dm,    selM.value);
+    fd.append(E.dd,    selD.value);
+    fd.append(E.sub,   sv);
+    fd.append('fvv',         '1');
+    fd.append('pageHistory', '0');
+
+    var btn = document.getElementById('rp-btn');
+    btn.classList.add('loading'); btn.disabled = true;
+
+    fetch(GF, {method:'POST', mode:'no-cors', body:fd})
+      .catch(function(){})
+      .finally(function(){
+        document.getElementById('rp-form-body').style.display = 'none';
+        document.getElementById('rp-ok').classList.add('show');
+        document.getElementById('rp-ok-meta').textContent = fn+' '+ln+' · '+em;
+      });
+  });
+
+  /* Clear errors on input */
+  ['rp-fname','rp-lname','rp-email','rp-gender'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('input', function(){
+      this.classList.remove('err');
+      var sfx = id.replace('rp-','');
+      var e = document.getElementById('rp-err-'+sfx);
+      if(e) e.classList.remove('show');
+    });
+  });
+
+})();
+</script>

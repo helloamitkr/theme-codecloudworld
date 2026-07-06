@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Register · ytLiveQuiz | codecloudworld</title>
+  <meta name="description" content="Register for the next ytLiveQuiz government job quiz session. SSC, UPSC, Banking, Railway."/>
+  <meta name="robots" content="noindex"/>
+  <meta name="theme-color" content="#070e07"/>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%230d1a0d'/><polygon points='32,12 52,52 12,52' fill='none' stroke='%2339d353' stroke-width='4'/><circle cx='32' cy='36' r='3' fill='%2339d353'/></svg>"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --bg:     #070e07;
+      --bg2:    #0d1a0d;
+      --bg3:    #142814;
+      --bg4:    #1a3a1a;
+      --border: rgba(57,211,83,0.1);
+      --border2:rgba(57,211,83,0.22);
+      --border3:rgba(57,211,83,0.5);
+      --text:   #d4f0d4;
+      --text2:  #6fa86f;
+      --text3:  #3a5a3a;
+      --green:  #39d353;
+      --amber:  #f0b429;
+      --red:    #ff4040;
+      --mono:   'IBM Plex Mono', monospace;
+      --sans:   'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { height: 100%; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mono);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+    body::after {
+      content: '';
+      pointer-events: none;
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px);
+      z-index: 9999;
+    }
+    body::before {
+      content: '';
+      pointer-events: none;
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(57,211,83,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(57,211,83,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+    }
+
+    /* ── BRAND BAR ── */
+    .qz-brand {
+      width: 100%; max-width: 640px;
+      padding: 1.75rem 2rem 0;
+      display: flex; align-items: center; gap: 10px;
+      position: relative; z-index: 1;
+    }
+    .qz-diamond {
+      width: 8px; height: 8px;
+      background: var(--green);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+      box-shadow: 0 0 8px var(--green);
+    }
+    .qz-brand-text { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--text2); }
+    .qz-brand-text strong { color: var(--green); font-weight: 600; }
+    .qz-brand-text a { color: var(--text2); text-decoration: none; }
+    .qz-brand-text a:hover { color: var(--green); }
+    .qz-sys {
+      margin-left: auto; font-size: 10px; letter-spacing: .1em;
+      color: var(--text3); text-transform: uppercase;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .qz-blip {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--green); box-shadow: 0 0 6px var(--green);
+      display: inline-block; animation: blip 2s ease-in-out infinite;
+    }
+    @keyframes blip { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+    /* ── WRAP ── */
+    .qz-wrap {
+      width: 100%; max-width: 640px;
+      padding: 2.5rem 2rem 4rem;
+      display: flex; flex-direction: column;
+      position: relative; z-index: 1; flex: 1;
+    }
+
+    /* ── FORM CARD ── */
+    .reg-card {
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      background: var(--bg2);
+      position: relative; overflow: hidden;
+    }
+    .reg-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--green), var(--amber), transparent);
+    }
+    .rc-corner { position: absolute; width: 14px; height: 14px; border-color: var(--border3); border-style: solid; }
+    .rc-tl { top: 8px;    left: 8px;  border-width: 1px 0 0 1px; }
+    .rc-tr { top: 8px;    right: 8px; border-width: 1px 1px 0 0; }
+    .rc-bl { bottom: 8px; left: 8px;  border-width: 0 0 1px 1px; }
+    .rc-br { bottom: 8px; right: 8px; border-width: 0 1px 1px 0; }
+
+    /* ── HEADER ── */
+    .rc-head { padding: 2rem 2rem 1.5rem; border-bottom: 1px solid var(--border); }
+    .rc-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 10px; letter-spacing: .15em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 2px;
+      background: rgba(57,211,83,.07); border: 1px solid rgba(57,211,83,.2);
+      color: var(--green); margin-bottom: 1rem;
+    }
+    .rc-badge-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--green); box-shadow: 0 0 6px var(--green);
+      animation: blip 2s ease-in-out infinite;
+    }
+    .rc-title { font-size: 20px; font-weight: 600; color: var(--text); line-height: 1.3; margin-bottom: .5rem; }
+    .rc-sub {
+      font-size: 12px; color: var(--text2); letter-spacing: .04em;
+      display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; margin-top: .625rem;
+    }
+    .rc-sub span { display: flex; align-items: center; gap: 5px; }
+    .rc-sub span::before { content: '◈'; color: var(--text3); font-size: 10px; }
+
+    /* ── FORM BODY ── */
+    .rc-body { padding: 1.75rem 2rem 2rem; }
+
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
+    .field-row.single { grid-template-columns: 1fr; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+
+    .field-label {
+      font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--text3); display: flex; align-items: center; gap: 6px;
+    }
+    .req  { color: var(--amber); font-size: 12px; line-height: 1; }
+    .opt  { font-size: 9px; letter-spacing: .08em; color: var(--text3); }
+
+    .field-input, .field-select {
+      background: var(--bg3); border: 1px solid var(--border2); border-radius: 3px;
+      color: var(--text); font-family: var(--mono); font-size: 13px;
+      padding: 10px 14px; outline: none; width: 100%;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .field-select { cursor: pointer; appearance: none; -webkit-appearance: none; }
+    .field-select option { background: var(--bg3); color: var(--text); }
+    .field-input::placeholder { color: var(--text3); }
+    .field-input:focus, .field-select:focus {
+      border-color: var(--border3);
+      box-shadow: 0 0 0 3px rgba(57,211,83,.08);
+    }
+    .field-input.err, .field-select.err, .phone-wrap.err { border-color: rgba(255,64,64,.5); }
+    .field-hint { font-size: 10px; color: var(--text3); letter-spacing: .03em; margin-top: 1px; }
+    .field-err { font-size: 10px; color: var(--red); letter-spacing: .04em; display: none; }
+    .field-err.show { display: block; }
+
+    /* Select arrow */
+    .select-wrap { position: relative; }
+    .select-arrow {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      pointer-events: none; color: var(--text3); font-size: 10px;
+    }
+
+    /* Phone */
+    .phone-wrap {
+      display: flex; border: 1px solid var(--border2); border-radius: 3px;
+      overflow: hidden; transition: border-color .15s, box-shadow .15s;
+    }
+    .phone-wrap:focus-within { border-color: var(--border3); box-shadow: 0 0 0 3px rgba(57,211,83,.08); }
+    .phone-prefix {
+      background: var(--bg4); border-right: 1px solid var(--border2);
+      color: var(--text2); font-family: var(--mono); font-size: 13px;
+      padding: 10px 12px; display: flex; align-items: center; gap: 6px; flex-shrink: 0;
+    }
+    .phone-input {
+      background: var(--bg3); border: none; color: var(--text);
+      font-family: var(--mono); font-size: 13px; padding: 10px 14px; outline: none; width: 100%;
+    }
+    .phone-input::placeholder { color: var(--text3); }
+
+    /* DOB row */
+    .dob-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .5rem; }
+
+    /* Divider */
+    .form-divider {
+      height: 1px; margin: 1.5rem 0;
+      background: linear-gradient(90deg, transparent, var(--border2), transparent);
+    }
+
+    /* Radio */
+    .radio-group-lbl {
+      font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--text3); margin-bottom: .75rem;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .radio-opts { display: flex; flex-direction: column; gap: .5rem; }
+    .radio-opt {
+      display: flex; align-items: center; gap: 12px; cursor: pointer;
+      padding: 10px 14px; border-radius: 3px;
+      border: 1px solid var(--border); background: var(--bg3);
+      transition: border-color .15s, background .15s;
+    }
+    .radio-opt:hover { border-color: var(--border2); background: var(--bg4); }
+    .radio-opt.sel-yes { border-color: rgba(57,211,83,.35); background: rgba(57,211,83,.04); }
+    .radio-opt.sel-no  { border-color: rgba(255,64,64,.3);  background: rgba(255,64,64,.03); }
+    .radio-opt input[type='radio'] {
+      appearance: none; -webkit-appearance: none;
+      width: 16px; height: 16px; border: 1px solid var(--border2); border-radius: 50%;
+      background: var(--bg); flex-shrink: 0; cursor: pointer; position: relative;
+      transition: border-color .15s;
+    }
+    .radio-opt input[type='radio']:checked { border-color: var(--green); }
+    .radio-opt input[type='radio']:checked::after {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%); width: 7px; height: 7px;
+      border-radius: 50%; background: var(--green); box-shadow: 0 0 6px rgba(57,211,83,.6);
+    }
+    .radio-opt-lbl { font-size: 13px; color: var(--text); font-weight: 500; flex: 1; }
+    .radio-opt-lbl small { display: block; font-size: 11px; color: var(--text2); font-weight: 400; margin-top: 1px; }
+    .radio-opt-ico { font-size: 18px; flex-shrink: 0; }
+
+    /* Subscribe prompt */
+    .sub-prompt {
+      display: none; margin-top: 1rem; padding: 1.125rem 1.25rem;
+      border: 1px solid rgba(255,64,64,.25); border-radius: 3px;
+      background: rgba(255,64,64,.04);
+    }
+    .sub-prompt.show { display: block; }
+    .sub-prompt-txt { font-size: 12px; color: var(--text2); margin-bottom: 1rem; line-height: 1.65; }
+    .sub-prompt-txt strong { color: var(--amber); }
+    .yt-sub-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #ff0000; color: #fff; font-family: var(--mono);
+      font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+      padding: 10px 18px; border-radius: 3px; text-decoration: none;
+      transition: background .15s, box-shadow .15s;
+    }
+    .yt-sub-btn:hover { background: #cc0000; box-shadow: 0 0 16px rgba(255,0,0,.3); }
+
+    /* Submit */
+    .submit-area { margin-top: 1.75rem; display: flex; flex-direction: column; align-items: center; gap: .625rem; }
+    .submit-note { font-size: 10px; color: var(--text3); text-align: center; letter-spacing: .04em; }
+    .btn-submit {
+      width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: rgba(57,211,83,.12); border: 1px solid var(--border2); border-radius: 3px;
+      color: var(--green); font-family: var(--mono); font-size: 14px; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase; padding: 14px 36px;
+      cursor: pointer; transition: all .15s;
+    }
+    .btn-submit:hover { background: rgba(57,211,83,.2); border-color: var(--border3); box-shadow: 0 0 20px rgba(57,211,83,.15); }
+    .btn-submit:disabled { opacity: .5; cursor: not-allowed; pointer-events: none; }
+    .btn-submit .spinner {
+      width: 14px; height: 14px; border: 2px solid rgba(57,211,83,.3);
+      border-top-color: var(--green); border-radius: 50%;
+      animation: spin .7s linear infinite; display: none;
+    }
+    .btn-submit.loading .spinner { display: block; }
+    .btn-submit.loading .btn-txt { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Success */
+    .success-screen { display: none; text-align: center; padding: 3.5rem 2rem; }
+    .success-screen.show { display: block; }
+    .success-icon {
+      width: 64px; height: 64px; margin: 0 auto 1.5rem;
+      border: 2px solid var(--green); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 24px rgba(57,211,83,.2);
+      animation: popIn .5s cubic-bezier(.34,1.56,.64,1) forwards;
+    }
+    @keyframes popIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+    .success-icon svg { color: var(--green); }
+    .success-title { font-size: 20px; font-weight: 600; color: var(--green); margin-bottom: .75rem; text-shadow: 0 0 20px rgba(57,211,83,.3); }
+    .success-msg { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 1rem; }
+    .success-meta { font-size: 11px; color: var(--text3); letter-spacing: .06em; margin-bottom: 2rem; }
+    .btn-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text2); border: 1px solid var(--border);
+      padding: 10px 24px; border-radius: 3px; text-decoration: none; transition: all .15s;
+    }
+    .btn-back:hover { border-color: var(--border2); color: var(--green); }
+
+    /* Footer */
+    .qz-footer {
+      width: 100%; border-top: 1px solid var(--border);
+      text-align: center; padding: 1.5rem 2rem;
+      position: relative; z-index: 1;
+    }
+    .qz-footer p { font-size: 11px; color: var(--text3); letter-spacing: .06em; }
+    .qz-footer a { color: var(--text2); text-decoration: none; }
+    .qz-footer a:hover { color: var(--green); }
+
+    @media (max-width: 520px) {
+      .qz-wrap  { padding: 2rem 1.25rem 3rem; }
+      .rc-head  { padding: 1.5rem 1.25rem 1.25rem; }
+      .rc-body  { padding: 1.25rem; }
+      .field-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="qz-brand">
+    <div class="qz-diamond"></div>
+    <div class="qz-brand-text"><a href="/"><strong>ytLiveQuiz</strong> &#160;// govt job series</a></div>
+    <div class="qz-sys"><span class="qz-blip"></span>OPEN</div>
+  </div>
+
+  <div class="qz-wrap">
+    <div class="reg-card" id="reg-card">
+      <div class="rc-corner rc-tl"></div>
+      <div class="rc-corner rc-tr"></div>
+      <div class="rc-corner rc-bl"></div>
+      <div class="rc-corner rc-br"></div>
+
+      <div class="rc-head">
+        <div class="rc-badge"><span class="rc-badge-dot"></span>Registration &#183; Open</div>
+        <div class="rc-title">Secure Your Slot</div>
+        <div class="rc-sub">
+          <span id="reg-exam">SSC CGL &#183; General Awareness</span>
+          <span id="reg-date">Sat, 14 Jun 2026 &#183; 21:00 IST</span>
+          <span>Live on YouTube</span>
+        </div>
+      </div>
+
+      <!-- ── FORM ── -->
+      <div class="rc-body" id="form-body">
+        <form id="reg-form" novalidate autocomplete="off">
+
+          <!-- Name row -->
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label" for="f-fname">First Name <span class="req">*</span></label>
+              <input class="field-input" id="f-fname" type="text" placeholder="Rahul" autocomplete="given-name"/>
+              <span class="field-err" id="err-fname">Enter your first name</span>
+            </div>
+            <div class="field">
+              <label class="field-label" for="f-lname">Last Name <span class="req">*</span></label>
+              <input class="field-input" id="f-lname" type="text" placeholder="Sharma" autocomplete="family-name"/>
+              <span class="field-err" id="err-lname">Enter your last name</span>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="field-row single">
+            <div class="field">
+              <label class="field-label" for="f-email">Email Address <span class="req">*</span></label>
+              <input class="field-input" id="f-email" type="email" placeholder="rahul@gmail.com" autocomplete="email"/>
+              <span class="field-err" id="err-email">Enter a valid email address</span>
+            </div>
+          </div>
+
+          <!-- WhatsApp -->
+          <div class="field-row single">
+            <div class="field">
+              <label class="field-label" for="f-whatsapp">WhatsApp Number <span class="req">*</span></label>
+              <div class="phone-wrap" id="phone-wrap">
+                <div class="phone-prefix">
+                  <svg viewBox="0 0 40 27" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:15px;border-radius:2px;flex-shrink:0;">
+                    <rect width="40" height="9" fill="#FF9933"/>
+                    <rect y="9" width="40" height="9" fill="#ffffff"/>
+                    <rect y="18" width="40" height="9" fill="#138808"/>
+                    <circle cx="20" cy="13.5" r="3.5" fill="none" stroke="#000080" stroke-width="0.8"/>
+                  </svg>
+                  +91
+                </div>
+                <input class="phone-input" id="f-whatsapp" type="tel" placeholder="98765 43210" maxlength="10"/>
+              </div>
+              <span class="field-err" id="err-whatsapp">Enter a valid 10-digit WhatsApp number</span>
+            </div>
+          </div>
+
+          <!-- Gender + DOB -->
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label" for="f-gender">Gender <span class="req">*</span></label>
+              <div class="select-wrap">
+                <select class="field-select" id="f-gender">
+                  <option value="" disabled selected>Select</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Others">Others</option>
+                </select>
+                <span class="select-arrow">&#9660;</span>
+              </div>
+              <span class="field-err" id="err-gender">Select your gender</span>
+            </div>
+            <div class="field">
+              <label class="field-label" for="f-dob-day">Date of Birth <span class="req">*</span></label>
+              <div class="dob-row">
+                <select class="field-select" id="f-dob-day"  title="Day"></select>
+                <select class="field-select" id="f-dob-mon"  title="Month"></select>
+                <select class="field-select" id="f-dob-year" title="Year"></select>
+              </div>
+              <span class="field-err" id="err-dob">Select your date of birth</span>
+            </div>
+          </div>
+
+          <div class="form-divider"></div>
+
+          <!-- IsSubscribed -->
+          <div class="field-row single">
+            <div>
+              <div class="radio-group-lbl">Subscribed to CodeCloudWorld? <span class="req">*</span></div>
+              <div class="radio-opts">
+                <label class="radio-opt" id="opt-yes">
+                  <input type="radio" id="f-sub-yes" name="subscribed" value="Yes"/>
+                  <span class="radio-opt-lbl">
+                    Yes, I'm subscribed
+                    <small>You'll get live quiz alerts on YouTube</small>
+                  </span>
+                  <span class="radio-opt-ico">&#9989;</span>
+                </label>
+                <label class="radio-opt" id="opt-no">
+                  <input type="radio" id="f-sub-no" name="subscribed" value="No"/>
+                  <span class="radio-opt-lbl">
+                    Not yet
+                    <small>Subscribe to get notified when the quiz starts</small>
+                  </span>
+                  <span class="radio-opt-ico">&#9651;</span>
+                </label>
+              </div>
+              <span class="field-err" id="err-sub" style="margin-top:6px;">Please select an option</span>
+
+              <div class="sub-prompt" id="sub-prompt">
+                <div class="sub-prompt-txt">
+                  <strong>&#9888; Subscribe before you participate!</strong><br/>
+                  Subscribers receive live alerts when the quiz goes live on YouTube.
+                  Subscribe below, then come back and select &#8220;Yes&#8221;.
+                </div>
+                <a class="yt-sub-btn" href="https://www.youtube.com/@codecloudworld?sub_confirmation=1" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 90 63" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:15px;flex-shrink:0;">
+                    <path d="M88.1 9.9C87 5.8 83.8 2.6 79.7 1.5 72.7 0 45 0 45 0S17.3 0 10.3 1.5C6.2 2.6 3 5.8 1.9 9.9.4 17 .4 31.5.4 31.5s0 14.5 1.5 21.6c1.1 4.1 4.3 7.3 8.4 8.4C17.3 63 45 63 45 63s27.7 0 34.7-1.5c4.1-1.1 7.3-4.3 8.4-8.4 1.5-7.1 1.5-21.6 1.5-21.6s0-14.5-1.5-21.6z" fill="#FF0000"/>
+                    <path d="M36 45l23-13.5L36 18v27z" fill="white"/>
+                  </svg>
+                  Subscribe to CodeCloudWorld
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="submit-area">
+            <button type="submit" class="btn-submit" id="btn-submit">
+              <span class="spinner"></span>
+              <span class="btn-txt">[ Submit Registration ]</span>
+            </button>
+            <div class="submit-note">Your data is used only to notify you about quiz sessions.</div>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- ── SUCCESS ── -->
+      <div class="success-screen" id="success-screen">
+        <div class="success-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div class="success-title">Mission Slot Secured</div>
+        <div class="success-msg">Registration confirmed.<br/>We'll notify you before the quiz goes live.</div>
+        <div class="success-meta" id="success-meta"></div>
+        <a class="btn-back" href="/">&#8592; Back to Home</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="qz-footer">
+    <p>
+      &#169; CodeCloudWorld &#160;&#183;&#160;
+      <a href="/">Home</a> &#160;&#183;&#160;
+      <a href="/p/privacy-policy.html">Privacy</a>
+    </p>
+  </footer>
+
+  <script>
+  (function(){
+
+    /* ─────────────────────────────────────────
+       Google Form submission (background, hidden)
+       Form ID: 1FAIpQLSdn3T2JLbJBOwSJVH5JueaObUQbtJZSqocTquTjXWgh72wNQQ
+    ───────────────────────────────────────── */
+    var GF_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSdn3T2JLbJBOwSJVH5JueaObUQbtJZSqocTquTjXWgh72wNQQ/formResponse';
+
+    var ENTRIES = {
+      name:        'entry.304816631',
+      email:       'entry.1557075527',
+      whatsapp:    'entry.1218916148',
+      gender:      'entry.1885205178',
+      dob_year:    'entry.1199713675_year',
+      dob_month:   'entry.1199713675_month',
+      dob_day:     'entry.1199713675_day',
+      subscribed:  'entry.902891137'
+    };
+
+    /* ─── Populate DOB dropdowns ─── */
+    var dayEl  = document.getElementById('f-dob-day');
+    var monEl  = document.getElementById('f-dob-mon');
+    var yearEl = document.getElementById('f-dob-year');
+
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+    function addOpt(sel, val, label) {
+      var o = document.createElement('option');
+      o.value = val; o.textContent = label || val; sel.appendChild(o);
+    }
+
+    addOpt(dayEl,  '', 'DD'); addOpt(monEl, '', 'MM'); addOpt(yearEl, '', 'YYYY');
+    for(var d=1; d<=31; d++) addOpt(dayEl, d, d<10?'0'+d:d);
+    for(var m=0; m<12; m++) addOpt(monEl, m+1, months[m]);
+    var now = new Date().getFullYear();
+    for(var y=now-15; y>=now-60; y--) addOpt(yearEl, y);
+
+    /* ─── Radio styling ─── */
+    var optYes   = document.getElementById('opt-yes');
+    var optNo    = document.getElementById('opt-no');
+    var subPrompt= document.getElementById('sub-prompt');
+
+    document.querySelectorAll('input[name="subscribed"]').forEach(function(r){
+      r.addEventListener('change', function(){
+        optYes.classList.remove('sel-yes','sel-no');
+        optNo.classList.remove('sel-yes','sel-no');
+        document.getElementById('err-sub').classList.remove('show');
+        if(this.value === 'Yes'){
+          optYes.classList.add('sel-yes');
+          subPrompt.classList.remove('show');
+        } else {
+          optNo.classList.add('sel-no');
+          subPrompt.classList.add('show');
+        }
+      });
+    });
+
+    /* ─── WhatsApp digits only ─── */
+    document.getElementById('f-whatsapp').addEventListener('input', function(){
+      this.value = this.value.replace(/\D/g,'').slice(0,10);
+    });
+
+    /* ─── Validation ─── */
+    function v(id, errId, test) {
+      var el = document.getElementById(id);
+      var err= document.getElementById(errId);
+      var pw = id==='f-whatsapp' ? document.getElementById('phone-wrap') : null;
+      var ok = test(el.value);
+      el.classList.toggle('err', !ok);
+      if(pw) pw.classList.toggle('err', !ok);
+      err.classList.toggle('show', !ok);
+      return ok;
+    }
+
+    function validate(){
+      var ok = true;
+      ok = v('f-fname',   'err-fname',   function(val){ return val.trim().length >= 2; }) && ok;
+      ok = v('f-lname',   'err-lname',   function(val){ return val.trim().length >= 2; }) && ok;
+      ok = v('f-email',   'err-email',   function(val){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim()); }) && ok;
+      ok = v('f-whatsapp','err-whatsapp',function(val){ return /^\d{10}$/.test(val); }) && ok;
+      ok = v('f-gender',  'err-gender',  function(val){ return val !== ''; }) && ok;
+
+      var dobOk = dayEl.value && monEl.value && yearEl.value;
+      document.getElementById('err-dob').classList.toggle('show', !dobOk);
+      if(!dobOk) ok = false;
+
+      var subVal = document.querySelector('input[name="subscribed"]:checked');
+      document.getElementById('err-sub').classList.toggle('show', !subVal);
+      if(!subVal) ok = false;
+
+      return ok;
+    }
+
+    /* ─── Submit to Google Form (hidden) ─── */
+    function postToGoogleForm(data) {
+      var fd = new FormData();
+      Object.keys(data).forEach(function(k){ fd.append(k, data[k]); });
+      return fetch(GF_ACTION, { method:'POST', mode:'no-cors', body: fd });
+    }
+
+    /* ─── Form submit ─── */
+    document.getElementById('reg-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      if(!validate()) return;
+
+      var fname  = document.getElementById('f-fname').value.trim();
+      var lname  = document.getElementById('f-lname').value.trim();
+      var email  = document.getElementById('f-email').value.trim();
+      var wa     = document.getElementById('f-whatsapp').value.trim();
+      var gender = document.getElementById('f-gender').value;
+      var subbed = document.querySelector('input[name="subscribed"]:checked').value;
+
+      var payload = {};
+      payload[ENTRIES.name]       = fname + ' ' + lname;
+      payload[ENTRIES.email]      = email;
+      payload[ENTRIES.whatsapp]   = '+91' + wa;
+      payload[ENTRIES.gender]     = gender;
+      payload[ENTRIES.dob_year]   = yearEl.value;
+      payload[ENTRIES.dob_month]  = monEl.value;
+      payload[ENTRIES.dob_day]    = dayEl.value;
+      payload[ENTRIES.subscribed] = subbed;
+
+      var btn = document.getElementById('btn-submit');
+      btn.classList.add('loading');
+      btn.disabled = true;
+
+      postToGoogleForm(payload)
+        .catch(function(){}) // no-cors always resolves — catch just in case
+        .finally(function(){
+          document.getElementById('form-body').style.display = 'none';
+          var sc = document.getElementById('success-screen');
+          sc.classList.add('show');
+          document.getElementById('success-meta').textContent =
+            fname + ' ' + lname + ' · ' + email;
+        });
+    });
+
+    /* ─── Clear errors on input ─── */
+    ['f-fname','f-lname','f-email','f-gender'].forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) el.addEventListener('change', function(){
+        this.classList.remove('err');
+        var suffix = id.replace('f-','');
+        var e = document.getElementById('err-'+suffix);
+        if(e) e.classList.remove('show');
+      });
+    });
+
+  })();
+  </script>
+
+</body>
+</html>
